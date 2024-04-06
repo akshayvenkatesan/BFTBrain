@@ -40,16 +40,17 @@ public class CoordinatorServer extends CoordinatorBase {
 
     private Benchmarker benchmarker;
 
-    public CoordinatorServer(String protocol, int port) {
+    public CoordinatorServer(String protocol, int port, int clusterNum) {
         super(port);
 
         this.protocol = protocol;
 
         responseCounter = new HashMap<>();
         configContent = new HashMap<>();
+        this.clusterNum = clusterNum;
 
         try {
-            var frameworkConfig = Files.readString(Path.of("../config/config.framework.yaml"));
+            var frameworkConfig = Files.readString(Path.of(String.format("../config/config.framework.%d.yaml", clusterNum)));
             var protocolPool = new ConfigObject(frameworkConfig, "").stringList("switching.protocol-pool");
 
             configContent.put("framework", frameworkConfig);
@@ -247,20 +248,24 @@ public class CoordinatorServer extends CoordinatorBase {
 
         var portOption = new Option("p", "port", true, "the coordination server port");
         var protocolOption = new Option("r", "protocol", true, "the benchmark protocol");
+        var clusterOption = new Option("k", "cluster", true, "the cluster number of all units");
         portOption.setType(Number.class);
+        clusterOption.setType(Number.class);
         portOption.setRequired(true);
         protocolOption.setRequired(true);
 
         options.addOption(portOption);
         options.addOption(protocolOption);
+        options.addOption(clusterOption);
 
         CommandLineParser parser = new DefaultParser();
         try {
             CommandLine cmd = parser.parse(options, args);
             Number port = (Number) cmd.getParsedOptionValue("port");
             var protocol = cmd.getOptionValue("protocol");
+            var clusterNum = (Number) cmd.getParsedOptionValue("cluster");
 
-            new CoordinatorServer(protocol, port.intValue()).run();
+            new CoordinatorServer(protocol, port.intValue(), clusterNum.intValue()).run();
         } catch (ParseException e) {
             System.err.println("Command parsing error: " + e.getMessage());
             var formatter = new HelpFormatter();
@@ -268,3 +273,5 @@ public class CoordinatorServer extends CoordinatorBase {
         }
     }
 }
+
+

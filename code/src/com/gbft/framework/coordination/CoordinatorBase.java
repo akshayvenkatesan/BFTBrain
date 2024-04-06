@@ -33,6 +33,8 @@ public abstract class CoordinatorBase {
 
     protected Map<Integer, Pair<String, Integer>> unitAddressMap;
 
+    protected int clusterNum;
+
     public CoordinatorBase(int port) {
         isRunning = true;
         unitAddressMap = new HashMap<>();
@@ -172,3 +174,5 @@ public abstract class CoordinatorBase {
         System.out.println(date + " " + str);
     }
 }
+
+

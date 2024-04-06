@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# Usage: ./sharding.sh [protocol] [learning (optional)]
+if [ "$#" -lt 1 ]; then
+    echo "Usage: $0 [protocol] [learning (optional)]"
+    exit 1
+fi
+
+protocol=$1
+learning=$2
+
+starting_port=6020
+cluster_number=1
+
+# Loop to call local_exp_sharding.sh four times
+for i in {0..3}
+do
+    session_name="sharding_${protocol}_${cluster_number}"
+    echo "Starting instance $i: $protocol with starting port: $starting_port and cluster number: $cluster_number in tmux session: $session_name"
+    
+    # Create a new tmux session for each instance
+    tmux new-session -d -s "$session_name"
+    
+    if [ ! -z "$learning" ]; then
+        command_to_run="./local_exp_sharding.sh $protocol $starting_port $cluster_number $learning"
+    else
+        command_to_run="./local_exp_sharding.sh $protocol $starting_port $cluster_number"
+    fi
+    
+    # Send the command to the tmux session
+    tmux send-keys -t "$session_name" "$command_to_run" C-m
+
+    starting_port=$((starting_port + 1000))
+    cluster_number=$((cluster_number + 1))
+done
+
+echo "All instances started in their respective tmux sessions."
+echo "Use 'tmux attach-session -t session_name' to attach to a session."
