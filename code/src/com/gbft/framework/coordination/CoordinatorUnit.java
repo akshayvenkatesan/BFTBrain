@@ -62,10 +62,10 @@ public class CoordinatorUnit extends CoordinatorBase {
     public String defaultProtocol;
     public int port;
 
-    public CoordinatorUnit(int port, int unit, int nodeCount, int clientCount, String coordinationServerAddress) {
+    public CoordinatorUnit(int port, int unit, int nodeCount, int clientCount, String coordinationServerAddress,  int clusterNum ){
         super(port);
         this.port = port;
-
+        this.clusterNum = clusterNum;
         myUnit = unit;
         unit_id = unit;
 
@@ -76,7 +76,7 @@ public class CoordinatorUnit extends CoordinatorBase {
         var split = coordinationServerAddress.split(":");
         unitAddressMap.put(SERVER, Pair.of(split[0], Integer.parseInt(split[1])));
 
-        var unitData = DataUtils.createUnitData(unit, nodeCount, clientCount);
+        var unitData = DataUtils.createUnitData(unit, nodeCount, clientCount, clusterNum);
         var initEvent = DataUtils.createEvent(unitData);
         sendEvent(SERVER, initEvent);
     }
@@ -415,6 +415,8 @@ public class CoordinatorUnit extends CoordinatorBase {
         var nodesOption = new Option("n", "nodes", true, "the number of nodes");
         var clientsOption = new Option("c", "clients", true, "the number of clients");
         var serverOption = new Option("s", "server", true, "the coordination server address");
+        var clusterOption = new Option("k", "cluster", true, "the cluster number of all units");
+        clusterOption.setType(Number.class);
         unitOption.setType(Number.class);
         unitOption.setRequired(true);
         portOption.setType(Number.class);
@@ -428,12 +430,13 @@ public class CoordinatorUnit extends CoordinatorBase {
         options.addOption(nodesOption);
         options.addOption(clientsOption);
         options.addOption(serverOption);
-
+        options.addOption(clusterOption);
         CommandLineParser parser = new DefaultParser();
         try {
             CommandLine cmd = parser.parse(options, args);
             Number unit = (Number) cmd.getParsedOptionValue("unit");
             Number port = (Number) cmd.getParsedOptionValue("port");
+            var clusterNum = (Number) cmd.getParsedOptionValue("cluster");
             var serverAddress = cmd.getOptionValue("server");
 
             int nodeCount = 0, clientCount = 0;
@@ -450,7 +453,7 @@ public class CoordinatorUnit extends CoordinatorBase {
                 }
             }
 
-            new CoordinatorUnit(port.intValue(), unit.intValue(), nodeCount, clientCount, serverAddress);
+            new CoordinatorUnit(port.intValue(), unit.intValue(), nodeCount, clientCount, serverAddress,clusterNum.intValue());
         } catch (ParseException e) {
             System.err.println("Command parsing error: " + e.getMessage());
             var formatter = new HelpFormatter();

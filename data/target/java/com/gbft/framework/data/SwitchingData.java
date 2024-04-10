@@ -4,25 +4,26 @@
 package com.gbft.framework.data;
 
 /**
- * Protobuf type {@code UnitData}
+ * Protobuf type {@code SwitchingData}
  */
-public final class UnitData extends
+public final class SwitchingData extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:UnitData)
-    UnitDataOrBuilder {
+    // @@protoc_insertion_point(message_implements:SwitchingData)
+    SwitchingDataOrBuilder {
 private static final long serialVersionUID = 0L;
-  // Use UnitData.newBuilder() to construct.
-  private UnitData(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+  // Use SwitchingData.newBuilder() to construct.
+  private SwitchingData(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
   }
-  private UnitData() {
+  private SwitchingData() {
+    nextProtocol_ = "";
   }
 
   @java.lang.Override
   @SuppressWarnings({"unused"})
   protected java.lang.Object newInstance(
       UnusedPrivateParameter unused) {
-    return new UnitData();
+    return new SwitchingData();
   }
 
   @java.lang.Override
@@ -30,7 +31,7 @@ private static final long serialVersionUID = 0L;
   getUnknownFields() {
     return this.unknownFields;
   }
-  private UnitData(
+  private SwitchingData(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
@@ -50,22 +51,13 @@ private static final long serialVersionUID = 0L;
             break;
           case 8: {
 
-            unit_ = input.readInt32();
+            switchReady_ = input.readBool();
             break;
           }
-          case 16: {
+          case 18: {
+            java.lang.String s = input.readStringRequireUtf8();
 
-            nodeCount_ = input.readInt32();
-            break;
-          }
-          case 24: {
-
-            clientCount_ = input.readInt32();
-            break;
-          }
-          case 32: {
-
-            clusterNum_ = input.readInt32();
+            nextProtocol_ = s;
             break;
           }
           default: {
@@ -89,59 +81,64 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return com.gbft.framework.data.Gbft.internal_static_UnitData_descriptor;
+    return com.gbft.framework.data.Gbft.internal_static_SwitchingData_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return com.gbft.framework.data.Gbft.internal_static_UnitData_fieldAccessorTable
+    return com.gbft.framework.data.Gbft.internal_static_SwitchingData_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            com.gbft.framework.data.UnitData.class, com.gbft.framework.data.UnitData.Builder.class);
+            com.gbft.framework.data.SwitchingData.class, com.gbft.framework.data.SwitchingData.Builder.class);
   }
 
-  public static final int UNIT_FIELD_NUMBER = 1;
-  private int unit_;
+  public static final int SWITCH_READY_FIELD_NUMBER = 1;
+  private boolean switchReady_;
   /**
-   * <code>int32 unit = 1;</code>
-   * @return The unit.
+   * <code>bool switch_ready = 1;</code>
+   * @return The switchReady.
    */
   @java.lang.Override
-  public int getUnit() {
-    return unit_;
+  public boolean getSwitchReady() {
+    return switchReady_;
   }
 
-  public static final int NODE_COUNT_FIELD_NUMBER = 2;
-  private int nodeCount_;
+  public static final int NEXT_PROTOCOL_FIELD_NUMBER = 2;
+  private volatile java.lang.Object nextProtocol_;
   /**
-   * <code>int32 node_count = 2;</code>
-   * @return The nodeCount.
+   * <code>string next_protocol = 2;</code>
+   * @return The nextProtocol.
    */
   @java.lang.Override
-  public int getNodeCount() {
-    return nodeCount_;
+  public java.lang.String getNextProtocol() {
+    java.lang.Object ref = nextProtocol_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      nextProtocol_ = s;
+      return s;
+    }
   }
-
-  public static final int CLIENT_COUNT_FIELD_NUMBER = 3;
-  private int clientCount_;
   /**
-   * <code>int32 client_count = 3;</code>
-   * @return The clientCount.
+   * <code>string next_protocol = 2;</code>
+   * @return The bytes for nextProtocol.
    */
   @java.lang.Override
-  public int getClientCount() {
-    return clientCount_;
-  }
-
-  public static final int CLUSTER_NUM_FIELD_NUMBER = 4;
-  private int clusterNum_;
-  /**
-   * <code>int32 cluster_num = 4;</code>
-   * @return The clusterNum.
-   */
-  @java.lang.Override
-  public int getClusterNum() {
-    return clusterNum_;
+  public com.google.protobuf.ByteString
+      getNextProtocolBytes() {
+    java.lang.Object ref = nextProtocol_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      nextProtocol_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
   }
 
   private byte memoizedIsInitialized = -1;
@@ -158,17 +155,11 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (unit_ != 0) {
-      output.writeInt32(1, unit_);
+    if (switchReady_ != false) {
+      output.writeBool(1, switchReady_);
     }
-    if (nodeCount_ != 0) {
-      output.writeInt32(2, nodeCount_);
-    }
-    if (clientCount_ != 0) {
-      output.writeInt32(3, clientCount_);
-    }
-    if (clusterNum_ != 0) {
-      output.writeInt32(4, clusterNum_);
+    if (!getNextProtocolBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, nextProtocol_);
     }
     unknownFields.writeTo(output);
   }
@@ -179,21 +170,12 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (unit_ != 0) {
+    if (switchReady_ != false) {
       size += com.google.protobuf.CodedOutputStream
-        .computeInt32Size(1, unit_);
+        .computeBoolSize(1, switchReady_);
     }
-    if (nodeCount_ != 0) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeInt32Size(2, nodeCount_);
-    }
-    if (clientCount_ != 0) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeInt32Size(3, clientCount_);
-    }
-    if (clusterNum_ != 0) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeInt32Size(4, clusterNum_);
+    if (!getNextProtocolBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, nextProtocol_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -205,19 +187,15 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof com.gbft.framework.data.UnitData)) {
+    if (!(obj instanceof com.gbft.framework.data.SwitchingData)) {
       return super.equals(obj);
     }
-    com.gbft.framework.data.UnitData other = (com.gbft.framework.data.UnitData) obj;
+    com.gbft.framework.data.SwitchingData other = (com.gbft.framework.data.SwitchingData) obj;
 
-    if (getUnit()
-        != other.getUnit()) return false;
-    if (getNodeCount()
-        != other.getNodeCount()) return false;
-    if (getClientCount()
-        != other.getClientCount()) return false;
-    if (getClusterNum()
-        != other.getClusterNum()) return false;
+    if (getSwitchReady()
+        != other.getSwitchReady()) return false;
+    if (!getNextProtocol()
+        .equals(other.getNextProtocol())) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -229,82 +207,79 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + UNIT_FIELD_NUMBER;
-    hash = (53 * hash) + getUnit();
-    hash = (37 * hash) + NODE_COUNT_FIELD_NUMBER;
-    hash = (53 * hash) + getNodeCount();
-    hash = (37 * hash) + CLIENT_COUNT_FIELD_NUMBER;
-    hash = (53 * hash) + getClientCount();
-    hash = (37 * hash) + CLUSTER_NUM_FIELD_NUMBER;
-    hash = (53 * hash) + getClusterNum();
+    hash = (37 * hash) + SWITCH_READY_FIELD_NUMBER;
+    hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+        getSwitchReady());
+    hash = (37 * hash) + NEXT_PROTOCOL_FIELD_NUMBER;
+    hash = (53 * hash) + getNextProtocol().hashCode();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
   }
 
-  public static com.gbft.framework.data.UnitData parseFrom(
+  public static com.gbft.framework.data.SwitchingData parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.gbft.framework.data.UnitData parseFrom(
+  public static com.gbft.framework.data.SwitchingData parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.gbft.framework.data.UnitData parseFrom(
+  public static com.gbft.framework.data.SwitchingData parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.gbft.framework.data.UnitData parseFrom(
+  public static com.gbft.framework.data.SwitchingData parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.gbft.framework.data.UnitData parseFrom(byte[] data)
+  public static com.gbft.framework.data.SwitchingData parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.gbft.framework.data.UnitData parseFrom(
+  public static com.gbft.framework.data.SwitchingData parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.gbft.framework.data.UnitData parseFrom(java.io.InputStream input)
+  public static com.gbft.framework.data.SwitchingData parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static com.gbft.framework.data.UnitData parseFrom(
+  public static com.gbft.framework.data.SwitchingData parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
-  public static com.gbft.framework.data.UnitData parseDelimitedFrom(java.io.InputStream input)
+  public static com.gbft.framework.data.SwitchingData parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
-  public static com.gbft.framework.data.UnitData parseDelimitedFrom(
+  public static com.gbft.framework.data.SwitchingData parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static com.gbft.framework.data.UnitData parseFrom(
+  public static com.gbft.framework.data.SwitchingData parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static com.gbft.framework.data.UnitData parseFrom(
+  public static com.gbft.framework.data.SwitchingData parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -317,7 +292,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(com.gbft.framework.data.UnitData prototype) {
+  public static Builder newBuilder(com.gbft.framework.data.SwitchingData prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -333,26 +308,26 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
-   * Protobuf type {@code UnitData}
+   * Protobuf type {@code SwitchingData}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:UnitData)
-      com.gbft.framework.data.UnitDataOrBuilder {
+      // @@protoc_insertion_point(builder_implements:SwitchingData)
+      com.gbft.framework.data.SwitchingDataOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.gbft.framework.data.Gbft.internal_static_UnitData_descriptor;
+      return com.gbft.framework.data.Gbft.internal_static_SwitchingData_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.gbft.framework.data.Gbft.internal_static_UnitData_fieldAccessorTable
+      return com.gbft.framework.data.Gbft.internal_static_SwitchingData_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.gbft.framework.data.UnitData.class, com.gbft.framework.data.UnitData.Builder.class);
+              com.gbft.framework.data.SwitchingData.class, com.gbft.framework.data.SwitchingData.Builder.class);
     }
 
-    // Construct using com.gbft.framework.data.UnitData.newBuilder()
+    // Construct using com.gbft.framework.data.SwitchingData.newBuilder()
     private Builder() {
       maybeForceBuilderInitialization();
     }
@@ -370,13 +345,9 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      unit_ = 0;
+      switchReady_ = false;
 
-      nodeCount_ = 0;
-
-      clientCount_ = 0;
-
-      clusterNum_ = 0;
+      nextProtocol_ = "";
 
       return this;
     }
@@ -384,17 +355,17 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return com.gbft.framework.data.Gbft.internal_static_UnitData_descriptor;
+      return com.gbft.framework.data.Gbft.internal_static_SwitchingData_descriptor;
     }
 
     @java.lang.Override
-    public com.gbft.framework.data.UnitData getDefaultInstanceForType() {
-      return com.gbft.framework.data.UnitData.getDefaultInstance();
+    public com.gbft.framework.data.SwitchingData getDefaultInstanceForType() {
+      return com.gbft.framework.data.SwitchingData.getDefaultInstance();
     }
 
     @java.lang.Override
-    public com.gbft.framework.data.UnitData build() {
-      com.gbft.framework.data.UnitData result = buildPartial();
+    public com.gbft.framework.data.SwitchingData build() {
+      com.gbft.framework.data.SwitchingData result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -402,12 +373,10 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public com.gbft.framework.data.UnitData buildPartial() {
-      com.gbft.framework.data.UnitData result = new com.gbft.framework.data.UnitData(this);
-      result.unit_ = unit_;
-      result.nodeCount_ = nodeCount_;
-      result.clientCount_ = clientCount_;
-      result.clusterNum_ = clusterNum_;
+    public com.gbft.framework.data.SwitchingData buildPartial() {
+      com.gbft.framework.data.SwitchingData result = new com.gbft.framework.data.SwitchingData(this);
+      result.switchReady_ = switchReady_;
+      result.nextProtocol_ = nextProtocol_;
       onBuilt();
       return result;
     }
@@ -446,27 +415,22 @@ private static final long serialVersionUID = 0L;
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof com.gbft.framework.data.UnitData) {
-        return mergeFrom((com.gbft.framework.data.UnitData)other);
+      if (other instanceof com.gbft.framework.data.SwitchingData) {
+        return mergeFrom((com.gbft.framework.data.SwitchingData)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(com.gbft.framework.data.UnitData other) {
-      if (other == com.gbft.framework.data.UnitData.getDefaultInstance()) return this;
-      if (other.getUnit() != 0) {
-        setUnit(other.getUnit());
+    public Builder mergeFrom(com.gbft.framework.data.SwitchingData other) {
+      if (other == com.gbft.framework.data.SwitchingData.getDefaultInstance()) return this;
+      if (other.getSwitchReady() != false) {
+        setSwitchReady(other.getSwitchReady());
       }
-      if (other.getNodeCount() != 0) {
-        setNodeCount(other.getNodeCount());
-      }
-      if (other.getClientCount() != 0) {
-        setClientCount(other.getClientCount());
-      }
-      if (other.getClusterNum() != 0) {
-        setClusterNum(other.getClusterNum());
+      if (!other.getNextProtocol().isEmpty()) {
+        nextProtocol_ = other.nextProtocol_;
+        onChanged();
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -483,11 +447,11 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      com.gbft.framework.data.UnitData parsedMessage = null;
+      com.gbft.framework.data.SwitchingData parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        parsedMessage = (com.gbft.framework.data.UnitData) e.getUnfinishedMessage();
+        parsedMessage = (com.gbft.framework.data.SwitchingData) e.getUnfinishedMessage();
         throw e.unwrapIOException();
       } finally {
         if (parsedMessage != null) {
@@ -497,126 +461,109 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private int unit_ ;
+    private boolean switchReady_ ;
     /**
-     * <code>int32 unit = 1;</code>
-     * @return The unit.
+     * <code>bool switch_ready = 1;</code>
+     * @return The switchReady.
      */
     @java.lang.Override
-    public int getUnit() {
-      return unit_;
+    public boolean getSwitchReady() {
+      return switchReady_;
     }
     /**
-     * <code>int32 unit = 1;</code>
-     * @param value The unit to set.
+     * <code>bool switch_ready = 1;</code>
+     * @param value The switchReady to set.
      * @return This builder for chaining.
      */
-    public Builder setUnit(int value) {
+    public Builder setSwitchReady(boolean value) {
       
-      unit_ = value;
+      switchReady_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>int32 unit = 1;</code>
+     * <code>bool switch_ready = 1;</code>
      * @return This builder for chaining.
      */
-    public Builder clearUnit() {
+    public Builder clearSwitchReady() {
       
-      unit_ = 0;
+      switchReady_ = false;
       onChanged();
       return this;
     }
 
-    private int nodeCount_ ;
+    private java.lang.Object nextProtocol_ = "";
     /**
-     * <code>int32 node_count = 2;</code>
-     * @return The nodeCount.
+     * <code>string next_protocol = 2;</code>
+     * @return The nextProtocol.
      */
-    @java.lang.Override
-    public int getNodeCount() {
-      return nodeCount_;
+    public java.lang.String getNextProtocol() {
+      java.lang.Object ref = nextProtocol_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        nextProtocol_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
     }
     /**
-     * <code>int32 node_count = 2;</code>
-     * @param value The nodeCount to set.
+     * <code>string next_protocol = 2;</code>
+     * @return The bytes for nextProtocol.
+     */
+    public com.google.protobuf.ByteString
+        getNextProtocolBytes() {
+      java.lang.Object ref = nextProtocol_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        nextProtocol_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string next_protocol = 2;</code>
+     * @param value The nextProtocol to set.
      * @return This builder for chaining.
      */
-    public Builder setNodeCount(int value) {
-      
-      nodeCount_ = value;
+    public Builder setNextProtocol(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      nextProtocol_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>int32 node_count = 2;</code>
+     * <code>string next_protocol = 2;</code>
      * @return This builder for chaining.
      */
-    public Builder clearNodeCount() {
+    public Builder clearNextProtocol() {
       
-      nodeCount_ = 0;
-      onChanged();
-      return this;
-    }
-
-    private int clientCount_ ;
-    /**
-     * <code>int32 client_count = 3;</code>
-     * @return The clientCount.
-     */
-    @java.lang.Override
-    public int getClientCount() {
-      return clientCount_;
-    }
-    /**
-     * <code>int32 client_count = 3;</code>
-     * @param value The clientCount to set.
-     * @return This builder for chaining.
-     */
-    public Builder setClientCount(int value) {
-      
-      clientCount_ = value;
+      nextProtocol_ = getDefaultInstance().getNextProtocol();
       onChanged();
       return this;
     }
     /**
-     * <code>int32 client_count = 3;</code>
+     * <code>string next_protocol = 2;</code>
+     * @param value The bytes for nextProtocol to set.
      * @return This builder for chaining.
      */
-    public Builder clearClientCount() {
+    public Builder setNextProtocolBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
       
-      clientCount_ = 0;
-      onChanged();
-      return this;
-    }
-
-    private int clusterNum_ ;
-    /**
-     * <code>int32 cluster_num = 4;</code>
-     * @return The clusterNum.
-     */
-    @java.lang.Override
-    public int getClusterNum() {
-      return clusterNum_;
-    }
-    /**
-     * <code>int32 cluster_num = 4;</code>
-     * @param value The clusterNum to set.
-     * @return This builder for chaining.
-     */
-    public Builder setClusterNum(int value) {
-      
-      clusterNum_ = value;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>int32 cluster_num = 4;</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearClusterNum() {
-      
-      clusterNum_ = 0;
+      nextProtocol_ = value;
       onChanged();
       return this;
     }
@@ -633,41 +580,41 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:UnitData)
+    // @@protoc_insertion_point(builder_scope:SwitchingData)
   }
 
-  // @@protoc_insertion_point(class_scope:UnitData)
-  private static final com.gbft.framework.data.UnitData DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:SwitchingData)
+  private static final com.gbft.framework.data.SwitchingData DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new com.gbft.framework.data.UnitData();
+    DEFAULT_INSTANCE = new com.gbft.framework.data.SwitchingData();
   }
 
-  public static com.gbft.framework.data.UnitData getDefaultInstance() {
+  public static com.gbft.framework.data.SwitchingData getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<UnitData>
-      PARSER = new com.google.protobuf.AbstractParser<UnitData>() {
+  private static final com.google.protobuf.Parser<SwitchingData>
+      PARSER = new com.google.protobuf.AbstractParser<SwitchingData>() {
     @java.lang.Override
-    public UnitData parsePartialFrom(
+    public SwitchingData parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return new UnitData(input, extensionRegistry);
+      return new SwitchingData(input, extensionRegistry);
     }
   };
 
-  public static com.google.protobuf.Parser<UnitData> parser() {
+  public static com.google.protobuf.Parser<SwitchingData> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<UnitData> getParserForType() {
+  public com.google.protobuf.Parser<SwitchingData> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.gbft.framework.data.UnitData getDefaultInstanceForType() {
+  public com.gbft.framework.data.SwitchingData getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

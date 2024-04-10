@@ -36,8 +36,8 @@ public class DataUtils {
         return MessageData.newBuilder(message).addFlags(INVALID).build();
     }
 
-    public static UnitData createUnitData(int unit, int nodeCount, int clientCount) {
-        return UnitData.newBuilder().setUnit(unit).setNodeCount(nodeCount).setClientCount(clientCount).build();
+    public static UnitData createUnitData(int unit, int nodeCount, int clientCount, int clusterNum) {
+        return UnitData.newBuilder().setUnit(unit).setNodeCount(nodeCount).setClientCount(clientCount).setClusterNum(clusterNum).build();
     }
 
     public static ConfigData createConfigData(Map<String, String> configContent, String defaultProtocol, List<UnitData> unitDataList) {
