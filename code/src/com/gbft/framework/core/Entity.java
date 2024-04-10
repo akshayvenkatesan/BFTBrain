@@ -617,7 +617,7 @@ public abstract class Entity {
                     try {
                         executionQueue.wait();
                     } catch (InterruptedException e) {
-                    }    
+                    }
                 }
 
                 transition = executionQueue.get(lastExecutedSequenceNum + 1);
@@ -794,6 +794,11 @@ public abstract class Entity {
         var messages = new ArrayList<MessageData>();
 
         for (var pair : transition.responses) {
+            /*
+             * This is written to incorporate the case such that
+             * in case a transition needs some response messages to be sent
+             * it adds to messages list and creates target list accordingly
+             */
             var role = pair.getLeft();
             var messageType = pair.getRight();
 
@@ -873,6 +878,9 @@ public abstract class Entity {
 
         for (var i = 0; i < transitionPlugins.size(); i++) {
             var plugin = transitionPlugins.get(i);
+            /*
+             * Not doing anything
+             */
             plugin.postTransition(seqnum, currentState, transition);
         }
 

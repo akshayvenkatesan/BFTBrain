@@ -128,7 +128,6 @@ public class CoordinatorUnit extends CoordinatorBase {
                         finished = finished && initPlugin.isInitialized();
                     }
                 }
-
             }
             if (finished) {
                 var readyEvent = DataUtils.createEvent(EventType.READY);
@@ -136,6 +135,9 @@ public class CoordinatorUnit extends CoordinatorBase {
             }
         } else if (coordinationType == EventType.CONNECTION) {
             if (event.getTarget() == SERVER) {
+                /*
+                 * If the event is from the server, create connections to all other units.
+                 */
                 println("Received connection event from server.");
                 for (var connection : connections.values()) {
                     if (connection.createSocket()) {
@@ -143,6 +145,10 @@ public class CoordinatorUnit extends CoordinatorBase {
                     }
                 }
 
+                /*
+                 * Wait for all connections to be established before starting the sender and
+                 * receiver threads.
+                 */
                 while (connected_units.get() < EntityMapUtils.unitCount() - 1)
                     ;
 
@@ -349,7 +355,12 @@ public class CoordinatorUnit extends CoordinatorBase {
                 var m = message.toBuilder().clearRequests();
                 for (var request : requests) {
                     try {
-                        m.addRequests(request.toBuilder().clearRequestDummy().setRequestDummy(ByteString.readFrom(new RandomDataStream(request.getReplySize()))));
+                        m.addRequests(
+                            request.toBuilder().
+                            clearRequestDummy().
+                            setRequestDummy(
+                                ByteString.readFrom(
+                                    new RandomDataStream(request.getReplySize()))));
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
