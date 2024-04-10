@@ -106,6 +106,7 @@ message Event {
         BENCHMARK_REPORT = 9;
         MESSAGE = 10;
         CONNECTION = 11;
+        INIT_CLUSTER = 12;
     }
 
     EventType event_type = 1;
@@ -124,6 +125,7 @@ message UnitData {
     int32 unit = 1;
     int32 node_count = 2;
     int32 client_count = 3;
+    int32 cluster_num = 4;
 }
 
 message ConfigData {

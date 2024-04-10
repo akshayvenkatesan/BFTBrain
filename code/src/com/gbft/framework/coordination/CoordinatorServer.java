@@ -144,7 +144,8 @@ public class CoordinatorServer extends CoordinatorBase {
         if (eventType == EventType.INIT) {
             var unitData = event.getUnitData();
             EntityMapUtils.addUnitData(unitData);
-            println("Unit " + unitData.getUnit() + " is connected.");
+            println("Unit " + unitData.getUnit() + " is connected to the coordinator server.");
+            sendEventToShardCoordinator(event);
         } else if (eventType == EventType.BENCHMARK_REPORT) {
             var report = Printer.convertToString(event.getReportData());
             benchmarker.print(report);

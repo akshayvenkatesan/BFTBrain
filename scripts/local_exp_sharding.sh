@@ -72,7 +72,7 @@ sleep 5
 for (( i=1; i<$count-1; i++ ))
 do
   echo "Protocol $protocol : [3/6] Starting Coordination Unit $(($i-1))"
-  tmux send-keys -t $session_name:"$i" "./run.sh CoordinatorUnit -u $(($i-1)) -p $(($start_port+$i)) -n 1 -s 127.0.0.1:$start_port" C-m
+  tmux send-keys -t $session_name:"$i" "./run.sh CoordinatorUnit -u $(($i-1)) -p $(($start_port+$i)) -n 1 -s 127.0.0.1:$start_port -k $cluster_number" C-m
   sleep 1
 done
 
@@ -86,7 +86,13 @@ sleep 5
 
 echo "Protocol $protocol : [4/6] Starting Client"
 # start client
-tmux send-keys -t $session_name:"$(($count-1))" "./run.sh CoordinatorUnit -u $(($count-2)) -p $(($start_port+$count-1)) -c 1 -s 127.0.0.1:$start_port" C-m
+if [ "$cluster_number" -eq 1 ]; then
+    tmux send-keys -t $session_name:"$(($count-1))" "./run.sh CoordinatorUnit -u $(($count-2)) -p $(($start_port+$count-1)) -c 1 -s 127.0.0.1:$start_port -k $cluster_number" C-m
+else
+    tmux send-keys -t $session_name:"$(($count-1))" "./run.sh CoordinatorUnit -u $(($count-2)) -p $(($start_port+$count-1)) -c 0 -s 127.0.0.1:$start_port -k $cluster_number" C-m
+fi
+
+#tmux send-keys -t $session_name:"$(($count-1))" "./run.sh CoordinatorUnit -u $(($count-2)) -p $(($start_port+$count-1)) -c 1 -s 127.0.0.1:$start_port" C-m
 
 echo "Protocol $protocol : [5/6] Waiting for 10 seconds for connection to set up ..."
 sleep 5

@@ -14,6 +14,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.plaf.nimbus.State;
+
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.gbft.framework.data.Event;
@@ -76,6 +78,20 @@ public abstract class CoordinatorBase {
     public void sendEvent(int unit, Event event) {
         var address = unitAddressMap.get(unit);
 
+        try {
+            var socket = new Socket(address.getLeft(), address.getRight());
+            new Thread(() -> netSend(socket, event)).start();
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        } catch (ConnectException e) {
+            System.err.println("Could not connect to " + address);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void sendEventToShardCoordinator(Event event) {
+        var address = Pair.of("127.0.0.1", 5050);
         try {
             var socket = new Socket(address.getLeft(), address.getRight());
             new Thread(() -> netSend(socket, event)).start();

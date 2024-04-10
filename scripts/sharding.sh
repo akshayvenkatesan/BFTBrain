@@ -11,7 +11,14 @@ learning=$2
 
 starting_port=6020
 cluster_number=1
+cd ../code
+echo $PWD
+tmux new-session -d -s "shard_coordinator"
+tmux send-keys -t shard_coordinator "./run_shard.sh ShardCoordinator -p 5050" C-m
+echo "Waiting for 10 seconds for ShardCoordinator to set up ..."
+sleep 10
 
+cd ../scripts
 # Loop to call local_exp_sharding.sh four times
 for i in {0..3}
 do
