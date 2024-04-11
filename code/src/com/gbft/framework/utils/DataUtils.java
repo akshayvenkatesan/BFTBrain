@@ -68,6 +68,10 @@ public class DataUtils {
         return Event.newBuilder().setEventType(EventType.INIT).setUnitData(unitData).build();
     }
 
+    public static Event createEvent(UnitData unitData, EventType eventType) {
+        return Event.newBuilder().setEventType(eventType).setUnitData(unitData).build();
+    }
+
     public static Event createEvent(ConfigData configData) {
         return Event.newBuilder().setEventType(EventType.CONFIG).setConfigData(configData).build();
     }

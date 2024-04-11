@@ -75,10 +75,11 @@ public class CoordinatorUnit extends CoordinatorBase {
 
         var split = coordinationServerAddress.split(":");
         unitAddressMap.put(SERVER, Pair.of(split[0], Integer.parseInt(split[1])));
-
+        println(unitAddressMap.get(SERVER).getLeft()+" "+unitAddressMap.get(SERVER).getRight());
         var unitData = DataUtils.createUnitData(unit, nodeCount, clientCount, clusterNum);
         var initEvent = DataUtils.createEvent(unitData);
         sendEvent(SERVER, initEvent);
+        println("Send event completed");
     }
 
     @Override
@@ -103,8 +104,8 @@ public class CoordinatorUnit extends CoordinatorBase {
                     connections.put(unit, connection);
                 }
             }
-
-            var allReadyEvent = DataUtils.createEvent(EventType.READY);
+            var unitData = DataUtils.createUnitData(myUnit, 1, 0, this.clusterNum);
+            var allReadyEvent = DataUtils.createEvent(unitData, EventType.READY);
             sendEvent(SERVER, allReadyEvent);
 
             println("Unit configured.");
@@ -131,7 +132,8 @@ public class CoordinatorUnit extends CoordinatorBase {
 
             }
             if (finished) {
-                var readyEvent = DataUtils.createEvent(EventType.READY);
+                var unitData = DataUtils.createUnitData(myUnit, 1, 0, this.clusterNum);
+                var readyEvent = DataUtils.createEvent(unitData, EventType.READY);
                 superSendEvent(SERVER, readyEvent);
             }
         } else if (coordinationType == EventType.CONNECTION) {
@@ -152,8 +154,9 @@ public class CoordinatorUnit extends CoordinatorBase {
                 receiveFromInQueueReplica = new Thread(new ReceiverPoller(inQueueReplica));
                 receiveFromInQueueReplica.start();
 
-                var allReadyEvent = DataUtils.createEvent(EventType.READY);
-                sendEvent(SERVER, allReadyEvent);
+                var unitData = DataUtils.createUnitData(myUnit, 1, 0, this.clusterNum);
+                var readyEvent = DataUtils.createEvent(unitData, EventType.READY);
+                sendEvent(SERVER, readyEvent);
                 println("Connection initialized.");
             } else {
                 println("Received connection event from unit " + event.getTarget() + ".");
@@ -442,7 +445,7 @@ public class CoordinatorUnit extends CoordinatorBase {
                 }
             }
 
-            new CoordinatorUnit(port.intValue(), unit.intValue(), nodeCount, clientCount, serverAddress,clusterNum.intValue());
+            new CoordinatorUnit(port.intValue(), unit.intValue(), nodeCount, clientCount, serverAddress, clusterNum.intValue());
         } catch (ParseException e) {
             System.err.println("Command parsing error: " + e.getMessage());
             var formatter = new HelpFormatter();

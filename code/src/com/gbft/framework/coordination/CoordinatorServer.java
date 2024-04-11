@@ -14,6 +14,11 @@ import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.stream.Stream;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -37,20 +42,20 @@ public class CoordinatorServer extends CoordinatorBase {
     private Map<String, String> configContent;
 
     private Map<EventType, Integer> responseCounter;
+    private Map<Integer, Map<EventType, Integer>> clusterResponseCounter;
 
     private Benchmarker benchmarker;
 
     public CoordinatorServer(String protocol, int port, int clusterNum) {
         super(port);
-
         this.protocol = protocol;
-
+        clusterResponseCounter = new ConcurrentHashMap<>();
         responseCounter = new HashMap<>();
         configContent = new HashMap<>();
         this.clusterNum = clusterNum;
 
         try {
-            var frameworkConfig = Files.readString(Path.of(String.format("../config/config.framework.%d.yaml", clusterNum)));
+            var frameworkConfig = Files.readString(Path.of(String.format("../config/config.framework.yaml", clusterNum)));
             var protocolPool = new ConfigObject(frameworkConfig, "").stringList("switching.protocol-pool");
 
             configContent.put("framework", frameworkConfig);
@@ -69,6 +74,32 @@ public class CoordinatorServer extends CoordinatorBase {
         benchmarker = new Benchmarker();
     }
 
+    private void initializeAndStartUnits(int clusternum) {
+
+        var units = EntityMapUtils.getclusterServerMapping(clusternum);
+        var configData = DataUtils.createConfigData(configContent, protocol, EntityMapUtils.allUnitData());
+        var configEvent = DataUtils.createEvent(configData);
+        println("Sending Event 1 " + clusternum );
+        sendEvent(units, configEvent);
+        var unitCount = EntityMapUtils.unitCount();
+        waitResponseCluster(EventType.READY, 4, clusternum);
+        println("Recieved Event 1 " + clusternum );
+        var initPluginsEvent = DataUtils.createEvent(EventType.PLUGIN_INIT);
+        println("Sending Event 2 " + clusternum );
+        sendEvent(units, initPluginsEvent);
+        waitResponseCluster(EventType.READY, 4, clusternum);
+        println("Recieved Event 2 " + clusternum );
+        var initConnectionsEvent = DataUtils.createEvent(EventType.CONNECTION, SERVER);
+        println("Sending Event 3 " + clusternum );
+        sendEvent(units, initConnectionsEvent);
+        waitResponseCluster(EventType.READY, 4, clusternum);
+        println("Recieved Event 3 " + clusternum );
+        println("\rUnits initialized.       ");
+        var startEvent = DataUtils.createEvent(EventType.START);
+        println("Sending Event 4 " + clusternum);
+        sendEvent(units, startEvent);
+    }
+
     public void run() {
         System.out.println("Press Enter after all units are connected, to start the benchmark.");
         System.console().readLine();
@@ -82,31 +113,36 @@ public class CoordinatorServer extends CoordinatorBase {
         var configData = DataUtils.createConfigData(configContent, protocol, EntityMapUtils.allUnitData());
         var configEvent = DataUtils.createEvent(configData);
 
-        sendEvent(units, configEvent);
+        
+        ExecutorService executor = Executors.newFixedThreadPool(4);
 
-        var unitCount = EntityMapUtils.unitCount();
+        // Submit the task to be executed asynchronously 4 times
+        for (int i = 0; i < 4; i++) {
+            final int iCopy = i + 1;
+            executor.submit(() -> initializeAndStartUnits(iCopy));
+        }
 
-        waitResponse(EventType.READY, unitCount);
+        // Shutdown the executor and wait for tasks to complete
+        executor.shutdown();
+        try {
+            if (!executor.awaitTermination(60, TimeUnit.MINUTES)) {
+                println("Executor did not terminate in the specified time.");
+                executor.shutdownNow();
+            }
+            else{
+                println("Executor terminated successfully.");
+            }
+        } catch (InterruptedException e) {
+            println(e.getMessage());
+            executor.shutdownNow();
+        }
 
-        var initPluginsEvent = DataUtils.createEvent(EventType.PLUGIN_INIT);
-        sendEvent(units, initPluginsEvent);
-
-        waitResponse(EventType.READY, unitCount);
-
-        var initConnectionsEvent = DataUtils.createEvent(EventType.CONNECTION, SERVER);
-        sendEvent(units, initConnectionsEvent);
-
-        waitResponse(EventType.READY, unitCount);
-
-        System.out.println("\rUnits initialized.       ");
-
-        var startEvent = DataUtils.createEvent(EventType.START);
-        sendEvent(units, startEvent);
+        println("All events recieved");
 
         benchmarker.start();
-        System.out.println("Benchmark started.");
+        println("Benchmark started.");
 
-        System.out.println("Available commands: \"stop\"");
+        println("Available commands: \"stop\"");
         try (var scanner = new Scanner(System.in)) {
             while (isRunning) {
                 System.out.print("$ ");
@@ -141,20 +177,36 @@ public class CoordinatorServer extends CoordinatorBase {
     public void receiveEvent(Event event, Socket socket) {
 
         var eventType = event.getEventType();
+        var unitData = event.getUnitData();
         if (eventType == EventType.INIT) {
-            var unitData = event.getUnitData();
+            println("Received INIT event from unit " + event.getUnitData().getUnit());
+            println("Created unit data for unit " + unitData.getUnit() + " in cluster " + unitData.getClusterNum());
             EntityMapUtils.addUnitData(unitData);
             println("Unit " + unitData.getUnit() + " is connected to the coordinator server.");
-            sendEventToShardCoordinator(event);
+            var myunit = unitAddressMap.get(unitData.getUnit());
+            var unitData2 = DataUtils.createUnitData(unitData.getUnit(), unitData.getNodeCount(), unitData.getClientCount(), unitData.getClusterNum() *10000+ myunit.getRight());
+            var event2 = DataUtils.createEvent(unitData2);
+            
+            // sendEventToShardCoordinator(event2);
         } else if (eventType == EventType.BENCHMARK_REPORT) {
             var report = Printer.convertToString(event.getReportData());
             benchmarker.print(report);
+        } 
+
+        var requiredEventMap = clusterResponseCounter.getOrDefault(unitData.getClusterNum(), new HashMap<>());
+        synchronized (requiredEventMap) {
+            println("Received " + eventType+ " event from unit " + unitData.getUnit() + " in cluster " + unitData.getClusterNum());
+            requiredEventMap.put(eventType, requiredEventMap.getOrDefault(eventType, 0) + 1);
+            clusterResponseCounter.put(unitData.getClusterNum(), requiredEventMap);
+            requiredEventMap.notify();
         }
 
-        synchronized (responseCounter) {
-            responseCounter.put(eventType, responseCounter.getOrDefault(eventType, 0) + 1);
-            responseCounter.notify();
-        }
+        // synchronized (responseCounter) {
+        //     responseCounter.put(eventType, responseCounter.getOrDefault(eventType, 0) + 1);
+        //     responseCounter.notify();
+        // }
+
+
     }
 
     private void waitResponse(EventType eventType, int expectedCount) {
@@ -168,6 +220,31 @@ public class CoordinatorServer extends CoordinatorBase {
 
             responseCounter.put(eventType, 0);
         }
+    }
+
+    private void waitResponseCluster(EventType eventType, int expectedCount, int clusternum) {
+        println("Waiting for " + expectedCount + " responses of type " + eventType + " from cluster " + clusternum);
+        
+        var clusterMap = clusterResponseCounter.getOrDefault(clusternum, new HashMap<>());
+        synchronized (clusterMap) {
+            
+            //var clusterMap = clusterResponseCounter.getOrDefault(clusternum, new HashMap<>());
+            
+            while (clusterMap.getOrDefault(eventType, 0) < expectedCount) {
+                println(clusterMap.toString() + " " + expectedCount + " " + eventType + " " + clusternum);
+                try {
+                    println("going to wait");
+                    clusterMap.wait();
+                    println("Done waiting");
+                } catch (InterruptedException e) {
+                    println("killing session " + e.getMessage());
+                }
+            }
+
+            clusterMap.put(eventType, 0);
+            clusterResponseCounter.put(clusternum, clusterMap);
+        }
+        println("Exiting for " + expectedCount + " responses of type " + eventType + " from cluster " + clusternum);
     }
 
     private class Benchmarker {
