@@ -10,10 +10,7 @@ import com.gbft.framework.data.UnitData;
 public class EntityMapUtils {
 
     private static List<UnitData> unitDataList;
-    /*
-     * Adding cluster to server mapping
-     */
-    private static Map<Integer, List<Integer>> clusterServerMapping;
+    private static Map<Integer,List<Integer>> clusterServerMapping;
     private static List<Integer> units;
     private static List<Integer> nodes;
     private static List<Integer> clients;
@@ -23,15 +20,19 @@ public class EntityMapUtils {
 
     public static void addUnitData(UnitData data) {
         var unit = data.getUnit();
-        /*
-         * Inputting cluster information to the existing map
-         */
-        var cluster = data.getClusterNum();
-        clusterServerMapping.computeIfAbsent(cluster, k -> new ArrayList<>()).add(unit);
+        println("Adding unit " + unit + " to entity map.");
         units.add(unit);
         unitNodes.put(unit, new ArrayList<>());
         unitClients.put(unit, new ArrayList<>());
         unitDataList.add(data);
+        println("Getting cluster number for unit " + unit + ".");
+        var cluster = data.getClusterNum();
+        println("Adding unit " + unit + " to cluster " + cluster + ".");
+        clusterServerMapping.putIfAbsent(cluster, new ArrayList<>());
+        println("Cluster server mapping: " + clusterServerMapping.toString() + ".");
+        clusterServerMapping.get(cluster).add(unit);
+        println("Cluster server mapping: " + clusterServerMapping.toString() + ".");
+
 
         var runner = nodes.size() + clients.size();
         for (var i = 0; i < data.getClientCount(); i++) {
@@ -47,6 +48,11 @@ public class EntityMapUtils {
             entityUnitMap.put(runner, unit);
             runner += 1;
         }
+    }
+
+    protected static void println(String str) {
+        // var date = dateFormat.format(new Date(System.currentTimeMillis()));
+        System.out.println(str);
     }
 
     public static int unitCount() {
@@ -101,6 +107,10 @@ public class EntityMapUtils {
         return unitDataList;
     }
 
+    public static List<Integer> getclusterServerMapping(int clusternum) {
+        return clusterServerMapping.get(clusternum);
+    }
+
     static {
         units = new ArrayList<>();
         nodes = new ArrayList<>();
@@ -109,5 +119,6 @@ public class EntityMapUtils {
         unitClients = new HashMap<>();
         entityUnitMap = new HashMap<>();
         unitDataList = new ArrayList<>();
+        clusterServerMapping = new HashMap<>();
     }
 }

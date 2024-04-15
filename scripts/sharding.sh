@@ -14,9 +14,10 @@ cluster_number=1
 cd ../code
 echo $PWD
 tmux new-session -d -s "shard_coordinator"
-tmux send-keys -t shard_coordinator "./run_shard.sh ShardCoordinator -p 5050" C-m
+tmux send-keys -t shard_coordinator "./run.sh CoordinatorServer -p 5050 -r $protocol -k 0" C-m
 echo "Waiting for 10 seconds for ShardCoordinator to set up ..."
-sleep 10
+sleep 5
+
 
 cd ../scripts
 # Loop to call local_exp_sharding.sh four times
@@ -29,9 +30,9 @@ do
     tmux new-session -d -s "$session_name"
     
     if [ ! -z "$learning" ]; then
-        command_to_run="./local_exp_sharding.sh $protocol $starting_port $cluster_number $learning"
+        command_to_run="./local_exp_sharding.sh $i $protocol $starting_port $cluster_number $learning"
     else
-        command_to_run="./local_exp_sharding.sh $protocol $starting_port $cluster_number"
+        command_to_run="./local_exp_sharding.sh $i $protocol $starting_port $cluster_number"
     fi
     
     # Send the command to the tmux session
@@ -40,6 +41,9 @@ do
     starting_port=$((starting_port + 1000))
     cluster_number=$((cluster_number + 1))
 done
+
+sleep 5
+tmux send-keys -t shard_coordinator:0 C-m
 
 echo "All instances started in their respective tmux sessions."
 echo "Use 'tmux attach-session -t session_name' to attach to a session."

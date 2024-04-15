@@ -77,7 +77,8 @@ public abstract class CoordinatorBase {
 
     public void sendEvent(int unit, Event event) {
         var address = unitAddressMap.get(unit);
-
+        if(unit==SERVER)
+            println(address.getLeft() + " " + address.getRight());
         try {
             var socket = new Socket(address.getLeft(), address.getRight());
             new Thread(() -> netSend(socket, event)).start();

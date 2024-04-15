@@ -1,0 +1,21 @@
+\033[4;42mPrepare [1/6] Creating new tmux session\033[m
+tail: cannot open 'servers.txt' for reading: No such file or directory
+\033[4;42mPrepare [2/6] Regenerate config based on servers.txt\033[m
+Traceback (most recent call last):
+  File "/home/akshay/BFTBrain/scripts/update_config.py", line 8, in <module>
+    with open("config.gridsearch.output.yaml", "r") as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'config.gridsearch.output.yaml'
+\033[4;42mPrepare [3/6] Sending config to coordination server\033[m
+head: cannot open 'servers.txt' for reading: No such file or directory
+ssh: Could not resolve hostname :BFTBrain/config: Name or service not known
+Connection closed.  
+Connection closed
+\033[4;42mPrepare [4/6] Obtaining Coordination Server's IP Address\033[m
+head: cannot open 'servers.txt' for reading: No such file or directory
+hostname contains invalid characters
+\033[4;42mPrepare [5/6] Cleaning previous benchmarks on the coordination server\033[m
+head: cannot open 'servers.txt' for reading: No such file or directory
+hostname contains invalid characters
+\033[4;42mPrepare [6/6] Start SSH Connection\033[m
+./run.sh: line 70: servers.txt: No such file or directory
+\033[4;42mPrepare [Finishing] Wait 10 seconds for SSH to establish connection ...\033[m
