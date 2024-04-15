@@ -10,7 +10,10 @@ import com.gbft.framework.data.UnitData;
 public class EntityMapUtils {
 
     private static List<UnitData> unitDataList;
-
+    /*
+     * Adding cluster to server mapping
+     */
+    private static Map<Integer, List<Integer>> clusterServerMapping;
     private static List<Integer> units;
     private static List<Integer> nodes;
     private static List<Integer> clients;
@@ -20,7 +23,11 @@ public class EntityMapUtils {
 
     public static void addUnitData(UnitData data) {
         var unit = data.getUnit();
-
+        /*
+         * Inputting cluster information to the existing map
+         */
+        var cluster = data.getClusterNum();
+        clusterServerMapping.computeIfAbsent(cluster, k -> new ArrayList<>()).add(unit);
         units.add(unit);
         unitNodes.put(unit, new ArrayList<>());
         unitClients.put(unit, new ArrayList<>());
@@ -58,6 +65,10 @@ public class EntityMapUtils {
         return units;
     }
 
+    public static List<Integer> getClusterUnits(int cluster) {
+        return clusterServerMapping.get(cluster);
+    }
+
     public static List<Integer> getAllNodes() {
         return nodes;
     }
@@ -76,7 +87,7 @@ public class EntityMapUtils {
 
     public static int getNodeIndex(int nodeId) {
         return nodes.indexOf(nodeId);
-    }
+    }   
 
     public static int getNodeId(int index) {
         return nodes.get(index);
