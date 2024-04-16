@@ -19,7 +19,7 @@ import com.gbft.framework.utils.MessageTally.QuorumId;
 import com.gbft.framework.utils.Printer;
 import com.gbft.framework.utils.Printer.Verbosity;
 
-public class Client extends Entity {
+public class ShardCoordinator extends Entity {
 
     protected long nextRequestNum;
     protected long intervalns;
@@ -29,7 +29,7 @@ public class Client extends Entity {
 
     private RequestGenerator requestGenerator;
 
-    public Client(int id, CoordinatorUnit coordinator) {
+    public ShardCoordinator(int id, CoordinatorUnit coordinator) {
         super(id, coordinator);
 
         intervalns = Config.integer("benchmark.request-interval-micros") * 1000L;
@@ -76,10 +76,7 @@ public class Client extends Entity {
         var viewnum = tally.getMaxQuorum(seqnum);
         var replies = tally.getQuorumReplies(seqnum, viewnum);
         currentViewNum = viewnum;
-        /*
-         * Checks for replies for the requests in the block and updates the dataset.
-         * Lookahead is when sending the request, and client dataset is updated on replies
-         */
+
         if (replies != null) {
             var now = System.nanoTime();
             for (var entry : replies.entrySet()) {
@@ -89,12 +86,7 @@ public class Client extends Entity {
 
                 // benchmarkManager.requestExecuted(reqnum, now);
             }
-            /*
-             * this mainly releases one semaphore to ensure only
-             * one request is active at a time. Because each request
-             * simulates a client, the client is blocked until the
-             * next simulation is started
-             */
+
             requestGenerator.execute();
 
         }

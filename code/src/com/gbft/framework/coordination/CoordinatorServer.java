@@ -19,7 +19,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -55,7 +54,8 @@ public class CoordinatorServer extends CoordinatorBase {
         this.clusterNum = clusterNum;
 
         try {
-            var frameworkConfig = Files.readString(Path.of(String.format("../config/config.framework.yaml", clusterNum)));
+            var frameworkConfig = Files
+                    .readString(Path.of(String.format("../config/config.framework.yaml", clusterNum)));
             var protocolPool = new ConfigObject(frameworkConfig, "").stringList("switching.protocol-pool");
 
             configContent.put("framework", frameworkConfig);
@@ -77,23 +77,24 @@ public class CoordinatorServer extends CoordinatorBase {
     private void initializeAndStartUnits(int clusternum) {
 
         var units = EntityMapUtils.getclusterServerMapping(clusternum);
-        var configData = DataUtils.createConfigData(configContent, protocol, EntityMapUtils.allUnitData());
+        var configData = DataUtils.createConfigData(configContent, protocol,
+                EntityMapUtils.getClusterUnitData(clusternum));
         var configEvent = DataUtils.createEvent(configData);
-        println("Sending Event 1 " + clusternum );
+        println("Sending Event 1 " + clusternum);
         sendEvent(units, configEvent);
         var unitCount = EntityMapUtils.unitCount();
         waitResponseCluster(EventType.READY, 4, clusternum);
-        println("Recieved Event 1 " + clusternum );
+        println("Recieved Event 1 " + clusternum);
         var initPluginsEvent = DataUtils.createEvent(EventType.PLUGIN_INIT);
-        println("Sending Event 2 " + clusternum );
+        println("Sending Event 2 " + clusternum);
         sendEvent(units, initPluginsEvent);
         waitResponseCluster(EventType.READY, 4, clusternum);
-        println("Recieved Event 2 " + clusternum );
+        println("Recieved Event 2 " + clusternum);
         var initConnectionsEvent = DataUtils.createEvent(EventType.CONNECTION, SERVER);
-        println("Sending Event 3 " + clusternum );
+        println("Sending Event 3 " + clusternum);
         sendEvent(units, initConnectionsEvent);
         waitResponseCluster(EventType.READY, 4, clusternum);
-        println("Recieved Event 3 " + clusternum );
+        println("Recieved Event 3 " + clusternum);
         println("\rUnits initialized.       ");
         var startEvent = DataUtils.createEvent(EventType.START);
         println("Sending Event 4 " + clusternum);
@@ -113,7 +114,6 @@ public class CoordinatorServer extends CoordinatorBase {
         var configData = DataUtils.createConfigData(configContent, protocol, EntityMapUtils.allUnitData());
         var configEvent = DataUtils.createEvent(configData);
 
-        
         ExecutorService executor = Executors.newFixedThreadPool(4);
 
         // Submit the task to be executed asynchronously 4 times
@@ -128,8 +128,7 @@ public class CoordinatorServer extends CoordinatorBase {
             if (!executor.awaitTermination(60, TimeUnit.MINUTES)) {
                 println("Executor did not terminate in the specified time.");
                 executor.shutdownNow();
-            }
-            else{
+            } else {
                 println("Executor terminated successfully.");
             }
         } catch (InterruptedException e) {
@@ -184,28 +183,30 @@ public class CoordinatorServer extends CoordinatorBase {
             EntityMapUtils.addUnitData(unitData);
             println("Unit " + unitData.getUnit() + " is connected to the coordinator server.");
             var myunit = unitAddressMap.get(unitData.getUnit());
-            var unitData2 = DataUtils.createUnitData(unitData.getUnit(), unitData.getNodeCount(), unitData.getClientCount(), unitData.getClusterNum() *10000+ myunit.getRight());
+            var unitData2 = DataUtils.createUnitData(unitData.getUnit(), unitData.getNodeCount(),
+                    unitData.getClientCount(), unitData.getClusterNum() * 10000 + myunit.getRight());
             var event2 = DataUtils.createEvent(unitData2);
-            
+
             // sendEventToShardCoordinator(event2);
         } else if (eventType == EventType.BENCHMARK_REPORT) {
             var report = Printer.convertToString(event.getReportData());
             benchmarker.print(report);
-        } 
+        }
 
         var requiredEventMap = clusterResponseCounter.getOrDefault(unitData.getClusterNum(), new HashMap<>());
         synchronized (requiredEventMap) {
-            println("Received " + eventType+ " event from unit " + unitData.getUnit() + " in cluster " + unitData.getClusterNum());
+            println("Received " + eventType + " event from unit " + unitData.getUnit() + " in cluster "
+                    + unitData.getClusterNum());
             requiredEventMap.put(eventType, requiredEventMap.getOrDefault(eventType, 0) + 1);
             clusterResponseCounter.put(unitData.getClusterNum(), requiredEventMap);
             requiredEventMap.notify();
         }
 
         // synchronized (responseCounter) {
-        //     responseCounter.put(eventType, responseCounter.getOrDefault(eventType, 0) + 1);
-        //     responseCounter.notify();
+        // responseCounter.put(eventType, responseCounter.getOrDefault(eventType, 0) +
+        // 1);
+        // responseCounter.notify();
         // }
-
 
     }
 
@@ -224,12 +225,13 @@ public class CoordinatorServer extends CoordinatorBase {
 
     private void waitResponseCluster(EventType eventType, int expectedCount, int clusternum) {
         println("Waiting for " + expectedCount + " responses of type " + eventType + " from cluster " + clusternum);
-        
+
         var clusterMap = clusterResponseCounter.getOrDefault(clusternum, new HashMap<>());
         synchronized (clusterMap) {
-            
-            //var clusterMap = clusterResponseCounter.getOrDefault(clusternum, new HashMap<>());
-            
+
+            // var clusterMap = clusterResponseCounter.getOrDefault(clusternum, new
+            // HashMap<>());
+
             while (clusterMap.getOrDefault(eventType, 0) < expectedCount) {
                 println(clusterMap.toString() + " " + expectedCount + " " + eventType + " " + clusternum);
                 try {
@@ -258,9 +260,9 @@ public class CoordinatorServer extends CoordinatorBase {
             var directory = new File("benchmarks/");
             directory.mkdirs();
             var lastBenchmarkId = Stream.of(directory.listFiles())
-                                        .map(file -> file.getName().split("-")[0])
-                                        .filter(id -> StringUtils.isNumeric(id))
-                                        .sorted(Comparator.reverseOrder()).findFirst().orElse("0000");
+                    .map(file -> file.getName().split("-")[0])
+                    .filter(id -> StringUtils.isNumeric(id))
+                    .sorted(Comparator.reverseOrder()).findFirst().orElse("0000");
 
             var num = Integer.parseInt(lastBenchmarkId) + 1;
             var nextBenchmarkId = StringUtils.leftPad(num + "", 4).replace(' ', '0');
@@ -285,9 +287,10 @@ public class CoordinatorServer extends CoordinatorBase {
             var f = Config.integer("general.f");
 
             var title = new StringBuilder();
-            title.append("== Benchmark Parameters: request-interval (initial)=").append(Printer.timeFormat(reqinterval, true))
-                 .append(", block-size=").append(blockSize).append(", nodes=").append(EntityMapUtils.nodeCount())
-                 .append(", f=").append(f).append("\n");
+            title.append("== Benchmark Parameters: request-interval (initial)=")
+                    .append(Printer.timeFormat(reqinterval, true))
+                    .append(", block-size=").append(blockSize).append(", nodes=").append(EntityMapUtils.nodeCount())
+                    .append(", f=").append(f).append("\n");
 
             print(title.toString());
         }
@@ -311,7 +314,8 @@ public class CoordinatorServer extends CoordinatorBase {
             if (isRunning) {
                 reportnum += 1;
                 var t = benchmarker.benchmarkInterval * reportnum;
-                benchmarker.print("-- Report #" + reportnum + " @ t=" + Printer.timeFormat(t * 1000000L, true) + " --\n");
+                benchmarker
+                        .print("-- Report #" + reportnum + " @ t=" + Printer.timeFormat(t * 1000000L, true) + " --\n");
 
                 var units = EntityMapUtils.getAllUnits();
                 var reportEvent = DataUtils.createEvent(EventType.BENCHMARK_REPORT);
@@ -351,5 +355,3 @@ public class CoordinatorServer extends CoordinatorBase {
         }
     }
 }
-
-

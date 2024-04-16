@@ -10,7 +10,8 @@ import com.gbft.framework.data.UnitData;
 public class EntityMapUtils {
 
     private static List<UnitData> unitDataList;
-    private static Map<Integer,List<Integer>> clusterServerMapping;
+    private static Map<Integer, List<UnitData>> unitDataClusterList;
+    private static Map<Integer, List<Integer>> clusterServerMapping;
     private static List<Integer> units;
     private static List<Integer> nodes;
     private static List<Integer> clients;
@@ -25,6 +26,8 @@ public class EntityMapUtils {
         unitNodes.put(unit, new ArrayList<>());
         unitClients.put(unit, new ArrayList<>());
         unitDataList.add(data);
+        unitDataClusterList.putIfAbsent(data.getClusterNum(), new ArrayList<>());
+        unitDataClusterList.get(data.getClusterNum()).add(data);
         println("Getting cluster number for unit " + unit + ".");
         var cluster = data.getClusterNum();
         println("Adding unit " + unit + " to cluster " + cluster + ".");
@@ -32,7 +35,6 @@ public class EntityMapUtils {
         println("Cluster server mapping: " + clusterServerMapping.toString() + ".");
         clusterServerMapping.get(cluster).add(unit);
         println("Cluster server mapping: " + clusterServerMapping.toString() + ".");
-
 
         var runner = nodes.size() + clients.size();
         for (var i = 0; i < data.getClientCount(); i++) {
@@ -71,6 +73,10 @@ public class EntityMapUtils {
         return units;
     }
 
+    public static List<Integer> getClusterUnits(int cluster) {
+        return clusterServerMapping.get(cluster);
+    }
+
     public static List<Integer> getAllNodes() {
         return nodes;
     }
@@ -103,6 +109,10 @@ public class EntityMapUtils {
         return unitDataList;
     }
 
+    public static List<UnitData> getClusterUnitData(int cluster) {
+        return unitDataClusterList.get(cluster);
+    }
+
     public static List<Integer> getclusterServerMapping(int clusternum) {
         return clusterServerMapping.get(clusternum);
     }
@@ -116,5 +126,6 @@ public class EntityMapUtils {
         entityUnitMap = new HashMap<>();
         unitDataList = new ArrayList<>();
         clusterServerMapping = new HashMap<>();
+        unitDataClusterList = new HashMap<>();
     }
 }

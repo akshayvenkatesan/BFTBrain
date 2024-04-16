@@ -62,7 +62,8 @@ public class CoordinatorUnit extends CoordinatorBase {
     public String defaultProtocol;
     public int port;
 
-    public CoordinatorUnit(int port, int unit, int nodeCount, int clientCount, String coordinationServerAddress,  int clusterNum ){
+    public CoordinatorUnit(int port, int unit, int nodeCount, int clientCount, String coordinationServerAddress,
+            int clusterNum) {
         super(port);
         this.port = port;
         this.clusterNum = clusterNum;
@@ -75,7 +76,7 @@ public class CoordinatorUnit extends CoordinatorBase {
 
         var split = coordinationServerAddress.split(":");
         unitAddressMap.put(SERVER, Pair.of(split[0], Integer.parseInt(split[1])));
-        println(unitAddressMap.get(SERVER).getLeft()+" "+unitAddressMap.get(SERVER).getRight());
+        println(unitAddressMap.get(SERVER).getLeft() + " " + unitAddressMap.get(SERVER).getRight());
         var unitData = DataUtils.createUnitData(unit, nodeCount, clientCount, clusterNum);
         var initEvent = DataUtils.createEvent(unitData);
         sendEvent(SERVER, initEvent);
@@ -86,7 +87,8 @@ public class CoordinatorUnit extends CoordinatorBase {
     public void receiveEvent(Event event, Socket socket) {
         var coordinationType = event.getEventType();
         if (coordinationType == EventType.CONFIG) {
-            initFromConfig(event.getConfigData().getDataMap(), event.getConfigData().getDefaultProtocol(), event.getConfigData().getUnitsList());
+            initFromConfig(event.getConfigData().getDataMap(), event.getConfigData().getDefaultProtocol(),
+                    event.getConfigData().getUnitsList());
             defaultProtocol = event.getConfigData().getDefaultProtocol();
             Config.setCurrentProtocol(defaultProtocol);
 
@@ -100,7 +102,8 @@ public class CoordinatorUnit extends CoordinatorBase {
 
             for (var unit : EntityMapUtils.getAllUnits()) {
                 if (unit != myUnit) {
-                    var connection = new Connection(this, myUnit, unit, inQueueClient, inQueueReplica, benchmarkManager);
+                    var connection = new Connection(this, myUnit, unit, inQueueClient, inQueueReplica,
+                            benchmarkManager);
                     connections.put(unit, connection);
                 }
             }
@@ -112,8 +115,10 @@ public class CoordinatorUnit extends CoordinatorBase {
         } else if (coordinationType == EventType.PLUGIN_INIT) {
             var data = event.getPluginData();
             var targets = data.getTargetsCount() == 0 ? entities.keySet() : data.getTargetsList();
+            println("Received plugin event for targets: " + targets.toString() + ".");
             for (var id : targets) {
                 var entity = entities.get(id);
+                println(entity.toString() + " " + entity.getId() + " " + entity.isClient() + " " + entity.isPrimary());
                 var plugins = entity.getMessagePlugins();
                 for (var plugin : plugins) {
                     if (plugin instanceof InitializablePluginInterface initPlugin) {
@@ -129,7 +134,6 @@ public class CoordinatorUnit extends CoordinatorBase {
                         finished = finished && initPlugin.isInitialized();
                     }
                 }
-
             }
             if (finished) {
                 var unitData = DataUtils.createUnitData(myUnit, 1, 0, this.clusterNum);
@@ -138,6 +142,9 @@ public class CoordinatorUnit extends CoordinatorBase {
             }
         } else if (coordinationType == EventType.CONNECTION) {
             if (event.getTarget() == SERVER) {
+                /*
+                 * If the event is from the server, create connections to all other units.
+                 */
                 println("Received connection event from server.");
                 for (var connection : connections.values()) {
                     if (connection.createSocket()) {
@@ -145,6 +152,10 @@ public class CoordinatorUnit extends CoordinatorBase {
                     }
                 }
 
+                /*
+                 * Wait for all connections to be established before starting the sender and
+                 * receiver threads.
+                 */
                 while (connected_units.get() < EntityMapUtils.unitCount() - 1)
                     ;
 
@@ -215,22 +226,24 @@ public class CoordinatorUnit extends CoordinatorBase {
 
                     // TODO: Use Virtual Thread.
 
-					// in-dark attack
-					if (message.getFault().getBlockedTargetsList().contains(target)) continue;
-					// timeout attack
-					var delay = 0L;
-					if (message.getFault().getDelayedTargetsList().contains(target))
-						delay = message.getFault().getDelay();
-					final long _delay = delay;
-					// execute
-					new Thread(() -> {
-						try {
-							if (_delay > 0L) Thread.sleep(_delay);
-							entities.get(target).handleMessage(message);
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
-					}).start();
+                    // in-dark attack
+                    if (message.getFault().getBlockedTargetsList().contains(target))
+                        continue;
+                    // timeout attack
+                    var delay = 0L;
+                    if (message.getFault().getDelayedTargetsList().contains(target))
+                        delay = message.getFault().getDelay();
+                    final long _delay = delay;
+                    // execute
+                    new Thread(() -> {
+                        try {
+                            if (_delay > 0L)
+                                Thread.sleep(_delay);
+                            entities.get(target).handleMessage(message);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }).start();
                 }
             }
         }
@@ -261,22 +274,24 @@ public class CoordinatorUnit extends CoordinatorBase {
                                         continue;
                                     }
 
-									// in-dark attack
-									if (message.getFault().getBlockedTargetsList().contains(target)) continue;
-									// timeout attack
-									var delay = 0L;
-									if (message.getFault().getDelayedTargetsList().contains(target))
-										delay = message.getFault().getDelay();
-									final long _delay = delay;
-									// execute
-									new Thread(() -> {
-										try {
-											if (_delay > 0L) Thread.sleep(_delay);
-											entities.get(target).handleMessage(message);
-										} catch (InterruptedException e) {
-											e.printStackTrace();
-										}
-									}).start();
+                                    // in-dark attack
+                                    if (message.getFault().getBlockedTargetsList().contains(target))
+                                        continue;
+                                    // timeout attack
+                                    var delay = 0L;
+                                    if (message.getFault().getDelayedTargetsList().contains(target))
+                                        delay = message.getFault().getDelay();
+                                    final long _delay = delay;
+                                    // execute
+                                    new Thread(() -> {
+                                        try {
+                                            if (_delay > 0L)
+                                                Thread.sleep(_delay);
+                                            entities.get(target).handleMessage(message);
+                                        } catch (InterruptedException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }).start();
                                 }
                             }
                         }
@@ -332,12 +347,13 @@ public class CoordinatorUnit extends CoordinatorBase {
         // fault implementation
         if (senderEntity.isPrimary()) {
             for (var message : messages) {
-				var faultDataBuilder = FaultData.newBuilder()
-					.addAllDelayedTargets(senderEntity.getTimeoutFault().getAffectedEntities())
-					.setDelay(senderEntity.getTimeoutFault().getDelay());
+                var faultDataBuilder = FaultData.newBuilder()
+                        .addAllDelayedTargets(senderEntity.getTimeoutFault().getAffectedEntities())
+                        .setDelay(senderEntity.getTimeoutFault().getDelay());
 
                 if (senderEntity.getInDarkFault().getApply()) {
-                    faultDataBuilder = faultDataBuilder.addAllBlockedTargets(senderEntity.getInDarkFault().getAffectedEntities());
+                    faultDataBuilder = faultDataBuilder
+                            .addAllBlockedTargets(senderEntity.getInDarkFault().getAffectedEntities());
                 }
                 transformedMessages.add(message.toBuilder().setFault(faultDataBuilder).build());
             }
@@ -352,7 +368,10 @@ public class CoordinatorUnit extends CoordinatorBase {
                 var m = message.toBuilder().clearRequests();
                 for (var request : requests) {
                     try {
-                        m.addRequests(request.toBuilder().clearRequestDummy().setRequestDummy(ByteString.readFrom(new RandomDataStream(request.getReplySize()))));
+                        m.addRequests(
+                                request.toBuilder().clearRequestDummy().setRequestDummy(
+                                        ByteString.readFrom(
+                                                new RandomDataStream(request.getReplySize()))));
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -445,7 +464,8 @@ public class CoordinatorUnit extends CoordinatorBase {
                 }
             }
 
-            new CoordinatorUnit(port.intValue(), unit.intValue(), nodeCount, clientCount, serverAddress, clusterNum.intValue());
+            new CoordinatorUnit(port.intValue(), unit.intValue(), nodeCount, clientCount, serverAddress,
+                    clusterNum.intValue());
         } catch (ParseException e) {
             System.err.println("Command parsing error: " + e.getMessage());
             var formatter = new HelpFormatter();

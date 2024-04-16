@@ -1,4 +1,4 @@
-package com.gbft.framework.coordination;
+package com.gbft.framework.sharding;
 
 import java.net.Socket;
 import java.io.File;
@@ -15,6 +15,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.stream.Stream;
 
+import com.gbft.framework.coordination.CoordinatorBase;
 import com.gbft.framework.data.Event;
 import com.gbft.framework.data.Event.EventType;
 import com.gbft.framework.utils.Config;
