@@ -85,6 +85,21 @@ public final class Gbft {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_UnitData_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_InitShardData_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_InitShardData_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_InitShardData_ClusterDataEntry_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_InitShardData_ClusterDataEntry_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_InitShardData_ClusterUnits_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_InitShardData_ClusterUnits_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_ConfigData_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -168,38 +183,44 @@ public final class Gbft {
       "(\005\022\r\n\005value\030\002 \001(\005:\0028\001\"L\n\tFaultData\022\027\n\017bl" +
       "ocked_targets\030\001 \003(\005\022\027\n\017delayed_targets\030\002" +
       " \003(\005\022\r\n\005delay\030\003 \001(\003\"2\n\014MessageBlock\022\"\n\014m" +
-      "essage_data\030\006 \003(\0132\014.MessageData\"\305\003\n\005Even" +
+      "essage_data\030\006 \003(\0132\014.MessageData\"\200\004\n\005Even" +
       "t\022$\n\nevent_type\030\001 \001(\0162\020.Event.EventType\022" +
       "\036\n\tunit_data\030\002 \001(\0132\t.UnitDataH\000\022\"\n\013confi" +
       "g_data\030\003 \001(\0132\013.ConfigDataH\000\022\"\n\013plugin_da" +
       "ta\030\004 \001(\0132\013.PluginDataH\000\022\"\n\013report_data\030\005" +
       " \001(\0132\013.ReportDataH\000\022&\n\rmessage_block\030\006 \001" +
-      "(\0132\r.MessageBlockH\000\022\020\n\006target\030\007 \001(\005H\000\"\301\001" +
-      "\n\tEventType\022\010\n\004INIT\020\000\022\n\n\006CONFIG\020\001\022\t\n\005REA" +
-      "DY\020\002\022\017\n\013PLUGIN_INIT\020\003\022\t\n\005START\020\004\022\t\n\005BLOC" +
-      "K\020\005\022\010\n\004STOP\020\006\022\010\n\004EXIT\020\007\022\023\n\017BENCHMARK_STA" +
-      "RT\020\010\022\024\n\020BENCHMARK_REPORT\020\t\022\013\n\007MESSAGE\020\n\022" +
-      "\016\n\nCONNECTION\020\013\022\020\n\014INIT_CLUSTER\020\014B\014\n\neve" +
-      "nt_data\"W\n\010UnitData\022\014\n\004unit\030\001 \001(\005\022\022\n\nnod" +
-      "e_count\030\002 \001(\005\022\024\n\014client_count\030\003 \001(\005\022\023\n\013c" +
-      "luster_num\030\004 \001(\005\"\221\001\n\nConfigData\022#\n\004data\030" +
-      "\001 \003(\0132\025.ConfigData.DataEntry\022\027\n\017defaultP" +
-      "rotocol\030\002 \001(\t\022\030\n\005units\030\003 \003(\0132\t.UnitData\032" +
-      "+\n\tDataEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t" +
-      ":\0028\001\"f\n\nPluginData\022\023\n\013plugin_name\030\001 \001(\t\022" +
-      "\024\n\014message_type\030\002 \001(\005\022\014\n\004data\030\003 \001(\014\022\016\n\006s" +
-      "ource\030\004 \001(\005\022\017\n\007targets\030\005 \003(\005\"\201\002\n\nReportD" +
-      "ata\0220\n\013report_data\030\001 \003(\0132\033.ReportData.Re" +
-      "portDataEntry\032I\n\017ReportDataEntry\022\013\n\003key\030" +
-      "\001 \001(\t\022%\n\005value\030\002 \001(\0132\026.ReportData.Report" +
-      "Item:\0028\001\032v\n\nReportItem\0227\n\titem_data\030\002 \003(" +
-      "\0132$.ReportData.ReportItem.ItemDataEntry\032" +
-      "/\n\rItemDataEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002" +
-      " \001(\t:\0028\0012F\n\nEntityComm\0228\n\rsend_decision\022" +
-      "\r.LearningData\032\026.google.protobuf.Empty\"\000" +
-      "2A\n\tAgentComm\0224\n\tsend_data\022\r.LearningDat" +
-      "a\032\026.google.protobuf.Empty\"\000B\033\n\027com.gbft." +
-      "framework.dataP\001b\006proto3"
+      "(\0132\r.MessageBlockH\000\022\020\n\006target\030\007 \001(\005H\000\022)\n" +
+      "\017init_shard_data\030\010 \001(\0132\016.InitShardDataH\000" +
+      "\"\321\001\n\tEventType\022\010\n\004INIT\020\000\022\n\n\006CONFIG\020\001\022\t\n\005" +
+      "READY\020\002\022\017\n\013PLUGIN_INIT\020\003\022\t\n\005START\020\004\022\t\n\005B" +
+      "LOCK\020\005\022\010\n\004STOP\020\006\022\010\n\004EXIT\020\007\022\023\n\017BENCHMARK_" +
+      "START\020\010\022\024\n\020BENCHMARK_REPORT\020\t\022\013\n\007MESSAGE" +
+      "\020\n\022\016\n\nCONNECTION\020\013\022\020\n\014INIT_CLUSTER\020\014\022\016\n\n" +
+      "INIT_SHARD\020\rB\014\n\nevent_data\"W\n\010UnitData\022\014" +
+      "\n\004unit\030\001 \001(\005\022\022\n\nnode_count\030\002 \001(\005\022\024\n\014clie" +
+      "nt_count\030\003 \001(\005\022\023\n\013cluster_num\030\004 \001(\005\"\266\001\n\r" +
+      "InitShardData\0224\n\013clusterData\030\001 \003(\0132\037.Ini" +
+      "tShardData.ClusterDataEntry\032O\n\020ClusterDa" +
+      "taEntry\022\013\n\003key\030\001 \001(\005\022*\n\005value\030\002 \001(\0132\033.In" +
+      "itShardData.ClusterUnits:\0028\001\032\036\n\014ClusterU" +
+      "nits\022\016\n\006values\030\002 \003(\005\"\221\001\n\nConfigData\022#\n\004d" +
+      "ata\030\001 \003(\0132\025.ConfigData.DataEntry\022\027\n\017defa" +
+      "ultProtocol\030\002 \001(\t\022\030\n\005units\030\003 \003(\0132\t.UnitD" +
+      "ata\032+\n\tDataEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002" +
+      " \001(\t:\0028\001\"f\n\nPluginData\022\023\n\013plugin_name\030\001 " +
+      "\001(\t\022\024\n\014message_type\030\002 \001(\005\022\014\n\004data\030\003 \001(\014\022" +
+      "\016\n\006source\030\004 \001(\005\022\017\n\007targets\030\005 \003(\005\"\201\002\n\nRep" +
+      "ortData\0220\n\013report_data\030\001 \003(\0132\033.ReportDat" +
+      "a.ReportDataEntry\032I\n\017ReportDataEntry\022\013\n\003" +
+      "key\030\001 \001(\t\022%\n\005value\030\002 \001(\0132\026.ReportData.Re" +
+      "portItem:\0028\001\032v\n\nReportItem\0227\n\titem_data\030" +
+      "\002 \003(\0132$.ReportData.ReportItem.ItemDataEn" +
+      "try\032/\n\rItemDataEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005val" +
+      "ue\030\002 \001(\t:\0028\0012F\n\nEntityComm\0228\n\rsend_decis" +
+      "ion\022\r.LearningData\032\026.google.protobuf.Emp" +
+      "ty\"\0002A\n\tAgentComm\0224\n\tsend_data\022\r.Learnin" +
+      "gData\032\026.google.protobuf.Empty\"\000B\033\n\027com.g" +
+      "bft.framework.dataP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -285,15 +306,33 @@ public final class Gbft {
     internal_static_Event_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Event_descriptor,
-        new java.lang.String[] { "EventType", "UnitData", "ConfigData", "PluginData", "ReportData", "MessageBlock", "Target", "EventData", });
+        new java.lang.String[] { "EventType", "UnitData", "ConfigData", "PluginData", "ReportData", "MessageBlock", "Target", "InitShardData", "EventData", });
     internal_static_UnitData_descriptor =
       getDescriptor().getMessageTypes().get(8);
     internal_static_UnitData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_UnitData_descriptor,
         new java.lang.String[] { "Unit", "NodeCount", "ClientCount", "ClusterNum", });
-    internal_static_ConfigData_descriptor =
+    internal_static_InitShardData_descriptor =
       getDescriptor().getMessageTypes().get(9);
+    internal_static_InitShardData_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_InitShardData_descriptor,
+        new java.lang.String[] { "ClusterData", });
+    internal_static_InitShardData_ClusterDataEntry_descriptor =
+      internal_static_InitShardData_descriptor.getNestedTypes().get(0);
+    internal_static_InitShardData_ClusterDataEntry_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_InitShardData_ClusterDataEntry_descriptor,
+        new java.lang.String[] { "Key", "Value", });
+    internal_static_InitShardData_ClusterUnits_descriptor =
+      internal_static_InitShardData_descriptor.getNestedTypes().get(1);
+    internal_static_InitShardData_ClusterUnits_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_InitShardData_ClusterUnits_descriptor,
+        new java.lang.String[] { "Values", });
+    internal_static_ConfigData_descriptor =
+      getDescriptor().getMessageTypes().get(10);
     internal_static_ConfigData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_ConfigData_descriptor,
@@ -305,13 +344,13 @@ public final class Gbft {
         internal_static_ConfigData_DataEntry_descriptor,
         new java.lang.String[] { "Key", "Value", });
     internal_static_PluginData_descriptor =
-      getDescriptor().getMessageTypes().get(10);
+      getDescriptor().getMessageTypes().get(11);
     internal_static_PluginData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_PluginData_descriptor,
         new java.lang.String[] { "PluginName", "MessageType", "Data", "Source", "Targets", });
     internal_static_ReportData_descriptor =
-      getDescriptor().getMessageTypes().get(11);
+      getDescriptor().getMessageTypes().get(12);
     internal_static_ReportData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_ReportData_descriptor,

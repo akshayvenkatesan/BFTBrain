@@ -86,6 +86,12 @@ public class CoordinatorUnit extends CoordinatorBase {
     @Override
     public void receiveEvent(Event event, Socket socket) {
         var coordinationType = event.getEventType();
+        println("123 ");
+        if (coordinationType == EventType.INIT_SHARD) {
+            println("Received new data at new clienty *** ");
+            println(event.getInitShardData().toString());
+            println("y  oyoyoyoyoo yoyoyoo *** ");
+        }
         if (coordinationType == EventType.CONFIG) {
             initFromConfig(event.getConfigData().getDataMap(), event.getConfigData().getDefaultProtocol(),
                     event.getConfigData().getUnitsList());
@@ -93,6 +99,9 @@ public class CoordinatorUnit extends CoordinatorBase {
             Config.setCurrentProtocol(defaultProtocol);
 
             var clientType = Config.string("benchmark.client");
+            //println(EntityMapUtils.getUnitClients(myUnit).toString() + " " + clientType + " " + myUnit);
+            //entities.put(16, genClient(clientType, 16));
+            //println("New created shard client is: " + entities.get(16));
             EntityMapUtils.getUnitClients(myUnit).forEach(id -> entities.put(id, genClient(clientType, id)));
             EntityMapUtils.getUnitNodes(myUnit).forEach(id -> entities.put(id, new Node(id, this)));
 
@@ -246,7 +255,7 @@ public class CoordinatorUnit extends CoordinatorBase {
                     }).start();
                 }
             }
-        }
+        } 
     }
 
     protected class ReceiverPoller implements Runnable {
@@ -394,8 +403,10 @@ public class CoordinatorUnit extends CoordinatorBase {
         unitData.forEach(item -> EntityMapUtils.addUnitData(item));
     }
 
-    private Client genClient(String type, int id) {
-        return type.equals("basic") ? new Client(id, this) : new DynamicClient(id, this);
+    private ShardingClient genClient(String type, int id) {
+        //return type.equals("basic") ? new Client(id, this) : new DynamicClient(id, this);
+        println("Creating client dataset for sharding client " + id + ".");
+        return new ShardingClient(id, this);
     }
 
     protected int reportnum = 0;
