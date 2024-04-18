@@ -99,5 +99,20 @@ public interface EventOrBuilder extends
    */
   int getTarget();
 
+  /**
+   * <code>.InitShardData init_shard_data = 8;</code>
+   * @return Whether the initShardData field is set.
+   */
+  boolean hasInitShardData();
+  /**
+   * <code>.InitShardData init_shard_data = 8;</code>
+   * @return The initShardData.
+   */
+  com.gbft.framework.data.InitShardData getInitShardData();
+  /**
+   * <code>.InitShardData init_shard_data = 8;</code>
+   */
+  com.gbft.framework.data.InitShardDataOrBuilder getInitShardDataOrBuilder();
+
   public com.gbft.framework.data.Event.EventDataCase getEventDataCase();
 }

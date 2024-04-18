@@ -29,7 +29,9 @@ import org.apache.commons.cli.ParseException;
 import org.apache.commons.lang3.StringUtils;
 
 import com.gbft.framework.data.Event;
+import com.gbft.framework.data.InitShardData;
 import com.gbft.framework.data.Event.EventType;
+import com.gbft.framework.data.InitShardData.ClusterUnits;
 import com.gbft.framework.utils.Config;
 import com.gbft.framework.utils.ConfigObject;
 import com.gbft.framework.utils.DataUtils;
@@ -96,8 +98,21 @@ public class CoordinatorServer extends CoordinatorBase {
         waitResponseCluster(EventType.READY, 4, clusternum);
         println("Recieved Event 3 " + clusternum);
         println("\rUnits initialized.       ");
-        var startEvent = DataUtils.createEvent(EventType.START);
+        var clusterData = EntityMapUtils.getAllClusterData();
+        var initShardData = InitShardData.newBuilder();
+        for (var entry: EntityMapUtils.getAllClusterData().entrySet()) {
+            var clus = entry.getKey();
+            var allUnits = entry.getValue();
+            var clusterUnits = ClusterUnits.newBuilder().addAllValues(allUnits).build();
+            initShardData.putClusterData(clus, clusterUnits);
+            println(initShardData.toString());
+        }
+
+        // TODO
+        var initShardEvent = DataUtils.createEvent(16, initShardData.build());
+        sendEvent(16, initShardEvent);
         println("Sending Event 4 " + clusternum);
+        var startEvent = DataUtils.createEvent(EventType.START);
         sendEvent(units, startEvent);
     }
 

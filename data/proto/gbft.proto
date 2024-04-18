@@ -107,6 +107,7 @@ message Event {
         MESSAGE = 10;
         CONNECTION = 11;
         INIT_CLUSTER = 12;
+        INIT_SHARD = 13;
     }
 
     EventType event_type = 1;
@@ -118,6 +119,7 @@ message Event {
         ReportData report_data = 5;
         MessageBlock message_block = 6;
         int32 target = 7;
+        InitShardData init_shard_data = 8;
     }
 }
 
@@ -126,6 +128,16 @@ message UnitData {
     int32 node_count = 2;
     int32 client_count = 3;
     int32 cluster_num = 4;
+}
+
+message InitShardData {
+    map<int32, ClusterUnits> clusterData = 1;
+
+
+    message ClusterUnits {
+        repeated int32 values = 2; 
+    }
+
 }
 
 message ConfigData {

@@ -15,6 +15,8 @@ cd ../code
 echo $PWD
 tmux new-session -d -s "shard_coordinator"
 tmux send-keys -t shard_coordinator "./run.sh CoordinatorServer -p 5050 -r $protocol -k 0" C-m
+
+
 echo "Waiting for 10 seconds for ShardCoordinator to set up ..."
 sleep 5
 
@@ -42,8 +44,16 @@ do
     cluster_number=$((cluster_number + 1))
 done
 
+cd ../code
+sleep 5
+echo "Starting Client"
+tmux new-session -d -s "sharding_client"
+tmux send-keys -t sharding_client "./run.sh CoordinatorUnit -u 0 -p 5051 -c 1 -s 127.0.0.1:5050 -k 0" C-m
+
 sleep 5
 tmux send-keys -t shard_coordinator:0 C-m
+
+
 
 echo "All instances started in their respective tmux sessions."
 echo "Use 'tmux attach-session -t session_name' to attach to a session."

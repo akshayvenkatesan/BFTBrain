@@ -130,6 +130,20 @@ private static final long serialVersionUID = 0L;
             eventData_ = input.readInt32();
             break;
           }
+          case 66: {
+            com.gbft.framework.data.InitShardData.Builder subBuilder = null;
+            if (eventDataCase_ == 8) {
+              subBuilder = ((com.gbft.framework.data.InitShardData) eventData_).toBuilder();
+            }
+            eventData_ =
+                input.readMessage(com.gbft.framework.data.InitShardData.parser(), extensionRegistry);
+            if (subBuilder != null) {
+              subBuilder.mergeFrom((com.gbft.framework.data.InitShardData) eventData_);
+              eventData_ = subBuilder.buildPartial();
+            }
+            eventDataCase_ = 8;
+            break;
+          }
           default: {
             if (!parseUnknownField(
                 input, unknownFields, extensionRegistry, tag)) {
@@ -219,6 +233,10 @@ private static final long serialVersionUID = 0L;
      * <code>INIT_CLUSTER = 12;</code>
      */
     INIT_CLUSTER(12),
+    /**
+     * <code>INIT_SHARD = 13;</code>
+     */
+    INIT_SHARD(13),
     UNRECOGNIZED(-1),
     ;
 
@@ -274,6 +292,10 @@ private static final long serialVersionUID = 0L;
      * <code>INIT_CLUSTER = 12;</code>
      */
     public static final int INIT_CLUSTER_VALUE = 12;
+    /**
+     * <code>INIT_SHARD = 13;</code>
+     */
+    public static final int INIT_SHARD_VALUE = 13;
 
 
     public final int getNumber() {
@@ -313,6 +335,7 @@ private static final long serialVersionUID = 0L;
         case 10: return MESSAGE;
         case 11: return CONNECTION;
         case 12: return INIT_CLUSTER;
+        case 13: return INIT_SHARD;
         default: return null;
       }
     }
@@ -380,6 +403,7 @@ private static final long serialVersionUID = 0L;
     REPORT_DATA(5),
     MESSAGE_BLOCK(6),
     TARGET(7),
+    INIT_SHARD_DATA(8),
     EVENTDATA_NOT_SET(0);
     private final int value;
     private EventDataCase(int value) {
@@ -403,6 +427,7 @@ private static final long serialVersionUID = 0L;
         case 5: return REPORT_DATA;
         case 6: return MESSAGE_BLOCK;
         case 7: return TARGET;
+        case 8: return INIT_SHARD_DATA;
         case 0: return EVENTDATA_NOT_SET;
         default: return null;
       }
@@ -605,6 +630,37 @@ private static final long serialVersionUID = 0L;
     return 0;
   }
 
+  public static final int INIT_SHARD_DATA_FIELD_NUMBER = 8;
+  /**
+   * <code>.InitShardData init_shard_data = 8;</code>
+   * @return Whether the initShardData field is set.
+   */
+  @java.lang.Override
+  public boolean hasInitShardData() {
+    return eventDataCase_ == 8;
+  }
+  /**
+   * <code>.InitShardData init_shard_data = 8;</code>
+   * @return The initShardData.
+   */
+  @java.lang.Override
+  public com.gbft.framework.data.InitShardData getInitShardData() {
+    if (eventDataCase_ == 8) {
+       return (com.gbft.framework.data.InitShardData) eventData_;
+    }
+    return com.gbft.framework.data.InitShardData.getDefaultInstance();
+  }
+  /**
+   * <code>.InitShardData init_shard_data = 8;</code>
+   */
+  @java.lang.Override
+  public com.gbft.framework.data.InitShardDataOrBuilder getInitShardDataOrBuilder() {
+    if (eventDataCase_ == 8) {
+       return (com.gbft.framework.data.InitShardData) eventData_;
+    }
+    return com.gbft.framework.data.InitShardData.getDefaultInstance();
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -640,6 +696,9 @@ private static final long serialVersionUID = 0L;
     if (eventDataCase_ == 7) {
       output.writeInt32(
           7, (int)((java.lang.Integer) eventData_));
+    }
+    if (eventDataCase_ == 8) {
+      output.writeMessage(8, (com.gbft.framework.data.InitShardData) eventData_);
     }
     unknownFields.writeTo(output);
   }
@@ -678,6 +737,10 @@ private static final long serialVersionUID = 0L;
       size += com.google.protobuf.CodedOutputStream
         .computeInt32Size(
             7, (int)((java.lang.Integer) eventData_));
+    }
+    if (eventDataCase_ == 8) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(8, (com.gbft.framework.data.InitShardData) eventData_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -721,6 +784,10 @@ private static final long serialVersionUID = 0L;
         if (getTarget()
             != other.getTarget()) return false;
         break;
+      case 8:
+        if (!getInitShardData()
+            .equals(other.getInitShardData())) return false;
+        break;
       case 0:
       default:
     }
@@ -761,6 +828,10 @@ private static final long serialVersionUID = 0L;
       case 7:
         hash = (37 * hash) + TARGET_FIELD_NUMBER;
         hash = (53 * hash) + getTarget();
+        break;
+      case 8:
+        hash = (37 * hash) + INIT_SHARD_DATA_FIELD_NUMBER;
+        hash = (53 * hash) + getInitShardData().hashCode();
         break;
       case 0:
       default:
@@ -967,6 +1038,13 @@ private static final long serialVersionUID = 0L;
       if (eventDataCase_ == 7) {
         result.eventData_ = eventData_;
       }
+      if (eventDataCase_ == 8) {
+        if (initShardDataBuilder_ == null) {
+          result.eventData_ = eventData_;
+        } else {
+          result.eventData_ = initShardDataBuilder_.build();
+        }
+      }
       result.eventDataCase_ = eventDataCase_;
       onBuilt();
       return result;
@@ -1042,6 +1120,10 @@ private static final long serialVersionUID = 0L;
         }
         case TARGET: {
           setTarget(other.getTarget());
+          break;
+        }
+        case INIT_SHARD_DATA: {
+          mergeInitShardData(other.getInitShardData());
           break;
         }
         case EVENTDATA_NOT_SET: {
@@ -1883,6 +1965,147 @@ private static final long serialVersionUID = 0L;
         onChanged();
       }
       return this;
+    }
+
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.gbft.framework.data.InitShardData, com.gbft.framework.data.InitShardData.Builder, com.gbft.framework.data.InitShardDataOrBuilder> initShardDataBuilder_;
+    /**
+     * <code>.InitShardData init_shard_data = 8;</code>
+     * @return Whether the initShardData field is set.
+     */
+    @java.lang.Override
+    public boolean hasInitShardData() {
+      return eventDataCase_ == 8;
+    }
+    /**
+     * <code>.InitShardData init_shard_data = 8;</code>
+     * @return The initShardData.
+     */
+    @java.lang.Override
+    public com.gbft.framework.data.InitShardData getInitShardData() {
+      if (initShardDataBuilder_ == null) {
+        if (eventDataCase_ == 8) {
+          return (com.gbft.framework.data.InitShardData) eventData_;
+        }
+        return com.gbft.framework.data.InitShardData.getDefaultInstance();
+      } else {
+        if (eventDataCase_ == 8) {
+          return initShardDataBuilder_.getMessage();
+        }
+        return com.gbft.framework.data.InitShardData.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.InitShardData init_shard_data = 8;</code>
+     */
+    public Builder setInitShardData(com.gbft.framework.data.InitShardData value) {
+      if (initShardDataBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        eventData_ = value;
+        onChanged();
+      } else {
+        initShardDataBuilder_.setMessage(value);
+      }
+      eventDataCase_ = 8;
+      return this;
+    }
+    /**
+     * <code>.InitShardData init_shard_data = 8;</code>
+     */
+    public Builder setInitShardData(
+        com.gbft.framework.data.InitShardData.Builder builderForValue) {
+      if (initShardDataBuilder_ == null) {
+        eventData_ = builderForValue.build();
+        onChanged();
+      } else {
+        initShardDataBuilder_.setMessage(builderForValue.build());
+      }
+      eventDataCase_ = 8;
+      return this;
+    }
+    /**
+     * <code>.InitShardData init_shard_data = 8;</code>
+     */
+    public Builder mergeInitShardData(com.gbft.framework.data.InitShardData value) {
+      if (initShardDataBuilder_ == null) {
+        if (eventDataCase_ == 8 &&
+            eventData_ != com.gbft.framework.data.InitShardData.getDefaultInstance()) {
+          eventData_ = com.gbft.framework.data.InitShardData.newBuilder((com.gbft.framework.data.InitShardData) eventData_)
+              .mergeFrom(value).buildPartial();
+        } else {
+          eventData_ = value;
+        }
+        onChanged();
+      } else {
+        if (eventDataCase_ == 8) {
+          initShardDataBuilder_.mergeFrom(value);
+        }
+        initShardDataBuilder_.setMessage(value);
+      }
+      eventDataCase_ = 8;
+      return this;
+    }
+    /**
+     * <code>.InitShardData init_shard_data = 8;</code>
+     */
+    public Builder clearInitShardData() {
+      if (initShardDataBuilder_ == null) {
+        if (eventDataCase_ == 8) {
+          eventDataCase_ = 0;
+          eventData_ = null;
+          onChanged();
+        }
+      } else {
+        if (eventDataCase_ == 8) {
+          eventDataCase_ = 0;
+          eventData_ = null;
+        }
+        initShardDataBuilder_.clear();
+      }
+      return this;
+    }
+    /**
+     * <code>.InitShardData init_shard_data = 8;</code>
+     */
+    public com.gbft.framework.data.InitShardData.Builder getInitShardDataBuilder() {
+      return getInitShardDataFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.InitShardData init_shard_data = 8;</code>
+     */
+    @java.lang.Override
+    public com.gbft.framework.data.InitShardDataOrBuilder getInitShardDataOrBuilder() {
+      if ((eventDataCase_ == 8) && (initShardDataBuilder_ != null)) {
+        return initShardDataBuilder_.getMessageOrBuilder();
+      } else {
+        if (eventDataCase_ == 8) {
+          return (com.gbft.framework.data.InitShardData) eventData_;
+        }
+        return com.gbft.framework.data.InitShardData.getDefaultInstance();
+      }
+    }
+    /**
+     * <code>.InitShardData init_shard_data = 8;</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.gbft.framework.data.InitShardData, com.gbft.framework.data.InitShardData.Builder, com.gbft.framework.data.InitShardDataOrBuilder> 
+        getInitShardDataFieldBuilder() {
+      if (initShardDataBuilder_ == null) {
+        if (!(eventDataCase_ == 8)) {
+          eventData_ = com.gbft.framework.data.InitShardData.getDefaultInstance();
+        }
+        initShardDataBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            com.gbft.framework.data.InitShardData, com.gbft.framework.data.InitShardData.Builder, com.gbft.framework.data.InitShardDataOrBuilder>(
+                (com.gbft.framework.data.InitShardData) eventData_,
+                getParentForChildren(),
+                isClean());
+        eventData_ = null;
+      }
+      eventDataCase_ = 8;
+      onChanged();;
+      return initShardDataBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

@@ -117,6 +117,10 @@ public class EntityMapUtils {
         return clusterServerMapping.get(clusternum);
     }
 
+    public static Map<Integer, List<Integer>> getAllClusterData() {
+        return clusterServerMapping;
+    }
+
     static {
         units = new ArrayList<>();
         nodes = new ArrayList<>();

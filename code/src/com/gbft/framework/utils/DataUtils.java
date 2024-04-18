@@ -13,6 +13,7 @@ import java.util.stream.IntStream;
 
 import com.gbft.framework.data.ConfigData;
 import com.gbft.framework.data.Event;
+import com.gbft.framework.data.InitShardData;
 import com.gbft.framework.data.Event.EventType;
 import com.gbft.framework.data.MessageBlock;
 import com.gbft.framework.data.MessageData;
@@ -59,6 +60,10 @@ public class DataUtils {
     public static Event createEvent(EventType eventType) {
         return Event.newBuilder().setEventType(eventType).build();
     }
+
+    public static Event createEvent(int target, InitShardData initShardData) {
+        return Event.newBuilder().setEventType(EventType.INIT_SHARD).setTarget(target).setInitShardData(initShardData).build();
+    }   
 
     public static Event createEvent(EventType eventType, int target) {
         return Event.newBuilder().setEventType(eventType).setTarget(target).build();
