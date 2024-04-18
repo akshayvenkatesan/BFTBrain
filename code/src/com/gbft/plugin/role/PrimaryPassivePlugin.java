@@ -62,6 +62,11 @@ public class PrimaryPassivePlugin extends RolePlugin {
 
     @Override
     protected List<Integer> getEntityRoles(long offset, int phase, int entity) {
+        /*
+         * Finds index of the id passed as entity in the list of nodes.
+         * If the entity is not found, returns a list containing the CLIENT 
+         * because client does not exist 
+         */
         var index = EntityMapUtils.getNodeIndex(entity);
         if (index < 0) {
             return List.of(StateMachine.CLIENT);

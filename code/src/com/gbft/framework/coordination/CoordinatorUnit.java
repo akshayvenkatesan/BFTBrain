@@ -62,7 +62,12 @@ public class CoordinatorUnit extends CoordinatorBase {
     public String defaultProtocol;
     public int port;
 
-    public CoordinatorUnit(int port, int unit, int nodeCount, int clientCount, String coordinationServerAddress,
+    public CoordinatorUnit(
+            int port,
+            int unit,
+            int nodeCount,
+            int clientCount,
+            String coordinationServerAddress,
             int clusterNum) {
         super(port);
         this.port = port;
