@@ -24,6 +24,7 @@ import com.gbft.framework.core.Client;
 import com.gbft.framework.core.DynamicClient;
 import com.gbft.framework.core.Entity;
 import com.gbft.framework.core.Node;
+import com.gbft.framework.core.ShardingClient;
 import com.gbft.framework.data.Event;
 import com.gbft.framework.data.FaultData;
 import com.gbft.framework.data.Event.EventType;
@@ -83,15 +84,18 @@ public class CoordinatorUnit extends CoordinatorBase {
         println("Send event completed");
     }
 
+    public int getMyUnit(){
+        return myUnit;
+    }
+
     @Override
     public void receiveEvent(Event event, Socket socket) {
         var coordinationType = event.getEventType();
-        println("123 ");
-        if (coordinationType == EventType.INIT_SHARD) {
-            println("Received new data at new clienty *** ");
-            println(event.getInitShardData().toString());
-            println("y  oyoyoyoyoo yoyoyoo *** ");
-        }
+        // if (coordinationType == EventType.INIT_SHARD) {
+        //     println("Received new data at new clienty *** ");
+        //     println(event.getInitShardData().toString());
+        //     println("y  oyoyoyoyoo yoyoyoo *** ");
+        // }
         if (coordinationType == EventType.CONFIG) {
             initFromConfig(event.getConfigData().getDataMap(), event.getConfigData().getDefaultProtocol(),
                     event.getConfigData().getUnitsList());
@@ -102,9 +106,14 @@ public class CoordinatorUnit extends CoordinatorBase {
             //println(EntityMapUtils.getUnitClients(myUnit).toString() + " " + clientType + " " + myUnit);
             //entities.put(16, genClient(clientType, 16));
             //println("New created shard client is: " + entities.get(16));
-            EntityMapUtils.getUnitClients(myUnit).forEach(id -> entities.put(id, genClient(clientType, id)));
-            EntityMapUtils.getUnitNodes(myUnit).forEach(id -> entities.put(id, new Node(id, this)));
-
+            EntityMapUtils.getUnitClients(myUnit).forEach((id) -> {
+                println("Initialising client for id: "+id);
+                entities.put(id, genClient(clientType, id));
+            });
+            EntityMapUtils.getUnitNodes(myUnit).forEach((id) -> {
+                println("Initialising node for id: "+id);
+                entities.put(id, new Node(id, this));
+            });
             // PluginManager.getRolePlugin(entities.get(0)).debugRoleMap();
 
             benchmarkManager = new BenchmarkManager(null);
@@ -123,12 +132,19 @@ public class CoordinatorUnit extends CoordinatorBase {
             println("Unit configured.");
         } else if (coordinationType == EventType.PLUGIN_INIT) {
             var data = event.getPluginData();
-            var targets = data.getTargetsCount() == 0 ? entities.keySet() : data.getTargetsList();
+            // var targets = data.getTargetsCount() == 0 ? entities.keySet() : data.getTargetsList();
+            
+            var targets = data.getTargetsCount() == 0 ? entities.keySet() : data.getTargetsList().contains(4)?List.of(16):data.getTargetsList();
             println("Received plugin event for targets: " + targets.toString() + ".");
+            println("Entities map for: "+entities);
+            println("Target list is: "+targets);
             for (var id : targets) {
                 var entity = entities.get(id);
                 println(entity.toString() + " " + entity.getId() + " " + entity.isClient() + " " + entity.isPrimary());
                 var plugins = entity.getMessagePlugins();
+                // println("Size of message plugin is: "+plugins.size());
+                // for(var x:plugins)
+                //     println(x.toString());
                 for (var plugin : plugins) {
                     if (plugin instanceof InitializablePluginInterface initPlugin) {
                         initPlugin.handleInitEvent(event.getPluginData());
@@ -137,17 +153,23 @@ public class CoordinatorUnit extends CoordinatorBase {
             }
             var finished = true;
             for (var entity : entities.values()) {
+                println("Ent is: " + entity.getId());
                 var plugins = entity.getMessagePlugins();
                 for (var plugin : plugins) {
                     if (plugin instanceof InitializablePluginInterface initPlugin) {
+                        println("Init plugin is: " + initPlugin.toString());
                         finished = finished && initPlugin.isInitialized();
                     }
                 }
             }
+            println("Plug initialised status: "+finished);
             if (finished) {
+                println("Inside finished block.");
+                println("Id is "+myUnit+" and clusterNum is "+this.clusterNum);
                 var unitData = DataUtils.createUnitData(myUnit, 1, 0, this.clusterNum);
                 var readyEvent = DataUtils.createEvent(unitData, EventType.READY);
-                superSendEvent(SERVER, readyEvent);
+                // superSendEvent(SERVER, readyEvent);
+                sendEvent(SERVER, readyEvent);
             }
         } else if (coordinationType == EventType.CONNECTION) {
             if (event.getTarget() == SERVER) {
@@ -165,8 +187,10 @@ public class CoordinatorUnit extends CoordinatorBase {
                  * Wait for all connections to be established before starting the sender and
                  * receiver threads.
                  */
-                while (connected_units.get() < EntityMapUtils.unitCount() - 1)
-                    ;
+                while (connected_units.get() < EntityMapUtils.unitCount() - 1){
+                    // println("Waiting for connections to complete. Current connections count : "+connected_units.get());
+                    // println("Expected connections: "+EntityMapUtils.unitCount());
+                };
 
                 connections.values().forEach(connection -> connection.startSenderReceiver());
                 receiveFromInQueueClient = new Thread(new ReceiverPoller(inQueueClient));
@@ -405,7 +429,7 @@ public class CoordinatorUnit extends CoordinatorBase {
 
     private ShardingClient genClient(String type, int id) {
         //return type.equals("basic") ? new Client(id, this) : new DynamicClient(id, this);
-        println("Creating client dataset for sharding client " + id + ".");
+        println("Creating sharding client instance" + id + ".");
         return new ShardingClient(id, this);
     }
 

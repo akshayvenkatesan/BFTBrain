@@ -1,7 +1,6 @@
-package com.gbft.framework.coordination;
+package com.gbft.framework.core;
 
-import com.gbft.framework.core.ClientDataset;
-import com.gbft.framework.core.Entity;
+import com.gbft.framework.coordination.CoordinatorUnit;
 import com.gbft.framework.data.RequestData;
 import com.gbft.framework.statemachine.StateMachine;
 import com.gbft.framework.utils.Config;
@@ -20,14 +19,14 @@ public class ShardingClient extends Entity {
 
     private RequestGenerator requestGenerator;
 
-    ShardingClient(int id, CoordinatorUnit coordinator) {
+    public ShardingClient(int id, CoordinatorUnit coordinator) {
         super(id, coordinator);
 
         intervalns = Config.integer("benchmark.request-interval-micros") * 1000L;
         var targetConfig = Config.string("protocol.general.request-target");
         requestTargetRole = StateMachine.roles.indexOf(targetConfig);
 
-        System.out.println("Creating client dataset for shyardigh client " + id + ".");
+        System.out.println("Creating client dataset for sharding client " + id + ".");
         dataset = new ClientDataset(id);
         nextRequestNum = 0L;
 

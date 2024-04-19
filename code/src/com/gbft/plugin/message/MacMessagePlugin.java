@@ -7,6 +7,7 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -42,7 +43,7 @@ public class MacMessagePlugin implements MessagePlugin, InitializablePluginInter
         this.entity = entity;
 
         initialized = false;
-        secretKeys = new HashMap<>();
+        secretKeys = new ConcurrentHashMap<>();
     }
 
     @Override
@@ -94,13 +95,17 @@ public class MacMessagePlugin implements MessagePlugin, InitializablePluginInter
             }
 
             var total = EntityMapUtils.nodeCount() + EntityMapUtils.clientCount();
+            /*
+             * Runs a loop from runner+1 to others
+             */
             for (var target = entity.getId() + 1; target < total; target += 1) {
                 keygen.init(256);
                 SecretKey hmacKey = keygen.generateKey();
+                System.out.println("Updating secret keys with value for target: "+target);
                 secretKeys.put(target, hmacKey.getEncoded());
 
                 var bytes = ByteString.copyFrom(hmacKey.getEncoded());
-                var secretKeyData = DataUtils.createPluginData("mac", SECRET_KEY, bytes, entity.getId(),
+                var secretKeyData = DataUtils.createPluginData("mac", SECRET_KEY, bytes, entity.getCoordinator().getMyUnit(),
                         List.of(target));
                 var secretKeyEvent = DataUtils.createEvent(secretKeyData);
 
@@ -113,9 +118,11 @@ public class MacMessagePlugin implements MessagePlugin, InitializablePluginInter
             if (messageType == SECRET_KEY) {
                 var source = pluginData.getSource();
                 var bytes = pluginData.getData().toByteArray();
+                System.out.println("Updating secret keys with value for source: "+source);
                 secretKeys.put(source, bytes);
             }
         }
+        System.out.println("Secret Key size: "+secretKeys.size());
 
         if (secretKeys.size() == EntityMapUtils.nodeCount() + EntityMapUtils.clientCount() - 1) {
             initialized = true;

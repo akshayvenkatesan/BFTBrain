@@ -12,11 +12,29 @@ public class EntityMapUtils {
     private static List<UnitData> unitDataList;
     private static Map<Integer, List<UnitData>> unitDataClusterList;
     private static Map<Integer, List<Integer>> clusterServerMapping;
+    /*
+     * Maintains list of id's
+     */
     private static List<Integer> units;
+    /*
+     * Maintains list of runners for nodes
+     */
     private static List<Integer> nodes;
+    /*
+     * Maintains list of runners for client
+     */
     private static List<Integer> clients;
+    /*
+     * Maintains id to runner node mapping
+     */
     private static Map<Integer, List<Integer>> unitNodes;
+    /*
+     * Maintains id to runner client mapping
+     */
     private static Map<Integer, List<Integer>> unitClients;
+    /*
+     * Maintains runner to id mapping
+     */
     private static Map<Integer, Integer> entityUnitMap;
 
     public static void addUnitData(UnitData data) {
