@@ -95,22 +95,22 @@ public class CoordinatorServer extends CoordinatorBase {
         // var configData = DataUtils.createConfigData(configContent, protocol,
         //         EntityMapUtils.getClusterUnitData(clusternum));
         var configEvent = DataUtils.createEvent(configData);
-        println("Sending Event 1 " + clusternum);
+        println("Sending Event 1 in cluster " + clusternum);
         sendEvent(units, configEvent);
         var unitCount = EntityMapUtils.unitCount();
         waitResponseCluster(EventType.READY, responseCount, clusternum);
-        println("Recieved Event 1 " + clusternum);
+        println("Recieved Event 1 in cluster " + clusternum);
         var initPluginsEvent = DataUtils.createEvent(EventType.PLUGIN_INIT);
-        println("Sending Event 2 " + clusternum);
+        println("Sending Event 2 in cluster " + clusternum);
         sendEvent(units, initPluginsEvent);
         waitResponseCluster(EventType.READY, responseCount, clusternum);
-        println("Recieved Event 2 " + clusternum);
+        println("Recieved Event 2 in cluster " + clusternum);
         var initConnectionsEvent = DataUtils.createEvent(EventType.CONNECTION, SERVER);
-        println("Sending Event 3 " + clusternum);
+        println("Sending Event 3 in cluster " + clusternum);
         sendEvent(units, initConnectionsEvent);
         waitResponseCluster(EventType.READY, responseCount, clusternum);
-        println("Recieved Event 3 " + clusternum);
-        println("Sending Event 4 " + clusternum);
+        println("Recieved Event 3 in cluster " + clusternum);
+        println("Sending Event 4 in cluster " + clusternum);
         var startEvent = DataUtils.createEvent(EventType.START);
         sendEvent(units, startEvent);
         println("\rUnits initialized.       ");
@@ -130,7 +130,7 @@ public class CoordinatorServer extends CoordinatorBase {
         var configEvent = DataUtils.createEvent(configData);
 
         ExecutorService executor = Executors.newFixedThreadPool(5);
-
+        println("Cluster server mapping in CS is: " + EntityMapUtils.getAllClusterData());
         // Submit the task to be executed asynchronously 4 times
         for (int i = 0; i <= 4; i++) {
             final int iCopy = i ;

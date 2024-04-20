@@ -72,7 +72,7 @@ public class Node extends Entity {
 
             if (seqnum == reportSequence) {
                 // if in dark there will be no report by default
-                var targets = getRolePlugin().getRoleEntities(seqnum, 0, StateMachine.NORMAL_PHASE, StateMachine.NODE);
+                var targets = getRolePlugin().getRoleEntities(seqnum, 0, StateMachine.NORMAL_PHASE, StateMachine.NODE, 1);
                 // seqnum represents episode number
                 var message = DataUtils.createMessage((long)currentEpisodeNum.get(), 0L, REPORT, getId(), targets, List.of(), EMPTY_BLOCK,
                         null, EMPTY_DIGEST);

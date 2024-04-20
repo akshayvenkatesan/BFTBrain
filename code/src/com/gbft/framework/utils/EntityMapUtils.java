@@ -41,11 +41,14 @@ public class EntityMapUtils {
         var unit = data.getUnit();
         println("Adding unit " + unit + " to entity map.");
         units.add(unit);
+        units.sort((a, b) -> a - b);
         unitNodes.put(unit, new ArrayList<>());
         unitClients.put(unit, new ArrayList<>());
         unitDataList.add(data);
+        unitDataList.sort((a, b) -> a.getUnit() - b.getUnit());
         unitDataClusterList.putIfAbsent(data.getClusterNum(), new ArrayList<>());
         unitDataClusterList.get(data.getClusterNum()).add(data);
+        unitDataClusterList.get(data.getClusterNum()).sort((a, b) -> a.getUnit() - b.getUnit());
         println("Getting cluster number for unit " + unit + ".");
         var cluster = data.getClusterNum();
         println("Adding unit " + unit + " to cluster " + cluster + ".");

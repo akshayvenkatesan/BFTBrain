@@ -30,7 +30,7 @@ benchmark:
   block-size: 10
   checkpoint-size: 5000
   catch-up-k: 2
-  request-interval-micros: 100
+  request-interval-micros: 1000000
   benchmark-interval-ms: 3000
   timeout: fixed
   timeout-trigger-interval-ms: 50
@@ -59,8 +59,8 @@ fault:
   in-dark:
     # the affected entities will always be excluded from leader rotation
     # set it to be a `non-existing` node (e.g., 100) to avoid this
-    affected-entities:
-      - 1
+    # affected-entities:
+    #   - 1
     generator:
       advance: true
       init: false
@@ -72,8 +72,8 @@ fault:
         intervals:
           - 10000
   timeout:
-    affected-entities:
-      - 2
+    # affected-entities:
+    #   - 2
     generator:
       advance: true
       init: 0
@@ -83,8 +83,7 @@ fault:
   slow-proposal:
     # affected entities here are the malicious leaders
     # instead of victims of malicious leaders
-    affected-entities:
-      - 0
+    # affected-entities:
     attacking: true
     timer: 100
     

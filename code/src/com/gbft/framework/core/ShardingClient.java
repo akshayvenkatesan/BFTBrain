@@ -1,13 +1,23 @@
 package com.gbft.framework.core;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.locks.LockSupport;
+import java.util.concurrent.Semaphore;
+import java.util.concurrent.atomic.AtomicLong;
+
 import com.gbft.framework.coordination.CoordinatorUnit;
 import com.gbft.framework.data.RequestData;
 import com.gbft.framework.statemachine.StateMachine;
+import com.gbft.framework.statemachine.Transition.UpdateMode;
+import com.gbft.framework.utils.AdvanceConfig;
+import com.gbft.framework.utils.BenchmarkManager;
 import com.gbft.framework.utils.Config;
+import com.gbft.framework.utils.MessageTally.QuorumId;
 import com.gbft.framework.utils.Printer;
-
-import java.util.List;
-import java.util.concurrent.locks.LockSupport;
+import com.gbft.framework.utils.Printer.Verbosity;
 
 public class ShardingClient extends Entity {
 
@@ -40,6 +50,7 @@ public class ShardingClient extends Entity {
 
     @Override
     protected void execute(long seqnum) {
+        System.out.println("Inside execute for sharding client " + id + " with seqnum " + seqnum + ".");
         var checkpoint = checkpointManager.getCheckpointForSeq(seqnum);
 
         var tally = checkpoint.getMessageTally();
@@ -51,6 +62,7 @@ public class ShardingClient extends Entity {
          * Lookahead is when sending the request, and client dataset is updated on replies
          */
         if (replies != null) {
+            System.out.println("Updating dataset for sharding client " + id + ".");
             var now = System.nanoTime();
             for (var entry : replies.entrySet()) {
                 var reqnum = entry.getKey();
@@ -76,6 +88,7 @@ public class ShardingClient extends Entity {
     }
 
     public class RequestGenerator {
+        protected final Semaphore semaphore = new Semaphore(1);
 
         public void init() {
             threads.add(new Thread(new RequestGenerator.RequestGeneratorRunner()));
@@ -84,23 +97,31 @@ public class ShardingClient extends Entity {
         protected class RequestGeneratorRunner implements Runnable {
             @Override
             public void run() {
-
-                while (running) {
-                    var next = System.nanoTime() + intervalns;
-
-                    var request = dataset.createRequest(nextRequestNum);
-                    nextRequestNum += 1;
-
-                    sendRequest(request);
-
-                    while (System.nanoTime() < next) {
-                        LockSupport.parkNanos(intervalns / 3);
+                try{
+                    while (running) {
+                        semaphore.acquire();
+                        var next = System.nanoTime() + intervalns;
+    
+                        var request = dataset.createRequest(nextRequestNum);
+    
+                        var clusternum = request.getRecord() / 25 + 1; 
+                        nextRequestNum += 1;
+    
+                        sendRequest(request, clusternum);
+    
+                        while (System.nanoTime() < next) {
+                            LockSupport.parkNanos(intervalns / 3);
+                        }
                     }
                 }
+                catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                
             }
         }
 
-        protected void sendRequest(RequestData request) {
+        protected void sendRequest(RequestData request , int clusternum) {
             var reqnum = request.getRequestNum();
             var seqnum = reqnum / blockSize;
             var view = currentViewNum;
@@ -129,13 +150,14 @@ public class ShardingClient extends Entity {
             }
 
             // Identify primary and send request
-            var targets = rolePlugin.getRoleEntities(seqnum, view, StateMachine.NORMAL_PHASE, requestTargetRole);
+            var targets = rolePlugin.getRoleEntities(seqnum, view, StateMachine.NORMAL_PHASE, requestTargetRole, clusternum);
 
             if (request.getOperationValue() == RequestData.Operation.READ_ONLY_VALUE) {
-                targets = rolePlugin.getRoleEntities(seqnum, view, StateMachine.NORMAL_PHASE, StateMachine.NODE);
+                targets = rolePlugin.getRoleEntities(seqnum, view, StateMachine.NORMAL_PHASE, StateMachine.NODE, clusternum);
             }
 
             var message = createMessage(null, view, List.of(request), StateMachine.REQUEST, id, targets);
+            System.out.println("Sending message for sharding client " + id + ".");
             sendMessage(message);
 
             if (Printer.verbosity >= Printer.Verbosity.VVV) {
@@ -143,7 +165,10 @@ public class ShardingClient extends Entity {
             }
         }
 
-        protected void execute() {}
+        protected void execute() {
+            System.out.println("Release semaphore for sharding client " + id + ".");
+            semaphore.release();
+        }
     }
 }
 

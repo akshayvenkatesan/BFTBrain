@@ -179,10 +179,10 @@ public class ShardCoordinator extends Entity {
             }
 
             // Identify primary and send request
-            var targets = rolePlugin.getRoleEntities(seqnum, view, StateMachine.NORMAL_PHASE, requestTargetRole);
+            var targets = rolePlugin.getRoleEntities(seqnum, view, StateMachine.NORMAL_PHASE, requestTargetRole, getCoordinator().getClusterNum());
 
             if (request.getOperationValue() == RequestData.Operation.READ_ONLY_VALUE) {
-                targets = rolePlugin.getRoleEntities(seqnum, view, StateMachine.NORMAL_PHASE, StateMachine.NODE);
+                targets = rolePlugin.getRoleEntities(seqnum, view, StateMachine.NORMAL_PHASE, StateMachine.NODE, getCoordinator().getClusterNum());
             }
 
             var message = createMessage(null, view, List.of(request), StateMachine.REQUEST, id, targets);

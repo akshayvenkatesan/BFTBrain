@@ -42,7 +42,7 @@ public class CheckpointManager {
         // System.out.println(entity.prefix + "sendCheckpoint, checkpointNum:  " + checkpointNum);
 
         var digest = getCheckpointDigest(checkpointNum);
-        var targets = entity.getRolePlugin().getRoleEntities(0, 0, StateMachine.NORMAL_PHASE, StateMachine.NODE);
+        var targets = entity.getRolePlugin().getRoleEntities(0, 0, StateMachine.NORMAL_PHASE, StateMachine.NODE, 1);
         var message = DataUtils.createMessage(checkpointNum, 0L, CHECKPOINT, entity.getId(), targets, List.of(),
                 entity.EMPTY_BLOCK, null, digest);
         entity.sendMessage(message);       
