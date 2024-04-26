@@ -28,6 +28,7 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.lang3.StringUtils;
 
+import com.gbft.framework.data.ConfigData;
 import com.gbft.framework.data.Event;
 import com.gbft.framework.data.InitShardData;
 import com.gbft.framework.data.Event.EventType;
@@ -79,41 +80,40 @@ public class CoordinatorServer extends CoordinatorBase {
     private void initializeAndStartUnits(int clusternum) {
 
         var units = EntityMapUtils.getclusterServerMapping(clusternum);
-        var configData = DataUtils.createConfigData(configContent, protocol,
-                EntityMapUtils.getClusterUnitData(clusternum));
+        ConfigData configData;
+        if( clusternum ==  0){
+            configData = DataUtils.createConfigData(configContent, protocol,
+                    EntityMapUtils.allUnitData());
+        }
+        else{
+            var entity_units = EntityMapUtils.getClusterUnitData(clusternum);
+            entity_units.addAll(EntityMapUtils.getClusterUnitData(0));
+            configData = DataUtils.createConfigData(configContent, protocol,
+                    entity_units);
+        }
+        int responseCount = clusternum == 0 ? 1 : 4;
+        // var configData = DataUtils.createConfigData(configContent, protocol,
+        //         EntityMapUtils.getClusterUnitData(clusternum));
         var configEvent = DataUtils.createEvent(configData);
-        println("Sending Event 1 " + clusternum);
+        println("Sending Event 1 in cluster " + clusternum);
         sendEvent(units, configEvent);
         var unitCount = EntityMapUtils.unitCount();
-        waitResponseCluster(EventType.READY, 4, clusternum);
-        println("Recieved Event 1 " + clusternum);
+        waitResponseCluster(EventType.READY, responseCount, clusternum);
+        println("Recieved Event 1 in cluster " + clusternum);
         var initPluginsEvent = DataUtils.createEvent(EventType.PLUGIN_INIT);
-        println("Sending Event 2 " + clusternum);
+        println("Sending Event 2 in cluster " + clusternum);
         sendEvent(units, initPluginsEvent);
-        waitResponseCluster(EventType.READY, 4, clusternum);
-        println("Recieved Event 2 " + clusternum);
+        waitResponseCluster(EventType.READY, responseCount, clusternum);
+        println("Recieved Event 2 in cluster " + clusternum);
         var initConnectionsEvent = DataUtils.createEvent(EventType.CONNECTION, SERVER);
-        println("Sending Event 3 " + clusternum);
+        println("Sending Event 3 in cluster " + clusternum);
         sendEvent(units, initConnectionsEvent);
-        waitResponseCluster(EventType.READY, 4, clusternum);
-        println("Recieved Event 3 " + clusternum);
-        println("\rUnits initialized.       ");
-        var clusterData = EntityMapUtils.getAllClusterData();
-        var initShardData = InitShardData.newBuilder();
-        for (var entry: EntityMapUtils.getAllClusterData().entrySet()) {
-            var clus = entry.getKey();
-            var allUnits = entry.getValue();
-            var clusterUnits = ClusterUnits.newBuilder().addAllValues(allUnits).build();
-            initShardData.putClusterData(clus, clusterUnits);
-            println(initShardData.toString());
-        }
-
-        // TODO
-        var initShardEvent = DataUtils.createEvent(16, initShardData.build());
-        sendEvent(16, initShardEvent);
-        println("Sending Event 4 " + clusternum);
+        waitResponseCluster(EventType.READY, responseCount, clusternum);
+        println("Recieved Event 3 in cluster " + clusternum);
+        println("Sending Event 4 in cluster " + clusternum);
         var startEvent = DataUtils.createEvent(EventType.START);
         sendEvent(units, startEvent);
+        println("\rUnits initialized.       ");
     }
 
     public void run() {
@@ -129,11 +129,11 @@ public class CoordinatorServer extends CoordinatorBase {
         var configData = DataUtils.createConfigData(configContent, protocol, EntityMapUtils.allUnitData());
         var configEvent = DataUtils.createEvent(configData);
 
-        ExecutorService executor = Executors.newFixedThreadPool(4);
-
+        ExecutorService executor = Executors.newFixedThreadPool(5);
+        println("Cluster server mapping in CS is: " + EntityMapUtils.getAllClusterData());
         // Submit the task to be executed asynchronously 4 times
-        for (int i = 0; i < 4; i++) {
-            final int iCopy = i + 1;
+        for (int i = 0; i <= 4; i++) {
+            final int iCopy = i ;
             executor.submit(() -> initializeAndStartUnits(iCopy));
         }
 
@@ -151,8 +151,22 @@ public class CoordinatorServer extends CoordinatorBase {
             executor.shutdownNow();
         }
 
-        println("All events recieved");
+        println("All events sent. Sending to client");
 
+        // var clusterData = EntityMapUtils.getAllClusterData();
+        // var initShardData = InitShardData.newBuilder();
+        // for (var entry: EntityMapUtils.getAllClusterData().entrySet()) {
+        //     var clus = entry.getKey();
+        //     var allUnits = entry.getValue();
+        //     var clusterUnits = ClusterUnits.newBuilder().addAllValues(allUnits).build();
+        //     initShardData.putClusterData(clus, clusterUnits);
+        //     // println(initShardData.toString());
+        // }
+
+        // // TODO
+        // var initShardEvent = DataUtils.createEvent(16, initShardData.build());
+        // println("Sending client shard event");
+        // sendEvent(16, initShardEvent);
         benchmarker.start();
         println("Benchmark started.");
 
@@ -250,11 +264,11 @@ public class CoordinatorServer extends CoordinatorBase {
             while (clusterMap.getOrDefault(eventType, 0) < expectedCount) {
                 println(clusterMap.toString() + " " + expectedCount + " " + eventType + " " + clusternum);
                 try {
-                    println("going to wait");
+                    // println("going to wait");
                     clusterMap.wait();
-                    println("Done waiting");
+                    // println("Done waiting");
                 } catch (InterruptedException e) {
-                    println("killing session " + e.getMessage());
+                    // println("killing session " + e.getMessage());
                 }
             }
 

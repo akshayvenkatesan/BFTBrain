@@ -47,7 +47,7 @@ public abstract class RolePlugin {
         });
     }
 
-    public List<Integer> getRoleEntities(long sequenceNum, long viewNum, int phase, int role) {
+    public List<Integer> getRoleEntities(long sequenceNum, long viewNum, int phase, int role, int clusterNum) {
         var leaderChange = episodeLeaderMode.get(this.entity.getEpisodeNum(sequenceNum));
         if (leaderChange == null) {
             System.out.println("Warning: Unknown leader mode for seqnum " + sequenceNum + ", assuming STABLE");
@@ -56,7 +56,7 @@ public abstract class RolePlugin {
             return getRoleEntities(offset, phase, role);
         }
 
-        return getRoleEntities(viewNum, phase, role);
+        return getRoleEntities(viewNum, phase, role, clusterNum);
     }
 
     public List<Integer> getEntityRoles(long sequenceNum, long viewNum, int phase, int entity) {
@@ -114,6 +114,8 @@ public abstract class RolePlugin {
     }
 
     protected abstract List<Integer> getRoleEntities(long offset, int phase, int role);
+
+    protected abstract List<Integer> getRoleEntities(long offset, int phase, int role, int clusterNum);
 
     protected abstract List<Integer> getEntityRoles(long offset, int phase, int entity);
 }

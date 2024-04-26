@@ -134,7 +134,8 @@ public class Client extends Entity {
     }
 
     public class RequestGenerator {
-
+        protected final Semaphore semaphore = new Semaphore(1);
+        
         public void init() {
             threads.add(new Thread(new RequestGeneratorRunner()));
         }
@@ -142,8 +143,9 @@ public class Client extends Entity {
         protected class RequestGeneratorRunner implements Runnable {
             @Override
             public void run() {
-
+                try{
                 while (running) {
+                    semaphore.acquire();
                     var next = System.nanoTime() + intervalns;
 
                     var request = dataset.createRequest(nextRequestNum);
@@ -155,7 +157,10 @@ public class Client extends Entity {
                         LockSupport.parkNanos(intervalns / 3);
                     }
                 }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
+        }
         }
 
         protected void sendRequest(RequestData request) {
@@ -187,10 +192,10 @@ public class Client extends Entity {
             }
 
             // Identify primary and send request
-            var targets = rolePlugin.getRoleEntities(seqnum, view, StateMachine.NORMAL_PHASE, requestTargetRole);
+            var targets = rolePlugin.getRoleEntities(seqnum, view, StateMachine.NORMAL_PHASE, requestTargetRole, getCoordinator().getClusterNum());
 
             if (request.getOperationValue() == RequestData.Operation.READ_ONLY_VALUE) {
-                targets = rolePlugin.getRoleEntities(seqnum, view, StateMachine.NORMAL_PHASE, StateMachine.NODE);
+                targets = rolePlugin.getRoleEntities(seqnum, view, StateMachine.NORMAL_PHASE, StateMachine.NODE, getCoordinator().getClusterNum());
             }
 
             var message = createMessage(null, view, List.of(request), StateMachine.REQUEST, id, targets);
@@ -201,7 +206,10 @@ public class Client extends Entity {
             }
         }
 
-        protected void execute() {}
+        protected void execute() {
+            System.out.println("Executed request");
+            semaphore.release();
+        }
     }
 
     public class ClosedLoopRequestGenerator extends RequestGenerator {

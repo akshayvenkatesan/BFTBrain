@@ -16,6 +16,7 @@ public class DirectPipelinePlugin implements PipelinePlugin {
 
     @Override
     public void sendMessage(MessageData message, int sender) {
+        System.out.println("DirectPipelinePlugin.sendMessage");
         entity.getCoordinator().sendMessages(List.of(message), sender);
     }
 

@@ -7,6 +7,7 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -42,17 +43,22 @@ public class MacMessagePlugin implements MessagePlugin, InitializablePluginInter
         this.entity = entity;
 
         initialized = false;
-        secretKeys = new HashMap<>();
+        secretKeys = new ConcurrentHashMap<>();
     }
 
     @Override
     public MessageData processIncomingMessage(MessageData message) {
         if (message.getFlagsList().contains(DataUtils.INVALID)) {
+            System.out.println("Invalid message received");
             return message;
         }
 
         if (verifyMac(message)) {
+            System.out.println("MAC validation successful");
             return message;
+        }
+        else{
+            System.out.println("MAC validation failed");
         }
 
         Printer.print(Verbosity.VVV, entity.prefix, "Mac validation failed for ", message);
@@ -94,13 +100,17 @@ public class MacMessagePlugin implements MessagePlugin, InitializablePluginInter
             }
 
             var total = EntityMapUtils.nodeCount() + EntityMapUtils.clientCount();
+            /*
+             * Runs a loop from runner+1 to others
+             */
             for (var target = entity.getId() + 1; target < total; target += 1) {
                 keygen.init(256);
                 SecretKey hmacKey = keygen.generateKey();
+                System.out.println("Updating secret keys with value for target: "+target);
                 secretKeys.put(target, hmacKey.getEncoded());
 
                 var bytes = ByteString.copyFrom(hmacKey.getEncoded());
-                var secretKeyData = DataUtils.createPluginData("mac", SECRET_KEY, bytes, entity.getId(),
+                var secretKeyData = DataUtils.createPluginData("mac", SECRET_KEY, bytes, target == 4 ? entity.getCoordinator().getMyUnit() : entity.getId(),
                         List.of(target));
                 var secretKeyEvent = DataUtils.createEvent(secretKeyData);
 
@@ -113,9 +123,11 @@ public class MacMessagePlugin implements MessagePlugin, InitializablePluginInter
             if (messageType == SECRET_KEY) {
                 var source = pluginData.getSource();
                 var bytes = pluginData.getData().toByteArray();
+                System.out.println("Updating secret keys with value for source: "+source);
                 secretKeys.put(source, bytes);
             }
         }
+        System.out.println("Secret Key size: "+secretKeys.size());
 
         if (secretKeys.size() == EntityMapUtils.nodeCount() + EntityMapUtils.clientCount() - 1) {
             initialized = true;
@@ -170,6 +182,12 @@ public class MacMessagePlugin implements MessagePlugin, InitializablePluginInter
 
     public boolean verifyMac(MessageData message) {
         var source = message.getSource();
+        /*
+         * In case of clusters, message from client will come from id 16 but
+         * for each the client is stored at id 4
+         */
+        if(source == 16)
+            source = 4;
         if (source == entity.getId()) {
             return true;
         }
@@ -177,8 +195,9 @@ public class MacMessagePlugin implements MessagePlugin, InitializablePluginInter
         if (!message.containsExtraData(MAC_VECTOR)) {
             return false;
         }
-
+        System.out.println("Verifying MAC for source: "+source);
         var secretKey = secretKeys.get(source);
+        System.out.println("Secret Key: "+secretKey);
         var macData = message.getExtraDataOrThrow(MAC_VECTOR);
 
         var requestList = message.getRequestsList();
@@ -202,6 +221,11 @@ public class MacMessagePlugin implements MessagePlugin, InitializablePluginInter
             byte[] bytes;
             try {
                 bytes = stream.readNBytes(len);
+                /*
+                 * Adding this because message target is the client id but here
+                 * we have defined to use runner value
+                 */
+                target = target%4;
                 if (target == entity.getId()) {
                     return Arrays.equals(computed, bytes);
                 }

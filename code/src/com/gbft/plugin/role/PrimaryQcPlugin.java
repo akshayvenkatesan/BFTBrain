@@ -48,6 +48,11 @@ public class PrimaryQcPlugin extends RolePlugin {
     }
 
     @Override
+    protected List<Integer> getRoleEntities(long offset, int phase, int role, int clusternum) {
+        return null;
+    }
+
+    @Override
     protected List<Integer> getEntityRoles(long offset, int phase, int entity) {
         var index = EntityMapUtils.getNodeIndex(entity);
         var total = EntityMapUtils.nodeCount();

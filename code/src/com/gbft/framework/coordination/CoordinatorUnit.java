@@ -24,6 +24,7 @@ import com.gbft.framework.core.Client;
 import com.gbft.framework.core.DynamicClient;
 import com.gbft.framework.core.Entity;
 import com.gbft.framework.core.Node;
+import com.gbft.framework.core.ShardingClient;
 import com.gbft.framework.data.Event;
 import com.gbft.framework.data.FaultData;
 import com.gbft.framework.data.Event.EventType;
@@ -88,32 +89,47 @@ public class CoordinatorUnit extends CoordinatorBase {
         println("Send event completed");
     }
 
+    public int getMyUnit(){
+        return myUnit;
+    }
+
+    public int getClusterNum(){
+        return clusterNum;
+    }
+
     @Override
     public void receiveEvent(Event event, Socket socket) {
         var coordinationType = event.getEventType();
-        println("123 ");
-        if (coordinationType == EventType.INIT_SHARD) {
-            println("Received new data at new clienty *** ");
-            println(event.getInitShardData().toString());
-            println("y  oyoyoyoyoo yoyoyoo *** ");
-        }
+        // if (coordinationType == EventType.INIT_SHARD) {
+        //     println("Received new data at new clienty *** ");
+        //     println(event.getInitShardData().toString());
+        //     println("y  oyoyoyoyoo yoyoyoo *** ");
+        // }
         if (coordinationType == EventType.CONFIG) {
+            /*
+             * initFromConfig mainly initializes the config map data and the default protocol
+             * and adds units to entity map util.
+             */
             initFromConfig(event.getConfigData().getDataMap(), event.getConfigData().getDefaultProtocol(),
                     event.getConfigData().getUnitsList());
             defaultProtocol = event.getConfigData().getDefaultProtocol();
             Config.setCurrentProtocol(defaultProtocol);
 
             var clientType = Config.string("benchmark.client");
-            //println(EntityMapUtils.getUnitClients(myUnit).toString() + " " + clientType + " " + myUnit);
-            //entities.put(16, genClient(clientType, 16));
-            //println("New created shard client is: " + entities.get(16));
-            EntityMapUtils.getUnitClients(myUnit).forEach(id -> entities.put(id, genClient(clientType, id)));
-            EntityMapUtils.getUnitNodes(myUnit).forEach(id -> entities.put(id, new Node(id, this)));
-
-            // PluginManager.getRolePlugin(entities.get(0)).debugRoleMap();
-
+            
+            /*
+             * Now it gets the runner for the id and creates the required mapping object
+             */
+            EntityMapUtils.getUnitClients(myUnit).forEach((id) -> entities.put(id, genClient(clientType, id)));
+            EntityMapUtils.getUnitNodes(myUnit).forEach((id) -> entities.put(id, new Node(id, this)));
+            
             benchmarkManager = new BenchmarkManager(null);
 
+            /*
+             * Now iterates over all units in entity map util and sends a connection
+             * request and updates connections map using ID as key and connection object as
+             * value
+             */
             for (var unit : EntityMapUtils.getAllUnits()) {
                 if (unit != myUnit) {
                     var connection = new Connection(this, myUnit, unit, inQueueClient, inQueueReplica,
@@ -128,11 +144,25 @@ public class CoordinatorUnit extends CoordinatorBase {
             println("Unit configured.");
         } else if (coordinationType == EventType.PLUGIN_INIT) {
             var data = event.getPluginData();
-            var targets = data.getTargetsCount() == 0 ? entities.keySet() : data.getTargetsList();
+            //var targets = data.getTargetsCount() == 0 ? entities.keySet() : data.getTargetsList();
+            /*
+            target here means runner. In case we are sending message to client ( runner = 4), we put the id
+            as the source of the message. This is because client will get requests from all.
+            When we are sending to just the cluster nodes, we use the runner of the coordinator.
+            */ 
+            var targets = data.getTargetsCount() == 0 ? entities.keySet() : data.getTargetsList().contains(4)?List.of(16):data.getTargetsList();
             println("Received plugin event for targets: " + targets.toString() + ".");
-            for (var id : targets) {
+            println("Entities map for: "+entities);
+            println("Target list is: "+targets);
+            /*
+             * The relevant plugin is mainly the MacMessagePlugin which is used to generate
+             * the secret keys for the nodes and clients. A unit updates their map and 
+             * sends a request to all folllowing runners to updates their secret key map
+             */
+            for (var id: targets) {
                 var entity = entities.get(id);
-                println(entity.toString() + " " + entity.getId() + " " + entity.isClient() + " " + entity.isPrimary());
+                // println(entity.toString() + " " + entity.getId() + " " + entity.isClient() + " " + entity.isPrimary());
+                
                 var plugins = entity.getMessagePlugins();
                 for (var plugin : plugins) {
                     if (plugin instanceof InitializablePluginInterface initPlugin) {
@@ -140,19 +170,30 @@ public class CoordinatorUnit extends CoordinatorBase {
                     }
                 }
             }
+
+            /*
+             * Waits for all secret keys from the units in the EntityMap utils to be updated
+             * and finish the initialization of the plugin.
+             */
             var finished = true;
             for (var entity : entities.values()) {
+                println("Ent is: " + entity.getId());
                 var plugins = entity.getMessagePlugins();
                 for (var plugin : plugins) {
                     if (plugin instanceof InitializablePluginInterface initPlugin) {
+                        println("Init plugin is: " + initPlugin.toString());
                         finished = finished && initPlugin.isInitialized();
                     }
                 }
             }
+            println("Plug initialised status: "+finished);
             if (finished) {
+                println("Inside finished block.");
+                println("Id is "+myUnit+" and clusterNum is "+this.clusterNum);
                 var unitData = DataUtils.createUnitData(myUnit, 1, 0, this.clusterNum);
                 var readyEvent = DataUtils.createEvent(unitData, EventType.READY);
-                superSendEvent(SERVER, readyEvent);
+                // superSendEvent(SERVER, readyEvent);
+                sendEvent(SERVER, readyEvent);
             }
         } else if (coordinationType == EventType.CONNECTION) {
             if (event.getTarget() == SERVER) {
@@ -170,8 +211,10 @@ public class CoordinatorUnit extends CoordinatorBase {
                  * Wait for all connections to be established before starting the sender and
                  * receiver threads.
                  */
-                while (connected_units.get() < EntityMapUtils.unitCount() - 1)
-                    ;
+                while (connected_units.get() < EntityMapUtils.unitCount() - 1){
+                    // println("Waiting for connections to complete. Current connections count : "+connected_units.get());
+                    // println("Expected connections: "+EntityMapUtils.unitCount());
+                };
 
                 connections.values().forEach(connection -> connection.startSenderReceiver());
                 receiveFromInQueueClient = new Thread(new ReceiverPoller(inQueueClient));
@@ -197,7 +240,7 @@ public class CoordinatorUnit extends CoordinatorBase {
             println("Benchmark started.");
         } else if (coordinationType == EventType.BENCHMARK_REPORT) {
 
-            println("Sending benchmark results to server.");
+            // println("Sending benchmark results to server.");
 
             var reportData = ReportData.newBuilder();
             for (var id : entities.keySet()) {
@@ -214,7 +257,7 @@ public class CoordinatorUnit extends CoordinatorBase {
 
             sendEvent(SERVER, reportEvent);
 
-            println(Printer.convertToString(reportEvent.getReportData()));
+            // println(Printer.convertToString(reportEvent.getReportData()));
         } else if (coordinationType == EventType.STOP) {
             for (var entity : entities.values()) {
                 entity.stop();
@@ -228,6 +271,7 @@ public class CoordinatorUnit extends CoordinatorBase {
             receiveFromInQueueClient.interrupt();
             receiveFromInQueueReplica.interrupt();
         } else if (event.getEventType() == EventType.MESSAGE) {
+            println("Message event received in "+myUnit);
             var messages = event.getMessageBlock().getMessageDataList();
 
             // TODO: More parallel.
@@ -237,6 +281,7 @@ public class CoordinatorUnit extends CoordinatorBase {
                     if (target == message.getSource() || EntityMapUtils.getUnit(target) != myUnit) {
                         continue;
                     }
+                    println("Processing message for target: "+target);
 
                     // TODO: Use Virtual Thread.
 
@@ -279,21 +324,28 @@ public class CoordinatorUnit extends CoordinatorBase {
 
                     if (event != null) {
                         if (event.getEventType() == EventType.MESSAGE) {
+                            System.out.println("Message event received in "+myUnit);
                             var messages = event.getMessageBlock().getMessageDataList();
 
                             for (var message : messages) {
                                 var targets = message.getTargetsList();
+                                System.out.println("Targets: "+targets.toString() + " for message: "+message.toString());
                                 for (var target : targets) {
-                                    if (target == message.getSource() || EntityMapUtils.getUnit(target) != myUnit) {
+                                    var new_target = target%4;
+                                    if (target == message.getSource() || EntityMapUtils.getUnit(new_target) != myUnit) {
                                         continue;
                                     }
 
+                                    // if (target == message.getSource() || target != myUnit) {
+                                    //     continue;
+                                    // }
+
                                     // in-dark attack
-                                    if (message.getFault().getBlockedTargetsList().contains(target))
+                                    if (message.getFault().getBlockedTargetsList().contains(new_target))
                                         continue;
                                     // timeout attack
                                     var delay = 0L;
-                                    if (message.getFault().getDelayedTargetsList().contains(target))
+                                    if (message.getFault().getDelayedTargetsList().contains(new_target))
                                         delay = message.getFault().getDelay();
                                     final long _delay = delay;
                                     // execute
@@ -301,7 +353,7 @@ public class CoordinatorUnit extends CoordinatorBase {
                                         try {
                                             if (_delay > 0L)
                                                 Thread.sleep(_delay);
-                                            entities.get(target).handleMessage(message);
+                                            entities.get(new_target).handleMessage(message);
                                         } catch (InterruptedException e) {
                                             e.printStackTrace();
                                         }
@@ -332,11 +384,26 @@ public class CoordinatorUnit extends CoordinatorBase {
             receiveEvent(event, null);
         } else {
             if (unit != SERVER) {
+                System.out.println("Sending event to " + unit + " at " + unitAddressMap.get(unit).getLeft() + ":"
+                        + unitAddressMap.get(unit).getRight());
+                /*
+                 * Adds the benchmark data for the coordinator unit send event
+                 */
                 benchmarkManager.add(BenchmarkManager.COORDINATOR_UNIT_SEND, 0, System.nanoTime());
             }
+            /*
+             * If the unit is in the connections map, send the event using the connection
+             */
             if (connections.containsKey(unit)) {
+                System.out.println("Using connection - Sending event to " + unit + " at " + unitAddressMap.get(unit).getLeft() + ":"
+                        + unitAddressMap.get(unit).getRight());
                 connections.get(unit).send(event);
             } else {
+                /*
+                 * If the unit is not in the connections map, send the event using the super
+                 */
+                System.out.println("Sending event to " + unit + " at " + unitAddressMap.get(unit).getLeft() + ":"
+                        + unitAddressMap.get(unit).getRight());
                 super.sendEvent(unit, event);
             }
         }
@@ -350,11 +417,14 @@ public class CoordinatorUnit extends CoordinatorBase {
     }
 
     public void sendMessages(List<MessageData> messages, int sender) {
+        /*
+         * Gets all the id's of units in the target list
+         */
         var units = messages.parallelStream().flatMap(message -> message.getTargetsList().stream())
                 .map(target -> EntityMapUtils.getUnit(target))
                 .distinct()
                 .toList();
-
+        println("Found target: "+units.toString());
         List<MessageData> transformedMessages = new ArrayList<>();
 
         Entity senderEntity = this.entities.get(sender);
@@ -410,7 +480,7 @@ public class CoordinatorUnit extends CoordinatorBase {
 
     private ShardingClient genClient(String type, int id) {
         //return type.equals("basic") ? new Client(id, this) : new DynamicClient(id, this);
-        println("Creating client dataset for sharding client " + id + ".");
+        println("Creating sharding client instance" + id + ".");
         return new ShardingClient(id, this);
     }
 

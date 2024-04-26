@@ -21,6 +21,7 @@ import com.gbft.plugin.pipeline.QcPipelinePlugin;
 import com.gbft.plugin.role.BasicPrimaryPlugin;
 import com.gbft.plugin.role.PrimaryPassivePlugin;
 import com.gbft.plugin.role.PrimaryQcPlugin;
+import com.gbft.plugin.role.ShardedPrimaryPlugin;
 import com.gbft.plugin.transition.CheckpointTransitionPlugin;
 
 public class PluginManager {
@@ -48,6 +49,7 @@ public class PluginManager {
             Printer.print(Verbosity.V, "{plugin-manager} ", "Role plugin not found: " + name);
             return null;
         }
+        name = "shardedprimary";
         return rolePlugins.get(name).apply(entity);
     }
 
@@ -112,6 +114,7 @@ public class PluginManager {
         PluginManager.registerRolePlugin("primary", (entity) -> new BasicPrimaryPlugin(entity));
         PluginManager.registerRolePlugin("passive", (entity) -> new PrimaryPassivePlugin(entity));
         PluginManager.registerRolePlugin("qc-primary", (entity) -> new PrimaryQcPlugin(entity));
+        PluginManager.registerRolePlugin("shardedprimary", (entity) -> new ShardedPrimaryPlugin(entity));
 
         PluginManager.registerMessagePlugin("checkpoint", (entity) -> new CheckpointMessagePlugin(entity));
         PluginManager.registerMessagePlugin("digest", (entity) -> new DigestMessagePlugin(entity));
@@ -125,5 +128,6 @@ public class PluginManager {
 
         PluginManager.registerPipelinePlugin("direct", (entity) -> new DirectPipelinePlugin(entity));
         PluginManager.registerPipelinePlugin("qc-pipeline", (entity) -> new QcPipelinePlugin(entity));
+        
     }
 }

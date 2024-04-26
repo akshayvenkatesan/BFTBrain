@@ -12,22 +12,43 @@ public class EntityMapUtils {
     private static List<UnitData> unitDataList;
     private static Map<Integer, List<UnitData>> unitDataClusterList;
     private static Map<Integer, List<Integer>> clusterServerMapping;
+    /*
+     * Maintains list of id's
+     */
     private static List<Integer> units;
+    /*
+     * Maintains list of runners for nodes
+     */
     private static List<Integer> nodes;
+    /*
+     * Maintains list of runners for client
+     */
     private static List<Integer> clients;
+    /*
+     * Maintains id to runner node mapping
+     */
     private static Map<Integer, List<Integer>> unitNodes;
+    /*
+     * Maintains id to runner client mapping
+     */
     private static Map<Integer, List<Integer>> unitClients;
+    /*
+     * Maintains runner to id mapping
+     */
     private static Map<Integer, Integer> entityUnitMap;
 
     public static void addUnitData(UnitData data) {
         var unit = data.getUnit();
         println("Adding unit " + unit + " to entity map.");
         units.add(unit);
+        units.sort((a, b) -> a - b);
         unitNodes.put(unit, new ArrayList<>());
         unitClients.put(unit, new ArrayList<>());
         unitDataList.add(data);
+        unitDataList.sort((a, b) -> a.getUnit() - b.getUnit());
         unitDataClusterList.putIfAbsent(data.getClusterNum(), new ArrayList<>());
         unitDataClusterList.get(data.getClusterNum()).add(data);
+        unitDataClusterList.get(data.getClusterNum()).sort((a, b) -> a.getUnit() - b.getUnit());
         println("Getting cluster number for unit " + unit + ".");
         var cluster = data.getClusterNum();
         println("Adding unit " + unit + " to cluster " + cluster + ".");

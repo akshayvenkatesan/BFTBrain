@@ -14,7 +14,7 @@ cluster_number=1
 cd ../code
 echo $PWD
 tmux new-session -d -s "shard_coordinator"
-tmux send-keys -t shard_coordinator "./run.sh CoordinatorServer -p 5050 -r $protocol -k 0" C-m
+tmux send-keys -t shard_coordinator "./run.sh CoordinatorServer -p 5050 -r $protocol -k 5" C-m
 
 
 echo "Waiting for 10 seconds for ShardCoordinator to set up ..."

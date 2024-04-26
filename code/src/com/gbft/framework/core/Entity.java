@@ -311,45 +311,54 @@ public abstract class Entity {
     }
 
     public void handleMessage(MessageData message) {
-
+        System.out.println("Received request: " + message);
         if (Printer.verbosity >= Verbosity.VVV) {
             Printer.print(Verbosity.VVV, prefix, "Processing ", message);
         }
-
+        System.out.println("Going to process: " + message);
         for (var i = messagePlugins.size() - 1; i >= 0; i--) {
             var plugin = messagePlugins.get(i);
             message = plugin.processIncomingMessage(message);
         }
-
+        System.out.println("Processed: " + message);
         if (message.getFlagsList().contains(DataUtils.INVALID)) {
+            System.out.println("Returning as message is invalid");
             return;
         }
 
         var type = message.getMessageType();
         if (type == StateMachine.REQUEST) {
+            System.out.println("Received request: " + message);
             var request = message.getRequestsList().get(0);
             var seqnum = getRequestSequence(request.getRequestNum());
             if (seqnum == null) {
                 // slow proposal
+                System.out.println("Inside seqnum == null");
                 if (slowProposalFault.getPerRequestDelay(this.id) > 0) {
+                    System.out.println("Inside slowProposalFault.getPerRequestDelay(this.id) > 0");
                     // Printer.print(Verbosity.V, prefix, "[time-since-start=" + Printer.timeFormat(System.nanoTime() - systemStartTime, true) + "] add slow proposal: reqnum=" + request.getRequestNum());
                     addSlowProposal(request);
                 } else {
                     // clean up if switch back to fault free
                     if (slowProposalRequests.size() > 0) {
+                        System.out.println("Inside slowProposalRequests.size() > 0");
                         synchronized (slowProposalRequests) {
                             while (slowProposalRequests.size() > 0) {
                                 pendingRequests.offer(slowProposalRequests.remove(0));
                             }
+                            System.out.println("Inside slowProposalRequests.size() > 0: pendingRequests: " + pendingRequests);
                         }
                     }
                     // Printer.print(Verbosity.V, prefix, "[time-since-start=" + Printer.timeFormat(System.nanoTime() - systemStartTime, true) + "] received request: reqnum=" + request.getRequestNum());
+                    System.out.println("Inserting into pending requests");
                     pendingRequests.offer(request);
+                    System.out.println("callling state update for next sequence");
                     stateUpdateLoop(nextSequence);
                 }
             }
         } else {
             Long seqnum = message.getSequenceNum();
+            System.out.println("Received message inside not request block: " + message);
             if (checkpointManager.getCheckpointNum(seqnum) < checkpointManager.getMinCheckpoint()) {
                 return;
             }
@@ -357,7 +366,7 @@ public abstract class Entity {
             if (!isValidMessage(message)) {
                 return;
             }
-
+            System.out.println("Valid message: " + message);
             var checkpoint = checkpointManager.getCheckpointForSeq(seqnum);
             checkpoint.tally(message);
             checkpoint.addAggregationValue(message);
@@ -807,7 +816,7 @@ public abstract class Entity {
                 var message = createMessage(seqnum, currentViewNum, null, messageType, id, targets);
                 messages.add(message);
             } else {
-                var targets = rolePlugin.getRoleEntities(seqnum, currentViewNum, phase, role);
+                var targets = rolePlugin.getRoleEntities(seqnum, currentViewNum, phase, role, this.getCoordinator().getClusterNum());
                 var message = createMessage(seqnum, currentViewNum, null, messageType, id, targets);
                 messages.add(message);
             }
@@ -816,7 +825,7 @@ public abstract class Entity {
         for (var pair : transition.extraTally) {
             var role = pair.getLeft();
             var messageType = pair.getRight();
-            var entities = rolePlugin.getRoleEntities(seqnum, currentViewNum, phase, role);
+            var entities = rolePlugin.getRoleEntities(seqnum, currentViewNum, phase, role, this.getCoordinator().getClusterNum());
 
             // Message from entities to self
             // if entities = [primary]
@@ -922,6 +931,7 @@ public abstract class Entity {
     }
 
     public void sendMessage(MessageData message) {
+        System.out.println("Sending message: " + message);
         if (message.getFlagsList().contains(DataUtils.INVALID)) {
             return;
         }

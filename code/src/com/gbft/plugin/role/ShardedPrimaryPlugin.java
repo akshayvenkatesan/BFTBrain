@@ -10,7 +10,7 @@ import com.gbft.framework.statemachine.StateMachine;
 import com.gbft.framework.utils.Config;
 import com.gbft.framework.utils.EntityMapUtils;
 
-public class PrimaryPassivePlugin extends RolePlugin {
+public class ShardedPrimaryPlugin extends RolePlugin {
 
     int f;
 
@@ -18,7 +18,7 @@ public class PrimaryPassivePlugin extends RolePlugin {
     public final int ACTIVE;
     public final int PASSIVE;
 
-    public PrimaryPassivePlugin(Entity entity) {
+    public ShardedPrimaryPlugin(Entity entity) {
         super(entity);
 
         f = Config.integer("general.f");
@@ -29,12 +29,7 @@ public class PrimaryPassivePlugin extends RolePlugin {
     }
 
     @Override
-    protected List<Integer> getRoleEntities(long offset, int phase, int role, int clusternum) {
-        return null;
-    }
-
-    @Override
-    protected List<Integer> getRoleEntities(long offset, int phase, int role) {
+    protected List<Integer> getRoleEntities(long offset, int phase, int role,int clusternum) {
         if (role == StateMachine.CLIENT) {
             return EntityMapUtils.getAllClients();
         }
@@ -48,6 +43,8 @@ public class PrimaryPassivePlugin extends RolePlugin {
 
         if (role == PRIMARY) {
             var index = phase == StateMachine.NORMAL_PHASE ? base : base + 1;
+            index = 4*(clusternum-1) + index;
+            System.err.println("Inside sharded plugin: "+index+" "+total+" "+EntityMapUtils.getNodeId(index % total));
             var entity = EntityMapUtils.getNodeId(index % total);
             return List.of(entity);
         } else if (role == ACTIVE) {
@@ -66,12 +63,12 @@ public class PrimaryPassivePlugin extends RolePlugin {
     }
 
     @Override
+    protected List<Integer> getRoleEntities(long offset, int phase, int role) {
+        return null;
+    }
+
+    @Override
     protected List<Integer> getEntityRoles(long offset, int phase, int entity) {
-        /*
-         * Finds index of the id passed as entity in the list of nodes.
-         * If the entity is not found, returns a list containing the CLIENT 
-         * because client does not exist 
-         */
         var index = EntityMapUtils.getNodeIndex(entity);
         if (index < 0) {
             return List.of(StateMachine.CLIENT);
