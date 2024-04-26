@@ -18,7 +18,7 @@ import com.gbft.framework.statemachine.StateMachine;
 import com.gbft.framework.utils.Printer.Verbosity;
 import com.google.protobuf.ByteString;
 
-public class MessageTally {
+public class -MessageTally {
 
     // seqnum -> message-type -> view-num -> digest -> set(node)
     protected Map<Long, Map<Integer, ConcurrentSkipListMap<Long, Map<ByteString, Set<Integer>>>>> counter;
