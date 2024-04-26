@@ -48,7 +48,7 @@ cd ../code
 sleep 5
 echo "Starting Client"
 tmux new-session -d -s "sharding_client"
-tmux send-keys -t sharding_client "./run.sh CoordinatorUnit -u 0 -p 5051 -c 1 -s 127.0.0.1:5050 -k 0" C-m
+tmux send-keys -t sharding_client "./run.sh CoordinatorUnit -u 16 -p 5051 -c 1 -s 127.0.0.1:5050 -k 0" C-m
 
 sleep 5
 tmux send-keys -t shard_coordinator:0 C-m
