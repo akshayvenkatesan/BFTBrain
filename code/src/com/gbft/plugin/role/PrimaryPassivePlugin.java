@@ -35,6 +35,13 @@ public class PrimaryPassivePlugin extends RolePlugin {
 
     @Override
     protected List<Integer> getRoleEntities(long offset, int phase, int role) {
+        /*
+         * This method returns the list of entities that match a role
+         * based on the offset, phase and role passed as arguments.
+         * offset: the offset to be used to calculate the index of the entity
+         * phase: normal phase or recovery phase
+         * role: the role of the entity
+         */
         if (role == StateMachine.CLIENT) {
             return EntityMapUtils.getAllClients();
         }
@@ -52,12 +59,12 @@ public class PrimaryPassivePlugin extends RolePlugin {
             return List.of(entity);
         } else if (role == ACTIVE) {
             return IntStream.range(base, base + total - f)
-                            .map(index -> EntityMapUtils.getNodeId(index % total)).boxed()
-                            .collect(Collectors.toList());
+                    .map(index -> EntityMapUtils.getNodeId(index % total)).boxed()
+                    .collect(Collectors.toList());
         } else if (role == PASSIVE) {
             return IntStream.range(base + total - f, base + total)
-                            .map(index -> EntityMapUtils.getNodeId(index % total)).boxed()
-                            .collect(Collectors.toList());
+                    .map(index -> EntityMapUtils.getNodeId(index % total)).boxed()
+                    .collect(Collectors.toList());
         } else if (role == StateMachine.NODE) {
             return EntityMapUtils.getAllNodes();
         }
@@ -69,8 +76,8 @@ public class PrimaryPassivePlugin extends RolePlugin {
     protected List<Integer> getEntityRoles(long offset, int phase, int entity) {
         /*
          * Finds index of the id passed as entity in the list of nodes.
-         * If the entity is not found, returns a list containing the CLIENT 
-         * because client does not exist 
+         * If the entity is not found, returns a list containing the CLIENT
+         * because client does not exist
          */
         var index = EntityMapUtils.getNodeIndex(entity);
         if (index < 0) {
