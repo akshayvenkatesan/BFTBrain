@@ -30,7 +30,7 @@ public class CheckpointData {
     private Map<Long, NavigableSet<Long>> aggregationValues;
     private MessageTally messageTally;
     private MessageTally viewTally;
-    
+
     // service state
     protected Dataset serviceState;
 
@@ -64,6 +64,7 @@ public class CheckpointData {
     /**
      * Clone dataset, invoked in Node.java (Node, not Client)
      * Only invoke when (seqnum+1) % checkpointSize == 0
+     * 
      * @param currentServiceState current dataset
      */
     public void setServiceState(Dataset currentServiceState) {
@@ -75,7 +76,9 @@ public class CheckpointData {
     }
 
     public void tally(MessageData message) {
+        System.out.println("Tallying message: " + message);
         messageTally.tally(message);
+        System.out.println("Counter Updated: " + messageTally.counter);
         viewTally.tally(message.toBuilder().clearDigest().build());
 
         // track number of received messages per slot
@@ -86,7 +89,8 @@ public class CheckpointData {
 
         // timestamp when receiving leader proposal
         var type = message.getMessageType();
-        if (StateMachine.messages.get(type).hasRequestBlock && type != StateMachine.REQUEST && type != StateMachine.REPLY) {
+        if (StateMachine.messages.get(type).hasRequestBlock && type != StateMachine.REQUEST
+                && type != StateMachine.REPLY) {
             entity.getFeatureManager().received(entity.getEpisodeNum(seqnum), seqnum);
         }
 
@@ -100,11 +104,13 @@ public class CheckpointData {
 
             var sb = new StringBuilder("");
             for (var element : stackTraceElements) {
-                sb.append(" class: " + element.getClassName() + " file: " + element.getFileName() + " line: " + element.getLineNumber() + " method: " + element.getMethodName() + "\n");
+                sb.append(" class: " + element.getClassName() + " file: " + element.getFileName() + " line: "
+                        + element.getLineNumber() + " method: " + element.getMethodName() + "\n");
             }
 
             Printer.print(Verbosity.VVVVVV, "Tally stacktrace ", sb.toString().trim());
         }
+        System.out.println("Tally Updated: " + decisionMatching);
     }
 
     public void tallyDecision(String decision) {
@@ -114,7 +120,8 @@ public class CheckpointData {
     public void addAggregationValue(MessageData message) {
         var seqnum = message.getSequenceNum();
         if (!message.getAggregationValuesList().isEmpty()) {
-            aggregationValues.computeIfAbsent(seqnum, k -> new ConcurrentSkipListSet<>()).addAll(message.getAggregationValuesList());
+            aggregationValues.computeIfAbsent(seqnum, k -> new ConcurrentSkipListSet<>())
+                    .addAll(message.getAggregationValuesList());
         }
     }
 
@@ -174,8 +181,9 @@ public class CheckpointData {
      * 
      * Set at `transition` and `execute` in `Entity.java`
      * Updated in `StateUpdateLoop` in `Entity.java`
+     * 
      * @param seqnum sequence number
-     * @param state state
+     * @param state  state
      */
     public void setState(long seqnum, int state) {
         stateMap.put(seqnum, state);
@@ -183,6 +191,7 @@ public class CheckpointData {
 
     /**
      * Get state of a seqnum
+     * 
      * @param seqnum sequence number
      * @return state
      */
@@ -190,7 +199,8 @@ public class CheckpointData {
         if (protocol.get() == null) {
             return StateMachine.ANY_STATE;
         } else {
-            return stateMap.getOrDefault(seqnum, StateMachine.states.indexOf(StateMachine.findState("idle", protocol.get() + "_")));
+            return stateMap.getOrDefault(seqnum,
+                    StateMachine.states.indexOf(StateMachine.findState("idle", protocol.get() + "_")));
         }
     }
 

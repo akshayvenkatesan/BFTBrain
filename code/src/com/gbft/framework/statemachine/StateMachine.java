@@ -60,6 +60,13 @@ public class StateMachine {
         public Set<Integer> phases;
         public String name;
         public boolean hasRequestBlock;
+
+        @Override
+        public String toString() {
+            StringBuilder builder = new StringBuilder();
+            builder.append("[name ").append(name).append(" phases ").append(phases).append("]");
+            return builder.toString();
+        }
     }
 
     public static void init() {
@@ -135,7 +142,7 @@ public class StateMachine {
                     var transition = genTransition(to.asMapping(), fromState, condition, prefix);
                     states.get(fromState).transitions.computeIfAbsent(role, r -> new ArrayList<>()).add(transition);
                 }
-            }   
+            }
         }
 
         NORMAL_PHASE = phases.indexOf("normal");
@@ -175,16 +182,19 @@ public class StateMachine {
             var params = Map.of(Condition.MESSAGE_TYPE, msgtype, Condition.QUORUM, quorum);
             condition = new Condition(Condition.MESSAGE_CONDITION, params);
         } else if (type.equals("timeout")) {
-            var mode = conditionConfig.string("mode").equals("sequence") ? Timekeeper.SEQUENCE_MODE : Timekeeper.STATE_MODE;
+            var mode = conditionConfig.string("mode").equals("sequence") ? Timekeeper.SEQUENCE_MODE
+                    : Timekeeper.STATE_MODE;
             var multiplier = conditionConfig.integer("multiplier");
-            var params = Map.of(Condition.TIMEOUT_MODE, mode, Condition.TIMEOUT_MULTIPLIER, multiplier > 0 ? multiplier : 1);
+            var params = Map.of(Condition.TIMEOUT_MODE, mode, Condition.TIMEOUT_MULTIPLIER,
+                    multiplier > 0 ? multiplier : 1);
             condition = new Condition(Condition.TIMEOUT_CONDITION, params);
         }
 
         return condition;
     }
 
-    private static Transition genTransition(YamlMapping transitionMapping, int fromState, Condition condition, String prefix) {
+    private static Transition genTransition(YamlMapping transitionMapping, int fromState, Condition condition,
+            String prefix) {
         var toState = states.indexOf(findState(transitionMapping.string("state"), prefix));
         var updateMode = transitionMapping.string("update") == null ? UpdateMode.NONE
                 : UpdateMode.valueOf(transitionMapping.string("update").toUpperCase());

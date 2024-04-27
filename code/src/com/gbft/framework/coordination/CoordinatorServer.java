@@ -81,11 +81,10 @@ public class CoordinatorServer extends CoordinatorBase {
 
         var units = EntityMapUtils.getclusterServerMapping(clusternum);
         ConfigData configData;
-        if( clusternum ==  0){
+        if (clusternum == 0) {
             configData = DataUtils.createConfigData(configContent, protocol,
                     EntityMapUtils.allUnitData());
-        }
-        else{
+        } else {
             var entity_units = EntityMapUtils.getClusterUnitData(clusternum);
             entity_units.addAll(EntityMapUtils.getClusterUnitData(0));
             configData = DataUtils.createConfigData(configContent, protocol,
@@ -93,7 +92,7 @@ public class CoordinatorServer extends CoordinatorBase {
         }
         int responseCount = clusternum == 0 ? 1 : 4;
         // var configData = DataUtils.createConfigData(configContent, protocol,
-        //         EntityMapUtils.getClusterUnitData(clusternum));
+        // EntityMapUtils.getClusterUnitData(clusternum));
         var configEvent = DataUtils.createEvent(configData);
         println("Sending Event 1 in cluster " + clusternum);
         sendEvent(units, configEvent);
@@ -133,7 +132,7 @@ public class CoordinatorServer extends CoordinatorBase {
         println("Cluster server mapping in CS is: " + EntityMapUtils.getAllClusterData());
         // Submit the task to be executed asynchronously 4 times
         for (int i = 0; i <= 4; i++) {
-            final int iCopy = i ;
+            final int iCopy = i;
             executor.submit(() -> initializeAndStartUnits(iCopy));
         }
 
@@ -156,11 +155,11 @@ public class CoordinatorServer extends CoordinatorBase {
         // var clusterData = EntityMapUtils.getAllClusterData();
         // var initShardData = InitShardData.newBuilder();
         // for (var entry: EntityMapUtils.getAllClusterData().entrySet()) {
-        //     var clus = entry.getKey();
-        //     var allUnits = entry.getValue();
-        //     var clusterUnits = ClusterUnits.newBuilder().addAllValues(allUnits).build();
-        //     initShardData.putClusterData(clus, clusterUnits);
-        //     // println(initShardData.toString());
+        // var clus = entry.getKey();
+        // var allUnits = entry.getValue();
+        // var clusterUnits = ClusterUnits.newBuilder().addAllValues(allUnits).build();
+        // initShardData.putClusterData(clus, clusterUnits);
+        // // println(initShardData.toString());
         // }
 
         // // TODO
@@ -192,7 +191,6 @@ public class CoordinatorServer extends CoordinatorBase {
         println("Stopping all entities.");
         var stopEvent = DataUtils.createEvent(EventType.STOP);
         sendEvent(units, stopEvent);
-
         try {
             Thread.sleep(500);
         } catch (InterruptedException e) {

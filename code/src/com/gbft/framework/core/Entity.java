@@ -426,6 +426,7 @@ public abstract class Entity {
         // TODO: concurrency control for leader rotation protocols
         if (seqnum <= lastExecutedSequenceNum || isExecuted(seqnum)
                 || (isPrimary(seqnum) && seqnum - lastExecutedSequenceNum > pipelinePlugin.getMaxActiveSequences())) {
+            
             System.out.println("Returning null for seqnum: " + seqnum);
             stateLock.unlock();
             return null;
@@ -499,11 +500,14 @@ public abstract class Entity {
                         } else if (conditionType == Condition.MESSAGE_CONDITION) {
                             System.out.println("Inside message condition: " + seqnum);
                             var messageType = condition.getParam(Condition.MESSAGE_TYPE);
+                            System.out.println("Message type: " + messageType);
+                            System.out.println("Message type for stateMachine request: " + StateMachine.REQUEST);
                             if (messageType == StateMachine.REQUEST) {
                                 System.out.println("Inside message type request: " + seqnum);
                                 var block = checkpoint.getRequestBlock(seqnum);
                                 System.out.println("Block: " + block);
                                 if (block == null || block.isEmpty()) {
+                                    System.out.println("Block is null or empty: " + seqnum);
                                     synchronized (pendingLock) {
                                         if (pendingRequests.size() < blockSize) {
                                             continue;
@@ -533,23 +537,27 @@ public abstract class Entity {
                                             }
                                             block.add(request);
                                         }
+                                        System.out.println("Block: " + block);
                                     }
                                 }
 
                                 var message = createMessage(seqnum, currentViewNum, block, StateMachine.REQUEST, id,
                                         List.of(id));
+                                System.out.println("Message: " + message);
                                 checkpoint.tally(message);
+                                System.out.println("Tally updated: " + message);
                                 benchmarkManager.add(BenchmarkManager.CREATE_REQUEST_BLOCK, 0, System.nanoTime());
 
                                 proposedRequests += 1;
                                 // Printer.print(Verbosity.V, prefix, "Create proposal, seqnum: " + seqnum);
                             }
-
+                            System.out.println(prefix + " outside if message type request: " + seqnum);
                             var quorumId = new QuorumId(messageType, condition.getParam(Condition.QUORUM));
                             conditionMet = checkMessageTally(seqnum, quorumId, transition.updateMode);
                         }
 
                         if (conditionMet) {
+                            System.out.println("Inside condition met: " + seqnum);
                             benchmarkManager.add(BenchmarkManager.CONDITION_MET, 0, System.nanoTime());
 
                             timekeeper.stateUpdated(seqnum, transition.toState);
@@ -1079,6 +1087,7 @@ public abstract class Entity {
                         StateMachine.messages.get(quorumId.message).name.toUpperCase() + " seqnum: " + seqnum
                                 + " size: " + quorumId.quorum);
             }
+            System.out.println("Returning true from checkMessageTally");
             return true;
         }
 
@@ -1087,7 +1096,7 @@ public abstract class Entity {
                     StateMachine.messages.get(quorumId.message).name.toUpperCase() + " seqnum: " + seqnum + " size: "
                             + quorumId.quorum);
         }
-
+        System.out.println("Returning false from checkMessageTally");
         return false;
     }
 

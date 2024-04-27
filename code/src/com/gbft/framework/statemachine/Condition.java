@@ -31,4 +31,13 @@ public class Condition {
     public Integer getParam(int param) {
         return params.get(param);
     }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append(
+                "Condition [type=" + params.get(MESSAGE_TYPE) + ", quorum=" + params.get(QUORUM) + ", timeoutMode="
+                        + params.get(TIMEOUT_MODE) + ", timeoutMultiplier=" + params.get(TIMEOUT_MULTIPLIER) + "]");
+        return builder.toString();
+    }
 }
