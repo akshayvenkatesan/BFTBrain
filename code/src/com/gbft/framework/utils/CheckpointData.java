@@ -76,9 +76,9 @@ public class CheckpointData {
     }
 
     public void tally(MessageData message) {
-        System.out.println("Tallying message: ");
+        System.out.println("Tallying message: " + message.getSequenceNum());
         messageTally.tally(message);
-        System.out.println("Counter Updated: " + messageTally.counter);
+        // System.out.println("Counter Updated: " + messageTally.counter);
         viewTally.tally(message.toBuilder().clearDigest().build());
 
         // track number of received messages per slot
@@ -110,7 +110,6 @@ public class CheckpointData {
 
             Printer.print(Verbosity.VVVVVV, "Tally stacktrace ", sb.toString().trim());
         }
-        System.out.println("Tally Updated: " + decisionMatching);
     }
 
     public void tallyDecision(String decision) {

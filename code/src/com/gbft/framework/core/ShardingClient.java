@@ -59,7 +59,8 @@ public class ShardingClient extends Entity {
         currentViewNum = viewnum;
         /*
          * Checks for replies for the requests in the block and updates the dataset.
-         * Lookahead is when sending the request, and client dataset is updated on replies
+         * Lookahead is when sending the request, and client dataset is updated on
+         * replies
          */
         if (replies != null) {
             System.out.println("Updating dataset for sharding client " + id + ".");
@@ -97,31 +98,30 @@ public class ShardingClient extends Entity {
         protected class RequestGeneratorRunner implements Runnable {
             @Override
             public void run() {
-                try{
+                try {
                     while (running) {
                         semaphore.acquire();
                         var next = System.nanoTime() + intervalns;
-    
+
                         var request = dataset.createRequest(nextRequestNum);
-    
-                        var clusternum = request.getRecord() / 25 + 1; 
+
+                        var clusternum = request.getRecord() / 25 + 1;
                         nextRequestNum += 1;
-    
+
                         sendRequest(request, clusternum);
-    
+
                         while (System.nanoTime() < next) {
                             LockSupport.parkNanos(intervalns / 3);
                         }
                     }
-                }
-                catch (InterruptedException e) {
+                } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                
+
             }
         }
 
-        protected void sendRequest(RequestData request , int clusternum) {
+        protected void sendRequest(RequestData request, int clusternum) {
             var reqnum = request.getRequestNum();
             var seqnum = reqnum / blockSize;
             var view = currentViewNum;
@@ -150,14 +150,17 @@ public class ShardingClient extends Entity {
             }
 
             // Identify primary and send request
-            var targets = rolePlugin.getRoleEntities(seqnum, view, StateMachine.NORMAL_PHASE, requestTargetRole, clusternum);
+            var targets = rolePlugin.getRoleEntities(seqnum, view, StateMachine.NORMAL_PHASE, requestTargetRole,
+                    clusternum);
 
             if (request.getOperationValue() == RequestData.Operation.READ_ONLY_VALUE) {
-                targets = rolePlugin.getRoleEntities(seqnum, view, StateMachine.NORMAL_PHASE, StateMachine.NODE, clusternum);
+                targets = rolePlugin.getRoleEntities(seqnum, view, StateMachine.NORMAL_PHASE, StateMachine.NODE,
+                        clusternum);
             }
 
             var message = createMessage(null, view, List.of(request), StateMachine.REQUEST, id, targets);
-            System.out.println("Sending message for sharding client " + id + ".");
+            System.out.println("Sending request for sharding client " + id + " with request number " + reqnum
+                    + " and sequence number " + seqnum + ".");
             sendMessage(message);
 
             if (Printer.verbosity >= Printer.Verbosity.VVV) {
@@ -171,4 +174,3 @@ public class ShardingClient extends Entity {
         }
     }
 }
-

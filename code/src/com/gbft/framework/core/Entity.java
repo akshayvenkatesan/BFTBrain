@@ -370,6 +370,10 @@ public abstract class Entity {
                 }
             }
         } else {
+            // System.out.println("Received message: " + message);
+            if (isClient()) {
+                message = message.toBuilder().setSequenceNum(message.getRequests(0).getRequestNum()).build();
+            }
             Long seqnum = message.getSequenceNum();
             System.out.println("Reply block: Seqnum: " + seqnum);
             System.out.println("Received message inside reply block ");
@@ -878,7 +882,8 @@ public abstract class Entity {
                 System.out.println("Targets: " + targets);
                 targets = targets.stream().map(d -> d == 16 ? 4 : d).collect(Collectors.toList());
                 System.out.println("Targets: " + targets);
-                var message = createMessage(seqnum, currentViewNum, null, messageType, EntityMapUtils.getUnit(id),
+                var message = createMessage(seqnum, currentViewNum, requestBlock, messageType,
+                        EntityMapUtils.getUnit(id),
                         targets);
                 messages.add(message);
             } else {
@@ -1083,8 +1088,10 @@ public abstract class Entity {
     }
 
     protected boolean checkMessageTally(long seqnum, QuorumId quorumId, UpdateMode updateMode) {
+        System.out.println("Inside checkMessageTally: " + seqnum + " " + quorumId + " " + updateMode);
         var checkpoint = checkpointManager.getCheckpointForSeq(seqnum);
         var tally = checkpoint.getMessageTally();
+        System.out.println("Tally: " + tally);
         var checkview = updateMode == UpdateMode.VIEW ? currentViewNum + 1 : currentViewNum;
         // var quorumId = new QuorumId(condition.getParam(Condition.MESSAGE_TYPE),
         // condition.getParam(Condition.QUORUM));
