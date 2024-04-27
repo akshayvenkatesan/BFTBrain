@@ -29,7 +29,7 @@ public class ShardedPrimaryPlugin extends RolePlugin {
     }
 
     @Override
-    protected List<Integer> getRoleEntities(long offset, int phase, int role,int clusternum) {
+    protected List<Integer> getRoleEntities(long offset, int phase, int role, int clusternum) {
         if (role == StateMachine.CLIENT) {
             return EntityMapUtils.getAllClients();
         }
@@ -43,18 +43,19 @@ public class ShardedPrimaryPlugin extends RolePlugin {
 
         if (role == PRIMARY) {
             var index = phase == StateMachine.NORMAL_PHASE ? base : base + 1;
-            index = 4*(clusternum-1) + index;
-            System.err.println("Inside sharded plugin: "+index+" "+total+" "+EntityMapUtils.getNodeId(index % total));
+            index = 4 * (clusternum - 1) + index;
+            System.err.println(
+                    "Inside sharded plugin: " + index + " " + total + " " + EntityMapUtils.getNodeId(index % total));
             var entity = EntityMapUtils.getNodeId(index % total);
             return List.of(entity);
         } else if (role == ACTIVE) {
             return IntStream.range(base, base + total - f)
-                            .map(index -> EntityMapUtils.getNodeId(index % total)).boxed()
-                            .collect(Collectors.toList());
+                    .map(index -> EntityMapUtils.getNodeId(index % total)).boxed()
+                    .collect(Collectors.toList());
         } else if (role == PASSIVE) {
             return IntStream.range(base + total - f, base + total)
-                            .map(index -> EntityMapUtils.getNodeId(index % total)).boxed()
-                            .collect(Collectors.toList());
+                    .map(index -> EntityMapUtils.getNodeId(index % total)).boxed()
+                    .collect(Collectors.toList());
         } else if (role == StateMachine.NODE) {
             return EntityMapUtils.getAllNodes();
         }
@@ -81,10 +82,13 @@ public class ShardedPrimaryPlugin extends RolePlugin {
 
         var point = (index - (offset % total) + total) % total;
         if (point == (phase == StateMachine.NORMAL_PHASE ? 0 : 1)) {
+            System.out.println("Inside sharded plugin point==0 : " + List.of(PRIMARY, ACTIVE, StateMachine.NODE));
             return List.of(PRIMARY, ACTIVE, StateMachine.NODE);
         } else if (point < total - f) {
+            System.out.println("Inside sharded plugin point<t-f : " + List.of(ACTIVE, StateMachine.NODE));
             return List.of(ACTIVE, StateMachine.NODE);
         } else {
+            System.out.println("Inside sharded plugin point else : " + List.of(PASSIVE, StateMachine.NODE));
             return List.of(PASSIVE, StateMachine.NODE);
         }
 

@@ -18,7 +18,7 @@ import com.gbft.framework.statemachine.StateMachine;
 import com.gbft.framework.utils.Printer.Verbosity;
 import com.google.protobuf.ByteString;
 
-public class -MessageTally {
+public class MessageTally {
 
     // seqnum -> message-type -> view-num -> digest -> set(node)
     protected Map<Long, Map<Integer, ConcurrentSkipListMap<Long, Map<ByteString, Set<Integer>>>>> counter;
@@ -71,10 +71,10 @@ public class -MessageTally {
         }
 
         counter.computeIfAbsent(seqnum, s -> new ConcurrentHashMap<>())
-               .computeIfAbsent(type, t -> new ConcurrentSkipListMap<>())
-               .computeIfAbsent(viewnum, v -> new ConcurrentHashMap<>())
-               .computeIfAbsent(digest, d -> ConcurrentHashMap.newKeySet())
-               .add(source);
+                .computeIfAbsent(type, t -> new ConcurrentSkipListMap<>())
+                .computeIfAbsent(viewnum, v -> new ConcurrentHashMap<>())
+                .computeIfAbsent(digest, d -> ConcurrentHashMap.newKeySet())
+                .add(source);
 
         counterWriteLock.unlock();
     }
@@ -97,7 +97,9 @@ public class -MessageTally {
             counterReadLock.unlock();
 
             if (Printer.verbosity >= Verbosity.VVVVV) {
-                Printer.print(Verbosity.VVVVV, "GetMaxQuorum Success [currentmax]: ", StateMachine.messages.get(quorumId.message).name.toUpperCase() + " seqnum: " + seqnum + " size: " + quorumId.quorum);
+                Printer.print(Verbosity.VVVVV, "GetMaxQuorum Success [currentmax]: ",
+                        StateMachine.messages.get(quorumId.message).name.toUpperCase() + " seqnum: " + seqnum
+                                + " size: " + quorumId.quorum);
             }
 
             return max;
@@ -107,8 +109,8 @@ public class -MessageTally {
         quorumWriteLock.lock();
         for (var viewnum : subcounter.tailMap(currentmax, false).descendingKeySet()) {
             var digest = subcounter.get(viewnum).entrySet().parallelStream()
-                                   .filter(entry -> entry.getValue().size() >= quorumId.quorum)
-                                   .map(entry -> entry.getKey()).findAny();
+                    .filter(entry -> entry.getValue().size() >= quorumId.quorum)
+                    .map(entry -> entry.getKey()).findAny();
             if (digest.isPresent()) {
                 updateQuorumDigest(seqnum, viewnum, digest.get(), quorumId);
                 max = viewnum;
@@ -117,7 +119,7 @@ public class -MessageTally {
                     var q = DataUtils.nestedGet(subcounter, max, digest.get());
                     StringBuilder sb = new StringBuilder();
                     sb.append("[");
-                    for(Integer x : q) {
+                    for (Integer x : q) {
                         sb.append(Integer.toString(x));
                         sb.append(" ");
                     }
@@ -125,7 +127,9 @@ public class -MessageTally {
                     st = st.trim();
                     st = st + "]";
 
-                    Printer.print(Verbosity.VVVVV, "GetMaxQuorum Success [filter]: ", StateMachine.messages.get(quorumId.message).name.toUpperCase() + " seqnum: " + seqnum + " size: " + quorumId.quorum + " quorum: " + st);
+                    Printer.print(Verbosity.VVVVV, "GetMaxQuorum Success [filter]: ",
+                            StateMachine.messages.get(quorumId.message).name.toUpperCase() + " seqnum: " + seqnum
+                                    + " size: " + quorumId.quorum + " quorum: " + st);
                 }
                 break;
             }
@@ -156,8 +160,8 @@ public class -MessageTally {
         quorumWriteLock.lock();
         var viewcounter = subcounter.get(viewnum);
         var digest = viewcounter.entrySet().parallelStream()
-                                .filter(entry -> entry.getValue().size() >= quorumId.quorum)
-                                .map(entry -> entry.getKey()).findAny();
+                .filter(entry -> entry.getValue().size() >= quorumId.quorum)
+                .map(entry -> entry.getKey()).findAny();
 
         var match = digest.isPresent();
         if (match) {
@@ -169,7 +173,8 @@ public class -MessageTally {
         return match;
     }
 
-    public void updateQuorumBlock(long seqnum, long viewnum, ByteString digest, List<RequestData> block, QuorumId quorumId) {
+    public void updateQuorumBlock(long seqnum, long viewnum, ByteString digest, List<RequestData> block,
+            QuorumId quorumId) {
         quorumWriteLock.lock();
         candidateBlocks.put(digest, block);
         updateQuorumDigest(seqnum, viewnum, digest, quorumId);
@@ -179,7 +184,7 @@ public class -MessageTally {
     private void updateQuorumDigest(long seqnum, long viewnum, ByteString digest, QuorumId quorumId) {
         quorumDigests.computeIfAbsent(seqnum, s -> new ConcurrentSkipListMap<>()).put(viewnum, digest);
         quorumMessages.computeIfAbsent(seqnum, s -> new ConcurrentHashMap<>())
-                      .computeIfAbsent(quorumId, c -> new ConcurrentSkipListSet<>()).add(viewnum);
+                .computeIfAbsent(quorumId, c -> new ConcurrentSkipListSet<>()).add(viewnum);
     }
 
     public Set<Integer> getQuorumNodes(long seqnum, long viewnum, QuorumId quorumId) {
