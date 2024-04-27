@@ -317,16 +317,16 @@ public abstract class Entity {
     }
 
     public void handleMessage(MessageData message) {
-        System.out.println("Received request: " + message);
+        // System.out.println("Received request: " + message);
         if (Printer.verbosity >= Verbosity.VVV) {
             Printer.print(Verbosity.VVV, prefix, "Processing ", message);
         }
-        System.out.println("Going to process: " + message);
+        // System.out.println("Going to process: " + message);
         for (var i = messagePlugins.size() - 1; i >= 0; i--) {
             var plugin = messagePlugins.get(i);
             message = plugin.processIncomingMessage(message);
         }
-        System.out.println("Processed: " + message);
+        // System.out.println("Processed: " + message);
         if (message.getFlagsList().contains(DataUtils.INVALID)) {
             System.out.println("Returning as message is invalid");
             return;
@@ -334,9 +334,11 @@ public abstract class Entity {
 
         var type = message.getMessageType();
         if (type == StateMachine.REQUEST) {
-            System.out.println("Received request: " + message);
+            // System.out.println("Received request: " + message);
             var request = message.getRequestsList().get(0);
             var seqnum = getRequestSequence(request.getRequestNum());
+            System.out.println(
+                    prefix + "seq_num: " + seqnum + "\t request: " + (int) request.getRequestNum());
             if (seqnum == null) {
                 // slow proposal
                 System.out.println("Inside seqnum == null");
@@ -369,7 +371,8 @@ public abstract class Entity {
             }
         } else {
             Long seqnum = message.getSequenceNum();
-            System.out.println("Received message inside not request block: " + message);
+            System.out.println("Reply block: Seqnum: " + seqnum);
+            System.out.println("Received message inside reply block ");
             if (checkpointManager.getCheckpointNum(seqnum) < checkpointManager.getMinCheckpoint()) {
                 return;
             }
@@ -377,7 +380,7 @@ public abstract class Entity {
             if (!isValidMessage(message)) {
                 return;
             }
-            System.out.println("Valid message: " + message);
+            // System.out.println("Valid message: " + message);
             var checkpoint = checkpointManager.getCheckpointForSeq(seqnum);
             checkpoint.tally(message);
             checkpoint.addAggregationValue(message);
@@ -426,7 +429,7 @@ public abstract class Entity {
         // TODO: concurrency control for leader rotation protocols
         if (seqnum <= lastExecutedSequenceNum || isExecuted(seqnum)
                 || (isPrimary(seqnum) && seqnum - lastExecutedSequenceNum > pipelinePlugin.getMaxActiveSequences())) {
-            
+
             System.out.println("Returning null for seqnum: " + seqnum);
             stateLock.unlock();
             return null;
@@ -600,6 +603,8 @@ public abstract class Entity {
                             }
 
                             if (transition.updateMode == UpdateMode.SEQUENCE) {
+                                System.out.println("Seq " + seqnum + " SeqExecuted: " + seqExecuted + ", stateUpdated: "
+                                        + stateUpdated);
                                 seqExecuted = true;
                                 // Printer.print(Verbosity.V, prefix, "[time-since-start=" +
                                 // Printer.timeFormat(System.nanoTime() - systemStartTime, true) + "] ready for
@@ -631,6 +636,8 @@ public abstract class Entity {
             }
 
             if (seqExecuted || !stateUpdated) {
+                System.out
+                        .println("Seq " + seqnum + " SeqExecuted: " + seqExecuted + ", stateUpdated: " + stateUpdated);
                 break;
             }
         }
@@ -841,6 +848,7 @@ public abstract class Entity {
             Printer.print(Verbosity.VVV, prefix, "Execution START: " + seqnum);
             // execute(seqnum);
             synchronized (executionQueue) {
+                System.out.println("Adding to execution queue: " + seqnum);
                 executionQueue.put(seqnum, transition);
                 executionQueue.notify();
             }
@@ -865,8 +873,13 @@ public abstract class Entity {
             var messageType = pair.getRight();
 
             if (role == StateMachine.CLIENT) {
+                System.out.println("Creating reply for client: " + requestBlock);
                 var targets = List.copyOf(requestBlock.stream().map(r -> r.getClient()).collect(Collectors.toSet()));
-                var message = createMessage(seqnum, currentViewNum, null, messageType, id, targets);
+                System.out.println("Targets: " + targets);
+                targets = targets.stream().map(d -> d == 16 ? 4 : d).collect(Collectors.toList());
+                System.out.println("Targets: " + targets);
+                var message = createMessage(seqnum, currentViewNum, null, messageType, EntityMapUtils.getUnit(id),
+                        targets);
                 messages.add(message);
             } else {
                 var targets = rolePlugin.getRoleEntities(seqnum, currentViewNum, phase, role,
@@ -991,7 +1004,7 @@ public abstract class Entity {
     }
 
     public void sendMessage(MessageData message) {
-        System.out.println("Sending message: " + message);
+        // System.out.println("Sending message: " + message);
         if (message.getFlagsList().contains(DataUtils.INVALID)) {
             return;
         }

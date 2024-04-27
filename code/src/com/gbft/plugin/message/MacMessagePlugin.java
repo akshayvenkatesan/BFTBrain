@@ -66,12 +66,12 @@ public class MacMessagePlugin implements MessagePlugin, InitializablePluginInter
 
     @Override
     public MessageData processOutgoingMessage(MessageData message) {
-        System.out.println("Processing outgoing message")
+        System.out.println("Processing outgoing message");
         var requestList = message.getRequestsList();
         var copyBuilder = message.toBuilder()
-            .clearExtraData()
-            .clearFault()       // clear fault
-            .clearRequests();   // clear requests first
+                .clearExtraData()
+                .clearFault() // clear fault
+                .clearRequests(); // clear requests first
         // clean the dummy part in request
         for (var request : requestList) {
             copyBuilder.addRequests(request.toBuilder().clearRequestDummy().build());
@@ -80,13 +80,13 @@ public class MacMessagePlugin implements MessagePlugin, InitializablePluginInter
 
         var bytes = message.toByteArray();
 
-        var targets = message.getTargetsList();
+        var targets = message.getTargetsList().stream().map(d -> d == 16 ? 4 : d).toList();
         System.out.println("Generating MAC vector for targets: " + targets);
         var macVector = generateMacVector(bytes, targets);
 
         return MessageData.newBuilder(message)
-                          .putExtraData(MAC_VECTOR, ByteString.copyFrom(macVector))
-                          .build();
+                .putExtraData(MAC_VECTOR, ByteString.copyFrom(macVector))
+                .build();
     }
 
     @Override
@@ -228,7 +228,7 @@ public class MacMessagePlugin implements MessagePlugin, InitializablePluginInter
                  * we have defined to use runner value
                  */
                 target = target % 4;
-                if (target == entity.getId()) {
+                if (entity.isClient() || target == entity.getId()) {
                     return Arrays.equals(computed, bytes);
                 }
             } catch (IOException e) {

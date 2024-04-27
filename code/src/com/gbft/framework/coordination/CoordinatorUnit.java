@@ -280,14 +280,19 @@ public class CoordinatorUnit extends CoordinatorBase {
             receiveFromInQueueClient.interrupt();
             receiveFromInQueueReplica.interrupt();
         } else if (event.getEventType() == EventType.MESSAGE) {
-            println("Message event received in " + myUnit);
+            println("CU: Message event received in " + myUnit);
             var messages = event.getMessageBlock().getMessageDataList();
 
             // TODO: More parallel.
             for (var message : messages) {
                 var targets = message.getTargetsList();
+                if (myUnit == 16)
+                    targets.stream().map(d -> d == 4 ? 16 : d).toList();
                 for (var target : targets) {
                     if (target == message.getSource() || EntityMapUtils.getUnit(target) != myUnit) {
+                        println("Skipping message for target: " + target);
+                        println("Source: " + message.getSource() + " MyUnit: " + myUnit);
+                        println(EntityMapUtils.getUnit(target) + " " + myUnit);
                         continue;
                     }
                     println("Processing message for target: " + target);
@@ -333,19 +338,21 @@ public class CoordinatorUnit extends CoordinatorBase {
 
                     if (event != null) {
                         if (event.getEventType() == EventType.MESSAGE) {
-                            System.out.println("Message event received in " + myUnit);
+                            System.out.println("Poller: Message event received in " + myUnit);
                             var messages = event.getMessageBlock().getMessageDataList();
 
                             for (var message : messages) {
                                 var targets = message.getTargetsList();
-                                System.out.println(
-                                        "Targets: " + targets.toString() + " for message: " + message.toString());
+                                // System.out.println(
+                                // "Targets: " + targets.toString() + " for message: " + message.toString());
                                 for (var target : targets) {
-                                    var new_target = target % 4;
-                                    if (target == message.getSource() || EntityMapUtils.getUnit(new_target) != myUnit) {
+                                    var new_target = unit_id == 16 ? 16 : target % 4;
+                                    if (new_target == message.getSource()
+                                            || EntityMapUtils.getUnit(new_target) != myUnit) {
+                                        println("Skipping message for target: " + new_target);
                                         continue;
                                     }
-
+                                    println("Processing message for target: " + target + " at " + new_target);
                                     // if (target == message.getSource() || target != myUnit) {
                                     // continue;
                                     // }
@@ -483,12 +490,12 @@ public class CoordinatorUnit extends CoordinatorBase {
 
     public void initFromConfig(Map<String, String> configContent, String defaultProtocol, List<UnitData> unitData) {
         initFromConfig(configContent, defaultProtocol);
-        for (var roles : StateMachine.roles) {
-            println("Roles: " + roles);
-        }
-        for (var messages : StateMachine.messages) {
-            println("Messages: " + messages.toString());
-        }
+        // for (var roles : StateMachine.roles) {
+        // println("Roles: " + roles);
+        // }
+        // for (var messages : StateMachine.messages) {
+        // println("Messages: " + messages.toString());
+        // }
         Printer.init();
         PluginManager.initDefaultPlugins();
         unitData.forEach(item -> EntityMapUtils.addUnitData(item));
