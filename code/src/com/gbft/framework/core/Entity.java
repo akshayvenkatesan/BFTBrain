@@ -13,7 +13,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.Collectors;
-
+import java.util.Date;
 import com.gbft.framework.coordination.CoordinatorUnit;
 import com.gbft.framework.data.AgentCommGrpc;
 import com.gbft.framework.data.LearningData;
@@ -49,13 +49,14 @@ import com.gbft.plugin.role.BasicPrimaryPlugin;
 import com.gbft.plugin.role.PrimaryPassivePlugin;
 import com.gbft.framework.utils.Timekeeper;
 import com.google.protobuf.ByteString;
-
+import java.text.SimpleDateFormat;
 import io.grpc.Grpc;
 import io.grpc.InsecureChannelCredentials;
 import io.grpc.ManagedChannel;
 
 public abstract class Entity {
 
+    private static SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss.S ");
     // Config
 
     protected final int blockSize; // The number of requests in each block.
@@ -221,6 +222,11 @@ public abstract class Entity {
     private long lastSlowProposalTimestamp = 0;
     private List<RequestData> slowProposalRequests = new ArrayList<>();
 
+    protected void println(String str) {
+        var date = dateFormat.format(new Date(System.currentTimeMillis()));
+        System.out.println(date + " " + str);
+    }
+
     public void addSlowProposal(RequestData request) {
         synchronized (slowProposalRequests) {
             slowProposalRequests.add(request);
@@ -337,13 +343,15 @@ public abstract class Entity {
             // System.out.println("Received request: " + message);
             var request = message.getRequestsList().get(0);
             var seqnum = getRequestSequence(request.getRequestNum());
-            System.out.println(
-                    prefix + "seq_num: " + seqnum + "\t request: " + (int) request.getRequestNum());
+            println(prefix + " Got message with request num: " + request);
+            // System.out.println(
+            // prefix + "seq_num: " + seqnum + "\t request: " + (int)
+            // request.getRequestNum());
             if (seqnum == null) {
                 // slow proposal
-                System.out.println("Inside seqnum == null");
+                println(prefix + " Got request for first time. Assigning sequence number");
                 if (slowProposalFault.getPerRequestDelay(this.id) > 0) {
-                    System.out.println("Inside slowProposalFault.getPerRequestDelay(this.id) > 0");
+                    println(prefix + " Inside slowProposalFault.getPerRequestDelay(this.id) > 0");
                     // Printer.print(Verbosity.V, prefix, "[time-since-start=" +
                     // Printer.timeFormat(System.nanoTime() - systemStartTime, true) + "] add slow
                     // proposal: reqnum=" + request.getRequestNum());
@@ -351,21 +359,21 @@ public abstract class Entity {
                 } else {
                     // clean up if switch back to fault free
                     if (slowProposalRequests.size() > 0) {
-                        System.out.println("Inside slowProposalRequests.size() > 0");
+                        println(prefix + " Inside slowProposalRequests.size() > 0");
                         synchronized (slowProposalRequests) {
                             while (slowProposalRequests.size() > 0) {
                                 pendingRequests.offer(slowProposalRequests.remove(0));
                             }
-                            System.out.println(
-                                    "Inside slowProposalRequests.size() > 0: pendingRequests: " + pendingRequests);
+                            println(prefix +
+                                    " Inside slowProposalRequests.size() > 0: pendingRequests: " + pendingRequests);
                         }
                     }
                     // Printer.print(Verbosity.V, prefix, "[time-since-start=" +
                     // Printer.timeFormat(System.nanoTime() - systemStartTime, true) + "] received
                     // request: reqnum=" + request.getRequestNum());
-                    System.out.println("Inserting into pending requests");
+                    println(prefix + " Inserting into pending requests");
                     pendingRequests.offer(request);
-                    System.out.println("callling state update for next sequence");
+                    println(prefix + " Callling state update for next sequence");
                     stateUpdateLoop(nextSequence);
                 }
             }
@@ -375,13 +383,13 @@ public abstract class Entity {
                 message = message.toBuilder().setSequenceNum(message.getRequests(0).getRequestNum()).build();
             }
             Long seqnum = message.getSequenceNum();
-            System.out.println("Reply block: Seqnum: " + seqnum);
-            System.out.println("Received message inside reply block ");
+            println(prefix + " Reply block: Seqnum: " + seqnum);
             if (checkpointManager.getCheckpointNum(seqnum) < checkpointManager.getMinCheckpoint()) {
                 return;
             }
 
             if (!isValidMessage(message)) {
+                println(prefix + " Invalid message: " + message);
                 return;
             }
             // System.out.println("Valid message: " + message);
@@ -402,7 +410,7 @@ public abstract class Entity {
 
     public void stateUpdateLoop(long seqnum) {
         Printer.print(Verbosity.VVVV, prefix, "StateUpdateLoop seqnum: " + seqnum);
-        System.out.println("StateUpdateLoop seqnum: " + seqnum);
+        println(prefix + " Checking transition for " + seqnum);
         var result = stateUpdate(seqnum);
         while (running && result != null && !result.isEmpty()) {
             var next = result.pollFirst();
@@ -419,7 +427,6 @@ public abstract class Entity {
         // stateUpdate: seqnum=" + seqnum +
         // " (nextSequence=" + nextSequence + ", lastExecutedSequenceNum=" +
         // lastExecutedSequenceNum + ")");
-        System.out.println("StateUpdate seqnum: " + seqnum);
         benchmarkManager.add(BenchmarkManager.STATE_UPDATE, 0, System.nanoTime());
 
         // Do not process messages belonging to the next episode
@@ -434,7 +441,7 @@ public abstract class Entity {
         if (seqnum <= lastExecutedSequenceNum || isExecuted(seqnum)
                 || (isPrimary(seqnum) && seqnum - lastExecutedSequenceNum > pipelinePlugin.getMaxActiveSequences())) {
 
-            System.out.println("Returning null for seqnum: " + seqnum);
+            println(prefix + " Seqnum Already Processed: " + seqnum);
             stateLock.unlock();
             return null;
         }
@@ -449,7 +456,7 @@ public abstract class Entity {
         benchmarkManager.add(BenchmarkManager.IF2, 0, System.nanoTime());
 
         if (updating.contains(seqnum)) {
-            System.out.println("Updating contains seqnum. Adding to needs update: " + seqnum);
+            println(prefix + " Sequence number is already being processed: " + seqnum);
             needsUpdate.add(seqnum);
             stateLock.unlock();
             return null;
@@ -475,46 +482,47 @@ public abstract class Entity {
             var phase = StateMachine.states.get(currentState).phase;
             var roles = rolePlugin.getEntityRoles(seqnum, currentViewNum, phase, id);
 
-            System.out.println("[" + String.join(",", roles.stream().map(x -> x +
-                    "").toList()) + "]");
+            // System.out.println("[" + String.join(",", roles.stream().map(x -> x +
+            // "").toList()) + "]");
 
-            System.out.println(prefix + "seq_num: " + seqnum + "\t local_cnt: " +
+            println(prefix + "seq_num: " + seqnum + "\t local_cnt: " +
                     local_cnt + "\t current state: " +
                     StateMachine.states.get(currentState).name);
 
             searchloop: for (var statenum : List.of(currentState, StateMachine.ANY_STATE)) {
-                System.out.println("Inside search loop: " + statenum);
+                // System.out.println("Inside search loop: " + statenum);
                 if (statenum == -1) {
                     continue;
                 }
 
                 var state = StateMachine.states.get(statenum);
                 for (var role : roles) {
-                    System.out.println(prefix + "seq_num: " + seqnum + "\t role: " + role);
+                    println(prefix + "seq_num: " + seqnum + "\t role: " + role);
                     var candidates = state.transitions.get(role);
                     if (candidates == null) {
                         continue;
                     }
                     for (var transition : candidates) {
-                        System.out.println(prefix + "seq_num: " + seqnum + "\t transition: " + transition);
+                        println(prefix + "seq_num: " + seqnum + "\t transition: " + transition);
                         var condition = transition.condition;
                         var conditionType = condition.getType();
 
                         var conditionMet = false;
                         if (conditionType == Condition.TRUE_CONDITION) {
-                            System.out.println("Inside true condition: " + seqnum);
+                            println("Inside true condition: " + seqnum);
                             conditionMet = true;
                         } else if (conditionType == Condition.MESSAGE_CONDITION) {
-                            System.out.println("Inside message condition: " + seqnum);
+                            println(prefix + " Validating message condition: " + seqnum);
                             var messageType = condition.getParam(Condition.MESSAGE_TYPE);
-                            System.out.println("Message type: " + messageType);
-                            System.out.println("Message type for stateMachine request: " + StateMachine.REQUEST);
+                            // System.out.println("Message type: " + messageType);
+                            // System.out.println("Message type for stateMachine request: " +
+                            // StateMachine.REQUEST);
                             if (messageType == StateMachine.REQUEST) {
-                                System.out.println("Inside message type request: " + seqnum);
+                                // println("Inside message type request: " + seqnum);
                                 var block = checkpoint.getRequestBlock(seqnum);
-                                System.out.println("Block: " + block);
+                                // System.out.println("Block: " + block);
                                 if (block == null || block.isEmpty()) {
-                                    System.out.println("Block is null or empty: " + seqnum);
+                                    println("Block is null or empty: " + seqnum);
                                     synchronized (pendingLock) {
                                         if (pendingRequests.size() < blockSize) {
                                             continue;
@@ -544,32 +552,34 @@ public abstract class Entity {
                                             }
                                             block.add(request);
                                         }
-                                        System.out.println("Block: " + block);
+                                        // System.out.println("Block: " + block);
                                     }
                                 }
 
                                 var message = createMessage(seqnum, currentViewNum, block, StateMachine.REQUEST, id,
                                         List.of(id));
-                                System.out.println("Message: " + message);
+                                // println("Message: " + message);
                                 checkpoint.tally(message);
-                                System.out.println("Tally updated: " + message);
+                                // println("Tally updated: " + message);
                                 benchmarkManager.add(BenchmarkManager.CREATE_REQUEST_BLOCK, 0, System.nanoTime());
 
                                 proposedRequests += 1;
                                 // Printer.print(Verbosity.V, prefix, "Create proposal, seqnum: " + seqnum);
                             }
-                            System.out.println(prefix + " outside if message type request: " + seqnum);
+                            // System.out.println(prefix + " outside if message type request: " + seqnum);
                             var quorumId = new QuorumId(messageType, condition.getParam(Condition.QUORUM));
+                            println(prefix + " Checking tally of message: " + seqnum);
                             conditionMet = checkMessageTally(seqnum, quorumId, transition.updateMode);
                         }
 
                         if (conditionMet) {
-                            System.out.println("Inside condition met: " + seqnum);
+                            println(prefix + " Condition satisfied " + seqnum);
                             benchmarkManager.add(BenchmarkManager.CONDITION_MET, 0, System.nanoTime());
 
                             timekeeper.stateUpdated(seqnum, transition.toState);
 
                             if (StateMachine.isIdle(currentState)) {
+                                println(prefix + " Current state is idle: " + seqnum);
                                 benchmarkManager.sequenceStarted(seqnum, System.nanoTime());
                             }
 
@@ -607,7 +617,7 @@ public abstract class Entity {
                             }
 
                             if (transition.updateMode == UpdateMode.SEQUENCE) {
-                                System.out.println("Seq " + seqnum + " SeqExecuted: " + seqExecuted + ", stateUpdated: "
+                                println(prefix + " Seq " + seqnum + " SeqExecuted: " + seqExecuted + ", stateUpdated: "
                                         + stateUpdated);
                                 seqExecuted = true;
                                 // Printer.print(Verbosity.V, prefix, "[time-since-start=" +
@@ -640,8 +650,7 @@ public abstract class Entity {
             }
 
             if (seqExecuted || !stateUpdated) {
-                System.out
-                        .println("Seq " + seqnum + " SeqExecuted: " + seqExecuted + ", stateUpdated: " + stateUpdated);
+                println(prefix + " Seq " + seqnum + " SeqExecuted: " + seqExecuted + ", stateUpdated: " + stateUpdated);
                 break;
             }
         }
@@ -1088,10 +1097,11 @@ public abstract class Entity {
     }
 
     protected boolean checkMessageTally(long seqnum, QuorumId quorumId, UpdateMode updateMode) {
-        System.out.println("Inside checkMessageTally: " + seqnum + " " + quorumId + " " + updateMode);
+        // System.out.println("Inside checkMessageTally: " + seqnum + " " + quorumId + "
+        // " + updateMode);
         var checkpoint = checkpointManager.getCheckpointForSeq(seqnum);
         var tally = checkpoint.getMessageTally();
-        System.out.println("Tally: " + tally);
+        // System.out.println("Tally: " + tally);
         var checkview = updateMode == UpdateMode.VIEW ? currentViewNum + 1 : currentViewNum;
         // var quorumId = new QuorumId(condition.getParam(Condition.MESSAGE_TYPE),
         // condition.getParam(Condition.QUORUM));
@@ -1107,7 +1117,7 @@ public abstract class Entity {
                         StateMachine.messages.get(quorumId.message).name.toUpperCase() + " seqnum: " + seqnum
                                 + " size: " + quorumId.quorum);
             }
-            System.out.println("Returning true from checkMessageTally");
+            println(prefix + " Returning true from checkMessageTally");
             return true;
         }
 
@@ -1116,7 +1126,7 @@ public abstract class Entity {
                     StateMachine.messages.get(quorumId.message).name.toUpperCase() + " seqnum: " + seqnum + " size: "
                             + quorumId.quorum);
         }
-        System.out.println("Returning false from checkMessageTally");
+        println(prefix + " Returning false from checkMessageTally");
         return false;
     }
 

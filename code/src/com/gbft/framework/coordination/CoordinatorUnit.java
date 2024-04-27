@@ -338,7 +338,7 @@ public class CoordinatorUnit extends CoordinatorBase {
 
                     if (event != null) {
                         if (event.getEventType() == EventType.MESSAGE) {
-                            System.out.println("Poller: Message event received in " + myUnit);
+                            println("Poller: Message event received in " + myUnit);
                             var messages = event.getMessageBlock().getMessageDataList();
 
                             for (var message : messages) {
@@ -349,10 +349,10 @@ public class CoordinatorUnit extends CoordinatorBase {
                                     var new_target = unit_id == 16 ? 16 : target % 4;
                                     if (new_target == message.getSource()
                                             || EntityMapUtils.getUnit(new_target) != myUnit) {
-                                        println("Skipping message for target: " + new_target);
+                                        // println("Skipping message for target: " + new_target);
                                         continue;
                                     }
-                                    println("Processing message for target: " + target + " at " + new_target);
+                                    // println("Processing message for target: " + target + " at " + new_target);
                                     // if (target == message.getSource() || target != myUnit) {
                                     // continue;
                                     // }

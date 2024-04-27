@@ -76,7 +76,7 @@ public class CheckpointData {
     }
 
     public void tally(MessageData message) {
-        System.out.println("Tallying message: " + message.getSequenceNum());
+        // System.out.println("Tallying message: " + message.getSequenceNum());
         messageTally.tally(message);
         // System.out.println("Counter Updated: " + messageTally.counter);
         viewTally.tally(message.toBuilder().clearDigest().build());

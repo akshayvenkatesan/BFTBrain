@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.List;
 import java.util.Map;
-
+import java.util.Date;
 import javax.crypto.KeyGenerator;
 import javax.crypto.Mac;
 import javax.crypto.SecretKey;
@@ -26,9 +26,11 @@ import com.gbft.framework.utils.EntityMapUtils;
 import com.gbft.framework.utils.Printer;
 import com.gbft.framework.utils.Printer.Verbosity;
 import com.google.protobuf.ByteString;
+import java.text.SimpleDateFormat;
 
 public class MacMessagePlugin implements MessagePlugin, InitializablePluginInterface {
 
+    private static SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss.S ");
     private Entity entity;
 
     protected Map<Integer, byte[]> secretKeys;
@@ -49,24 +51,29 @@ public class MacMessagePlugin implements MessagePlugin, InitializablePluginInter
     @Override
     public MessageData processIncomingMessage(MessageData message) {
         if (message.getFlagsList().contains(DataUtils.INVALID)) {
-            System.out.println("Invalid message received");
+            println("Invalid message received");
             return message;
         }
 
         if (verifyMac(message)) {
-            System.out.println("MAC validation successful");
+            println("MAC validation successful");
             return message;
         } else {
-            System.out.println("MAC validation failed");
+            println("MAC validation failed");
         }
 
         Printer.print(Verbosity.VVV, entity.prefix, "Mac validation failed for ", message);
         return DataUtils.invalidate(message);
     }
 
+    protected void println(String str) {
+        var date = dateFormat.format(new Date(System.currentTimeMillis()));
+        System.out.println(date + " " + str);
+    }
+
     @Override
     public MessageData processOutgoingMessage(MessageData message) {
-        System.out.println("Processing outgoing message");
+        println("Processing outgoing message");
         var requestList = message.getRequestsList();
         var copyBuilder = message.toBuilder()
                 .clearExtraData()
@@ -81,7 +88,7 @@ public class MacMessagePlugin implements MessagePlugin, InitializablePluginInter
         var bytes = message.toByteArray();
 
         var targets = message.getTargetsList().stream().map(d -> d == 16 ? 4 : d).toList();
-        System.out.println("Generating MAC vector for targets: " + targets);
+        // System.out.println("Generating MAC vector for targets: " + targets);
         var macVector = generateMacVector(bytes, targets);
 
         return MessageData.newBuilder(message)
@@ -107,7 +114,7 @@ public class MacMessagePlugin implements MessagePlugin, InitializablePluginInter
             for (var target = entity.getId() + 1; target < total; target += 1) {
                 keygen.init(256);
                 SecretKey hmacKey = keygen.generateKey();
-                System.out.println("Updating secret keys with value for target: " + target);
+                println("Updating secret keys with value for target: " + target);
                 secretKeys.put(target, hmacKey.getEncoded());
 
                 var bytes = ByteString.copyFrom(hmacKey.getEncoded());
@@ -125,11 +132,11 @@ public class MacMessagePlugin implements MessagePlugin, InitializablePluginInter
             if (messageType == SECRET_KEY) {
                 var source = pluginData.getSource();
                 var bytes = pluginData.getData().toByteArray();
-                System.out.println("Updating secret keys with value for source: " + source);
+                println("Updating secret keys with value for source: " + source);
                 secretKeys.put(source, bytes);
             }
         }
-        System.out.println("Secret Key size: " + secretKeys.size());
+        println("Secret Key size: " + secretKeys.size());
 
         if (secretKeys.size() == EntityMapUtils.nodeCount() + EntityMapUtils.clientCount() - 1) {
             initialized = true;
@@ -151,7 +158,7 @@ public class MacMessagePlugin implements MessagePlugin, InitializablePluginInter
                 if (target == entity.getId()) {
                     continue;
                 }
-                System.out.println("Generating MAC for target: " + target);
+                // System.out.println("Generating MAC for target: " + target);
                 var mac = Mac.getInstance("HmacSHA512");
                 mac.init(new SecretKeySpec(secretKeys.get(target), "HmacSHA512"));
                 mac.update(data);
@@ -197,9 +204,9 @@ public class MacMessagePlugin implements MessagePlugin, InitializablePluginInter
         if (!message.containsExtraData(MAC_VECTOR)) {
             return false;
         }
-        System.out.println("Verifying MAC for source: " + source);
+        // println("Verifying MAC for source: " + source);
         var secretKey = secretKeys.get(source);
-        System.out.println("Secret Key: " + secretKey);
+        // println("Secret Key: " + secretKey);
         var macData = message.getExtraDataOrThrow(MAC_VECTOR);
 
         var requestList = message.getRequestsList();
