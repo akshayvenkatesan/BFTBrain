@@ -38,7 +38,7 @@ public class ShardingClient extends Entity {
 
         System.out.println("Creating client dataset for sharding client " + id + ".");
         dataset = new ClientDataset(id);
-        nextRequestNum = 0L;
+        nextRequestNum = 1L;
 
         requestGenerator = createRequestGenerator();
         requestGenerator.init();
@@ -67,6 +67,7 @@ public class ShardingClient extends Entity {
             for (var entry : replies.entrySet()) {
                 var reqnum = entry.getKey();
                 var request = checkpoint.getRequest(reqnum);
+                System.out.println(" For reqNum : " + reqnum + " new value is: " + entry.getValue());
                 dataset.update(request, entry.getValue());
 
                 // benchmarkManager.requestExecuted(reqnum, now);
@@ -101,25 +102,75 @@ public class ShardingClient extends Entity {
                     while (running) {
                         semaphore.acquire();
                         var next = System.nanoTime() + intervalns;
-    
-                        var request = dataset.createRequest(nextRequestNum);
-    
-                        var clusternum = request.getRecord() / 25 + 1; 
-                        nextRequestNum += 1;
-    
-                        sendRequest(request, clusternum);
-    
+                        // generating 1000 random transactions.
+                        List<int[]> transactions = dataset.generateRandomTransactions(1);
+                        for (int i =0;i<transactions.size();i++) {
+                            int[] currentTransaction = transactions.get(i);
+                            // If we are depositing in the same account then simply add the val to that key
+                            System.out.println("Sender is : " + currentTransaction[0]);
+                            System.out.println("Receiver is : " + currentTransaction[1]);
+                            System.out.println("Amount is : " + currentTransaction[2]);
+                            System.out.println(" Txn number is : " + nextRequestNum);
+                            if (currentTransaction[0] == currentTransaction[1]) {
+                                var request = dataset.createRequestWithKeyAndVal(nextRequestNum, currentTransaction[0], currentTransaction[2]);
+                                nextRequestNum += 1;
+                                var clusternum0 = request.getRecord() / 25 + 1;
+                                sendRequest(request, clusternum0);
+                            } else {
+                                Long firstRequestNumber = Long.valueOf(String.valueOf(nextRequestNum) + '1');
+                                Long secondRequestNumber = Long.valueOf(String.valueOf(nextRequestNum) + '2');
+                                // Sending first request with a-val
+                                System.out.println(" First request number is : " + firstRequestNumber);
+                                System.out.println(" Second request number is : " + secondRequestNumber);
+                                var request1 = dataset.createRequestWithKeyAndVal(firstRequestNumber, currentTransaction[0], -currentTransaction[2]);
+                                var clusternum1 = request1.getRecord() / 25 + 1;
+                                sendRequest(request1, clusternum1);
+                                while (System.nanoTime() < next) {
+                                    LockSupport.parkNanos(intervalns / 3);
+                                }
+                                // Sending second request with b+val
+                                var request2 = dataset.createRequestWithKeyAndVal(secondRequestNumber, currentTransaction[1], +currentTransaction[2]);
+                                nextRequestNum += 1;
+                                var clusternum2 = request2.getRecord() / 25 + 1;
+                                sendRequest(request2, clusternum2);
+                            }
+                        }
+//                    var request = dataset.createRequest(nextRequestNum);
+//                    nextRequestNum += 1;
+//
+//                    sendRequest(request);
+
                         while (System.nanoTime() < next) {
                             LockSupport.parkNanos(intervalns / 3);
                         }
                     }
-                }
-                catch (InterruptedException e) {
+                } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                
             }
         }
+//                    while (running) {
+//                        semaphore.acquire();
+//                        var next = System.nanoTime() + intervalns;
+//
+//                        var request = dataset.createRequest(nextRequestNum);
+//
+//                        var clusternum = request.getRecord() / 25 + 1;
+//                        nextRequestNum += 1;
+//
+//                        sendRequest(request, clusternum);
+//
+//                        while (System.nanoTime() < next) {
+//                            LockSupport.parkNanos(intervalns / 3);
+//                        }
+//                    }
+//                }
+//                catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//
+//            }
+//        }
 
         protected void sendRequest(RequestData request , int clusternum) {
             var reqnum = request.getRequestNum();
