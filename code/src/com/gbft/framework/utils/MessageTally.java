@@ -59,7 +59,7 @@ public class MessageTally {
         var digest = message.getDigest();
         var source = message.getSource();
         var type = message.getMessageType();
-
+        System.out.println("Tallying message: " + message.toString());
         counterWriteLock.lock();
 
         if (StateMachine.messages.get(type).hasRequestBlock) {
@@ -83,7 +83,27 @@ public class MessageTally {
         Long max = null;
         counterReadLock.lock();
         var subcounter = DataUtils.nestedGet(counter, seqnum, quorumId.message); // subcounter.key = view
+        // print all elements of coounter
+        System.out.println("Seqnum: " + seqnum + " QuorumId: " + quorumId.message);
+        System.out.println("Printing all elements of counter");
+        //Print all elements of counter
+        for (Map.Entry<Long, Map<Integer, ConcurrentSkipListMap<Long, Map<ByteString, Set<Integer>>>>> seqEntry : counter.entrySet()) {
+            System.out.println("Seqnum: " + seqEntry.getKey());
+            for (Map.Entry<Integer, ConcurrentSkipListMap<Long, Map<ByteString, Set<Integer>>>> typeEntry : seqEntry.getValue().entrySet()) {
+            System.out.println("MessageType: " + typeEntry.getKey());
+            for (Map.Entry<Long, Map<ByteString, Set<Integer>>> viewEntry : typeEntry.getValue().entrySet()) {
+                System.out.println("Viewnum: " + viewEntry.getKey());
+                for (Map.Entry<ByteString, Set<Integer>> digestEntry : viewEntry.getValue().entrySet()) {
+                System.out.println("Digest: " + digestEntry.getKey());
+                for (Integer node : digestEntry.getValue()) {
+                    System.out.println("Node: " + node);
+                }
+                }
+            }
+            }
+        }
         if (subcounter == null) {
+            System.out.println("subcounter is null");
             counterReadLock.unlock();
             return null;
         }
@@ -132,7 +152,7 @@ public class MessageTally {
         }
         quorumWriteLock.unlock();
         counterReadLock.unlock();
-
+        System.out.println("Returning from here2 is null");
         return max;
     }
 

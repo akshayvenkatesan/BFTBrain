@@ -352,6 +352,7 @@ public abstract class Entity {
                     // Printer.print(Verbosity.V, prefix, "[time-since-start=" + Printer.timeFormat(System.nanoTime() - systemStartTime, true) + "] received request: reqnum=" + request.getRequestNum());
                     System.out.println("Inserting into pending requests");
                     pendingRequests.offer(request);
+                    System.out.println("Pending requests size: " + pendingRequests.size());
                     System.out.println("callling state update for next sequence");
                     stateUpdateLoop(nextSequence);
                 }
@@ -385,7 +386,6 @@ public abstract class Entity {
 
     public void stateUpdateLoop(long seqnum) {
         Printer.print(Verbosity.VVVV, prefix, "StateUpdateLoop seqnum: " + seqnum);
-
         var result = stateUpdate(seqnum);
         while (running && result != null && !result.isEmpty()) {
             var next = result.pollFirst();
@@ -416,7 +416,6 @@ public abstract class Entity {
             return null;
         }
         benchmarkManager.add(BenchmarkManager.IF1, 0, System.nanoTime());
-
         if (seqnum > nextSequence) {
             needsUpdate.add(seqnum);
             stateLock.unlock();
@@ -449,54 +448,74 @@ public abstract class Entity {
             var currentState = checkpoint.getState(seqnum);
             var phase = StateMachine.states.get(currentState).phase;
             var roles = rolePlugin.getEntityRoles(seqnum, currentViewNum, phase, id);
-
+            var roles2 = rolePlugin.getRoleEntities(seqnum, seqnum, local_cnt, local_cnt, local_cnt);
+        // Print roles
+            System.out.println(" Printing roles: ");
+            for (var role : roles) {
+                System.out.println("Role: " + role);
+            }
+            System.out.println("Inside pending requests1");
             // System.out.println("[" + String.join(",", roles.stream().map(x -> x + "").toList()) + "]");
 
             // System.out.println(prefix + "seq_num: " + seqnum + "\t local_cnt: " + local_cnt + "\t current state: " + StateMachine.states.get(currentState).name);
 
             searchloop:
+            // System.out.println("Inside pending requests2");
             for (var statenum : List.of(currentState, StateMachine.ANY_STATE)) {
                 if (statenum == -1) {
                     continue;
                 }
-
+                System.out.println("Inside pending requests3");
                 var state = StateMachine.states.get(statenum);
                 for (var role : roles) {
                     var candidates = state.transitions.get(role);
                     if (candidates == null) {
                         continue;
                     }
-
+                    //Printing all the candidates
                     for (var transition : candidates) {
+                        System.out.println("Transition: " + transition);
+                    }
+                    for (var transition : candidates) {
+                        System.out.println("Inside pending requests4");
                         var condition = transition.condition;
                         var conditionType = condition.getType();
 
                         var conditionMet = false;
+                        System.out.println("Condition type: " + conditionType);
                         if (conditionType == Condition.TRUE_CONDITION) {
+                            System.out.println("Inside condition type true");
                             conditionMet = true;
                         } else if (conditionType == Condition.MESSAGE_CONDITION) {
                             var messageType = condition.getParam(Condition.MESSAGE_TYPE);
-
+                            System.out.println("The message type is: " + messageType);
                             if (messageType == StateMachine.REQUEST) {                                                 
                                 var block = checkpoint.getRequestBlock(seqnum);
+                                System.out.println("Inside pending requests5");
+                                System.out.println("Pending request size and block size: " + pendingRequests.size() + " " + blockSize);
                                 if (block == null || block.isEmpty()) {
                                     synchronized (pendingLock) {
                                         if (pendingRequests.size() < blockSize) {
-                                            continue;
+                                            System.out.println("Inside pending requests6 and pending request size: " + pendingRequests.size());
+                                            //continue;
                                         }
 
                                         // seqnum reserved for feature exchange
                                         if (learning && seqnum == exchangeSequence && isPrimary(seqnum)) {
                                             if (!reportTally.hasQuorum(currentEpisodeNum.get(), 0, new QuorumId(REPORT, REPORT_QUORUM))) {
+                                                System.out.println("Inside pending requests7 and report tally has no quorum");
                                                 break searchloop;
                                             }
                                         }
 
                                         block = new ArrayList<RequestData>(blockSize);
-                                        for (var i = 0; i < blockSize; i++) {
+                                        
+                                        // for (var i = 0; i < blockSize; i++) {
+                                            
                                             var request = pendingRequests.remove();
                                             // carry the report quorum in the first request of this reserved block
-                                            if (learning && seqnum == exchangeSequence && isPrimary(seqnum) && i == 0) {
+                                            // if (learning && seqnum == exchangeSequence && isPrimary(seqnum) && i == 0) 
+                                            if (learning && seqnum == exchangeSequence && isPrimary(seqnum)) {
                                                 var reportQuorum = new ArrayList<LearningData>(REPORT_QUORUM);
                                                 reports.get(currentEpisodeNum.get()).entrySet().stream().limit(REPORT_QUORUM).forEach(entry -> {
                                                     var learningDataBuilder = LearningData.newBuilder().putAllReport(entry.getValue());
@@ -505,12 +524,13 @@ public abstract class Entity {
                                                 request = request.toBuilder().addAllReportQuorum(reportQuorum).build();                                                
                                             }
                                             block.add(request);
-                                        }
+                                        //}
                                     }
                                 }
 
                                 var message = createMessage(seqnum, currentViewNum, block, StateMachine.REQUEST, id,
                                         List.of(id));
+                                System.out.println("Inside pending requests8 and messaeg: " + message);
                                 checkpoint.tally(message);
                                 benchmarkManager.add(BenchmarkManager.CREATE_REQUEST_BLOCK, 0, System.nanoTime());
                                 
@@ -520,6 +540,7 @@ public abstract class Entity {
 
                             var quorumId = new QuorumId(messageType, condition.getParam(Condition.QUORUM));
                             conditionMet = checkMessageTally(seqnum, quorumId, transition.updateMode);
+                            System.out.println("Inside pending requests8 + conditionMet: " + conditionMet);
                         }
 
                         if (conditionMet) {
@@ -562,7 +583,6 @@ public abstract class Entity {
                                 // Printer.print(Verbosity.V, prefix, "[time-since-start=" + Printer.timeFormat(System.nanoTime() - systemStartTime, true) + "] ready for execution: seqnum=" + seqnum);
                             }
                             stateLock.unlock();
-
                             break searchloop;
                         }
                     }
@@ -810,15 +830,17 @@ public abstract class Entity {
              */
             var role = pair.getLeft();
             var messageType = pair.getRight();
-
+            System.out.println("Currently at Role: " + role + " MessageType: " + messageType);
             if (role == StateMachine.CLIENT) {
                 var targets = List.copyOf(requestBlock.stream().map(r -> r.getClient()).collect(Collectors.toSet()));
-                var message = createMessage(seqnum, currentViewNum, null, messageType, id, targets);
+                var message = createMessage(seqnum, currentViewNum, null, messageType, id+(4*(this.coordinator.getClusterNum()-1)), List.of(4));
+                System.out.println("Inside client response and targets: " + targets);
                 messages.add(message);
             } else {
                 var targets = rolePlugin.getRoleEntities(seqnum, currentViewNum, phase, role, this.getCoordinator().getClusterNum());
                 var message = createMessage(seqnum, currentViewNum, null, messageType, id, targets);
                 messages.add(message);
+                System.out.println("Current targets: " + targets);
             }
         }
 
@@ -974,6 +996,9 @@ public abstract class Entity {
         }
 
         var hasblock = StateMachine.messages.get(type).hasRequestBlock;
+        System.out.println("My source is: " + source);
+        System.out.println("My messsage type is: " + type);
+        System.out.println("My targets are: " + targets);
         if (hasblock) {
             message = DataUtils.createMessage(seqnum, viewNum, type, source, targets, null, block, replies, digest);
         } else {
@@ -1014,6 +1039,7 @@ public abstract class Entity {
         var checkview = updateMode == UpdateMode.VIEW ? currentViewNum + 1 : currentViewNum;
         //var quorumId = new QuorumId(condition.getParam(Condition.MESSAGE_TYPE), condition.getParam(Condition.QUORUM));
         var viewnum = tally.getMaxQuorum(seqnum, quorumId);
+        System.out.println("Inside checkMessageTally: seqnum: " + seqnum + ", quorumId: " + quorumId + ", viewnum: " + viewnum + ", checkview: " + checkview);
         if (viewnum != null && viewnum == checkview) {
             var block = tally.getQuorumBlock(seqnum, viewnum);
             if (block != null) {

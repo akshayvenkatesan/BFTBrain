@@ -87,5 +87,45 @@ public class ClientDataset extends Dataset {
 
         return DataUtils.createRequest(reqnum, record, operation, value, clientId);
     }
+    public RequestData createTransaction(long reqnum) {
+
+        var record = random.nextInt(AdvanceConfig.integer("workload.contention-level"));
+        
+        var operation = Operation.values()[random.nextInt(5)];
+        int value = 0;
+
+        switch (operation) {
+        case ADD:
+            value = random.nextInt(DEFAULT_VALUE);
+            break;
+        case SUB:
+            var max = Math.min(DEFAULT_VALUE, lookahead.get(record).intValue());
+            if (max <= 0) { // < 0 to fix #47
+                operation = Operation.NOP;
+            } else {
+                value = random.nextInt(max);
+                lookahead.get(record).add(-value);
+            }
+            break;
+        case DEC:
+            if (lookahead.get(record).intValue() < 1) {
+                operation = Operation.NOP;
+            } else {
+                lookahead.get(record).decrement();
+            }
+            break;
+        default:
+            break;
+        }
+
+        // generate read only optimization
+        if (Config.stringList("plugins.message").contains("read-only")) {
+            if (random.nextDouble() < AdvanceConfig.doubleNumber("workload.read-only-ratio")) {
+                operation = Operation.READ_ONLY;
+            }
+        }
+
+        return DataUtils.createRequest(reqnum, record, operation, value, clientId);
+    }
 
 }

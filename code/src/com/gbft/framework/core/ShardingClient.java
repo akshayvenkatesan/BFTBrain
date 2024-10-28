@@ -48,6 +48,43 @@ public class ShardingClient extends Entity {
         return new RequestGenerator();
     }
 
+    // @Override
+    // protected void execute(long seqnum) {
+    //     System.out.println("Inside execute for sharding client " + id + " with seqnum " + seqnum + ".");
+    //     var checkpoint = checkpointManager.getCheckpointForSeq(seqnum);
+
+    //     var tally = checkpoint.getMessageTally();
+    //     var viewnum = tally.getMaxQuorum(seqnum);
+    //     var replies = tally.getQuorumReplies(seqnum, viewnum);
+    //     currentViewNum = viewnum;
+    //     /*
+    //      * Checks for replies for the requests in the block and updates the dataset.
+    //      * Lookahead is when sending the request, and client dataset is updated on replies
+    //      */
+    //     if (replies != null) {
+    //         System.out.println("Updating dataset for sharding client " + id + ".");
+    //         var now = System.nanoTime();
+    //         for (var entry : replies.entrySet()) {
+    //             var reqnum = entry.getKey();
+    //             var request = checkpoint.getRequest(reqnum);
+    //             //Check if both the replies are as expected, if not create and execute rollback transaction
+    //             //After previous logic, decrease inorder of associated transactions. If inorder==0, add them to queue
+    //             dataset.update(request, entry.getValue());
+
+    //             // benchmarkManager.requestExecuted(reqnum, now);
+
+    //         //Check each currently executing transaction in a map
+    //         }
+    //         /*
+    //          * this mainly releases one semaphore to ensure only
+    //          * one request is active at a time. Because each request
+    //          * simulates a client, the client is blocked until the
+    //          * next simulation is started
+    //          */
+    //         requestGenerator.execute();
+
+    //     }
+    // }
     @Override
     protected void execute(long seqnum) {
         System.out.println("Inside execute for sharding client " + id + " with seqnum " + seqnum + ".");
@@ -67,9 +104,23 @@ public class ShardingClient extends Entity {
             for (var entry : replies.entrySet()) {
                 var reqnum = entry.getKey();
                 var request = checkpoint.getRequest(reqnum);
+                int record = request.getRecord();
+                System.out.println("*********************************"); 
+                System.out.println("*"); 
+                System.out.println("*"); 
+                System.out.println("*"); 
+                System.out.println("Key: "+record+" Value: "+entry.getValue()); 
+                System.out.println("*"); 
+                System.out.println("*"); 
+                System.out.println("*"); 
+                System.out.println("*********************************"); 
+                //Check if both the replies are as expected, if not create and execute rollback transaction
+                //After previous logic, decrease inorder of associated transactions. If inorder==0, add them to queue
                 dataset.update(request, entry.getValue());
 
                 // benchmarkManager.requestExecuted(reqnum, now);
+
+            //Check each currently executing transaction in a map
             }
             /*
              * this mainly releases one semaphore to ensure only
@@ -106,7 +157,9 @@ public class ShardingClient extends Entity {
     
                         var clusternum = request.getRecord() / 25 + 1; 
                         nextRequestNum += 1;
-    
+                        //Write logic to create graph
+                        //Execute all independent transactions and to queue
+                        //Keep counter of currently executing transactiions. Run loop till either counter is 0 and queue is empty
                         sendRequest(request, clusternum);
     
                         while (System.nanoTime() < next) {

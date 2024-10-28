@@ -44,13 +44,14 @@ import com.gbft.framework.utils.RandomDataStream;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.Message;
 
+
 public class CoordinatorUnit extends CoordinatorBase {
 
     public static int unit_id;
 
     private int myUnit;
 
-    private Map<Integer, Entity> entities;
+    private Map<Integer, Entity> entities = new ConcurrentHashMap<>();
     private Map<Integer, Connection> connections;
     private AtomicInteger connected_units;
     private LinkedBlockingQueue<Event> inQueueClient = new LinkedBlockingQueue<>();
@@ -273,9 +274,11 @@ public class CoordinatorUnit extends CoordinatorBase {
             for (var message : messages) {
                 var targets = message.getTargetsList();
                 for (var target : targets) {
-                    if (target == message.getSource() || EntityMapUtils.getUnit(target) != myUnit) {
+                    if ((target == message.getSource() || EntityMapUtils.getUnit(target) != myUnit) && myUnit!=16){
+                        System.out.println("In the continue block");
                         continue;
                     }
+
                     println("Processing message for target: "+target);
 
                     // TODO: Use Virtual Thread.
@@ -293,7 +296,12 @@ public class CoordinatorUnit extends CoordinatorBase {
                         try {
                             if (_delay > 0L)
                                 Thread.sleep(_delay);
-                            entities.get(target).handleMessage(message);
+                                if (myUnit == 16 && target == 4) {
+                                    System.out.println("Handling message for target 4");
+                                    entities.get(16).handleMessage(message);
+                                } else {
+                                    entities.get(target).handleMessage(message);
+                                }       
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
@@ -327,7 +335,7 @@ public class CoordinatorUnit extends CoordinatorBase {
                                 System.out.println("Targets: "+targets.toString() + " for message: "+message.toString());
                                 for (var target : targets) {
                                     var new_target = target%4;
-                                    if (target == message.getSource() || EntityMapUtils.getUnit(new_target) != myUnit) {
+                                    if ((target == message.getSource() || EntityMapUtils.getUnit(new_target) != myUnit) && myUnit!=16) {
                                         continue;
                                     }
 
@@ -348,7 +356,11 @@ public class CoordinatorUnit extends CoordinatorBase {
                                         try {
                                             if (_delay > 0L)
                                                 Thread.sleep(_delay);
-                                            entities.get(new_target).handleMessage(message);
+                                                if (myUnit == 16 && target == 4) {
+                                                    entities.get(16).handleMessage(message);
+                                                } else {
+                                                    entities.get(new_target).handleMessage(message);
+                                                }
                                         } catch (InterruptedException e) {
                                             e.printStackTrace();
                                         }

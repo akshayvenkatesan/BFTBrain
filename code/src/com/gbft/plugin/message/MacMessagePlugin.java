@@ -123,8 +123,8 @@ public class MacMessagePlugin implements MessagePlugin, InitializablePluginInter
             if (messageType == SECRET_KEY) {
                 var source = pluginData.getSource();
                 var bytes = pluginData.getData().toByteArray();
-                System.out.println("Updating secret keys with value for source: "+source);
                 secretKeys.put(source, bytes);
+                System.out.println("Updating secret keys with value for source: with bytes :"+source + " "+bytes);
             }
         }
         System.out.println("Secret Key size: "+secretKeys.size());
@@ -226,7 +226,7 @@ public class MacMessagePlugin implements MessagePlugin, InitializablePluginInter
                  * we have defined to use runner value
                  */
                 target = target%4;
-                if (target == entity.getId()) {
+                if ((target == entity.getId()) || (entity.getId()==16 && target==0)) {
                     return Arrays.equals(computed, bytes);
                 }
             } catch (IOException e) {
