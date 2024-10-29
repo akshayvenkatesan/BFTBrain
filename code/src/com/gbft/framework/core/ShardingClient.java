@@ -29,6 +29,13 @@ public class ShardingClient extends Entity {
 
     private RequestGenerator requestGenerator;
 
+    // Map of txid -> cluster -> responses
+    private Map<Long, Map<Integer, Integer>> responses;
+
+    private Map<Long, Map<Integer, Integer>> rollbackResponses;
+
+    private Map<Long, int[]> rollbackTransactions;
+
     public ShardingClient(int id, CoordinatorUnit coordinator) {
         super(id, coordinator);
 
@@ -39,7 +46,9 @@ public class ShardingClient extends Entity {
         System.out.println("Creating client dataset for sharding client " + id + ".");
         dataset = new ClientDataset(id);
         nextRequestNum = 1L;
-
+        responses = new HashMap<>();
+        rollbackResponses = new HashMap<>();
+        rollbackTransactions = new HashMap<>();
         requestGenerator = createRequestGenerator();
         requestGenerator.init();
     }
@@ -105,7 +114,8 @@ public class ShardingClient extends Entity {
                 var reqnum = entry.getKey();
                 var request = checkpoint.getRequest(reqnum);
                 int record = request.getRecord();
-                System.out.println("*********************************"); 
+                var clusterNum = record / 25 + 1;
+                System.out.println("*"); 
                 System.out.println("*"); 
                 System.out.println("*"); 
                 System.out.println("*"); 
@@ -113,10 +123,31 @@ public class ShardingClient extends Entity {
                 System.out.println("*"); 
                 System.out.println("*"); 
                 System.out.println("*"); 
-                System.out.println("*********************************"); 
-                //Check if both the replies are as expected, if not create and execute rollback transaction
-                //After previous logic, decrease inorder of associated transactions. If inorder==0, add them to queue
-                dataset.update(request, entry.getValue());
+                System.out.println("*");
+
+                if (rollbackResponses.containsKey(reqnum)) {
+                    // This is a response for a rollback request
+
+                    var responseMap = rollbackResponses.get(reqnum);
+                    responseMap.put(clusterNum, responseMap.getOrDefault(clusterNum, 0) + 1);
+                } else if (entry.getValue() < 0) {
+                    // We need to send a rollback as the balance has become negative
+                    rollbackResponses.put(reqnum, new HashMap<>());
+                    var rollbackTx = rollbackTransactions.get(reqnum);
+                    var firstRollbackRequest = dataset.createRequestWithKeyAndVal(nextRequestNum++, rollbackTx[0], rollbackTx[1]);
+                    sendRequest(firstRollbackRequest, clusterNum);
+                    var nextRollback = reqnum % 10 == 1 ? 2 : 1;
+                    var newRequestNum = Long.valueOf(reqnum / 10 + String.valueOf(nextRollback));
+                    rollbackResponses.put(newRequestNum, new HashMap<>());
+                    var nextRollbackTx = rollbackTransactions.get(newRequestNum);
+                    var secondRollbackRequest = dataset.createRequestWithKeyAndVal(nextRequestNum++, nextRollbackTx[0], nextRollbackTx[1]);
+                    var nextClusterNum = (int) (newRequestNum / 25 + 1);
+                    sendRequest(secondRollbackRequest, nextClusterNum);
+                } else {
+                    //Check if both the replies are as expected, if not create and execute rollback transaction
+                    //After previous logic, decrease inorder of associated transactions. If inorder==0, add them to queue
+                    dataset.update(request, entry.getValue());
+                }
 
                 // benchmarkManager.requestExecuted(reqnum, now);
 
@@ -130,6 +161,50 @@ public class ShardingClient extends Entity {
              */
             requestGenerator.execute();
 
+        }
+    }
+
+    protected void sendRequest(RequestData request , int clusternum) {
+        var reqnum = request.getRequestNum();
+        var seqnum = reqnum / blockSize;
+        var view = currentViewNum;
+
+        // wait to know the leader mode if necessary
+        var episode = getEpisodeNum(seqnum);
+        rolePlugin.roleReadLock.lock();
+        try {
+            if (rolePlugin.episodeLeaderMode.get(episode) == null) {
+                rolePlugin.roleReadLock.unlock();
+                rolePlugin.roleWriteLock.lock();
+                try {
+                    while (rolePlugin.episodeLeaderMode.get(episode) == null) {
+                        rolePlugin.roleCondition.await();
+                    }
+                } catch (InterruptedException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                } finally {
+                    rolePlugin.roleWriteLock.unlock();
+                    rolePlugin.roleReadLock.lock();
+                }
+            }
+        } finally {
+            rolePlugin.roleReadLock.unlock();
+        }
+
+        // Identify primary and send request
+        var targets = rolePlugin.getRoleEntities(seqnum, view, StateMachine.NORMAL_PHASE, requestTargetRole, clusternum);
+
+        if (request.getOperationValue() == RequestData.Operation.READ_ONLY_VALUE) {
+            targets = rolePlugin.getRoleEntities(seqnum, view, StateMachine.NORMAL_PHASE, StateMachine.NODE, clusternum);
+        }
+
+        var message = createMessage(null, view, List.of(request), StateMachine.REQUEST, id, targets);
+        System.out.println("Sending message for sharding client " + id + ".");
+        sendMessage(message);
+
+        if (Printer.verbosity >= Printer.Verbosity.VVV) {
+            Printer.print(Printer.Verbosity.VVV, prefix, "Request created: ", request);
         }
     }
 
@@ -168,8 +243,17 @@ public class ShardingClient extends Entity {
                                 var clusternum0 = request.getRecord() / 25 + 1;
                                 sendRequest(request, clusternum0);
                             } else {
-                                Long firstRequestNumber = Long.valueOf(String.valueOf(nextRequestNum) + '1');
-                                Long secondRequestNumber = Long.valueOf(String.valueOf(nextRequestNum) + '2');
+                                var requestNum = String.valueOf(nextRequestNum);
+                                Long firstRequestNumber = Long.valueOf(requestNum + '1');
+                                Long secondRequestNumber = Long.valueOf(requestNum + '2');
+                                rollbackTransactions.putIfAbsent(firstRequestNumber, new int[]{currentTransaction[0], currentTransaction[2]});
+                                rollbackTransactions.putIfAbsent(secondRequestNumber, new int[]{currentTransaction[1], -currentTransaction[2]});
+                                responses.putIfAbsent(firstRequestNumber, new HashMap<>());
+                                responses.putIfAbsent(secondRequestNumber, new HashMap<>());
+                                for (int clusterNum = 1; clusterNum <= 4; clusterNum++) {
+                                    responses.get(firstRequestNumber).put(clusterNum, 0);
+                                    responses.get(secondRequestNumber).put(clusterNum, 0);
+                                }
                                 // Sending first request with a-val
                                 System.out.println(" First request number is : " + firstRequestNumber);
                                 System.out.println(" Second request number is : " + secondRequestNumber);
@@ -206,7 +290,7 @@ public class ShardingClient extends Entity {
 
         protected void sendRequest(RequestData request , int clusternum) {
             var reqnum = request.getRequestNum();
-            var seqnum = reqnum / blockSize;
+            var seqnum = reqnum; // blockSize;
             var view = currentViewNum;
 
             // wait to know the leader mode if necessary
@@ -254,4 +338,5 @@ public class ShardingClient extends Entity {
         }
     }
 }
+
 

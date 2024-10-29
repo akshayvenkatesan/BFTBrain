@@ -305,6 +305,7 @@ public abstract class Entity {
 
                 aggregationBuffer.clear();
             }
+            System.out.println("Calling state update from aggStateupdate for seqnum: " + seqnum);
             stateUpdate(seqnum);
 
         }
@@ -353,7 +354,7 @@ public abstract class Entity {
                     System.out.println("Inserting into pending requests");
                     pendingRequests.offer(request);
                     System.out.println("Pending requests size: " + pendingRequests.size());
-                    System.out.println("callling state update for next sequence");
+                    System.out.println("callling state update for next sequence number: " + nextSequence);
                     stateUpdateLoop(nextSequence);
                 }
             }
@@ -376,7 +377,7 @@ public abstract class Entity {
             if (Printer.verbosity >= Verbosity.VVV) {
                 Printer.print(Verbosity.VVV, prefix, "Tally message ", message);
             }
-
+            System.out.println("Running state update loop for seqnum: " + seqnum); 
             stateUpdateLoop(seqnum);
         }
 
@@ -386,6 +387,7 @@ public abstract class Entity {
 
     public void stateUpdateLoop(long seqnum) {
         Printer.print(Verbosity.VVVV, prefix, "StateUpdateLoop seqnum: " + seqnum);
+        System.out.println("Calling state update from staeUpdateLoop");
         var result = stateUpdate(seqnum);
         while (running && result != null && !result.isEmpty()) {
             var next = result.pollFirst();
@@ -400,10 +402,12 @@ public abstract class Entity {
         // Printer.print(Verbosity.V, prefix, "[time-since-start=" + Printer.timeFormat(System.nanoTime() - systemStartTime, true) + "] begin stateUpdate: seqnum=" + seqnum + 
         //             " (nextSequence=" + nextSequence + ", lastExecutedSequenceNum=" + lastExecutedSequenceNum + ")");
         
+        System.out.println("Inside state update for seqnum: " + seqnum);
         benchmarkManager.add(BenchmarkManager.STATE_UPDATE, 0, System.nanoTime());
 
         // Do not process messages belonging to the next episode
         if (seqnum > getEndOfEpisode()) {
+            System.out.println("Returning null as seqnum > getEndOfEpisode()");
             return null;
         }
 
@@ -413,10 +417,12 @@ public abstract class Entity {
         if (seqnum <= lastExecutedSequenceNum || isExecuted(seqnum)
                 || (isPrimary(seqnum) && seqnum - lastExecutedSequenceNum > pipelinePlugin.getMaxActiveSequences())) {
             stateLock.unlock();
+            System.out.println("Returning null as seqnum <= lastExecutedSequenceNum and isExecuted(seqnum) = " + isExecuted(seqnum) + "\n and isPrimary(seqnum) = " + isPrimary(seqnum) + "lastExecutedSequenceNum = " + lastExecutedSequenceNum);
             return null;
         }
         benchmarkManager.add(BenchmarkManager.IF1, 0, System.nanoTime());
         if (seqnum > nextSequence) {
+            System.out.println("Returning null as seqnum > nextSequence");
             needsUpdate.add(seqnum);
             stateLock.unlock();
             return null;
@@ -426,10 +432,12 @@ public abstract class Entity {
         if (updating.contains(seqnum)) {
             needsUpdate.add(seqnum);
             stateLock.unlock();
+            System.out.println("Returning null as updating.contains(seqnum)");
             return null;
         }
         benchmarkManager.add(BenchmarkManager.IF3, 0, System.nanoTime());
 
+        System.out.println("Adding seqnum to updating: " + seqnum);
         updating.add(seqnum);
         stateLock.unlock();
 
@@ -441,7 +449,7 @@ public abstract class Entity {
         benchmarkManager.add(BenchmarkManager.BEGIN_WHILE_LOOP, 0, System.nanoTime());
         while (running) {
             local_cnt++;
-
+            System.out.println("Inside while loop");
             stateUpdated = false;
 
             var checkpoint = checkpointManager.getCheckpointForSeq(seqnum);
@@ -467,9 +475,11 @@ public abstract class Entity {
                 }
                 System.out.println("Inside pending requests3");
                 var state = StateMachine.states.get(statenum);
+                System.out.println("State: " + state.name);
                 for (var role : roles) {
                     var candidates = state.transitions.get(role);
                     if (candidates == null) {
+                        System.out.println("Candidate is null");
                         continue;
                     }
                     //Printing all the candidates
@@ -530,7 +540,7 @@ public abstract class Entity {
 
                                 var message = createMessage(seqnum, currentViewNum, block, StateMachine.REQUEST, id,
                                         List.of(id));
-                                System.out.println("Inside pending requests8 and messaeg: " + message);
+                                System.out.println("Inside pending requests8 and message: ");
                                 checkpoint.tally(message);
                                 benchmarkManager.add(BenchmarkManager.CREATE_REQUEST_BLOCK, 0, System.nanoTime());
                                 
@@ -572,6 +582,7 @@ public abstract class Entity {
 
                             stateLock.lock();
                             if (nextSequence == seqnum) {
+                                System.out.println("Increasing next sequence by 1 "+ nextSequence);
                                 nextSequence += 1;
                                 nextseqUpdated = true;
                                 // Printer.print(Verbosity.V, prefix, "[time-since-start=" + Printer.timeFormat(System.nanoTime() - systemStartTime, true) + "] update nextSequence to: seqnum=" + seqnum + 

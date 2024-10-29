@@ -1,0 +1,2530 @@
+23:37:08.816  127.0.0.1 5050
+Sending event to -1 at 127.0.0.1:5050
+23:37:08.869  Sending event to -1 at 127.0.0.1:5050
+23:37:08.874  Send event completed
+Config value not found: protocol.general.f
+Config value not found: protocol.general.f
+Config value not found: protocol.general.f
+Config value not found: protocol.general.f
+Config value not found: protocol.general.f
+Config value not found: protocol.general.f
+Adding unit 0 to entity map.
+Getting cluster number for unit 0.
+Adding unit 0 to cluster 1.
+Cluster server mapping: {1=[]}.
+Cluster server mapping: {1=[0]}.
+Adding unit 1 to entity map.
+Getting cluster number for unit 1.
+Adding unit 1 to cluster 1.
+Cluster server mapping: {1=[0]}.
+Cluster server mapping: {1=[0, 1]}.
+Adding unit 2 to entity map.
+Getting cluster number for unit 2.
+Adding unit 2 to cluster 1.
+Cluster server mapping: {1=[0, 1]}.
+Cluster server mapping: {1=[0, 1, 2]}.
+Adding unit 3 to entity map.
+Getting cluster number for unit 3.
+Adding unit 3 to cluster 1.
+Cluster server mapping: {1=[0, 1, 2]}.
+Cluster server mapping: {1=[0, 1, 2, 3]}.
+Adding unit 16 to entity map.
+Getting cluster number for unit 16.
+Adding unit 16 to cluster 0.
+Cluster server mapping: {0=[], 1=[0, 1, 2, 3]}.
+Cluster server mapping: {0=[16], 1=[0, 1, 2, 3]}.
+23:37:24.829  GRPC server started, listening on 6031
+Sending event to -1 at 127.0.0.1:5050
+23:37:24.992  Sending event to -1 at 127.0.0.1:5050
+23:37:24.993  Unit configured.
+23:37:25.9  Received plugin event for targets: [0].
+23:37:25.12  Entities map for: {0=com.gbft.framework.core.Node@6bb65ee8}
+23:37:25.13  Target list is: [0]
+Updating secret keys with value for target: 1
+23:37:25.148  Sending event to 1 at 127.0.0.1:6022
+Updating secret keys with value for target: 2
+23:37:25.152  Sending event to 2 at 127.0.0.1:6023
+Updating secret keys with value for target: 3
+23:37:25.153  Sending event to 3 at 127.0.0.1:6024
+Updating secret keys with value for target: 4
+23:37:25.158  Sending event to 16 at 127.0.0.1:5051
+Secret Key size: 4
+23:37:25.159  Ent is: 0
+23:37:25.160  Init plugin is: com.gbft.plugin.message.MacMessagePlugin@6c3bdf9d
+23:37:25.161  Plug initialised status: true
+23:37:25.161  Inside finished block.
+23:37:25.161  Id is 0 and clusterNum is 1
+Sending event to -1 at 127.0.0.1:5050
+23:37:25.162  Sending event to -1 at 127.0.0.1:5050
+23:37:25.171  Received connection event from server.
+Sending event to -1 at 127.0.0.1:5050
+23:37:25.185  Sending event to -1 at 127.0.0.1:5050
+23:37:25.191  Connection initialized.
+23:37:25.224  Benchmark started.
+Message event received in 0
+Targets: [0] for message: source: 16
+targets: 0
+requests {
+  client: 16
+  request_num: 11
+  record: 12
+  operation: SUB
+  value: 32
+  timestamp {
+    seconds: 13867
+    nanos: 344115926
+  }
+}
+digest: ";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,"
+extra_data {
+  key: 1001
+  value: "\001\000@\204\364\202\322UT\370\005\261\301\026\267\251\235?\312B\237q_|]\256&\300\370\355\225F\366\242x\223\206\364\363\242?\247\351yos\276\002\343\030\362\210\240\\.\246\263/\331P\201\276%\256\253\314#"
+}
+timestamp {
+  seconds: 13867
+  nanos: 355882271
+}
+
+Received request: source: 16
+targets: 0
+requests {
+  client: 16
+  request_num: 11
+  record: 12
+  operation: SUB
+  value: 32
+  timestamp {
+    seconds: 13867
+    nanos: 344115926
+  }
+}
+digest: ";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,"
+extra_data {
+  key: 1001
+  value: "\001\000@\204\364\202\322UT\370\005\261\301\026\267\251\235?\312B\237q_|]\256&\300\370\355\225F\366\242x\223\206\364\363\242?\247\351yos\276\002\343\030\362\210\240\\.\246\263/\331P\201\276%\256\253\314#"
+}
+timestamp {
+  seconds: 13867
+  nanos: 355882271
+}
+
+Going to process: source: 16
+targets: 0
+requests {
+  client: 16
+  request_num: 11
+  record: 12
+  operation: SUB
+  value: 32
+  timestamp {
+    seconds: 13867
+    nanos: 344115926
+  }
+}
+digest: ";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,"
+extra_data {
+  key: 1001
+  value: "\001\000@\204\364\202\322UT\370\005\261\301\026\267\251\235?\312B\237q_|]\256&\300\370\355\225F\366\242x\223\206\364\363\242?\247\351yos\276\002\343\030\362\210\240\\.\246\263/\331P\201\276%\256\253\314#"
+}
+timestamp {
+  seconds: 13867
+  nanos: 355882271
+}
+
+Verifying MAC for source: 4
+Secret Key: [B@4325a3b8
+MAC validation successful
+Processed: source: 16
+targets: 0
+requests {
+  client: 16
+  request_num: 11
+  record: 12
+  operation: SUB
+  value: 32
+  timestamp {
+    seconds: 13867
+    nanos: 344115926
+  }
+}
+digest: ";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,"
+extra_data {
+  key: 1001
+  value: "\001\000@\204\364\202\322UT\370\005\261\301\026\267\251\235?\312B\237q_|]\256&\300\370\355\225F\366\242x\223\206\364\363\242?\247\351yos\276\002\343\030\362\210\240\\.\246\263/\331P\201\276%\256\253\314#"
+}
+timestamp {
+  seconds: 13867
+  nanos: 355882271
+}
+
+Received request: source: 16
+targets: 0
+requests {
+  client: 16
+  request_num: 11
+  record: 12
+  operation: SUB
+  value: 32
+  timestamp {
+    seconds: 13867
+    nanos: 344115926
+  }
+}
+digest: ";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,"
+extra_data {
+  key: 1001
+  value: "\001\000@\204\364\202\322UT\370\005\261\301\026\267\251\235?\312B\237q_|]\256&\300\370\355\225F\366\242x\223\206\364\363\242?\247\351yos\276\002\343\030\362\210\240\\.\246\263/\331P\201\276%\256\253\314#"
+}
+timestamp {
+  seconds: 13867
+  nanos: 355882271
+}
+
+Inside seqnum == null
+Inserting into pending requests
+Pending requests size: 1
+callling state update for next sequence number: 0
+Calling state update from staeUpdateLoop
+Inside state update for seqnum: 0
+Adding seqnum to updating: 0
+Inside while loop
+ Printing roles: 
+Role: 0
+Role: 1
+Role: 3
+Inside pending requests1
+Inside pending requests3
+State: pbft_idle
+Transition: [from pbft_idle to pbft_wait_prepare, condition=com.gbft.framework.statemachine.Condition@1ec68f5a, updateMode=none, responses=[(3,12)], extraTally=[(0,13)]]
+Inside pending requests4
+Condition type: 1
+The message type is: 0
+Inside pending requests5
+Pending request size and block size: 1 10
+Inside pending requests6 and pending request size: 1
+My source is: 0
+My messsage type is: 0
+My targets are: [0]
+Inside pending requests8 and message: 
+Tallying message: targets: 0
+requests {
+  client: 16
+  request_num: 11
+  record: 12
+  operation: SUB
+  value: 32
+  timestamp {
+    seconds: 13867
+    nanos: 344115926
+  }
+}
+digest: ";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,"
+extra_data {
+  key: 1001
+  value: "\001"
+}
+timestamp {
+  seconds: 13867
+  nanos: 443898262
+}
+
+Tallying message: targets: 0
+requests {
+  client: 16
+  request_num: 11
+  record: 12
+  operation: SUB
+  value: 32
+  timestamp {
+    seconds: 13867
+    nanos: 344115926
+  }
+}
+extra_data {
+  key: 1001
+  value: "\001"
+}
+timestamp {
+  seconds: 13867
+  nanos: 443898262
+}
+
+Seqnum: 0 QuorumId: 0
+Printing all elements of counter
+Seqnum: 0
+MessageType: 0
+Viewnum: 0
+Digest: <ByteString@23cbb8f4 size=32 contents=";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,">
+Node: 0
+Returning from here2 is null
+Inside checkMessageTally: seqnum: 0, quorumId: com.gbft.framework.utils.MessageTally$QuorumId@3c2, viewnum: 0, checkview: 0
+Inside pending requests8 + conditionMet: true
+Currently at Role: 3 MessageType: 12
+My source is: 0
+My messsage type is: 12
+My targets are: [0, 1, 2, 3]
+Current targets: [0, 1, 2, 3]
+Inside sharded plugin: 0 4 0
+My source is: 0
+My messsage type is: 13
+My targets are: [0]
+Tallying message: message_type: 13
+targets: 0
+request_nums: 11
+digest: ";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,"
+extra_data {
+  key: 1001
+  value: "\001"
+}
+timestamp {
+  seconds: 13867
+  nanos: 472359153
+}
+
+Tallying message: message_type: 13
+targets: 0
+request_nums: 11
+extra_data {
+  key: 1001
+  value: "\001"
+}
+timestamp {
+  seconds: 13867
+  nanos: 472359153
+}
+
+Sending message: message_type: 12
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+requests {
+  client: 16
+  request_num: 11
+  record: 12
+  operation: SUB
+  value: 32
+  timestamp {
+    seconds: 13867
+    nanos: 344115926
+  }
+}
+digest: ";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,"
+extra_data {
+  key: 1001
+  value: "\004\001@D\361\2219\0346\325\217\267\301\247\200`A\212\310\233\373\327\350\022\362n\360\016\300\321J8\325\002\214\325\327\017DY\177\r\211z\207\004\221$\206h\235\000\f\201\314\"\0336\037N\322\n\355\377:\301_\002@\332\264|\227W.\265@\224\367\255\253/\022g\036e\000\2022Z\347\026\324$!\255\235R\256\2245h^[\275e\023Z\336\036\373S!\316\331\236\032\212.\275Os\024r\206\t\315,^\272\215|v\003@\373\312\361\360\017\265A\325\263\032\357\353\306)Q?\323\225\200\322\343?\354\nBOi\223\337#&\303\236\030\205\256\006\364\261[\260G\243\t\025\200\b\3326\025\232An\227\204E/\325bX\201%\3059"
+}
+timestamp {
+  seconds: 13867
+  nanos: 465766491
+}
+
+DirectPipelinePlugin.sendMessage
+23:37:25.404  Found target: [0, 1, 2, 3]
+23:37:25.405  Message event received in 0
+In the continue block
+In the continue block
+In the continue block
+In the continue block
+Sending event to 1 at 127.0.0.1:6022
+Using connection - Sending event to 1 at 127.0.0.1:6022
+Sending event to 2 at 127.0.0.1:6023
+Using connection - Sending event to 2 at 127.0.0.1:6023
+Sending event to 3 at 127.0.0.1:6024
+Using connection - Sending event to 3 at 127.0.0.1:6024
+Tallying message: message_type: 12
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+requests {
+  client: 16
+  request_num: 11
+  record: 12
+  operation: SUB
+  value: 32
+  timestamp {
+    seconds: 13867
+    nanos: 344115926
+  }
+}
+digest: ";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,"
+extra_data {
+  key: 1001
+  value: "\004\001@D\361\2219\0346\325\217\267\301\247\200`A\212\310\233\373\327\350\022\362n\360\016\300\321J8\325\002\214\325\327\017DY\177\r\211z\207\004\221$\206h\235\000\f\201\314\"\0336\037N\322\n\355\377:\301_\002@\332\264|\227W.\265@\224\367\255\253/\022g\036e\000\2022Z\347\026\324$!\255\235R\256\2245h^[\275e\023Z\336\036\373S!\316\331\236\032\212.\275Os\024r\206\t\315,^\272\215|v\003@\373\312\361\360\017\265A\325\263\032\357\353\306)Q?\323\225\200\322\343?\354\nBOi\223\337#&\303\236\030\205\256\006\364\261[\260G\243\t\025\200\b\3326\025\232An\227\204E/\325bX\201%\3059"
+}
+timestamp {
+  seconds: 13867
+  nanos: 465766491
+}
+
+Tallying message: message_type: 12
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+requests {
+  client: 16
+  request_num: 11
+  record: 12
+  operation: SUB
+  value: 32
+  timestamp {
+    seconds: 13867
+    nanos: 344115926
+  }
+}
+extra_data {
+  key: 1001
+  value: "\004\001@D\361\2219\0346\325\217\267\301\247\200`A\212\310\233\373\327\350\022\362n\360\016\300\321J8\325\002\214\325\327\017DY\177\r\211z\207\004\221$\206h\235\000\f\201\314\"\0336\037N\322\n\355\377:\301_\002@\332\264|\227W.\265@\224\367\255\253/\022g\036e\000\2022Z\347\026\324$!\255\235R\256\2245h^[\275e\023Z\336\036\373S!\316\331\236\032\212.\275Os\024r\206\t\315,^\272\215|v\003@\373\312\361\360\017\265A\325\263\032\357\353\306)Q?\323\225\200\322\343?\354\nBOi\223\337#&\303\236\030\205\256\006\364\261[\260G\243\t\025\200\b\3326\025\232An\227\204E/\325bX\201%\3059"
+}
+timestamp {
+  seconds: 13867
+  nanos: 465766491
+}
+
+Increasing next sequence by 1 0
+Inside while loop
+ Printing roles: 
+Role: 0
+Role: 1
+Role: 3
+Inside pending requests1
+Inside pending requests3
+State: pbft_wait_prepare
+Candidate is null
+Candidate is null
+Transition: [from pbft_wait_prepare to pbft_wait_commit, condition=com.gbft.framework.statemachine.Condition@388057a1, updateMode=none, responses=[(3,14)], extraTally=[]]
+Inside pending requests4
+Condition type: 1
+The message type is: 13
+Seqnum: 0 QuorumId: 13
+Printing all elements of counter
+Seqnum: 0
+MessageType: 0
+Viewnum: 0
+Digest: <ByteString@23cbb8f4 size=32 contents=";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,">
+Node: 0
+MessageType: 12
+Viewnum: 0
+Digest: <ByteString@23cbb8f4 size=32 contents=";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,">
+Node: 0
+MessageType: 13
+Viewnum: 0
+Digest: <ByteString@23cbb8f4 size=32 contents=";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,">
+Node: 0
+Returning from here2 is null
+Inside checkMessageTally: seqnum: 0, quorumId: com.gbft.framework.utils.MessageTally$QuorumId@557, viewnum: null, checkview: 0
+Inside pending requests8 + conditionMet: false
+Inside state update for seqnum: 1
+Adding seqnum to updating: 1
+Inside while loop
+ Printing roles: 
+Role: 0
+Role: 1
+Role: 3
+Inside pending requests1
+Inside pending requests3
+State: pbft_idle
+Transition: [from pbft_idle to pbft_wait_prepare, condition=com.gbft.framework.statemachine.Condition@1ec68f5a, updateMode=none, responses=[(3,12)], extraTally=[(0,13)]]
+Inside pending requests4
+Condition type: 1
+The message type is: 0
+Inside pending requests5
+Pending request size and block size: 0 10
+Inside pending requests6 and pending request size: 0
+Exception in thread "Thread-30" java.util.NoSuchElementException
+	at java.base/java.util.AbstractQueue.remove(AbstractQueue.java:117)
+	at com.gbft.framework.core.Entity.stateUpdate(Entity.java:525)
+	at com.gbft.framework.core.Entity.stateUpdateLoop(Entity.java:394)
+	at com.gbft.framework.core.Entity.handleMessage(Entity.java:358)
+	at com.gbft.framework.coordination.CoordinatorUnit$ReceiverPoller.lambda$run$0(CoordinatorUnit.java:362)
+	at java.base/java.lang.Thread.run(Thread.java:1623)
+Message event received in 0
+Targets: [0, 1, 2, 3] for message: message_type: 13
+source: 2
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: ";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,"
+extra_data {
+  key: 1001
+  value: "\004\000@\240HN7\313-\'\001\304\365\237\333\243\377\001}v\374\004Gn)S\tX\024\al\341\346\374g\024\357.\327\341\353\030\033\300\204\276\000\260\fL_\355&\363\345Z:N\001)\'Y\362\305\243\205\362\001@\324\323\300\271A\f\2237\370:\215J\302\023\214\247l\331\177Pp\216\322\363wc\266\317\2076\vy\350\236\264\333@\033\vUw!?\263\204h\214_)\020q\245Nj\f\273Tf\344\243\327\005^@\003@\265\t\257\225\352n\317\236\025\205\220\250\023\250\345?_\330\363\"\344u\362\361\347k\330\225\231\334\202{YG$\371^\236\331:\234#\226\204L\212?\354\207a\236\277a3\256sJ3\031 \271Um\033"
+}
+timestamp {
+  seconds: 13867
+  nanos: 549799542
+}
+
+Received request: message_type: 13
+source: 2
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: ";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,"
+extra_data {
+  key: 1001
+  value: "\004\000@\240HN7\313-\'\001\304\365\237\333\243\377\001}v\374\004Gn)S\tX\024\al\341\346\374g\024\357.\327\341\353\030\033\300\204\276\000\260\fL_\355&\363\345Z:N\001)\'Y\362\305\243\205\362\001@\324\323\300\271A\f\2237\370:\215J\302\023\214\247l\331\177Pp\216\322\363wc\266\317\2076\vy\350\236\264\333@\033\vUw!?\263\204h\214_)\020q\245Nj\f\273Tf\344\243\327\005^@\003@\265\t\257\225\352n\317\236\025\205\220\250\023\250\345?_\330\363\"\344u\362\361\347k\330\225\231\334\202{YG$\371^\236\331:\234#\226\204L\212?\354\207a\236\277a3\256sJ3\031 \271Um\033"
+}
+timestamp {
+  seconds: 13867
+  nanos: 549799542
+}
+
+Going to process: message_type: 13
+source: 2
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: ";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,"
+extra_data {
+  key: 1001
+  value: "\004\000@\240HN7\313-\'\001\304\365\237\333\243\377\001}v\374\004Gn)S\tX\024\al\341\346\374g\024\357.\327\341\353\030\033\300\204\276\000\260\fL_\355&\363\345Z:N\001)\'Y\362\305\243\205\362\001@\324\323\300\271A\f\2237\370:\215J\302\023\214\247l\331\177Pp\216\322\363wc\266\317\2076\vy\350\236\264\333@\033\vUw!?\263\204h\214_)\020q\245Nj\f\273Tf\344\243\327\005^@\003@\265\t\257\225\352n\317\236\025\205\220\250\023\250\345?_\330\363\"\344u\362\361\347k\330\225\231\334\202{YG$\371^\236\331:\234#\226\204L\212?\354\207a\236\277a3\256sJ3\031 \271Um\033"
+}
+timestamp {
+  seconds: 13867
+  nanos: 549799542
+}
+
+Verifying MAC for source: 2
+Secret Key: [B@2e42bcc5
+MAC validation successful
+Processed: message_type: 13
+source: 2
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: ";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,"
+extra_data {
+  key: 1001
+  value: "\004\000@\240HN7\313-\'\001\304\365\237\333\243\377\001}v\374\004Gn)S\tX\024\al\341\346\374g\024\357.\327\341\353\030\033\300\204\276\000\260\fL_\355&\363\345Z:N\001)\'Y\362\305\243\205\362\001@\324\323\300\271A\f\2237\370:\215J\302\023\214\247l\331\177Pp\216\322\363wc\266\317\2076\vy\350\236\264\333@\033\vUw!?\263\204h\214_)\020q\245Nj\f\273Tf\344\243\327\005^@\003@\265\t\257\225\352n\317\236\025\205\220\250\023\250\345?_\330\363\"\344u\362\361\347k\330\225\231\334\202{YG$\371^\236\331:\234#\226\204L\212?\354\207a\236\277a3\256sJ3\031 \271Um\033"
+}
+timestamp {
+  seconds: 13867
+  nanos: 549799542
+}
+
+Received message inside not request block: message_type: 13
+source: 2
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: ";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,"
+extra_data {
+  key: 1001
+  value: "\004\000@\240HN7\313-\'\001\304\365\237\333\243\377\001}v\374\004Gn)S\tX\024\al\341\346\374g\024\357.\327\341\353\030\033\300\204\276\000\260\fL_\355&\363\345Z:N\001)\'Y\362\305\243\205\362\001@\324\323\300\271A\f\2237\370:\215J\302\023\214\247l\331\177Pp\216\322\363wc\266\317\2076\vy\350\236\264\333@\033\vUw!?\263\204h\214_)\020q\245Nj\f\273Tf\344\243\327\005^@\003@\265\t\257\225\352n\317\236\025\205\220\250\023\250\345?_\330\363\"\344u\362\361\347k\330\225\231\334\202{YG$\371^\236\331:\234#\226\204L\212?\354\207a\236\277a3\256sJ3\031 \271Um\033"
+}
+timestamp {
+  seconds: 13867
+  nanos: 549799542
+}
+
+Valid message: message_type: 13
+source: 2
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: ";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,"
+extra_data {
+  key: 1001
+  value: "\004\000@\240HN7\313-\'\001\304\365\237\333\243\377\001}v\374\004Gn)S\tX\024\al\341\346\374g\024\357.\327\341\353\030\033\300\204\276\000\260\fL_\355&\363\345Z:N\001)\'Y\362\305\243\205\362\001@\324\323\300\271A\f\2237\370:\215J\302\023\214\247l\331\177Pp\216\322\363wc\266\317\2076\vy\350\236\264\333@\033\vUw!?\263\204h\214_)\020q\245Nj\f\273Tf\344\243\327\005^@\003@\265\t\257\225\352n\317\236\025\205\220\250\023\250\345?_\330\363\"\344u\362\361\347k\330\225\231\334\202{YG$\371^\236\331:\234#\226\204L\212?\354\207a\236\277a3\256sJ3\031 \271Um\033"
+}
+timestamp {
+  seconds: 13867
+  nanos: 549799542
+}
+
+Tallying message: message_type: 13
+source: 2
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: ";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,"
+extra_data {
+  key: 1001
+  value: "\004\000@\240HN7\313-\'\001\304\365\237\333\243\377\001}v\374\004Gn)S\tX\024\al\341\346\374g\024\357.\327\341\353\030\033\300\204\276\000\260\fL_\355&\363\345Z:N\001)\'Y\362\305\243\205\362\001@\324\323\300\271A\f\2237\370:\215J\302\023\214\247l\331\177Pp\216\322\363wc\266\317\2076\vy\350\236\264\333@\033\vUw!?\263\204h\214_)\020q\245Nj\f\273Tf\344\243\327\005^@\003@\265\t\257\225\352n\317\236\025\205\220\250\023\250\345?_\330\363\"\344u\362\361\347k\330\225\231\334\202{YG$\371^\236\331:\234#\226\204L\212?\354\207a\236\277a3\256sJ3\031 \271Um\033"
+}
+timestamp {
+  seconds: 13867
+  nanos: 549799542
+}
+
+Tallying message: message_type: 13
+source: 2
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+extra_data {
+  key: 1001
+  value: "\004\000@\240HN7\313-\'\001\304\365\237\333\243\377\001}v\374\004Gn)S\tX\024\al\341\346\374g\024\357.\327\341\353\030\033\300\204\276\000\260\fL_\355&\363\345Z:N\001)\'Y\362\305\243\205\362\001@\324\323\300\271A\f\2237\370:\215J\302\023\214\247l\331\177Pp\216\322\363wc\266\317\2076\vy\350\236\264\333@\033\vUw!?\263\204h\214_)\020q\245Nj\f\273Tf\344\243\327\005^@\003@\265\t\257\225\352n\317\236\025\205\220\250\023\250\345?_\330\363\"\344u\362\361\347k\330\225\231\334\202{YG$\371^\236\331:\234#\226\204L\212?\354\207a\236\277a3\256sJ3\031 \271Um\033"
+}
+timestamp {
+  seconds: 13867
+  nanos: 549799542
+}
+
+Running state update loop for seqnum: 0
+Calling state update from staeUpdateLoop
+Inside state update for seqnum: 0
+Adding seqnum to updating: 0
+Inside while loop
+ Printing roles: 
+Role: 0
+Role: 1
+Role: 3
+Inside pending requests1
+Inside pending requests3
+State: pbft_wait_prepare
+Candidate is null
+Candidate is null
+Transition: [from pbft_wait_prepare to pbft_wait_commit, condition=com.gbft.framework.statemachine.Condition@388057a1, updateMode=none, responses=[(3,14)], extraTally=[]]
+Inside pending requests4
+Condition type: 1
+The message type is: 13
+Seqnum: 0 QuorumId: 13
+Printing all elements of counter
+Seqnum: 0
+MessageType: 0
+Viewnum: 0
+Digest: <ByteString@23cbb8f4 size=32 contents=";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,">
+Node: 0
+MessageType: 12
+Viewnum: 0
+Digest: <ByteString@23cbb8f4 size=32 contents=";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,">
+Node: 0
+MessageType: 13
+Viewnum: 0
+Digest: <ByteString@23cbb8f4 size=32 contents=";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,">
+Node: 0
+Node: 2
+Returning from here2 is null
+Inside checkMessageTally: seqnum: 0, quorumId: com.gbft.framework.utils.MessageTally$QuorumId@557, viewnum: null, checkview: 0
+Inside pending requests8 + conditionMet: false
+Message event received in 0
+Targets: [0, 1, 2, 3] for message: message_type: 13
+source: 3
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: ";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,"
+extra_data {
+  key: 1001
+  value: "\004\000@@\331\027W\376\v\024\364ob\036\026\234\031g\027\313\350\206\225A\360T\261\371XO\334{(\313\323Q\276\277\f\207\355\272\315BuD\377\357B\252\345L\241C\230\230M\004{UAN\211\203\251*\211\001@\250M\204\303\267!N\301g\273{b\205+\302\303\331\345$\320\334\266\264\352x5\'Y\217\300c-\321\002\nk\224\335\234\t\336\226\247\374\205O\332\032\n]o`\330\274\207y5\346\375\244\225\330\025\002\002@]\022\3502\036\330Q:t\355JG\256\355\273\364o\022\244\032\2055\307\230\314d\372\023c3\266\'F\203\207\335\232$\313\300\272\2355\373\373\a\374\254z\a[M\025}\354[\263\330\302a\255b\\\313"
+}
+timestamp {
+  seconds: 13867
+  nanos: 602848492
+}
+
+Received request: message_type: 13
+source: 3
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: ";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,"
+extra_data {
+  key: 1001
+  value: "\004\000@@\331\027W\376\v\024\364ob\036\026\234\031g\027\313\350\206\225A\360T\261\371XO\334{(\313\323Q\276\277\f\207\355\272\315BuD\377\357B\252\345L\241C\230\230M\004{UAN\211\203\251*\211\001@\250M\204\303\267!N\301g\273{b\205+\302\303\331\345$\320\334\266\264\352x5\'Y\217\300c-\321\002\nk\224\335\234\t\336\226\247\374\205O\332\032\n]o`\330\274\207y5\346\375\244\225\330\025\002\002@]\022\3502\036\330Q:t\355JG\256\355\273\364o\022\244\032\2055\307\230\314d\372\023c3\266\'F\203\207\335\232$\313\300\272\2355\373\373\a\374\254z\a[M\025}\354[\263\330\302a\255b\\\313"
+}
+timestamp {
+  seconds: 13867
+  nanos: 602848492
+}
+
+Going to process: message_type: 13
+source: 3
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: ";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,"
+extra_data {
+  key: 1001
+  value: "\004\000@@\331\027W\376\v\024\364ob\036\026\234\031g\027\313\350\206\225A\360T\261\371XO\334{(\313\323Q\276\277\f\207\355\272\315BuD\377\357B\252\345L\241C\230\230M\004{UAN\211\203\251*\211\001@\250M\204\303\267!N\301g\273{b\205+\302\303\331\345$\320\334\266\264\352x5\'Y\217\300c-\321\002\nk\224\335\234\t\336\226\247\374\205O\332\032\n]o`\330\274\207y5\346\375\244\225\330\025\002\002@]\022\3502\036\330Q:t\355JG\256\355\273\364o\022\244\032\2055\307\230\314d\372\023c3\266\'F\203\207\335\232$\313\300\272\2355\373\373\a\374\254z\a[M\025}\354[\263\330\302a\255b\\\313"
+}
+timestamp {
+  seconds: 13867
+  nanos: 602848492
+}
+
+Verifying MAC for source: 3
+Secret Key: [B@3016ef13
+MAC validation successful
+Processed: message_type: 13
+source: 3
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: ";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,"
+extra_data {
+  key: 1001
+  value: "\004\000@@\331\027W\376\v\024\364ob\036\026\234\031g\027\313\350\206\225A\360T\261\371XO\334{(\313\323Q\276\277\f\207\355\272\315BuD\377\357B\252\345L\241C\230\230M\004{UAN\211\203\251*\211\001@\250M\204\303\267!N\301g\273{b\205+\302\303\331\345$\320\334\266\264\352x5\'Y\217\300c-\321\002\nk\224\335\234\t\336\226\247\374\205O\332\032\n]o`\330\274\207y5\346\375\244\225\330\025\002\002@]\022\3502\036\330Q:t\355JG\256\355\273\364o\022\244\032\2055\307\230\314d\372\023c3\266\'F\203\207\335\232$\313\300\272\2355\373\373\a\374\254z\a[M\025}\354[\263\330\302a\255b\\\313"
+}
+timestamp {
+  seconds: 13867
+  nanos: 602848492
+}
+
+Received message inside not request block: message_type: 13
+source: 3
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: ";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,"
+extra_data {
+  key: 1001
+  value: "\004\000@@\331\027W\376\v\024\364ob\036\026\234\031g\027\313\350\206\225A\360T\261\371XO\334{(\313\323Q\276\277\f\207\355\272\315BuD\377\357B\252\345L\241C\230\230M\004{UAN\211\203\251*\211\001@\250M\204\303\267!N\301g\273{b\205+\302\303\331\345$\320\334\266\264\352x5\'Y\217\300c-\321\002\nk\224\335\234\t\336\226\247\374\205O\332\032\n]o`\330\274\207y5\346\375\244\225\330\025\002\002@]\022\3502\036\330Q:t\355JG\256\355\273\364o\022\244\032\2055\307\230\314d\372\023c3\266\'F\203\207\335\232$\313\300\272\2355\373\373\a\374\254z\a[M\025}\354[\263\330\302a\255b\\\313"
+}
+timestamp {
+  seconds: 13867
+  nanos: 602848492
+}
+
+Valid message: message_type: 13
+source: 3
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: ";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,"
+extra_data {
+  key: 1001
+  value: "\004\000@@\331\027W\376\v\024\364ob\036\026\234\031g\027\313\350\206\225A\360T\261\371XO\334{(\313\323Q\276\277\f\207\355\272\315BuD\377\357B\252\345L\241C\230\230M\004{UAN\211\203\251*\211\001@\250M\204\303\267!N\301g\273{b\205+\302\303\331\345$\320\334\266\264\352x5\'Y\217\300c-\321\002\nk\224\335\234\t\336\226\247\374\205O\332\032\n]o`\330\274\207y5\346\375\244\225\330\025\002\002@]\022\3502\036\330Q:t\355JG\256\355\273\364o\022\244\032\2055\307\230\314d\372\023c3\266\'F\203\207\335\232$\313\300\272\2355\373\373\a\374\254z\a[M\025}\354[\263\330\302a\255b\\\313"
+}
+timestamp {
+  seconds: 13867
+  nanos: 602848492
+}
+
+Tallying message: message_type: 13
+source: 3
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: ";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,"
+extra_data {
+  key: 1001
+  value: "\004\000@@\331\027W\376\v\024\364ob\036\026\234\031g\027\313\350\206\225A\360T\261\371XO\334{(\313\323Q\276\277\f\207\355\272\315BuD\377\357B\252\345L\241C\230\230M\004{UAN\211\203\251*\211\001@\250M\204\303\267!N\301g\273{b\205+\302\303\331\345$\320\334\266\264\352x5\'Y\217\300c-\321\002\nk\224\335\234\t\336\226\247\374\205O\332\032\n]o`\330\274\207y5\346\375\244\225\330\025\002\002@]\022\3502\036\330Q:t\355JG\256\355\273\364o\022\244\032\2055\307\230\314d\372\023c3\266\'F\203\207\335\232$\313\300\272\2355\373\373\a\374\254z\a[M\025}\354[\263\330\302a\255b\\\313"
+}
+timestamp {
+  seconds: 13867
+  nanos: 602848492
+}
+
+Tallying message: message_type: 13
+source: 3
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+extra_data {
+  key: 1001
+  value: "\004\000@@\331\027W\376\v\024\364ob\036\026\234\031g\027\313\350\206\225A\360T\261\371XO\334{(\313\323Q\276\277\f\207\355\272\315BuD\377\357B\252\345L\241C\230\230M\004{UAN\211\203\251*\211\001@\250M\204\303\267!N\301g\273{b\205+\302\303\331\345$\320\334\266\264\352x5\'Y\217\300c-\321\002\nk\224\335\234\t\336\226\247\374\205O\332\032\n]o`\330\274\207y5\346\375\244\225\330\025\002\002@]\022\3502\036\330Q:t\355JG\256\355\273\364o\022\244\032\2055\307\230\314d\372\023c3\266\'F\203\207\335\232$\313\300\272\2355\373\373\a\374\254z\a[M\025}\354[\263\330\302a\255b\\\313"
+}
+timestamp {
+  seconds: 13867
+  nanos: 602848492
+}
+
+Running state update loop for seqnum: 0
+Calling state update from staeUpdateLoop
+Inside state update for seqnum: 0
+Adding seqnum to updating: 0
+Inside while loop
+ Printing roles: 
+Role: 0
+Role: 1
+Role: 3
+Inside pending requests1
+Inside pending requests3
+State: pbft_wait_prepare
+Candidate is null
+Candidate is null
+Transition: [from pbft_wait_prepare to pbft_wait_commit, condition=com.gbft.framework.statemachine.Condition@388057a1, updateMode=none, responses=[(3,14)], extraTally=[]]
+Inside pending requests4
+Condition type: 1
+The message type is: 13
+Seqnum: 0 QuorumId: 13
+Printing all elements of counter
+Seqnum: 0
+MessageType: 0
+Viewnum: 0
+Digest: <ByteString@23cbb8f4 size=32 contents=";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,">
+Node: 0
+MessageType: 12
+Viewnum: 0
+Digest: <ByteString@23cbb8f4 size=32 contents=";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,">
+Node: 0
+MessageType: 13
+Viewnum: 0
+Digest: <ByteString@23cbb8f4 size=32 contents=";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,">
+Node: 0
+Node: 2
+Node: 3
+Returning from here2 is null
+Inside checkMessageTally: seqnum: 0, quorumId: com.gbft.framework.utils.MessageTally$QuorumId@557, viewnum: 0, checkview: 0
+Inside pending requests8 + conditionMet: true
+Currently at Role: 3 MessageType: 14
+My source is: 0
+My messsage type is: 14
+My targets are: [0, 1, 2, 3]
+Message event received in 0
+Targets: [0, 1, 2, 3] for message: message_type: 13
+source: 1
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: ";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,"
+extra_data {
+  key: 1001
+  value: "\004\000@\306\315Ylo\253\203n\312EO\346\250\000e-\365\t\rV\203\210!\301\247Y<h\277\tg\005\004x1\255\263\262\354O\302\330|aN\0278\253\017\016\216\250\336_\222\034\266>1v\311\371w\025\002@\215\233\264\n\324\210<\214\271\204Y\357\226\027\200M\347\344\245\331\222\374\365\ak`\320\022(e\261\253!\256d8\b\206\221\335\'\355\237=T\004\226\356k\216X\314\202\277\372\335zz\344\367\316\341\213\332\003@c\333-@u\215r\244\240\352\'\340\232\235\205\216P^\3751][\306\240\372\306\002\022\201\022\364\n8\314\376\270\273\215\306\214\025\221?)n,\204\220L\f\374\037\203(\300\202\244\t\315\23018\345\t"
+}
+timestamp {
+  seconds: 13867
+  nanos: 616901986
+}
+
+Current targets: [0, 1, 2, 3]
+Sending message: message_type: 14
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: ";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,"
+extra_data {
+  key: 1001
+  value: "\004\001@\217[\202\361\aH\276<\277\a\\\323r\271\347T\023\022\265\3079\332\037X\234\221\334\302\265?\225\215\352\314\232E/\034V\3519\177\177p\322\312\201\0261T`\307\315IT\361]+\233\002\250`\252?\002@\030\214\327\343\367\325X\273\274:\306\371W\313?4\2724lj\3619\346\004\330\2418\352B\366\000\027g+h\371\247\b\226rM\212\317\020W\330\365\354*\356\027x\374d]\277\276\376I\207\265\361\265\200\003@J\'1P<\026\366\327\364\005gC\245\2069A\363kG\033\212fG\301\225\226j\f\312&\226\262\237\357(\363\256`\034S\322{\025\322\363\025)\271\031\274\2112\313V\313@\262\325|T\022;O4"
+}
+timestamp {
+  seconds: 13867
+  nanos: 645179974
+}
+
+DirectPipelinePlugin.sendMessage
+23:37:25.575  Found target: [0, 1, 2, 3]
+23:37:25.575  Message event received in 0
+In the continue block
+In the continue block
+In the continue block
+In the continue block
+Sending event to 1 at 127.0.0.1:6022
+Using connection - Sending event to 1 at 127.0.0.1:6022
+Sending event to 2 at 127.0.0.1:6023
+Received request: message_type: 13
+source: 1
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: ";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,"
+extra_data {
+  key: 1001
+  value: "\004\000@\306\315Ylo\253\203n\312EO\346\250\000e-\365\t\rV\203\210!\301\247Y<h\277\tg\005\004x1\255\263\262\354O\302\330|aN\0278\253\017\016\216\250\336_\222\034\266>1v\311\371w\025\002@\215\233\264\n\324\210<\214\271\204Y\357\226\027\200M\347\344\245\331\222\374\365\ak`\320\022(e\261\253!\256d8\b\206\221\335\'\355\237=T\004\226\356k\216X\314\202\277\372\335zz\344\367\316\341\213\332\003@c\333-@u\215r\244\240\352\'\340\232\235\205\216P^\3751][\306\240\372\306\002\022\201\022\364\n8\314\376\270\273\215\306\214\025\221?)n,\204\220L\f\374\037\203(\300\202\244\t\315\23018\345\t"
+}
+timestamp {
+  seconds: 13867
+  nanos: 616901986
+}
+
+Using connection - Sending event to 2 at 127.0.0.1:6023
+Message event received in 0
+Targets: [0, 1, 2, 3] for message: message_type: 14
+source: 2
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: ";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,"
+extra_data {
+  key: 1001
+  value: "\004\000@>f\372\215uT\200\350\037<\v\004\345\246$B\257<\vx\204Z\264\225uB\240\272>X\204\034\020\300\222\001\236\367nL{\017D\217j4B$\204J\231FE\205\331\277\202\214\b\310k^\377\377\001@\267\024\025i\362;\3237\244\254F\254)NZ\370A,\355\335\3412\313\365\261\3450\230-\016\312\2541\177\025A\344_zv4\034G\361\006\243\b\224!Z\226\340\324\364\266\316\177\260\263PJ\310\362\020\003@=\341\217$\'\000\351eX\324\225J\b\325`1\264c_\351C\353\372:\334\265\022\217\367[G\351),f\232\344\205z\262\026\312\350\304\\\266\200\237h\n_\361\350Z\001Lu\307az\256rD\n"
+}
+timestamp {
+  seconds: 13867
+  nanos: 646808837
+}
+
+Going to process: message_type: 13
+source: 1
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: ";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,"
+extra_data {
+  key: 1001
+  value: "\004\000@\306\315Ylo\253\203n\312EO\346\250\000e-\365\t\rV\203\210!\301\247Y<h\277\tg\005\004x1\255\263\262\354O\302\330|aN\0278\253\017\016\216\250\336_\222\034\266>1v\311\371w\025\002@\215\233\264\n\324\210<\214\271\204Y\357\226\027\200M\347\344\245\331\222\374\365\ak`\320\022(e\261\253!\256d8\b\206\221\335\'\355\237=T\004\226\356k\216X\314\202\277\372\335zz\344\367\316\341\213\332\003@c\333-@u\215r\244\240\352\'\340\232\235\205\216P^\3751][\306\240\372\306\002\022\201\022\364\n8\314\376\270\273\215\306\214\025\221?)n,\204\220L\f\374\037\203(\300\202\244\t\315\23018\345\t"
+}
+timestamp {
+  seconds: 13867
+  nanos: 616901986
+}
+
+Verifying MAC for source: 1
+Secret Key: [B@10fa2540
+MAC validation successful
+Sending event to 3 at 127.0.0.1:6024
+Using connection - Sending event to 3 at 127.0.0.1:6024
+Received request: message_type: 14
+source: 2
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: ";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,"
+extra_data {
+  key: 1001
+  value: "\004\000@>f\372\215uT\200\350\037<\v\004\345\246$B\257<\vx\204Z\264\225uB\240\272>X\204\034\020\300\222\001\236\367nL{\017D\217j4B$\204J\231FE\205\331\277\202\214\b\310k^\377\377\001@\267\024\025i\362;\3237\244\254F\254)NZ\370A,\355\335\3412\313\365\261\3450\230-\016\312\2541\177\025A\344_zv4\034G\361\006\243\b\224!Z\226\340\324\364\266\316\177\260\263PJ\310\362\020\003@=\341\217$\'\000\351eX\324\225J\b\325`1\264c_\351C\353\372:\334\265\022\217\367[G\351),f\232\344\205z\262\026\312\350\304\\\266\200\237h\n_\361\350Z\001Lu\307az\256rD\n"
+}
+timestamp {
+  seconds: 13867
+  nanos: 646808837
+}
+
+Message event received in 0
+Targets: [0, 1, 2, 3] for message: message_type: 14
+source: 3
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: ";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,"
+extra_data {
+  key: 1001
+  value: "\004\000@\2372\245iM\347\001USl\364\036\022\314\201}/\330\002226\227\267\347&]\321fNR\273\354\fRB\205\024\370e\341Ku\355\202\226/\374\334\350W\214\314_\221\332e\033\223\212b(\316\210\001@\365\333Z\354\'\nw1@\226{\252\025\241K\345\321\335\376OE\355\310\325\342\340\317\356y\232L\246T\017\203iL\300Ok\236\201\353)\332T\377\327@\324\377\216\335\256\016Fc\375\220W\263\237X\027\002@\031\250p\217x\262\346\001=p\243\304\233\242\266\263X\234\377\372\272D\330C#\252\370\235\342Ruy\371\323i\3554\300p5\324^\030\342\246\370\274\v\267W\347d\271ifty5.>\263I\272\351"
+}
+timestamp {
+  seconds: 13867
+  nanos: 639547911
+}
+
+Received request: message_type: 14
+source: 3
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: ";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,"
+extra_data {
+  key: 1001
+  value: "\004\000@\2372\245iM\347\001USl\364\036\022\314\201}/\330\002226\227\267\347&]\321fNR\273\354\fRB\205\024\370e\341Ku\355\202\226/\374\334\350W\214\314_\221\332e\033\223\212b(\316\210\001@\365\333Z\354\'\nw1@\226{\252\025\241K\345\321\335\376OE\355\310\325\342\340\317\356y\232L\246T\017\203iL\300Ok\236\201\353)\332T\377\327@\324\377\216\335\256\016Fc\375\220W\263\237X\027\002@\031\250p\217x\262\346\001=p\243\304\233\242\266\263X\234\377\372\272D\330C#\252\370\235\342Ruy\371\323i\3554\300p5\324^\030\342\246\370\274\v\267W\347d\271ifty5.>\263I\272\351"
+}
+timestamp {
+  seconds: 13867
+  nanos: 639547911
+}
+
+Processed: message_type: 13
+source: 1
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: ";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,"
+extra_data {
+  key: 1001
+  value: "\004\000@\306\315Ylo\253\203n\312EO\346\250\000e-\365\t\rV\203\210!\301\247Y<h\277\tg\005\004x1\255\263\262\354O\302\330|aN\0278\253\017\016\216\250\336_\222\034\266>1v\311\371w\025\002@\215\233\264\n\324\210<\214\271\204Y\357\226\027\200M\347\344\245\331\222\374\365\ak`\320\022(e\261\253!\256d8\b\206\221\335\'\355\237=T\004\226\356k\216X\314\202\277\372\335zz\344\367\316\341\213\332\003@c\333-@u\215r\244\240\352\'\340\232\235\205\216P^\3751][\306\240\372\306\002\022\201\022\364\n8\314\376\270\273\215\306\214\025\221?)n,\204\220L\f\374\037\203(\300\202\244\t\315\23018\345\t"
+}
+timestamp {
+  seconds: 13867
+  nanos: 616901986
+}
+
+Received message inside not request block: message_type: 13
+source: 1
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: ";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,"
+extra_data {
+  key: 1001
+  value: "\004\000@\306\315Ylo\253\203n\312EO\346\250\000e-\365\t\rV\203\210!\301\247Y<h\277\tg\005\004x1\255\263\262\354O\302\330|aN\0278\253\017\016\216\250\336_\222\034\266>1v\311\371w\025\002@\215\233\264\n\324\210<\214\271\204Y\357\226\027\200M\347\344\245\331\222\374\365\ak`\320\022(e\261\253!\256d8\b\206\221\335\'\355\237=T\004\226\356k\216X\314\202\277\372\335zz\344\367\316\341\213\332\003@c\333-@u\215r\244\240\352\'\340\232\235\205\216P^\3751][\306\240\372\306\002\022\201\022\364\n8\314\376\270\273\215\306\214\025\221?)n,\204\220L\f\374\037\203(\300\202\244\t\315\23018\345\t"
+}
+timestamp {
+  seconds: 13867
+  nanos: 616901986
+}
+
+Going to process: message_type: 14
+source: 3
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: ";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,"
+extra_data {
+  key: 1001
+  value: "\004\000@\2372\245iM\347\001USl\364\036\022\314\201}/\330\002226\227\267\347&]\321fNR\273\354\fRB\205\024\370e\341Ku\355\202\226/\374\334\350W\214\314_\221\332e\033\223\212b(\316\210\001@\365\333Z\354\'\nw1@\226{\252\025\241K\345\321\335\376OE\355\310\325\342\340\317\356y\232L\246T\017\203iL\300Ok\236\201\353)\332T\377\327@\324\377\216\335\256\016Fc\375\220W\263\237X\027\002@\031\250p\217x\262\346\001=p\243\304\233\242\266\263X\234\377\372\272D\330C#\252\370\235\342Ruy\371\323i\3554\300p5\324^\030\342\246\370\274\v\267W\347d\271ifty5.>\263I\272\351"
+}
+timestamp {
+  seconds: 13867
+  nanos: 639547911
+}
+
+Verifying MAC for source: 3
+Secret Key: [B@3016ef13
+Valid message: message_type: 13
+source: 1
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: ";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,"
+extra_data {
+  key: 1001
+  value: "\004\000@\306\315Ylo\253\203n\312EO\346\250\000e-\365\t\rV\203\210!\301\247Y<h\277\tg\005\004x1\255\263\262\354O\302\330|aN\0278\253\017\016\216\250\336_\222\034\266>1v\311\371w\025\002@\215\233\264\n\324\210<\214\271\204Y\357\226\027\200M\347\344\245\331\222\374\365\ak`\320\022(e\261\253!\256d8\b\206\221\335\'\355\237=T\004\226\356k\216X\314\202\277\372\335zz\344\367\316\341\213\332\003@c\333-@u\215r\244\240\352\'\340\232\235\205\216P^\3751][\306\240\372\306\002\022\201\022\364\n8\314\376\270\273\215\306\214\025\221?)n,\204\220L\f\374\037\203(\300\202\244\t\315\23018\345\t"
+}
+timestamp {
+  seconds: 13867
+  nanos: 616901986
+}
+
+Tallying message: message_type: 13
+source: 1
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: ";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,"
+extra_data {
+  key: 1001
+  value: "\004\000@\306\315Ylo\253\203n\312EO\346\250\000e-\365\t\rV\203\210!\301\247Y<h\277\tg\005\004x1\255\263\262\354O\302\330|aN\0278\253\017\016\216\250\336_\222\034\266>1v\311\371w\025\002@\215\233\264\n\324\210<\214\271\204Y\357\226\027\200M\347\344\245\331\222\374\365\ak`\320\022(e\261\253!\256d8\b\206\221\335\'\355\237=T\004\226\356k\216X\314\202\277\372\335zz\344\367\316\341\213\332\003@c\333-@u\215r\244\240\352\'\340\232\235\205\216P^\3751][\306\240\372\306\002\022\201\022\364\n8\314\376\270\273\215\306\214\025\221?)n,\204\220L\f\374\037\203(\300\202\244\t\315\23018\345\t"
+}
+timestamp {
+  seconds: 13867
+  nanos: 616901986
+}
+
+MAC validation successful
+Tallying message: message_type: 13
+source: 1
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+extra_data {
+  key: 1001
+  value: "\004\000@\306\315Ylo\253\203n\312EO\346\250\000e-\365\t\rV\203\210!\301\247Y<h\277\tg\005\004x1\255\263\262\354O\302\330|aN\0278\253\017\016\216\250\336_\222\034\266>1v\311\371w\025\002@\215\233\264\n\324\210<\214\271\204Y\357\226\027\200M\347\344\245\331\222\374\365\ak`\320\022(e\261\253!\256d8\b\206\221\335\'\355\237=T\004\226\356k\216X\314\202\277\372\335zz\344\367\316\341\213\332\003@c\333-@u\215r\244\240\352\'\340\232\235\205\216P^\3751][\306\240\372\306\002\022\201\022\364\n8\314\376\270\273\215\306\214\025\221?)n,\204\220L\f\374\037\203(\300\202\244\t\315\23018\345\t"
+}
+timestamp {
+  seconds: 13867
+  nanos: 616901986
+}
+
+Running state update loop for seqnum: 0
+Calling state update from staeUpdateLoop
+Inside state update for seqnum: 0
+Returning null as updating.contains(seqnum)
+Processed: message_type: 14
+source: 3
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: ";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,"
+extra_data {
+  key: 1001
+  value: "\004\000@\2372\245iM\347\001USl\364\036\022\314\201}/\330\002226\227\267\347&]\321fNR\273\354\fRB\205\024\370e\341Ku\355\202\226/\374\334\350W\214\314_\221\332e\033\223\212b(\316\210\001@\365\333Z\354\'\nw1@\226{\252\025\241K\345\321\335\376OE\355\310\325\342\340\317\356y\232L\246T\017\203iL\300Ok\236\201\353)\332T\377\327@\324\377\216\335\256\016Fc\375\220W\263\237X\027\002@\031\250p\217x\262\346\001=p\243\304\233\242\266\263X\234\377\372\272D\330C#\252\370\235\342Ruy\371\323i\3554\300p5\324^\030\342\246\370\274\v\267W\347d\271ifty5.>\263I\272\351"
+}
+timestamp {
+  seconds: 13867
+  nanos: 639547911
+}
+
+Received message inside not request block: message_type: 14
+source: 3
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: ";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,"
+extra_data {
+  key: 1001
+  value: "\004\000@\2372\245iM\347\001USl\364\036\022\314\201}/\330\002226\227\267\347&]\321fNR\273\354\fRB\205\024\370e\341Ku\355\202\226/\374\334\350W\214\314_\221\332e\033\223\212b(\316\210\001@\365\333Z\354\'\nw1@\226{\252\025\241K\345\321\335\376OE\355\310\325\342\340\317\356y\232L\246T\017\203iL\300Ok\236\201\353)\332T\377\327@\324\377\216\335\256\016Fc\375\220W\263\237X\027\002@\031\250p\217x\262\346\001=p\243\304\233\242\266\263X\234\377\372\272D\330C#\252\370\235\342Ruy\371\323i\3554\300p5\324^\030\342\246\370\274\v\267W\347d\271ifty5.>\263I\272\351"
+}
+timestamp {
+  seconds: 13867
+  nanos: 639547911
+}
+
+Valid message: message_type: 14
+source: 3
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: ";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,"
+extra_data {
+  key: 1001
+  value: "\004\000@\2372\245iM\347\001USl\364\036\022\314\201}/\330\002226\227\267\347&]\321fNR\273\354\fRB\205\024\370e\341Ku\355\202\226/\374\334\350W\214\314_\221\332e\033\223\212b(\316\210\001@\365\333Z\354\'\nw1@\226{\252\025\241K\345\321\335\376OE\355\310\325\342\340\317\356y\232L\246T\017\203iL\300Ok\236\201\353)\332T\377\327@\324\377\216\335\256\016Fc\375\220W\263\237X\027\002@\031\250p\217x\262\346\001=p\243\304\233\242\266\263X\234\377\372\272D\330C#\252\370\235\342Ruy\371\323i\3554\300p5\324^\030\342\246\370\274\v\267W\347d\271ifty5.>\263I\272\351"
+}
+timestamp {
+  seconds: 13867
+  nanos: 639547911
+}
+
+Tallying message: message_type: 14
+source: 3
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: ";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,"
+extra_data {
+  key: 1001
+  value: "\004\000@\2372\245iM\347\001USl\364\036\022\314\201}/\330\002226\227\267\347&]\321fNR\273\354\fRB\205\024\370e\341Ku\355\202\226/\374\334\350W\214\314_\221\332e\033\223\212b(\316\210\001@\365\333Z\354\'\nw1@\226{\252\025\241K\345\321\335\376OE\355\310\325\342\340\317\356y\232L\246T\017\203iL\300Ok\236\201\353)\332T\377\327@\324\377\216\335\256\016Fc\375\220W\263\237X\027\002@\031\250p\217x\262\346\001=p\243\304\233\242\266\263X\234\377\372\272D\330C#\252\370\235\342Ruy\371\323i\3554\300p5\324^\030\342\246\370\274\v\267W\347d\271ifty5.>\263I\272\351"
+}
+timestamp {
+  seconds: 13867
+  nanos: 639547911
+}
+
+Tallying message: message_type: 14
+source: 3
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+extra_data {
+  key: 1001
+  value: "\004\000@\2372\245iM\347\001USl\364\036\022\314\201}/\330\002226\227\267\347&]\321fNR\273\354\fRB\205\024\370e\341Ku\355\202\226/\374\334\350W\214\314_\221\332e\033\223\212b(\316\210\001@\365\333Z\354\'\nw1@\226{\252\025\241K\345\321\335\376OE\355\310\325\342\340\317\356y\232L\246T\017\203iL\300Ok\236\201\353)\332T\377\327@\324\377\216\335\256\016Fc\375\220W\263\237X\027\002@\031\250p\217x\262\346\001=p\243\304\233\242\266\263X\234\377\372\272D\330C#\252\370\235\342Ruy\371\323i\3554\300p5\324^\030\342\246\370\274\v\267W\347d\271ifty5.>\263I\272\351"
+}
+timestamp {
+  seconds: 13867
+  nanos: 639547911
+}
+
+Running state update loop for seqnum: 0
+Calling state update from staeUpdateLoop
+Inside state update for seqnum: 0
+Returning null as updating.contains(seqnum)
+Tallying message: message_type: 14
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: ";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,"
+extra_data {
+  key: 1001
+  value: "\004\001@\217[\202\361\aH\276<\277\a\\\323r\271\347T\023\022\265\3079\332\037X\234\221\334\302\265?\225\215\352\314\232E/\034V\3519\177\177p\322\312\201\0261T`\307\315IT\361]+\233\002\250`\252?\002@\030\214\327\343\367\325X\273\274:\306\371W\313?4\2724lj\3619\346\004\330\2418\352B\366\000\027g+h\371\247\b\226rM\212\317\020W\330\365\354*\356\027x\374d]\277\276\376I\207\265\361\265\200\003@J\'1P<\026\366\327\364\005gC\245\2069A\363kG\033\212fG\301\225\226j\f\312&\226\262\237\357(\363\256`\034S\322{\025\322\363\025)\271\031\274\2112\313V\313@\262\325|T\022;O4"
+}
+timestamp {
+  seconds: 13867
+  nanos: 645179974
+}
+
+Tallying message: message_type: 14
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+extra_data {
+  key: 1001
+  value: "\004\001@\217[\202\361\aH\276<\277\a\\\323r\271\347T\023\022\265\3079\332\037X\234\221\334\302\265?\225\215\352\314\232E/\034V\3519\177\177p\322\312\201\0261T`\307\315IT\361]+\233\002\250`\252?\002@\030\214\327\343\367\325X\273\274:\306\371W\313?4\2724lj\3619\346\004\330\2418\352B\366\000\027g+h\371\247\b\226rM\212\317\020W\330\365\354*\356\027x\374d]\277\276\376I\207\265\361\265\200\003@J\'1P<\026\366\327\364\005gC\245\2069A\363kG\033\212fG\301\225\226j\f\312&\226\262\237\357(\363\256`\034S\322{\025\322\363\025)\271\031\274\2112\313V\313@\262\325|T\022;O4"
+}
+timestamp {
+  seconds: 13867
+  nanos: 645179974
+}
+
+Going to process: message_type: 14
+source: 2
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: ";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,"
+extra_data {
+  key: 1001
+  value: "\004\000@>f\372\215uT\200\350\037<\v\004\345\246$B\257<\vx\204Z\264\225uB\240\272>X\204\034\020\300\222\001\236\367nL{\017D\217j4B$\204J\231FE\205\331\277\202\214\b\310k^\377\377\001@\267\024\025i\362;\3237\244\254F\254)NZ\370A,\355\335\3412\313\365\261\3450\230-\016\312\2541\177\025A\344_zv4\034G\361\006\243\b\224!Z\226\340\324\364\266\316\177\260\263PJ\310\362\020\003@=\341\217$\'\000\351eX\324\225J\b\325`1\264c_\351C\353\372:\334\265\022\217\367[G\351),f\232\344\205z\262\026\312\350\304\\\266\200\237h\n_\361\350Z\001Lu\307az\256rD\n"
+}
+timestamp {
+  seconds: 13867
+  nanos: 646808837
+}
+
+Verifying MAC for source: 2
+Secret Key: [B@2e42bcc5
+MAC validation successful
+Processed: message_type: 14
+source: 2
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: ";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,"
+extra_data {
+  key: 1001
+  value: "\004\000@>f\372\215uT\200\350\037<\v\004\345\246$B\257<\vx\204Z\264\225uB\240\272>X\204\034\020\300\222\001\236\367nL{\017D\217j4B$\204J\231FE\205\331\277\202\214\b\310k^\377\377\001@\267\024\025i\362;\3237\244\254F\254)NZ\370A,\355\335\3412\313\365\261\3450\230-\016\312\2541\177\025A\344_zv4\034G\361\006\243\b\224!Z\226\340\324\364\266\316\177\260\263PJ\310\362\020\003@=\341\217$\'\000\351eX\324\225J\b\325`1\264c_\351C\353\372:\334\265\022\217\367[G\351),f\232\344\205z\262\026\312\350\304\\\266\200\237h\n_\361\350Z\001Lu\307az\256rD\n"
+}
+timestamp {
+  seconds: 13867
+  nanos: 646808837
+}
+
+Received message inside not request block: message_type: 14
+source: 2
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: ";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,"
+extra_data {
+  key: 1001
+  value: "\004\000@>f\372\215uT\200\350\037<\v\004\345\246$B\257<\vx\204Z\264\225uB\240\272>X\204\034\020\300\222\001\236\367nL{\017D\217j4B$\204J\231FE\205\331\277\202\214\b\310k^\377\377\001@\267\024\025i\362;\3237\244\254F\254)NZ\370A,\355\335\3412\313\365\261\3450\230-\016\312\2541\177\025A\344_zv4\034G\361\006\243\b\224!Z\226\340\324\364\266\316\177\260\263PJ\310\362\020\003@=\341\217$\'\000\351eX\324\225J\b\325`1\264c_\351C\353\372:\334\265\022\217\367[G\351),f\232\344\205z\262\026\312\350\304\\\266\200\237h\n_\361\350Z\001Lu\307az\256rD\n"
+}
+timestamp {
+  seconds: 13867
+  nanos: 646808837
+}
+
+Valid message: message_type: 14
+source: 2
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: ";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,"
+extra_data {
+  key: 1001
+  value: "\004\000@>f\372\215uT\200\350\037<\v\004\345\246$B\257<\vx\204Z\264\225uB\240\272>X\204\034\020\300\222\001\236\367nL{\017D\217j4B$\204J\231FE\205\331\277\202\214\b\310k^\377\377\001@\267\024\025i\362;\3237\244\254F\254)NZ\370A,\355\335\3412\313\365\261\3450\230-\016\312\2541\177\025A\344_zv4\034G\361\006\243\b\224!Z\226\340\324\364\266\316\177\260\263PJ\310\362\020\003@=\341\217$\'\000\351eX\324\225J\b\325`1\264c_\351C\353\372:\334\265\022\217\367[G\351),f\232\344\205z\262\026\312\350\304\\\266\200\237h\n_\361\350Z\001Lu\307az\256rD\n"
+}
+timestamp {
+  seconds: 13867
+  nanos: 646808837
+}
+
+Inside while loop
+ Printing roles: 
+Role: 0
+Role: 1
+Role: 3
+Inside pending requests1
+Inside pending requests3
+State: pbft_wait_commit
+Candidate is null
+Candidate is null
+Transition: [from pbft_wait_commit to executed, condition=com.gbft.framework.statemachine.Condition@3ed10761, updateMode=sequence, responses=[(4,1)], extraTally=[]]
+Inside pending requests4
+Tallying message: message_type: 14
+source: 2
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: ";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,"
+extra_data {
+  key: 1001
+  value: "\004\000@>f\372\215uT\200\350\037<\v\004\345\246$B\257<\vx\204Z\264\225uB\240\272>X\204\034\020\300\222\001\236\367nL{\017D\217j4B$\204J\231FE\205\331\277\202\214\b\310k^\377\377\001@\267\024\025i\362;\3237\244\254F\254)NZ\370A,\355\335\3412\313\365\261\3450\230-\016\312\2541\177\025A\344_zv4\034G\361\006\243\b\224!Z\226\340\324\364\266\316\177\260\263PJ\310\362\020\003@=\341\217$\'\000\351eX\324\225J\b\325`1\264c_\351C\353\372:\334\265\022\217\367[G\351),f\232\344\205z\262\026\312\350\304\\\266\200\237h\n_\361\350Z\001Lu\307az\256rD\n"
+}
+timestamp {
+  seconds: 13867
+  nanos: 646808837
+}
+
+Condition type: 1
+The message type is: 14
+Seqnum: 0 QuorumId: 14
+Printing all elements of counter
+Seqnum: 0
+MessageType: 0
+Viewnum: 0
+Digest: <ByteString@23cbb8f4 size=32 contents=";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,">
+Node: 0
+MessageType: 12
+Viewnum: 0
+Digest: <ByteString@23cbb8f4 size=32 contents=";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,">
+Node: 0
+MessageType: 13
+Viewnum: 0
+Digest: <ByteString@23cbb8f4 size=32 contents=";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,">
+Node: 0
+Node: 1
+Node: 2
+Node: 3
+MessageType: 14
+Viewnum: 0
+Tallying message: message_type: 14
+source: 2
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+extra_data {
+  key: 1001
+  value: "\004\000@>f\372\215uT\200\350\037<\v\004\345\246$B\257<\vx\204Z\264\225uB\240\272>X\204\034\020\300\222\001\236\367nL{\017D\217j4B$\204J\231FE\205\331\277\202\214\b\310k^\377\377\001@\267\024\025i\362;\3237\244\254F\254)NZ\370A,\355\335\3412\313\365\261\3450\230-\016\312\2541\177\025A\344_zv4\034G\361\006\243\b\224!Z\226\340\324\364\266\316\177\260\263PJ\310\362\020\003@=\341\217$\'\000\351eX\324\225J\b\325`1\264c_\351C\353\372:\334\265\022\217\367[G\351),f\232\344\205z\262\026\312\350\304\\\266\200\237h\n_\361\350Z\001Lu\307az\256rD\n"
+}
+timestamp {
+  seconds: 13867
+  nanos: 646808837
+}
+
+Digest: <ByteString@3aee8463 size=32 contents=";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,">
+Node: 0
+Node: 2
+Node: 3
+Returning from here2 is null
+Inside checkMessageTally: seqnum: 0, quorumId: com.gbft.framework.utils.MessageTally$QuorumId@576, viewnum: 0, checkview: 0
+Inside pending requests8 + conditionMet: true
+Inside state update for seqnum: 0
+Adding seqnum to updating: 0
+Inside while loop
+Running state update loop for seqnum: 0
+Calling state update from staeUpdateLoop
+Inside state update for seqnum: 0
+Returning null as updating.contains(seqnum)
+ Printing roles: 
+Role: 0
+Role: 1
+Role: 3
+Inside pending requests1
+Inside pending requests3
+State: pbft_wait_commit
+Candidate is null
+Candidate is null
+Transition: [from pbft_wait_commit to executed, condition=com.gbft.framework.statemachine.Condition@3ed10761, updateMode=sequence, responses=[(4,1)], extraTally=[]]
+Inside pending requests4
+Condition type: 1
+The message type is: 14
+Seqnum: 0 QuorumId: 14
+Printing all elements of counter
+Seqnum: 0
+MessageType: 0
+Viewnum: 0
+Digest: <ByteString@23cbb8f4 size=32 contents=";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,">
+Node: 0
+MessageType: 12
+Viewnum: 0
+Digest: <ByteString@23cbb8f4 size=32 contents=";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,">
+Node: 0
+MessageType: 13
+Viewnum: 0
+Digest: <ByteString@23cbb8f4 size=32 contents=";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,">
+Node: 0
+Node: 1
+Node: 2
+Node: 3
+MessageType: 14
+Viewnum: 0
+Digest: <ByteString@3aee8463 size=32 contents=";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,">
+Node: 0
+Node: 2
+Node: 3
+Inside checkMessageTally: seqnum: 0, quorumId: com.gbft.framework.utils.MessageTally$QuorumId@576, viewnum: 0, checkview: 0
+Inside pending requests8 + conditionMet: true
+Currently at Role: 4 MessageType: 1
+My source is: 0
+My messsage type is: 1
+My targets are: [4]
+Inside client response and targets: [16]
+Sending message: message_type: 1
+targets: 4
+requests {
+  client: 16
+  request_num: 11
+  record: 12
+  operation: SUB
+  value: 32
+  timestamp {
+    seconds: 13867
+    nanos: 344115926
+  }
+}
+digest: ";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,"
+reply_data {
+  key: 11
+  value: 968
+}
+extra_data {
+  key: 1001
+  value: "\001\004@\275\222\235>\n\204\030;\251\314\260q\250\310\357\202\244:X>\226\366\027\006\236\300\345\306\022O\0364\271%\252\370\0266\317\021\a:4~\253\023!uV\323\n\3653\204\263(\351a\255COh\230\255"
+}
+timestamp {
+  seconds: 13867
+  nanos: 690574689
+}
+
+DirectPipelinePlugin.sendMessage
+Currently at Role: 4 MessageType: 1
+My source is: 0
+My messsage type is: 1
+My targets are: [4]
+23:37:25.624  Found target: [16]
+Sending event to 16 at 127.0.0.1:5051
+Using connection - Sending event to 16 at 127.0.0.1:5051
+Inside state update for seqnum: 0
+Inside client response and targets: [16]
+Sending message: message_type: 1
+targets: 4
+requests {
+  client: 16
+  request_num: 11
+  record: 12
+  operation: SUB
+  value: 32
+  timestamp {
+    seconds: 13867
+    nanos: 344115926
+  }
+}
+digest: ";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,"
+reply_data {
+  key: 11
+  value: 968
+}
+extra_data {
+  key: 1001
+  value: "\001\004@}\212\3305b\3600e\2169sM\354\004\374pB\340|2=H\235\366\320T\2363i\r]\001a1\356\027C\332A+Y\325\240+\316\303t\264:\261^K\277\225\320=\032x]\253\356\'\273\177"
+}
+timestamp {
+  seconds: 13867
+  nanos: 698121512
+}
+
+DirectPipelinePlugin.sendMessage
+23:37:25.629  Found target: [16]
+Sending event to 16 at 127.0.0.1:5051
+Using connection - Sending event to 16 at 127.0.0.1:5051
+Calling state update from staeUpdateLoop
+Inside state update for seqnum: 1
+Returning null as updating.contains(seqnum)
+Message event received in 0
+Targets: [0, 1, 2, 3] for message: message_type: 14
+source: 1
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: ";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,"
+extra_data {
+  key: 1001
+  value: "\004\000@^j\\+\260=|{9\377\"x\005]\'C\2376\350hGU\030\353x\"\027\303-\273N:\274\324|\202\262JJ)$\375\353\030\241\233]\222B\244N\205\236e\v\270L&)\313/\346\246\332\002@\350\302Y\336\307ta%\'\n\304r\227\243\fg\262\005@\202\002\002\377\211\302\231P\304\317\322\323\225J\feUgB9\"\253\004\036[\004K\376\'\263|\227uql\33430\005\n\353g\177u\000\003@\302\005\337\341\026\025\246\270k\374\236\254\243@\206\250\024\002\277O~JA\235\231^\225\025\263\356\005\236\026\361F\243(\341B\252\255jz\305\373\025\266y\266\264\"\217i\242vy:A\276\216c\217S\321"
+}
+timestamp {
+  seconds: 13867
+  nanos: 670014474
+}
+
+Returning null as seqnum <= lastExecutedSequenceNum and isExecuted(seqnum) = true
+ and isPrimary(seqnum) = falselastExecutedSequenceNum = 0
+Received request: message_type: 14
+source: 1
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: ";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,"
+extra_data {
+  key: 1001
+  value: "\004\000@^j\\+\260=|{9\377\"x\005]\'C\2376\350hGU\030\353x\"\027\303-\273N:\274\324|\202\262JJ)$\375\353\030\241\233]\222B\244N\205\236e\v\270L&)\313/\346\246\332\002@\350\302Y\336\307ta%\'\n\304r\227\243\fg\262\005@\202\002\002\377\211\302\231P\304\317\322\323\225J\feUgB9\"\253\004\036[\004K\376\'\263|\227uql\33430\005\n\353g\177u\000\003@\302\005\337\341\026\025\246\270k\374\236\254\243@\206\250\024\002\277O~JA\235\231^\225\025\263\356\005\236\026\361F\243(\341B\252\255jz\305\373\025\266y\266\264\"\217i\242vy:A\276\216c\217S\321"
+}
+timestamp {
+  seconds: 13867
+  nanos: 670014474
+}
+
+Going to process: message_type: 14
+source: 1
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: ";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,"
+extra_data {
+  key: 1001
+  value: "\004\000@^j\\+\260=|{9\377\"x\005]\'C\2376\350hGU\030\353x\"\027\303-\273N:\274\324|\202\262JJ)$\375\353\030\241\233]\222B\244N\205\236e\v\270L&)\313/\346\246\332\002@\350\302Y\336\307ta%\'\n\304r\227\243\fg\262\005@\202\002\002\377\211\302\231P\304\317\322\323\225J\feUgB9\"\253\004\036[\004K\376\'\263|\227uql\33430\005\n\353g\177u\000\003@\302\005\337\341\026\025\246\270k\374\236\254\243@\206\250\024\002\277O~JA\235\231^\225\025\263\356\005\236\026\361F\243(\341B\252\255jz\305\373\025\266y\266\264\"\217i\242vy:A\276\216c\217S\321"
+}
+timestamp {
+  seconds: 13867
+  nanos: 670014474
+}
+
+Verifying MAC for source: 1
+Secret Key: [B@10fa2540
+MAC validation successful
+Processed: message_type: 14
+source: 1
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: ";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,"
+extra_data {
+  key: 1001
+  value: "\004\000@^j\\+\260=|{9\377\"x\005]\'C\2376\350hGU\030\353x\"\027\303-\273N:\274\324|\202\262JJ)$\375\353\030\241\233]\222B\244N\205\236e\v\270L&)\313/\346\246\332\002@\350\302Y\336\307ta%\'\n\304r\227\243\fg\262\005@\202\002\002\377\211\302\231P\304\317\322\323\225J\feUgB9\"\253\004\036[\004K\376\'\263|\227uql\33430\005\n\353g\177u\000\003@\302\005\337\341\026\025\246\270k\374\236\254\243@\206\250\024\002\277O~JA\235\231^\225\025\263\356\005\236\026\361F\243(\341B\252\255jz\305\373\025\266y\266\264\"\217i\242vy:A\276\216c\217S\321"
+}
+timestamp {
+  seconds: 13867
+  nanos: 670014474
+}
+
+Received message inside not request block: message_type: 14
+source: 1
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: ";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,"
+extra_data {
+  key: 1001
+  value: "\004\000@^j\\+\260=|{9\377\"x\005]\'C\2376\350hGU\030\353x\"\027\303-\273N:\274\324|\202\262JJ)$\375\353\030\241\233]\222B\244N\205\236e\v\270L&)\313/\346\246\332\002@\350\302Y\336\307ta%\'\n\304r\227\243\fg\262\005@\202\002\002\377\211\302\231P\304\317\322\323\225J\feUgB9\"\253\004\036[\004K\376\'\263|\227uql\33430\005\n\353g\177u\000\003@\302\005\337\341\026\025\246\270k\374\236\254\243@\206\250\024\002\277O~JA\235\231^\225\025\263\356\005\236\026\361F\243(\341B\252\255jz\305\373\025\266y\266\264\"\217i\242vy:A\276\216c\217S\321"
+}
+timestamp {
+  seconds: 13867
+  nanos: 670014474
+}
+
+Valid message: message_type: 14
+source: 1
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: ";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,"
+extra_data {
+  key: 1001
+  value: "\004\000@^j\\+\260=|{9\377\"x\005]\'C\2376\350hGU\030\353x\"\027\303-\273N:\274\324|\202\262JJ)$\375\353\030\241\233]\222B\244N\205\236e\v\270L&)\313/\346\246\332\002@\350\302Y\336\307ta%\'\n\304r\227\243\fg\262\005@\202\002\002\377\211\302\231P\304\317\322\323\225J\feUgB9\"\253\004\036[\004K\376\'\263|\227uql\33430\005\n\353g\177u\000\003@\302\005\337\341\026\025\246\270k\374\236\254\243@\206\250\024\002\277O~JA\235\231^\225\025\263\356\005\236\026\361F\243(\341B\252\255jz\305\373\025\266y\266\264\"\217i\242vy:A\276\216c\217S\321"
+}
+timestamp {
+  seconds: 13867
+  nanos: 670014474
+}
+
+Tallying message: message_type: 14
+source: 1
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: ";LH\352\037\276P\254R~\241\3050\303\266\266\303\235\nr\230\t\301o,M\241\212\330Q\256,"
+extra_data {
+  key: 1001
+  value: "\004\000@^j\\+\260=|{9\377\"x\005]\'C\2376\350hGU\030\353x\"\027\303-\273N:\274\324|\202\262JJ)$\375\353\030\241\233]\222B\244N\205\236e\v\270L&)\313/\346\246\332\002@\350\302Y\336\307ta%\'\n\304r\227\243\fg\262\005@\202\002\002\377\211\302\231P\304\317\322\323\225J\feUgB9\"\253\004\036[\004K\376\'\263|\227uql\33430\005\n\353g\177u\000\003@\302\005\337\341\026\025\246\270k\374\236\254\243@\206\250\024\002\277O~JA\235\231^\225\025\263\356\005\236\026\361F\243(\341B\252\255jz\305\373\025\266y\266\264\"\217i\242vy:A\276\216c\217S\321"
+}
+timestamp {
+  seconds: 13867
+  nanos: 670014474
+}
+
+Tallying message: message_type: 14
+source: 1
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+extra_data {
+  key: 1001
+  value: "\004\000@^j\\+\260=|{9\377\"x\005]\'C\2376\350hGU\030\353x\"\027\303-\273N:\274\324|\202\262JJ)$\375\353\030\241\233]\222B\244N\205\236e\v\270L&)\313/\346\246\332\002@\350\302Y\336\307ta%\'\n\304r\227\243\fg\262\005@\202\002\002\377\211\302\231P\304\317\322\323\225J\feUgB9\"\253\004\036[\004K\376\'\263|\227uql\33430\005\n\353g\177u\000\003@\302\005\337\341\026\025\246\270k\374\236\254\243@\206\250\024\002\277O~JA\235\231^\225\025\263\356\005\236\026\361F\243(\341B\252\255jz\305\373\025\266y\266\264\"\217i\242vy:A\276\216c\217S\321"
+}
+timestamp {
+  seconds: 13867
+  nanos: 670014474
+}
+
+Running state update loop for seqnum: 0
+Calling state update from staeUpdateLoop
+Inside state update for seqnum: 0
+Returning null as seqnum <= lastExecutedSequenceNum and isExecuted(seqnum) = true
+ and isPrimary(seqnum) = falselastExecutedSequenceNum = 0
+Message event received in 0
+Targets: [0] for message: source: 16
+targets: 0
+requests {
+  client: 16
+  request_num: 12
+  record: 19
+  operation: ADD
+  value: 32
+  timestamp {
+    seconds: 13868
+    nanos: 392644639
+  }
+}
+digest: "\374\212\321$\240\003\222N\202DJ\232\310b\316\273\\\021\206\023\344\032\240\254j&\257y\261\225\233."
+extra_data {
+  key: 1001
+  value: "\001\000@\300\203\233\313\026\225\v\017\211\033\372R\003~\216\274q\\\227\343 \362r\211R&\221\254\3070a\025\311\351n\323\337ml\033\n*\236\032\370%\006\341`\033z\211e\\\226\233\315\267\315v\352ng\026"
+}
+timestamp {
+  seconds: 13868
+  nanos: 393046242
+}
+
+Received request: source: 16
+targets: 0
+requests {
+  client: 16
+  request_num: 12
+  record: 19
+  operation: ADD
+  value: 32
+  timestamp {
+    seconds: 13868
+    nanos: 392644639
+  }
+}
+digest: "\374\212\321$\240\003\222N\202DJ\232\310b\316\273\\\021\206\023\344\032\240\254j&\257y\261\225\233."
+extra_data {
+  key: 1001
+  value: "\001\000@\300\203\233\313\026\225\v\017\211\033\372R\003~\216\274q\\\227\343 \362r\211R&\221\254\3070a\025\311\351n\323\337ml\033\n*\236\032\370%\006\341`\033z\211e\\\226\233\315\267\315v\352ng\026"
+}
+timestamp {
+  seconds: 13868
+  nanos: 393046242
+}
+
+Going to process: source: 16
+targets: 0
+requests {
+  client: 16
+  request_num: 12
+  record: 19
+  operation: ADD
+  value: 32
+  timestamp {
+    seconds: 13868
+    nanos: 392644639
+  }
+}
+digest: "\374\212\321$\240\003\222N\202DJ\232\310b\316\273\\\021\206\023\344\032\240\254j&\257y\261\225\233."
+extra_data {
+  key: 1001
+  value: "\001\000@\300\203\233\313\026\225\v\017\211\033\372R\003~\216\274q\\\227\343 \362r\211R&\221\254\3070a\025\311\351n\323\337ml\033\n*\236\032\370%\006\341`\033z\211e\\\226\233\315\267\315v\352ng\026"
+}
+timestamp {
+  seconds: 13868
+  nanos: 393046242
+}
+
+Verifying MAC for source: 4
+Secret Key: [B@4325a3b8
+MAC validation successful
+Processed: source: 16
+targets: 0
+requests {
+  client: 16
+  request_num: 12
+  record: 19
+  operation: ADD
+  value: 32
+  timestamp {
+    seconds: 13868
+    nanos: 392644639
+  }
+}
+digest: "\374\212\321$\240\003\222N\202DJ\232\310b\316\273\\\021\206\023\344\032\240\254j&\257y\261\225\233."
+extra_data {
+  key: 1001
+  value: "\001\000@\300\203\233\313\026\225\v\017\211\033\372R\003~\216\274q\\\227\343 \362r\211R&\221\254\3070a\025\311\351n\323\337ml\033\n*\236\032\370%\006\341`\033z\211e\\\226\233\315\267\315v\352ng\026"
+}
+timestamp {
+  seconds: 13868
+  nanos: 393046242
+}
+
+Received request: source: 16
+targets: 0
+requests {
+  client: 16
+  request_num: 12
+  record: 19
+  operation: ADD
+  value: 32
+  timestamp {
+    seconds: 13868
+    nanos: 392644639
+  }
+}
+digest: "\374\212\321$\240\003\222N\202DJ\232\310b\316\273\\\021\206\023\344\032\240\254j&\257y\261\225\233."
+extra_data {
+  key: 1001
+  value: "\001\000@\300\203\233\313\026\225\v\017\211\033\372R\003~\216\274q\\\227\343 \362r\211R&\221\254\3070a\025\311\351n\323\337ml\033\n*\236\032\370%\006\341`\033z\211e\\\226\233\315\267\315v\352ng\026"
+}
+timestamp {
+  seconds: 13868
+  nanos: 393046242
+}
+
+Inside seqnum == null
+Inserting into pending requests
+Pending requests size: 1
+callling state update for next sequence number: 1
+Calling state update from staeUpdateLoop
+Inside state update for seqnum: 1
+Returning null as updating.contains(seqnum)
+Sending event to -1 at 127.0.0.1:5050
+23:37:28.285  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:37:31.265  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:37:34.275  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:37:37.266  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:37:40.271  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:37:43.285  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:37:46.286  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:37:49.288  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:37:52.286  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:37:55.286  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:37:58.297  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:38:01.310  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:38:04.321  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:38:07.323  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:38:10.325  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:38:13.330  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:38:16.332  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:38:19.331  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:38:22.332  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:38:25.333  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:38:28.334  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:38:31.334  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:38:34.334  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:38:37.341  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:38:40.349  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:38:43.343  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:38:46.344  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:38:49.345  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:38:52.345  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:38:55.345  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:38:58.346  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:39:01.347  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:39:04.347  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:39:07.348  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:39:10.348  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:39:13.352  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:39:16.353  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:39:19.355  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:39:22.355  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:39:25.365  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:39:28.387  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:39:31.398  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:39:34.398  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:39:37.399  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:39:40.401  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:39:43.406  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:39:46.415  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:39:49.414  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:39:52.414  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:39:55.418  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:39:58.433  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:40:01.435  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:40:04.434  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:40:07.436  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:40:10.456  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:40:13.456  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:40:16.458  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:40:19.462  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:40:22.458  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:40:25.467  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:40:28.467  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:40:31.478  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:40:34.479  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:40:37.480  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:40:40.483  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:40:43.484  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:40:46.485  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:40:49.484  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:40:52.488  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:40:55.494  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:40:58.496  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:41:01.499  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:41:04.499  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:41:07.501  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:41:10.502  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:41:13.503  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:41:16.503  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:41:19.504  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:41:22.510  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:41:25.511  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:41:28.513  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:41:31.515  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:41:34.515  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:41:37.516  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:41:40.516  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:41:43.517  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:41:46.517  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:41:49.517  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:41:52.519  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:41:55.524  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:41:58.519  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:42:01.524  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:42:04.527  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:42:07.529  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:42:10.529  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:42:13.528  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:42:16.530  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:42:19.538  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:42:22.542  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:42:25.544  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:42:28.543  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:42:31.546  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:42:34.545  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:42:37.547  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:42:40.547  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:42:43.553  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:42:46.550  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:42:49.551  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:42:52.550  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:42:55.554  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:42:58.554  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:43:01.554  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:43:04.564  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:43:07.557  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:43:10.557  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:43:13.558  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:43:16.558  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:43:19.559  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:43:22.561  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:43:25.563  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:43:28.563  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:43:31.566  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:43:34.580  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:43:37.581  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:43:40.580  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:43:43.585  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:43:46.583  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:43:49.590  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:43:52.593  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:43:55.604  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:43:58.595  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:44:01.596  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:44:04.596  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:44:07.597  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:44:10.599  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:44:13.602  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:44:16.625  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:44:19.634  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:44:22.633  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:44:25.634  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:44:28.636  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:44:31.634  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:44:34.638  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:44:37.638  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:44:40.638  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:44:43.639  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:44:46.641  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:44:49.642  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:44:52.647  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:44:55.651  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:44:58.650  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:45:01.650  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:45:04.651  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:45:07.659  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:45:10.659  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:45:13.659  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:45:16.672  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:45:19.673  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:45:22.678  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:45:25.678  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:45:28.678  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:45:31.678  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:45:34.680  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:45:37.681  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:45:40.682  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:45:43.687  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:45:46.687  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:45:49.742  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:45:52.741  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:45:55.742  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:45:58.741  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:46:01.744  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:46:04.742  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:46:07.743  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:46:10.744  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:46:13.744  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:46:16.745  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:46:19.746  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:46:22.746  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:46:25.747  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:46:28.747  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:46:31.747  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:46:34.750  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:46:37.768  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:46:40.769  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:46:43.769  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:46:46.771  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:46:49.771  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:46:52.777  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:46:55.775  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:46:58.776  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:47:01.781  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:47:04.780  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:47:07.780  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:47:10.781  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:47:13.781  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:47:16.783  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:47:19.798  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:47:22.800  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:47:25.801  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:47:28.802  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:47:31.802  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:47:34.804  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:47:37.806  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:47:40.805  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:47:43.806  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:47:46.818  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:47:49.818  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:47:52.830  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:47:55.831  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:47:58.834  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:48:01.842  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:48:04.843  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:48:07.843  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:48:10.858  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:48:13.846  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:48:16.847  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:48:19.849  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:48:22.848  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:48:25.885  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:48:28.880  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:48:31.882  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:48:34.888  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:48:37.892  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:48:40.893  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:48:43.898  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:48:46.897  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:48:49.897  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:48:52.898  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:48:55.900  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:48:58.899  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:49:01.900  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:49:04.926  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:49:07.928  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:49:10.936  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:49:13.928  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:49:16.947  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:49:19.942  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:49:22.933  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:49:25.932  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:49:28.957  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:49:31.958  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:49:34.959  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:49:37.959  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:49:40.962  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:49:43.974  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:49:46.976  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:49:49.977  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:49:52.978  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:49:55.978  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:49:58.987  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:50:01.988  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:50:04.988  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:50:07.998  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:50:10.993  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:50:14.1  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:50:17.11  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:50:20.35  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:50:23.43  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:50:26.45  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:50:29.47  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:50:32.46  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:50:35.47  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:50:38.48  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:50:41.49  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:50:44.53  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:50:47.63  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:50:50.68  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:50:53.70  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:50:56.80  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:50:59.86  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:51:02.82  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:51:05.87  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:51:08.87  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:51:11.88  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:51:14.89  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:51:17.90  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:51:20.91  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:51:23.117  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:51:26.121  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:51:29.119  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:51:32.119  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:51:35.119  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:51:38.119  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:51:41.129  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:51:44.129  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:51:47.143  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:51:50.146  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:51:53.148  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:51:56.147  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:51:59.147  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:52:02.149  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:52:05.149  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:52:08.149  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:52:11.160  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:52:14.151  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:52:17.159  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:52:20.153  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:52:23.154  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:52:26.155  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:52:29.157  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:52:32.156  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:52:35.156  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:52:38.162  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:52:41.163  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:52:44.171  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:52:47.181  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:52:50.180  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:52:53.183  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:52:56.194  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:52:59.196  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:53:02.198  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:53:05.199  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:53:08.198  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:53:11.200  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:53:14.201  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:53:17.203  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:53:20.200  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:53:23.202  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:53:26.205  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:53:29.221  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:53:32.221  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:53:35.270  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:53:38.271  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:53:41.271  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:53:44.289  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:53:47.289  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:53:50.291  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:53:53.291  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:53:56.293  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:53:59.317  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:54:02.317  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:54:05.317  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:54:08.325  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:54:11.326  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:54:14.326  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:54:17.328  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:54:20.332  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:54:23.335  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:54:26.347  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:54:29.365  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:54:32.368  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:54:35.370  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:54:38.380  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:54:41.381  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:54:44.387  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:54:47.391  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:54:50.407  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:54:53.407  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:54:56.407  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:54:59.407  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:55:02.409  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:55:05.410  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:55:08.420  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:55:11.418  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:55:14.419  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:55:17.418  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:55:20.420  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:55:23.427  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:55:26.422  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:55:29.422  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:55:32.422  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:55:35.422  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:55:38.430  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:55:41.430  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:55:44.427  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:55:47.434  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:55:50.443  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:55:53.435  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:55:56.437  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:55:59.439  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:56:02.448  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:56:05.447  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:56:08.450  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:56:11.456  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:56:14.450  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:56:17.452  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:56:20.462  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:56:23.472  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:56:26.497  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:56:29.499  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:56:32.503  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:56:35.504  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:56:38.504  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:56:41.509  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:56:44.509  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:56:47.512  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:56:50.510  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:56:53.510  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:56:56.523  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:56:59.524  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:57:02.540  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:57:05.530  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:57:08.529  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:57:11.529  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:57:14.529  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:57:17.529  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:57:20.532  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:57:23.533  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:57:26.534  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:57:29.535  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:57:32.546  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:57:35.546  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:57:38.559  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+23:57:41.550  Sending event to -1 at 127.0.0.1:5050
