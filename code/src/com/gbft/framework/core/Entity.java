@@ -268,6 +268,7 @@ public abstract class Entity {
                     }
                 }
                 // Printer.print(Verbosity.V, prefix, "[time-since-start=" + Printer.timeFormat(System.nanoTime() - systemStartTime, true) + "] packing slow proposal requests, ready for stateUpdate: nextSequence=" + nextSequence);
+                System.out.println("For some reason I'm here 6 and nextSequence: " + nextSequence);
                 stateUpdateLoop(nextSequence);
             }
         }
@@ -355,6 +356,7 @@ public abstract class Entity {
                     pendingRequests.offer(request);
                     System.out.println("Pending requests size: " + pendingRequests.size());
                     System.out.println("callling state update for next sequence number: " + nextSequence);
+                    System.out.println("For some reason I'm here 4 and nextSequence: " + nextSequence);
                     stateUpdateLoop(nextSequence);
                 }
             }
@@ -378,6 +380,7 @@ public abstract class Entity {
                 Printer.print(Verbosity.VVV, prefix, "Tally message ", message);
             }
             System.out.println("Running state update loop for seqnum: " + seqnum); 
+            System.out.println("For some reason I'm here 3 and seqnum: " + seqnum);
             stateUpdateLoop(seqnum);
         }
 
@@ -391,6 +394,7 @@ public abstract class Entity {
         var result = stateUpdate(seqnum);
         while (running && result != null && !result.isEmpty()) {
             var next = result.pollFirst();
+            System.out.println("This is causing issue for seqnum: " + next);
             var more = stateUpdate(next);
             if (more != null) {
                 result.addAll(more);
@@ -624,12 +628,14 @@ public abstract class Entity {
         stateLock.lock();
         updating.remove(seqnum);
         var toUpdate = new TreeSet<Long>();
-        if (nextseqUpdated || needsUpdate.contains(nextSequence)) {
-            toUpdate.add(nextSequence);
-        }
+        // if (nextseqUpdated || needsUpdate.contains(nextSequence)) {
+        //     System.out.println("Adding nextSequence to toUpdate1: " + nextSequence);
+        //     toUpdate.add(nextSequence);
+        // }
 
         if (needsUpdate.contains(seqnum)) {
             needsUpdate.remove(seqnum);
+            System.out.println("Adding seqnum to toUpdate2: " + seqnum);
             toUpdate.add(seqnum);
         }
         stateLock.unlock();
@@ -703,7 +709,10 @@ public abstract class Entity {
                 transition(lastExecutedSequenceNum, transition);
             }
             // checkSwitching(lastExecutedSequenceNum);
-            stateUpdateLoop(lastExecutedSequenceNum + 1);
+
+            //Commeting this part out because causing issue with seqnum
+            // System.out.println("For some reason I'm here 2 and running for lastExecutedSequenceNum+1: " + lastExecutedSequenceNum);
+            // stateUpdateLoop(lastExecutedSequenceNum + 1);
         }
     }
 
@@ -794,7 +803,7 @@ public abstract class Entity {
             this.lastExecutedSequenceNum = lastExecutedSequenceNum;
             this.nextSequence = lastExecutedSequenceNum + 1;
             stateLock.unlock();
-
+            System.out.println("For some reason I'm here 1 and running for lastExecutedSequenceNum+1: " + lastExecutedSequenceNum);
             new Thread(() -> stateUpdateLoop(lastExecutedSequenceNum + 1)).start();
         }
     }

@@ -1,0 +1,3269 @@
+Config value not found: protocol.general.f
+Config value not found: protocol.general.f
+Config value not found: protocol.general.f
+Config value not found: protocol.general.f
+Config value not found: protocol.general.f
+Config value not found: protocol.general.f
+Adding unit 0 to entity map.
+Getting cluster number for unit 0.
+Adding unit 0 to cluster 1.
+Cluster server mapping: {1=[]}.
+Cluster server mapping: {1=[0]}.
+Adding unit 1 to entity map.
+Getting cluster number for unit 1.
+Adding unit 1 to cluster 1.
+Cluster server mapping: {1=[0]}.
+Cluster server mapping: {1=[0, 1]}.
+Adding unit 2 to entity map.
+Getting cluster number for unit 2.
+Adding unit 2 to cluster 1.
+Cluster server mapping: {1=[0, 1]}.
+Cluster server mapping: {1=[0, 1, 2]}.
+Adding unit 3 to entity map.
+Getting cluster number for unit 3.
+Adding unit 3 to cluster 1.
+Cluster server mapping: {1=[0, 1, 2]}.
+Cluster server mapping: {1=[0, 1, 2, 3]}.
+Adding unit 16 to entity map.
+Getting cluster number for unit 16.
+Adding unit 16 to cluster 0.
+Cluster server mapping: {0=[], 1=[0, 1, 2, 3]}.
+Cluster server mapping: {0=[16], 1=[0, 1, 2, 3]}.
+16:42:46.743  GRPC server started, listening on 6031
+Sending event to -1 at 127.0.0.1:5050
+16:42:46.892  Sending event to -1 at 127.0.0.1:5050
+16:42:46.895  Unit configured.
+16:42:46.967  Received plugin event for targets: [0].
+16:42:46.974  Entities map for: {0=com.gbft.framework.core.Node@51b5e5fe}
+16:42:46.974  Target list is: [0]
+Updating secret keys with value for target: 1
+16:42:47.66  Sending event to 1 at 127.0.0.1:6022
+Updating secret keys with value for target: 2
+16:42:47.76  Sending event to 2 at 127.0.0.1:6023
+Updating secret keys with value for target: 3
+16:42:47.84  Sending event to 3 at 127.0.0.1:6024
+Updating secret keys with value for target: 4
+16:42:47.85  Sending event to 16 at 127.0.0.1:5051
+Secret Key size: 4
+16:42:47.96  Ent is: 0
+16:42:47.96  Init plugin is: com.gbft.plugin.message.MacMessagePlugin@5113acdc
+16:42:47.108  Plug initialised status: true
+16:42:47.108  Inside finished block.
+16:42:47.108  Id is 0 and clusterNum is 1
+Sending event to -1 at 127.0.0.1:5050
+16:42:47.108  Sending event to -1 at 127.0.0.1:5050
+16:42:47.275  Received connection event from server.
+Sending event to -1 at 127.0.0.1:5050
+16:42:47.315  Sending event to -1 at 127.0.0.1:5050
+16:42:47.317  Connection initialized.
+16:42:47.371  Benchmark started.
+Message event received in 0
+Targets: [0] for message: source: 16
+targets: 0
+requests {
+  client: 16
+  request_num: 11
+  record: 11
+  operation: SUB
+  value: 57
+  timestamp {
+    seconds: 39596
+    nanos: 758500127
+  }
+}
+digest: "\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370"
+extra_data {
+  key: 1001
+  value: "\001\000@B\251p\305\226\357d\245\256\375T\354\307\351\365L\332\274\310h\223z\370S\034\201w\316_\326\231\035\363\227\fq,L\375\327}\317P\331\314p\0035#\036\262\364\330:\001\203\003rh\374rNi\310"
+}
+timestamp {
+  seconds: 39596
+  nanos: 769883914
+}
+
+Received request: source: 16
+targets: 0
+requests {
+  client: 16
+  request_num: 11
+  record: 11
+  operation: SUB
+  value: 57
+  timestamp {
+    seconds: 39596
+    nanos: 758500127
+  }
+}
+digest: "\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370"
+extra_data {
+  key: 1001
+  value: "\001\000@B\251p\305\226\357d\245\256\375T\354\307\351\365L\332\274\310h\223z\370S\034\201w\316_\326\231\035\363\227\fq,L\375\327}\317P\331\314p\0035#\036\262\364\330:\001\203\003rh\374rNi\310"
+}
+timestamp {
+  seconds: 39596
+  nanos: 769883914
+}
+
+Going to process: source: 16
+targets: 0
+requests {
+  client: 16
+  request_num: 11
+  record: 11
+  operation: SUB
+  value: 57
+  timestamp {
+    seconds: 39596
+    nanos: 758500127
+  }
+}
+digest: "\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370"
+extra_data {
+  key: 1001
+  value: "\001\000@B\251p\305\226\357d\245\256\375T\354\307\351\365L\332\274\310h\223z\370S\034\201w\316_\326\231\035\363\227\fq,L\375\327}\317P\331\314p\0035#\036\262\364\330:\001\203\003rh\374rNi\310"
+}
+timestamp {
+  seconds: 39596
+  nanos: 769883914
+}
+
+Verifying MAC for source: 4
+Secret Key: [B@4c45257e
+MAC validation successful
+Processed: source: 16
+targets: 0
+requests {
+  client: 16
+  request_num: 11
+  record: 11
+  operation: SUB
+  value: 57
+  timestamp {
+    seconds: 39596
+    nanos: 758500127
+  }
+}
+digest: "\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370"
+extra_data {
+  key: 1001
+  value: "\001\000@B\251p\305\226\357d\245\256\375T\354\307\351\365L\332\274\310h\223z\370S\034\201w\316_\326\231\035\363\227\fq,L\375\327}\317P\331\314p\0035#\036\262\364\330:\001\203\003rh\374rNi\310"
+}
+timestamp {
+  seconds: 39596
+  nanos: 769883914
+}
+
+Received request: source: 16
+targets: 0
+requests {
+  client: 16
+  request_num: 11
+  record: 11
+  operation: SUB
+  value: 57
+  timestamp {
+    seconds: 39596
+    nanos: 758500127
+  }
+}
+digest: "\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370"
+extra_data {
+  key: 1001
+  value: "\001\000@B\251p\305\226\357d\245\256\375T\354\307\351\365L\332\274\310h\223z\370S\034\201w\316_\326\231\035\363\227\fq,L\375\327}\317P\331\314p\0035#\036\262\364\330:\001\203\003rh\374rNi\310"
+}
+timestamp {
+  seconds: 39596
+  nanos: 769883914
+}
+
+Inside seqnum == null
+Inserting into pending requests
+Pending requests size: 1
+callling state update for next sequence number: 0
+For some reason I'm here 4 and nextSequence: 0
+Calling state update from staeUpdateLoop
+Inside state update for seqnum: 0
+Adding seqnum to updating: 0
+Inside while loop
+ Printing roles: 
+Role: 0
+Role: 1
+Role: 3
+Inside pending requests1
+Inside pending requests3
+State: pbft_idle
+Transition: [from pbft_idle to pbft_wait_prepare, condition=com.gbft.framework.statemachine.Condition@7c2bf47e, updateMode=none, responses=[(3,12)], extraTally=[(0,13)]]
+Inside pending requests4
+Condition type: 1
+The message type is: 0
+Inside pending requests5
+Pending request size and block size: 1 10
+Inside pending requests6 and pending request size: 1
+My source is: 0
+My messsage type is: 0
+My targets are: [0]
+Inside pending requests8 and message: 
+Tallying message: targets: 0
+requests {
+  client: 16
+  request_num: 11
+  record: 11
+  operation: SUB
+  value: 57
+  timestamp {
+    seconds: 39596
+    nanos: 758500127
+  }
+}
+digest: "\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370"
+extra_data {
+  key: 1001
+  value: "\001"
+}
+timestamp {
+  seconds: 39596
+  nanos: 850646888
+}
+
+Tallying message: targets: 0
+requests {
+  client: 16
+  request_num: 11
+  record: 11
+  operation: SUB
+  value: 57
+  timestamp {
+    seconds: 39596
+    nanos: 758500127
+  }
+}
+extra_data {
+  key: 1001
+  value: "\001"
+}
+timestamp {
+  seconds: 39596
+  nanos: 850646888
+}
+
+Seqnum: 0 QuorumId: 0
+Printing all elements of counter
+Seqnum: 0
+MessageType: 0
+Viewnum: 0
+Digest: <ByteString@1ee25d86 size=32 contents="\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370">
+Node: 0
+Returning from here2 is null
+Inside checkMessageTally: seqnum: 0, quorumId: com.gbft.framework.utils.MessageTally$QuorumId@3c2, viewnum: 0, checkview: 0
+Inside pending requests8 + conditionMet: true
+Currently at Role: 3 MessageType: 12
+My source is: 0
+My messsage type is: 12
+My targets are: [0, 1, 2, 3]
+Current targets: [0, 1, 2, 3]
+Inside sharded plugin: 0 4 0
+My source is: 0
+My messsage type is: 13
+My targets are: [0]
+Tallying message: message_type: 13
+targets: 0
+request_nums: 11
+digest: "\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370"
+extra_data {
+  key: 1001
+  value: "\001"
+}
+timestamp {
+  seconds: 39596
+  nanos: 886334802
+}
+
+Tallying message: message_type: 13
+targets: 0
+request_nums: 11
+extra_data {
+  key: 1001
+  value: "\001"
+}
+timestamp {
+  seconds: 39596
+  nanos: 886334802
+}
+
+Sending message: message_type: 12
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+requests {
+  client: 16
+  request_num: 11
+  record: 11
+  operation: SUB
+  value: 57
+  timestamp {
+    seconds: 39596
+    nanos: 758500127
+  }
+}
+digest: "\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370"
+extra_data {
+  key: 1001
+  value: "\004\001@\020W[\353\251B\327\027\"A\314O<\320mY\034\022\240\003\020\302\265\354E\373$O~\262\341Fl\255Yif<0\271\332\315|D\255D5\336\342\335\004\343\253/\263\371\351\330~\003 7\v\366\002@R\215\376\330\366\231_\362\303Y\215\n!\360\322O\211\222)rLroZ\r\374\362\f\342\211\a{\306u\232\334\362\346L\262\233\004\025\373D@\365;\341\363\265\001zr\343E\332\2657\230\242\n\316\277\003@\220\216$\004\'\267\312\266(\017\265\374\334M\213(\235\\\216z\004y`P|\035\366H\343T\256\321W\v\210\242$\235\372\246\002?\225\343\337\ft\274=_j\v\006\351\324:\000]\335\206\242\236\365&"
+}
+timestamp {
+  seconds: 39596
+  nanos: 879262489
+}
+
+DirectPipelinePlugin.sendMessage
+16:42:47.611  Found target: [0, 1, 2, 3]
+16:42:47.612  Message event received in 0
+In the continue block
+In the continue block
+In the continue block
+In the continue block
+Sending event to 1 at 127.0.0.1:6022
+Using connection - Sending event to 1 at 127.0.0.1:6022
+Sending event to 2 at 127.0.0.1:6023
+Using connection - Sending event to 2 at 127.0.0.1:6023
+Sending event to 3 at 127.0.0.1:6024
+Using connection - Sending event to 3 at 127.0.0.1:6024
+Tallying message: message_type: 12
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+requests {
+  client: 16
+  request_num: 11
+  record: 11
+  operation: SUB
+  value: 57
+  timestamp {
+    seconds: 39596
+    nanos: 758500127
+  }
+}
+digest: "\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370"
+extra_data {
+  key: 1001
+  value: "\004\001@\020W[\353\251B\327\027\"A\314O<\320mY\034\022\240\003\020\302\265\354E\373$O~\262\341Fl\255Yif<0\271\332\315|D\255D5\336\342\335\004\343\253/\263\371\351\330~\003 7\v\366\002@R\215\376\330\366\231_\362\303Y\215\n!\360\322O\211\222)rLroZ\r\374\362\f\342\211\a{\306u\232\334\362\346L\262\233\004\025\373D@\365;\341\363\265\001zr\343E\332\2657\230\242\n\316\277\003@\220\216$\004\'\267\312\266(\017\265\374\334M\213(\235\\\216z\004y`P|\035\366H\343T\256\321W\v\210\242$\235\372\246\002?\225\343\337\ft\274=_j\v\006\351\324:\000]\335\206\242\236\365&"
+}
+timestamp {
+  seconds: 39596
+  nanos: 879262489
+}
+
+Tallying message: message_type: 12
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+requests {
+  client: 16
+  request_num: 11
+  record: 11
+  operation: SUB
+  value: 57
+  timestamp {
+    seconds: 39596
+    nanos: 758500127
+  }
+}
+extra_data {
+  key: 1001
+  value: "\004\001@\020W[\353\251B\327\027\"A\314O<\320mY\034\022\240\003\020\302\265\354E\373$O~\262\341Fl\255Yif<0\271\332\315|D\255D5\336\342\335\004\343\253/\263\371\351\330~\003 7\v\366\002@R\215\376\330\366\231_\362\303Y\215\n!\360\322O\211\222)rLroZ\r\374\362\f\342\211\a{\306u\232\334\362\346L\262\233\004\025\373D@\365;\341\363\265\001zr\343E\332\2657\230\242\n\316\277\003@\220\216$\004\'\267\312\266(\017\265\374\334M\213(\235\\\216z\004y`P|\035\366H\343T\256\321W\v\210\242$\235\372\246\002?\225\343\337\ft\274=_j\v\006\351\324:\000]\335\206\242\236\365&"
+}
+timestamp {
+  seconds: 39596
+  nanos: 879262489
+}
+
+Increasing next sequence by 1 0
+Inside while loop
+ Printing roles: 
+Role: 0
+Role: 1
+Role: 3
+Inside pending requests1
+Inside pending requests3
+State: pbft_wait_prepare
+Candidate is null
+Candidate is null
+Transition: [from pbft_wait_prepare to pbft_wait_commit, condition=com.gbft.framework.statemachine.Condition@6988fd24, updateMode=none, responses=[(3,14)], extraTally=[]]
+Inside pending requests4
+Condition type: 1
+The message type is: 13
+Seqnum: 0 QuorumId: 13
+Printing all elements of counter
+Seqnum: 0
+MessageType: 0
+Viewnum: 0
+Digest: <ByteString@1ee25d86 size=32 contents="\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370">
+Node: 0
+MessageType: 12
+Viewnum: 0
+Digest: <ByteString@1ee25d86 size=32 contents="\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370">
+Node: 0
+MessageType: 13
+Viewnum: 0
+Digest: <ByteString@1ee25d86 size=32 contents="\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370">
+Node: 0
+Returning from here2 is null
+Inside checkMessageTally: seqnum: 0, quorumId: com.gbft.framework.utils.MessageTally$QuorumId@557, viewnum: null, checkview: 0
+Inside pending requests8 + conditionMet: false
+Message event received in 0
+Targets: [0, 1, 2, 3] for message: message_type: 13
+source: 2
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: "\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370"
+extra_data {
+  key: 1001
+  value: "\004\000@\226\310\370\366\326r\037\213m\a\314\370\222\263\332+b\351\177B\341\003.A\354\250\377\252c\336\325`\351\212\331E\001\346\252\240\272.\232\t\240W\330x\177\024\365I\353\302\332\313\037\020\220\250Y\217\\\267\001@\241\226\335\252\307\021a\207T&\232\312\004\335_\215E]x1C>\250\324\326$\212\253\036\341\325M7\347\234\320\264\0201\230V\314f7~\307E\a\312\365\207\362.%\016\304\254\212\321\272\366\335\375\253\003@SE0\030\256\312\227N0\363\177lD\323\235\323\304\376\235\327#\317~\344\244\r\267\236\272\240$\275jc\262\363I\373\323U\037o\341\a\375Tl\005\021\350\267\371\274IV\222\001\272\220\"\022\232\213\233"
+}
+timestamp {
+  seconds: 39596
+  nanos: 966022127
+}
+
+Received request: message_type: 13
+source: 2
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: "\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370"
+extra_data {
+  key: 1001
+  value: "\004\000@\226\310\370\366\326r\037\213m\a\314\370\222\263\332+b\351\177B\341\003.A\354\250\377\252c\336\325`\351\212\331E\001\346\252\240\272.\232\t\240W\330x\177\024\365I\353\302\332\313\037\020\220\250Y\217\\\267\001@\241\226\335\252\307\021a\207T&\232\312\004\335_\215E]x1C>\250\324\326$\212\253\036\341\325M7\347\234\320\264\0201\230V\314f7~\307E\a\312\365\207\362.%\016\304\254\212\321\272\366\335\375\253\003@SE0\030\256\312\227N0\363\177lD\323\235\323\304\376\235\327#\317~\344\244\r\267\236\272\240$\275jc\262\363I\373\323U\037o\341\a\375Tl\005\021\350\267\371\274IV\222\001\272\220\"\022\232\213\233"
+}
+timestamp {
+  seconds: 39596
+  nanos: 966022127
+}
+
+Going to process: message_type: 13
+source: 2
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: "\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370"
+extra_data {
+  key: 1001
+  value: "\004\000@\226\310\370\366\326r\037\213m\a\314\370\222\263\332+b\351\177B\341\003.A\354\250\377\252c\336\325`\351\212\331E\001\346\252\240\272.\232\t\240W\330x\177\024\365I\353\302\332\313\037\020\220\250Y\217\\\267\001@\241\226\335\252\307\021a\207T&\232\312\004\335_\215E]x1C>\250\324\326$\212\253\036\341\325M7\347\234\320\264\0201\230V\314f7~\307E\a\312\365\207\362.%\016\304\254\212\321\272\366\335\375\253\003@SE0\030\256\312\227N0\363\177lD\323\235\323\304\376\235\327#\317~\344\244\r\267\236\272\240$\275jc\262\363I\373\323U\037o\341\a\375Tl\005\021\350\267\371\274IV\222\001\272\220\"\022\232\213\233"
+}
+timestamp {
+  seconds: 39596
+  nanos: 966022127
+}
+
+Verifying MAC for source: 2
+Secret Key: [B@3016ef13
+MAC validation successful
+Processed: message_type: 13
+source: 2
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: "\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370"
+extra_data {
+  key: 1001
+  value: "\004\000@\226\310\370\366\326r\037\213m\a\314\370\222\263\332+b\351\177B\341\003.A\354\250\377\252c\336\325`\351\212\331E\001\346\252\240\272.\232\t\240W\330x\177\024\365I\353\302\332\313\037\020\220\250Y\217\\\267\001@\241\226\335\252\307\021a\207T&\232\312\004\335_\215E]x1C>\250\324\326$\212\253\036\341\325M7\347\234\320\264\0201\230V\314f7~\307E\a\312\365\207\362.%\016\304\254\212\321\272\366\335\375\253\003@SE0\030\256\312\227N0\363\177lD\323\235\323\304\376\235\327#\317~\344\244\r\267\236\272\240$\275jc\262\363I\373\323U\037o\341\a\375Tl\005\021\350\267\371\274IV\222\001\272\220\"\022\232\213\233"
+}
+timestamp {
+  seconds: 39596
+  nanos: 966022127
+}
+
+Received message inside not request block: message_type: 13
+source: 2
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: "\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370"
+extra_data {
+  key: 1001
+  value: "\004\000@\226\310\370\366\326r\037\213m\a\314\370\222\263\332+b\351\177B\341\003.A\354\250\377\252c\336\325`\351\212\331E\001\346\252\240\272.\232\t\240W\330x\177\024\365I\353\302\332\313\037\020\220\250Y\217\\\267\001@\241\226\335\252\307\021a\207T&\232\312\004\335_\215E]x1C>\250\324\326$\212\253\036\341\325M7\347\234\320\264\0201\230V\314f7~\307E\a\312\365\207\362.%\016\304\254\212\321\272\366\335\375\253\003@SE0\030\256\312\227N0\363\177lD\323\235\323\304\376\235\327#\317~\344\244\r\267\236\272\240$\275jc\262\363I\373\323U\037o\341\a\375Tl\005\021\350\267\371\274IV\222\001\272\220\"\022\232\213\233"
+}
+timestamp {
+  seconds: 39596
+  nanos: 966022127
+}
+
+Valid message: message_type: 13
+source: 2
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: "\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370"
+extra_data {
+  key: 1001
+  value: "\004\000@\226\310\370\366\326r\037\213m\a\314\370\222\263\332+b\351\177B\341\003.A\354\250\377\252c\336\325`\351\212\331E\001\346\252\240\272.\232\t\240W\330x\177\024\365I\353\302\332\313\037\020\220\250Y\217\\\267\001@\241\226\335\252\307\021a\207T&\232\312\004\335_\215E]x1C>\250\324\326$\212\253\036\341\325M7\347\234\320\264\0201\230V\314f7~\307E\a\312\365\207\362.%\016\304\254\212\321\272\366\335\375\253\003@SE0\030\256\312\227N0\363\177lD\323\235\323\304\376\235\327#\317~\344\244\r\267\236\272\240$\275jc\262\363I\373\323U\037o\341\a\375Tl\005\021\350\267\371\274IV\222\001\272\220\"\022\232\213\233"
+}
+timestamp {
+  seconds: 39596
+  nanos: 966022127
+}
+
+Tallying message: message_type: 13
+source: 2
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: "\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370"
+extra_data {
+  key: 1001
+  value: "\004\000@\226\310\370\366\326r\037\213m\a\314\370\222\263\332+b\351\177B\341\003.A\354\250\377\252c\336\325`\351\212\331E\001\346\252\240\272.\232\t\240W\330x\177\024\365I\353\302\332\313\037\020\220\250Y\217\\\267\001@\241\226\335\252\307\021a\207T&\232\312\004\335_\215E]x1C>\250\324\326$\212\253\036\341\325M7\347\234\320\264\0201\230V\314f7~\307E\a\312\365\207\362.%\016\304\254\212\321\272\366\335\375\253\003@SE0\030\256\312\227N0\363\177lD\323\235\323\304\376\235\327#\317~\344\244\r\267\236\272\240$\275jc\262\363I\373\323U\037o\341\a\375Tl\005\021\350\267\371\274IV\222\001\272\220\"\022\232\213\233"
+}
+timestamp {
+  seconds: 39596
+  nanos: 966022127
+}
+
+Tallying message: message_type: 13
+source: 2
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+extra_data {
+  key: 1001
+  value: "\004\000@\226\310\370\366\326r\037\213m\a\314\370\222\263\332+b\351\177B\341\003.A\354\250\377\252c\336\325`\351\212\331E\001\346\252\240\272.\232\t\240W\330x\177\024\365I\353\302\332\313\037\020\220\250Y\217\\\267\001@\241\226\335\252\307\021a\207T&\232\312\004\335_\215E]x1C>\250\324\326$\212\253\036\341\325M7\347\234\320\264\0201\230V\314f7~\307E\a\312\365\207\362.%\016\304\254\212\321\272\366\335\375\253\003@SE0\030\256\312\227N0\363\177lD\323\235\323\304\376\235\327#\317~\344\244\r\267\236\272\240$\275jc\262\363I\373\323U\037o\341\a\375Tl\005\021\350\267\371\274IV\222\001\272\220\"\022\232\213\233"
+}
+timestamp {
+  seconds: 39596
+  nanos: 966022127
+}
+
+Running state update loop for seqnum: 0
+For some reason I'm here 3 and seqnum: 0
+Calling state update from staeUpdateLoop
+Inside state update for seqnum: 0
+Adding seqnum to updating: 0
+Inside while loop
+ Printing roles: 
+Role: 0
+Role: 1
+Role: 3
+Inside pending requests1
+Inside pending requests3
+State: pbft_wait_prepare
+Candidate is null
+Candidate is null
+Transition: [from pbft_wait_prepare to pbft_wait_commit, condition=com.gbft.framework.statemachine.Condition@6988fd24, updateMode=none, responses=[(3,14)], extraTally=[]]
+Inside pending requests4
+Condition type: 1
+The message type is: 13
+Seqnum: 0 QuorumId: 13
+Printing all elements of counter
+Seqnum: 0
+MessageType: 0
+Viewnum: 0
+Digest: <ByteString@1ee25d86 size=32 contents="\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370">
+Node: 0
+MessageType: 12
+Viewnum: 0
+Digest: <ByteString@1ee25d86 size=32 contents="\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370">
+Node: 0
+MessageType: 13
+Viewnum: 0
+Digest: <ByteString@1ee25d86 size=32 contents="\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370">
+Node: 0
+Node: 2
+Returning from here2 is null
+Inside checkMessageTally: seqnum: 0, quorumId: com.gbft.framework.utils.MessageTally$QuorumId@557, viewnum: null, checkview: 0
+Inside pending requests8 + conditionMet: false
+Message event received in 0
+Targets: [0, 1, 2, 3] for message: message_type: 13
+source: 1
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: "\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370"
+extra_data {
+  key: 1001
+  value: "\004\000@YD\231\344\351t\361\240@\253\005\017GWb!\250\037\211OfV\314\215\370\347\277F\301\0205\025\307\312\372N\317sD\274\315x\217@;a\256\223\205\201T\365\256b#\240\272\314<\352\231U\231\367\002@\341eV\215\302\321\006|\364\211\"\214Oc\351\310\317Gw\275\303\b\266\177\221\v\002q\022\32192i\212mB7\353\224\325+T\360\343m\363{\345J\361*\023\315P\373\303\3339\314[r0\307\316\003@\3008\b\371\256\356c\\\0176\326.\352_\275\a\340G\215\253\023\354\231\237\257U\255yi@\332l\322H{`>\372\216\342n\344\372*\234\314\242\360\020O>k\033\274\253\177\345\321D\366\211\\\342]"
+}
+timestamp {
+  seconds: 39597
+  nanos: 18588815
+}
+
+Message event received in 0
+Received request: message_type: 13
+source: 1
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: "\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370"
+extra_data {
+  key: 1001
+  value: "\004\000@YD\231\344\351t\361\240@\253\005\017GWb!\250\037\211OfV\314\215\370\347\277F\301\0205\025\307\312\372N\317sD\274\315x\217@;a\256\223\205\201T\365\256b#\240\272\314<\352\231U\231\367\002@\341eV\215\302\321\006|\364\211\"\214Oc\351\310\317Gw\275\303\b\266\177\221\v\002q\022\32192i\212mB7\353\224\325+T\360\343m\363{\345J\361*\023\315P\373\303\3339\314[r0\307\316\003@\3008\b\371\256\356c\\\0176\326.\352_\275\a\340G\215\253\023\354\231\237\257U\255yi@\332l\322H{`>\372\216\342n\344\372*\234\314\242\360\020O>k\033\274\253\177\345\321D\366\211\\\342]"
+}
+timestamp {
+  seconds: 39597
+  nanos: 18588815
+}
+
+Targets: [0, 1, 2, 3] for message: message_type: 14
+source: 1
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: "\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370"
+extra_data {
+  key: 1001
+  value: "\004\000@\260\333 \t\225\362\036\231\230K\224\234t\357\216\317\242;\323\231\274\034\233\231\037\005b\2236\234\016\223\365\304\233`\030|\200R\340\016\331|<\321A\a\005\227\275=\356|z\223\216\331Y\000\023\361<M\002@\332\257\316\311\035\213\355\313\252\362\3056m\263B}e(\300\f\332\345\365\326%\344\262\'\220QX\312\020(\223\325\337eD\325\246\0004\364\252V\271\357\037\243.\aKS\033\003\375O\252\\)Z\016\375\003@Q\242\206\311M\201\346Q\343\200&\256JD-\'\376z\bUo\030/\313\002\203m\272\022\335:\260>\305\027\317|\303\315\017\271&C\261\v\225\003Q\006\n\325\214f\267\372\031\300#\377K\261\335\206<"
+}
+timestamp {
+  seconds: 39597
+  nanos: 41439676
+}
+
+Going to process: message_type: 13
+source: 1
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: "\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370"
+extra_data {
+  key: 1001
+  value: "\004\000@YD\231\344\351t\361\240@\253\005\017GWb!\250\037\211OfV\314\215\370\347\277F\301\0205\025\307\312\372N\317sD\274\315x\217@;a\256\223\205\201T\365\256b#\240\272\314<\352\231U\231\367\002@\341eV\215\302\321\006|\364\211\"\214Oc\351\310\317Gw\275\303\b\266\177\221\v\002q\022\32192i\212mB7\353\224\325+T\360\343m\363{\345J\361*\023\315P\373\303\3339\314[r0\307\316\003@\3008\b\371\256\356c\\\0176\326.\352_\275\a\340G\215\253\023\354\231\237\257U\255yi@\332l\322H{`>\372\216\342n\344\372*\234\314\242\360\020O>k\033\274\253\177\345\321D\366\211\\\342]"
+}
+timestamp {
+  seconds: 39597
+  nanos: 18588815
+}
+
+Verifying MAC for source: 1
+Secret Key: [B@10fa2540
+MAC validation successful
+Processed: message_type: 13
+source: 1
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: "\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370"
+extra_data {
+  key: 1001
+  value: "\004\000@YD\231\344\351t\361\240@\253\005\017GWb!\250\037\211OfV\314\215\370\347\277F\301\0205\025\307\312\372N\317sD\274\315x\217@;a\256\223\205\201T\365\256b#\240\272\314<\352\231U\231\367\002@\341eV\215\302\321\006|\364\211\"\214Oc\351\310\317Gw\275\303\b\266\177\221\v\002q\022\32192i\212mB7\353\224\325+T\360\343m\363{\345J\361*\023\315P\373\303\3339\314[r0\307\316\003@\3008\b\371\256\356c\\\0176\326.\352_\275\a\340G\215\253\023\354\231\237\257U\255yi@\332l\322H{`>\372\216\342n\344\372*\234\314\242\360\020O>k\033\274\253\177\345\321D\366\211\\\342]"
+}
+timestamp {
+  seconds: 39597
+  nanos: 18588815
+}
+
+Received message inside not request block: message_type: 13
+source: 1
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: "\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370"
+extra_data {
+  key: 1001
+  value: "\004\000@YD\231\344\351t\361\240@\253\005\017GWb!\250\037\211OfV\314\215\370\347\277F\301\0205\025\307\312\372N\317sD\274\315x\217@;a\256\223\205\201T\365\256b#\240\272\314<\352\231U\231\367\002@\341eV\215\302\321\006|\364\211\"\214Oc\351\310\317Gw\275\303\b\266\177\221\v\002q\022\32192i\212mB7\353\224\325+T\360\343m\363{\345J\361*\023\315P\373\303\3339\314[r0\307\316\003@\3008\b\371\256\356c\\\0176\326.\352_\275\a\340G\215\253\023\354\231\237\257U\255yi@\332l\322H{`>\372\216\342n\344\372*\234\314\242\360\020O>k\033\274\253\177\345\321D\366\211\\\342]"
+}
+timestamp {
+  seconds: 39597
+  nanos: 18588815
+}
+
+Valid message: message_type: 13
+source: 1
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: "\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370"
+extra_data {
+  key: 1001
+  value: "\004\000@YD\231\344\351t\361\240@\253\005\017GWb!\250\037\211OfV\314\215\370\347\277F\301\0205\025\307\312\372N\317sD\274\315x\217@;a\256\223\205\201T\365\256b#\240\272\314<\352\231U\231\367\002@\341eV\215\302\321\006|\364\211\"\214Oc\351\310\317Gw\275\303\b\266\177\221\v\002q\022\32192i\212mB7\353\224\325+T\360\343m\363{\345J\361*\023\315P\373\303\3339\314[r0\307\316\003@\3008\b\371\256\356c\\\0176\326.\352_\275\a\340G\215\253\023\354\231\237\257U\255yi@\332l\322H{`>\372\216\342n\344\372*\234\314\242\360\020O>k\033\274\253\177\345\321D\366\211\\\342]"
+}
+timestamp {
+  seconds: 39597
+  nanos: 18588815
+}
+
+Tallying message: message_type: 13
+source: 1
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: "\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370"
+extra_data {
+  key: 1001
+  value: "\004\000@YD\231\344\351t\361\240@\253\005\017GWb!\250\037\211OfV\314\215\370\347\277F\301\0205\025\307\312\372N\317sD\274\315x\217@;a\256\223\205\201T\365\256b#\240\272\314<\352\231U\231\367\002@\341eV\215\302\321\006|\364\211\"\214Oc\351\310\317Gw\275\303\b\266\177\221\v\002q\022\32192i\212mB7\353\224\325+T\360\343m\363{\345J\361*\023\315P\373\303\3339\314[r0\307\316\003@\3008\b\371\256\356c\\\0176\326.\352_\275\a\340G\215\253\023\354\231\237\257U\255yi@\332l\322H{`>\372\216\342n\344\372*\234\314\242\360\020O>k\033\274\253\177\345\321D\366\211\\\342]"
+}
+timestamp {
+  seconds: 39597
+  nanos: 18588815
+}
+
+Tallying message: message_type: 13
+source: 1
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+extra_data {
+  key: 1001
+  value: "\004\000@YD\231\344\351t\361\240@\253\005\017GWb!\250\037\211OfV\314\215\370\347\277F\301\0205\025\307\312\372N\317sD\274\315x\217@;a\256\223\205\201T\365\256b#\240\272\314<\352\231U\231\367\002@\341eV\215\302\321\006|\364\211\"\214Oc\351\310\317Gw\275\303\b\266\177\221\v\002q\022\32192i\212mB7\353\224\325+T\360\343m\363{\345J\361*\023\315P\373\303\3339\314[r0\307\316\003@\3008\b\371\256\356c\\\0176\326.\352_\275\a\340G\215\253\023\354\231\237\257U\255yi@\332l\322H{`>\372\216\342n\344\372*\234\314\242\360\020O>k\033\274\253\177\345\321D\366\211\\\342]"
+}
+timestamp {
+  seconds: 39597
+  nanos: 18588815
+}
+
+Running state update loop for seqnum: 0
+For some reason I'm here 3 and seqnum: 0
+Calling state update from staeUpdateLoop
+Inside state update for seqnum: 0
+Adding seqnum to updating: 0
+Inside while loop
+ Printing roles: 
+Role: 0
+Role: 1
+Role: 3
+Inside pending requests1
+Inside pending requests3
+State: pbft_wait_prepare
+Candidate is null
+Candidate is null
+Transition: [from pbft_wait_prepare to pbft_wait_commit, condition=com.gbft.framework.statemachine.Condition@6988fd24, updateMode=none, responses=[(3,14)], extraTally=[]]
+Inside pending requests4
+Condition type: 1
+The message type is: 13
+Seqnum: 0 QuorumId: 13
+Printing all elements of counter
+Seqnum: 0
+MessageType: 0
+Viewnum: 0
+Digest: <ByteString@1ee25d86 size=32 contents="\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370">
+Node: 0
+MessageType: 12
+Viewnum: 0
+Digest: <ByteString@1ee25d86 size=32 contents="\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370">
+Node: 0
+MessageType: 13
+Viewnum: 0
+Digest: <ByteString@1ee25d86 size=32 contents="\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370">
+Node: 0
+Node: 1
+Node: 2
+Returning from here2 is null
+Inside checkMessageTally: seqnum: 0, quorumId: com.gbft.framework.utils.MessageTally$QuorumId@557, viewnum: 0, checkview: 0
+Inside pending requests8 + conditionMet: true
+Currently at Role: 3 MessageType: 14
+My source is: 0
+My messsage type is: 14
+My targets are: [0, 1, 2, 3]
+Current targets: [0, 1, 2, 3]
+Sending message: message_type: 14
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: "\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370"
+extra_data {
+  key: 1001
+  value: "\004\001@\004\212d\2157\264\003(+\025\202\034\305\332{\r\v\2421\2767Kk${,\346TV\\\234\021\f\326\252(D\352\243\237\273G\005@\215\275\027\275?\322\221\002\215\363\275>-%4\267&\363\247\206\002@B\301\315P_\225\017e\207\201w\004Y?p\316CJ\342\323o\313Q\270K\256\373\302\251\356io]\237\311,\261\215@V/Q\rG\336`\233j\220\236\rE\236\306\356\274\301LPB\373\\\r}\003@\200\035\373\223\275\025\317\036g\037\036t\305S!\323\373^w\356\313-|\270\300c\317m\231\320\357+\000W\227\365\204\336\334\201\373m\350\214\006f%z\255\337G\313\205\315g\353OH\"\f\241\205\264\306"
+}
+timestamp {
+  seconds: 39597
+  nanos: 64329770
+}
+
+DirectPipelinePlugin.sendMessage
+Received request: message_type: 14
+source: 1
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: "\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370"
+extra_data {
+  key: 1001
+  value: "\004\000@\260\333 \t\225\362\036\231\230K\224\234t\357\216\317\242;\323\231\274\034\233\231\037\005b\2236\234\016\223\365\304\233`\030|\200R\340\016\331|<\321A\a\005\227\275=\356|z\223\216\331Y\000\023\361<M\002@\332\257\316\311\035\213\355\313\252\362\3056m\263B}e(\300\f\332\345\365\326%\344\262\'\220QX\312\020(\223\325\337eD\325\246\0004\364\252V\271\357\037\243.\aKS\033\003\375O\252\\)Z\016\375\003@Q\242\206\311M\201\346Q\343\200&\256JD-\'\376z\bUo\030/\313\002\203m\272\022\335:\260>\305\027\317|\303\315\017\271&C\261\v\225\003Q\006\n\325\214f\267\372\031\300#\377K\261\335\206<"
+}
+timestamp {
+  seconds: 39597
+  nanos: 41439676
+}
+
+16:42:47.785  Found target: [0, 1, 2, 3]
+16:42:47.785  Message event received in 0
+In the continue block
+In the continue block
+In the continue block
+In the continue block
+Going to process: message_type: 14
+source: 1
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: "\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370"
+extra_data {
+  key: 1001
+  value: "\004\000@\260\333 \t\225\362\036\231\230K\224\234t\357\216\317\242;\323\231\274\034\233\231\037\005b\2236\234\016\223\365\304\233`\030|\200R\340\016\331|<\321A\a\005\227\275=\356|z\223\216\331Y\000\023\361<M\002@\332\257\316\311\035\213\355\313\252\362\3056m\263B}e(\300\f\332\345\365\326%\344\262\'\220QX\312\020(\223\325\337eD\325\246\0004\364\252V\271\357\037\243.\aKS\033\003\375O\252\\)Z\016\375\003@Q\242\206\311M\201\346Q\343\200&\256JD-\'\376z\bUo\030/\313\002\203m\272\022\335:\260>\305\027\317|\303\315\017\271&C\261\v\225\003Q\006\n\325\214f\267\372\031\300#\377K\261\335\206<"
+}
+timestamp {
+  seconds: 39597
+  nanos: 41439676
+}
+
+Verifying MAC for source: 1
+Secret Key: [B@10fa2540
+Sending event to 1 at 127.0.0.1:6022
+Using connection - Sending event to 1 at 127.0.0.1:6022
+Sending event to 2 at 127.0.0.1:6023
+Using connection - Sending event to 2 at 127.0.0.1:6023
+Sending event to 3 at 127.0.0.1:6024
+Using connection - Sending event to 3 at 127.0.0.1:6024
+Message event received in 0
+MAC validation successful
+Processed: message_type: 14
+source: 1
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: "\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370"
+extra_data {
+  key: 1001
+  value: "\004\000@\260\333 \t\225\362\036\231\230K\224\234t\357\216\317\242;\323\231\274\034\233\231\037\005b\2236\234\016\223\365\304\233`\030|\200R\340\016\331|<\321A\a\005\227\275=\356|z\223\216\331Y\000\023\361<M\002@\332\257\316\311\035\213\355\313\252\362\3056m\263B}e(\300\f\332\345\365\326%\344\262\'\220QX\312\020(\223\325\337eD\325\246\0004\364\252V\271\357\037\243.\aKS\033\003\375O\252\\)Z\016\375\003@Q\242\206\311M\201\346Q\343\200&\256JD-\'\376z\bUo\030/\313\002\203m\272\022\335:\260>\305\027\317|\303\315\017\271&C\261\v\225\003Q\006\n\325\214f\267\372\031\300#\377K\261\335\206<"
+}
+timestamp {
+  seconds: 39597
+  nanos: 41439676
+}
+
+Received message inside not request block: message_type: 14
+source: 1
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: "\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370"
+extra_data {
+  key: 1001
+  value: "\004\000@\260\333 \t\225\362\036\231\230K\224\234t\357\216\317\242;\323\231\274\034\233\231\037\005b\2236\234\016\223\365\304\233`\030|\200R\340\016\331|<\321A\a\005\227\275=\356|z\223\216\331Y\000\023\361<M\002@\332\257\316\311\035\213\355\313\252\362\3056m\263B}e(\300\f\332\345\365\326%\344\262\'\220QX\312\020(\223\325\337eD\325\246\0004\364\252V\271\357\037\243.\aKS\033\003\375O\252\\)Z\016\375\003@Q\242\206\311M\201\346Q\343\200&\256JD-\'\376z\bUo\030/\313\002\203m\272\022\335:\260>\305\027\317|\303\315\017\271&C\261\v\225\003Q\006\n\325\214f\267\372\031\300#\377K\261\335\206<"
+}
+timestamp {
+  seconds: 39597
+  nanos: 41439676
+}
+
+Valid message: message_type: 14
+source: 1
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: "\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370"
+extra_data {
+  key: 1001
+  value: "\004\000@\260\333 \t\225\362\036\231\230K\224\234t\357\216\317\242;\323\231\274\034\233\231\037\005b\2236\234\016\223\365\304\233`\030|\200R\340\016\331|<\321A\a\005\227\275=\356|z\223\216\331Y\000\023\361<M\002@\332\257\316\311\035\213\355\313\252\362\3056m\263B}e(\300\f\332\345\365\326%\344\262\'\220QX\312\020(\223\325\337eD\325\246\0004\364\252V\271\357\037\243.\aKS\033\003\375O\252\\)Z\016\375\003@Q\242\206\311M\201\346Q\343\200&\256JD-\'\376z\bUo\030/\313\002\203m\272\022\335:\260>\305\027\317|\303\315\017\271&C\261\v\225\003Q\006\n\325\214f\267\372\031\300#\377K\261\335\206<"
+}
+timestamp {
+  seconds: 39597
+  nanos: 41439676
+}
+
+Tallying message: message_type: 14
+source: 1
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: "\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370"
+extra_data {
+  key: 1001
+  value: "\004\000@\260\333 \t\225\362\036\231\230K\224\234t\357\216\317\242;\323\231\274\034\233\231\037\005b\2236\234\016\223\365\304\233`\030|\200R\340\016\331|<\321A\a\005\227\275=\356|z\223\216\331Y\000\023\361<M\002@\332\257\316\311\035\213\355\313\252\362\3056m\263B}e(\300\f\332\345\365\326%\344\262\'\220QX\312\020(\223\325\337eD\325\246\0004\364\252V\271\357\037\243.\aKS\033\003\375O\252\\)Z\016\375\003@Q\242\206\311M\201\346Q\343\200&\256JD-\'\376z\bUo\030/\313\002\203m\272\022\335:\260>\305\027\317|\303\315\017\271&C\261\v\225\003Q\006\n\325\214f\267\372\031\300#\377K\261\335\206<"
+}
+timestamp {
+  seconds: 39597
+  nanos: 41439676
+}
+
+Tallying message: message_type: 14
+source: 1
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+extra_data {
+  key: 1001
+  value: "\004\000@\260\333 \t\225\362\036\231\230K\224\234t\357\216\317\242;\323\231\274\034\233\231\037\005b\2236\234\016\223\365\304\233`\030|\200R\340\016\331|<\321A\a\005\227\275=\356|z\223\216\331Y\000\023\361<M\002@\332\257\316\311\035\213\355\313\252\362\3056m\263B}e(\300\f\332\345\365\326%\344\262\'\220QX\312\020(\223\325\337eD\325\246\0004\364\252V\271\357\037\243.\aKS\033\003\375O\252\\)Z\016\375\003@Q\242\206\311M\201\346Q\343\200&\256JD-\'\376z\bUo\030/\313\002\203m\272\022\335:\260>\305\027\317|\303\315\017\271&C\261\v\225\003Q\006\n\325\214f\267\372\031\300#\377K\261\335\206<"
+}
+timestamp {
+  seconds: 39597
+  nanos: 41439676
+}
+
+Running state update loop for seqnum: 0
+For some reason I'm here 3 and seqnum: 0
+Calling state update from staeUpdateLoop
+Inside state update for seqnum: 0
+Returning null as updating.contains(seqnum)
+Targets: [0, 1, 2, 3] for message: message_type: 14
+source: 2
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: "\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370"
+extra_data {
+  key: 1001
+  value: "\004\000@\252\341+\270\t-\211\255%\342\360p\354k\236\323\032\350\311\3605Y\3059\274\262\323\316\a\021ai\346qU\337\"\337eA-_\202\004\\\233\030\361B\354`\261\000t\315l|\0369?\362\315\216\324\001@p\036\377\324\244Gp\2407\331\236:\036C\202\246q.\253ql0|B\230\237\324\r\023\243\215v>V\252l\260h\212\t\252\217\2204#w\025\373\\a\367\321\305\217\247\310d?\245\320^\372e\366\003@f\377\265WD \327\n\021\304\261?j\350\223m\221D\331\v\247B\2321\244\265\025}\205:\271\035\1774\303\373\356j+\212O\221\361M\241\030\305\006\317l#(~\f\311\203\004\0171\024Q\3125\025"
+}
+timestamp {
+  seconds: 39597
+  nanos: 55476194
+}
+
+Tallying message: message_type: 14
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: "\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370"
+extra_data {
+  key: 1001
+  value: "\004\001@\004\212d\2157\264\003(+\025\202\034\305\332{\r\v\2421\2767Kk${,\346TV\\\234\021\f\326\252(D\352\243\237\273G\005@\215\275\027\275?\322\221\002\215\363\275>-%4\267&\363\247\206\002@B\301\315P_\225\017e\207\201w\004Y?p\316CJ\342\323o\313Q\270K\256\373\302\251\356io]\237\311,\261\215@V/Q\rG\336`\233j\220\236\rE\236\306\356\274\301LPB\373\\\r}\003@\200\035\373\223\275\025\317\036g\037\036t\305S!\323\373^w\356\313-|\270\300c\317m\231\320\357+\000W\227\365\204\336\334\201\373m\350\214\006f%z\255\337G\313\205\315g\353OH\"\f\241\205\264\306"
+}
+timestamp {
+  seconds: 39597
+  nanos: 64329770
+}
+
+Tallying message: message_type: 14
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+extra_data {
+  key: 1001
+  value: "\004\001@\004\212d\2157\264\003(+\025\202\034\305\332{\r\v\2421\2767Kk${,\346TV\\\234\021\f\326\252(D\352\243\237\273G\005@\215\275\027\275?\322\221\002\215\363\275>-%4\267&\363\247\206\002@B\301\315P_\225\017e\207\201w\004Y?p\316CJ\342\323o\313Q\270K\256\373\302\251\356io]\237\311,\261\215@V/Q\rG\336`\233j\220\236\rE\236\306\356\274\301LPB\373\\\r}\003@\200\035\373\223\275\025\317\036g\037\036t\305S!\323\373^w\356\313-|\270\300c\317m\231\320\357+\000W\227\365\204\336\334\201\373m\350\214\006f%z\255\337G\313\205\315g\353OH\"\f\241\205\264\306"
+}
+timestamp {
+  seconds: 39597
+  nanos: 64329770
+}
+
+Inside while loop
+ Printing roles: 
+Role: 0
+Role: 1
+Role: 3
+Inside pending requests1
+Inside pending requests3
+State: pbft_wait_commit
+Candidate is null
+Candidate is null
+Transition: [from pbft_wait_commit to executed, condition=com.gbft.framework.statemachine.Condition@1e3dd92f, updateMode=sequence, responses=[(4,1)], extraTally=[]]
+Inside pending requests4
+Condition type: 1
+The message type is: 14
+Seqnum: 0 QuorumId: 14
+Printing all elements of counter
+Seqnum: 0
+MessageType: 0
+Viewnum: 0
+Digest: <ByteString@1ee25d86 size=32 contents="\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370">
+Node: 0
+MessageType: 12
+Viewnum: 0
+Digest: <ByteString@1ee25d86 size=32 contents="\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370">
+Node: 0
+MessageType: 13
+Viewnum: 0
+Digest: <ByteString@1ee25d86 size=32 contents="\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370">
+Node: 0
+Node: 1
+Node: 2
+MessageType: 14
+Viewnum: 0
+Digest: <ByteString@1a024e30 size=32 contents="\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370">
+Node: 0
+Node: 1
+Returning from here2 is null
+Inside checkMessageTally: seqnum: 0, quorumId: com.gbft.framework.utils.MessageTally$QuorumId@576, viewnum: null, checkview: 0
+Inside pending requests8 + conditionMet: false
+Adding seqnum to toUpdate2: 0
+This is causing issue for seqnum: 0
+Inside state update for seqnum: 0
+Adding seqnum to updating: 0
+Inside while loop
+ Printing roles: 
+Role: 0
+Role: 1
+Role: 3
+Inside pending requests1
+Inside pending requests3
+State: pbft_wait_commit
+Candidate is null
+Candidate is null
+Transition: [from pbft_wait_commit to executed, condition=com.gbft.framework.statemachine.Condition@1e3dd92f, updateMode=sequence, responses=[(4,1)], extraTally=[]]
+Inside pending requests4
+Condition type: 1
+The message type is: 14
+Seqnum: 0 QuorumId: 14
+Printing all elements of counter
+Seqnum: 0
+MessageType: 0
+Viewnum: 0
+Digest: <ByteString@1ee25d86 size=32 contents="\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370">
+Node: 0
+MessageType: 12
+Viewnum: 0
+Digest: <ByteString@1ee25d86 size=32 contents="\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370">
+Node: 0
+MessageType: 13
+Viewnum: 0
+Digest: <ByteString@1ee25d86 size=32 contents="\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370">
+Node: 0
+Node: 1
+Node: 2
+MessageType: 14
+Viewnum: 0
+Digest: <ByteString@1a024e30 size=32 contents="\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370">
+Node: 0
+Node: 1
+Returning from here2 is null
+Inside checkMessageTally: seqnum: 0, quorumId: com.gbft.framework.utils.MessageTally$QuorumId@576, viewnum: null, checkview: 0
+Inside pending requests8 + conditionMet: false
+Received request: message_type: 14
+source: 2
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: "\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370"
+extra_data {
+  key: 1001
+  value: "\004\000@\252\341+\270\t-\211\255%\342\360p\354k\236\323\032\350\311\3605Y\3059\274\262\323\316\a\021ai\346qU\337\"\337eA-_\202\004\\\233\030\361B\354`\261\000t\315l|\0369?\362\315\216\324\001@p\036\377\324\244Gp\2407\331\236:\036C\202\246q.\253ql0|B\230\237\324\r\023\243\215v>V\252l\260h\212\t\252\217\2204#w\025\373\\a\367\321\305\217\247\310d?\245\320^\372e\366\003@f\377\265WD \327\n\021\304\261?j\350\223m\221D\331\v\247B\2321\244\265\025}\205:\271\035\1774\303\373\356j+\212O\221\361M\241\030\305\006\317l#(~\f\311\203\004\0171\024Q\3125\025"
+}
+timestamp {
+  seconds: 39597
+  nanos: 55476194
+}
+
+Going to process: message_type: 14
+source: 2
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: "\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370"
+extra_data {
+  key: 1001
+  value: "\004\000@\252\341+\270\t-\211\255%\342\360p\354k\236\323\032\350\311\3605Y\3059\274\262\323\316\a\021ai\346qU\337\"\337eA-_\202\004\\\233\030\361B\354`\261\000t\315l|\0369?\362\315\216\324\001@p\036\377\324\244Gp\2407\331\236:\036C\202\246q.\253ql0|B\230\237\324\r\023\243\215v>V\252l\260h\212\t\252\217\2204#w\025\373\\a\367\321\305\217\247\310d?\245\320^\372e\366\003@f\377\265WD \327\n\021\304\261?j\350\223m\221D\331\v\247B\2321\244\265\025}\205:\271\035\1774\303\373\356j+\212O\221\361M\241\030\305\006\317l#(~\f\311\203\004\0171\024Q\3125\025"
+}
+timestamp {
+  seconds: 39597
+  nanos: 55476194
+}
+
+Verifying MAC for source: 2
+Secret Key: [B@3016ef13
+MAC validation successful
+Processed: message_type: 14
+source: 2
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: "\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370"
+extra_data {
+  key: 1001
+  value: "\004\000@\252\341+\270\t-\211\255%\342\360p\354k\236\323\032\350\311\3605Y\3059\274\262\323\316\a\021ai\346qU\337\"\337eA-_\202\004\\\233\030\361B\354`\261\000t\315l|\0369?\362\315\216\324\001@p\036\377\324\244Gp\2407\331\236:\036C\202\246q.\253ql0|B\230\237\324\r\023\243\215v>V\252l\260h\212\t\252\217\2204#w\025\373\\a\367\321\305\217\247\310d?\245\320^\372e\366\003@f\377\265WD \327\n\021\304\261?j\350\223m\221D\331\v\247B\2321\244\265\025}\205:\271\035\1774\303\373\356j+\212O\221\361M\241\030\305\006\317l#(~\f\311\203\004\0171\024Q\3125\025"
+}
+timestamp {
+  seconds: 39597
+  nanos: 55476194
+}
+
+Received message inside not request block: message_type: 14
+source: 2
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: "\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370"
+extra_data {
+  key: 1001
+  value: "\004\000@\252\341+\270\t-\211\255%\342\360p\354k\236\323\032\350\311\3605Y\3059\274\262\323\316\a\021ai\346qU\337\"\337eA-_\202\004\\\233\030\361B\354`\261\000t\315l|\0369?\362\315\216\324\001@p\036\377\324\244Gp\2407\331\236:\036C\202\246q.\253ql0|B\230\237\324\r\023\243\215v>V\252l\260h\212\t\252\217\2204#w\025\373\\a\367\321\305\217\247\310d?\245\320^\372e\366\003@f\377\265WD \327\n\021\304\261?j\350\223m\221D\331\v\247B\2321\244\265\025}\205:\271\035\1774\303\373\356j+\212O\221\361M\241\030\305\006\317l#(~\f\311\203\004\0171\024Q\3125\025"
+}
+timestamp {
+  seconds: 39597
+  nanos: 55476194
+}
+
+Valid message: message_type: 14
+source: 2
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: "\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370"
+extra_data {
+  key: 1001
+  value: "\004\000@\252\341+\270\t-\211\255%\342\360p\354k\236\323\032\350\311\3605Y\3059\274\262\323\316\a\021ai\346qU\337\"\337eA-_\202\004\\\233\030\361B\354`\261\000t\315l|\0369?\362\315\216\324\001@p\036\377\324\244Gp\2407\331\236:\036C\202\246q.\253ql0|B\230\237\324\r\023\243\215v>V\252l\260h\212\t\252\217\2204#w\025\373\\a\367\321\305\217\247\310d?\245\320^\372e\366\003@f\377\265WD \327\n\021\304\261?j\350\223m\221D\331\v\247B\2321\244\265\025}\205:\271\035\1774\303\373\356j+\212O\221\361M\241\030\305\006\317l#(~\f\311\203\004\0171\024Q\3125\025"
+}
+timestamp {
+  seconds: 39597
+  nanos: 55476194
+}
+
+Tallying message: message_type: 14
+source: 2
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: "\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370"
+extra_data {
+  key: 1001
+  value: "\004\000@\252\341+\270\t-\211\255%\342\360p\354k\236\323\032\350\311\3605Y\3059\274\262\323\316\a\021ai\346qU\337\"\337eA-_\202\004\\\233\030\361B\354`\261\000t\315l|\0369?\362\315\216\324\001@p\036\377\324\244Gp\2407\331\236:\036C\202\246q.\253ql0|B\230\237\324\r\023\243\215v>V\252l\260h\212\t\252\217\2204#w\025\373\\a\367\321\305\217\247\310d?\245\320^\372e\366\003@f\377\265WD \327\n\021\304\261?j\350\223m\221D\331\v\247B\2321\244\265\025}\205:\271\035\1774\303\373\356j+\212O\221\361M\241\030\305\006\317l#(~\f\311\203\004\0171\024Q\3125\025"
+}
+timestamp {
+  seconds: 39597
+  nanos: 55476194
+}
+
+Tallying message: message_type: 14
+source: 2
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+extra_data {
+  key: 1001
+  value: "\004\000@\252\341+\270\t-\211\255%\342\360p\354k\236\323\032\350\311\3605Y\3059\274\262\323\316\a\021ai\346qU\337\"\337eA-_\202\004\\\233\030\361B\354`\261\000t\315l|\0369?\362\315\216\324\001@p\036\377\324\244Gp\2407\331\236:\036C\202\246q.\253ql0|B\230\237\324\r\023\243\215v>V\252l\260h\212\t\252\217\2204#w\025\373\\a\367\321\305\217\247\310d?\245\320^\372e\366\003@f\377\265WD \327\n\021\304\261?j\350\223m\221D\331\v\247B\2321\244\265\025}\205:\271\035\1774\303\373\356j+\212O\221\361M\241\030\305\006\317l#(~\f\311\203\004\0171\024Q\3125\025"
+}
+timestamp {
+  seconds: 39597
+  nanos: 55476194
+}
+
+Running state update loop for seqnum: 0
+For some reason I'm here 3 and seqnum: 0
+Calling state update from staeUpdateLoop
+Inside state update for seqnum: 0
+Adding seqnum to updating: 0
+Inside while loop
+ Printing roles: 
+Role: 0
+Role: 1
+Role: 3
+Inside pending requests1
+Inside pending requests3
+State: pbft_wait_commit
+Candidate is null
+Candidate is null
+Transition: [from pbft_wait_commit to executed, condition=com.gbft.framework.statemachine.Condition@1e3dd92f, updateMode=sequence, responses=[(4,1)], extraTally=[]]
+Inside pending requests4
+Condition type: 1
+The message type is: 14
+Seqnum: 0 QuorumId: 14
+Printing all elements of counter
+Seqnum: 0
+MessageType: 0
+Viewnum: 0
+Digest: <ByteString@1ee25d86 size=32 contents="\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370">
+Node: 0
+MessageType: 12
+Viewnum: 0
+Digest: <ByteString@1ee25d86 size=32 contents="\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370">
+Node: 0
+MessageType: 13
+Viewnum: 0
+Digest: <ByteString@1ee25d86 size=32 contents="\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370">
+Node: 0
+Node: 1
+Node: 2
+MessageType: 14
+Viewnum: 0
+Digest: <ByteString@1a024e30 size=32 contents="\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370">
+Node: 0
+Node: 1
+Node: 2
+Returning from here2 is null
+Inside checkMessageTally: seqnum: 0, quorumId: com.gbft.framework.utils.MessageTally$QuorumId@576, viewnum: 0, checkview: 0
+Inside pending requests8 + conditionMet: true
+Currently at Role: 4 MessageType: 1
+My source is: 0
+My messsage type is: 1
+My targets are: [4]
+Inside client response and targets: [16]
+Sending message: message_type: 1
+targets: 4
+requests {
+  client: 16
+  request_num: 11
+  record: 11
+  operation: SUB
+  value: 57
+  timestamp {
+    seconds: 39596
+    nanos: 758500127
+  }
+}
+digest: "\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370"
+reply_data {
+  key: 11
+  value: 943
+}
+extra_data {
+  key: 1001
+  value: "\001\004@\336\231\355\254\346\337\373\330\335\017\326T!\325/\343\336\030\221\267\342`Vx{j?\020n\030\241\2445UT\024R\301\206\236tT\313Nw|\366\376\251]\377\370knL?\204\243\037@\2244\362\324"
+}
+timestamp {
+  seconds: 39597
+  nanos: 108995532
+}
+
+DirectPipelinePlugin.sendMessage
+16:42:47.834  Found target: [16]
+Sending event to 16 at 127.0.0.1:5051
+Using connection - Sending event to 16 at 127.0.0.1:5051
+Message event received in 0
+Targets: [0, 1, 2, 3] for message: message_type: 13
+source: 3
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: "\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370"
+extra_data {
+  key: 1001
+  value: "\004\000@nh2\367VQ\311q\3768\2571\353k)}\321\273\245:c6\262g\305\317wL\240\244\317\214UKj\232\273uU\370\325\020\333K\364n1\230\306\037\352O\347\177)\225\243\364\255\307\020xC\334\001@R\354r\024\245\264\030\022\0234\3473&\203\016\334\254\246[\276\357Yx\251\353Cm\263\352\340\316\353\372\034W\347\343V\215\a`R\026D\322\215\315\207(\331\n\016\223\360\360\304\337C\376\203wX\373\343\002@\rKam-\253Z\327\314\350\024\211\314\307\266\253\242\341\034c\335\2501\213,!\365aZ\353\203T\347\350S\362\332\203\355cL]~\221\320\023o\231u\255\212\244\234\023g>\267\345\344\334\200\346\306\202"
+}
+timestamp {
+  seconds: 39597
+  nanos: 69614191
+}
+
+Received request: message_type: 13
+source: 3
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: "\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370"
+extra_data {
+  key: 1001
+  value: "\004\000@nh2\367VQ\311q\3768\2571\353k)}\321\273\245:c6\262g\305\317wL\240\244\317\214UKj\232\273uU\370\325\020\333K\364n1\230\306\037\352O\347\177)\225\243\364\255\307\020xC\334\001@R\354r\024\245\264\030\022\0234\3473&\203\016\334\254\246[\276\357Yx\251\353Cm\263\352\340\316\353\372\034W\347\343V\215\a`R\026D\322\215\315\207(\331\n\016\223\360\360\304\337C\376\203wX\373\343\002@\rKam-\253Z\327\314\350\024\211\314\307\266\253\242\341\034c\335\2501\213,!\365aZ\353\203T\347\350S\362\332\203\355cL]~\221\320\023o\231u\255\212\244\234\023g>\267\345\344\334\200\346\306\202"
+}
+timestamp {
+  seconds: 39597
+  nanos: 69614191
+}
+
+Going to process: message_type: 13
+source: 3
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: "\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370"
+extra_data {
+  key: 1001
+  value: "\004\000@nh2\367VQ\311q\3768\2571\353k)}\321\273\245:c6\262g\305\317wL\240\244\317\214UKj\232\273uU\370\325\020\333K\364n1\230\306\037\352O\347\177)\225\243\364\255\307\020xC\334\001@R\354r\024\245\264\030\022\0234\3473&\203\016\334\254\246[\276\357Yx\251\353Cm\263\352\340\316\353\372\034W\347\343V\215\a`R\026D\322\215\315\207(\331\n\016\223\360\360\304\337C\376\203wX\373\343\002@\rKam-\253Z\327\314\350\024\211\314\307\266\253\242\341\034c\335\2501\213,!\365aZ\353\203T\347\350S\362\332\203\355cL]~\221\320\023o\231u\255\212\244\234\023g>\267\345\344\334\200\346\306\202"
+}
+timestamp {
+  seconds: 39597
+  nanos: 69614191
+}
+
+Verifying MAC for source: 3
+Secret Key: [B@7b6729fc
+MAC validation successful
+Processed: message_type: 13
+source: 3
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: "\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370"
+extra_data {
+  key: 1001
+  value: "\004\000@nh2\367VQ\311q\3768\2571\353k)}\321\273\245:c6\262g\305\317wL\240\244\317\214UKj\232\273uU\370\325\020\333K\364n1\230\306\037\352O\347\177)\225\243\364\255\307\020xC\334\001@R\354r\024\245\264\030\022\0234\3473&\203\016\334\254\246[\276\357Yx\251\353Cm\263\352\340\316\353\372\034W\347\343V\215\a`R\026D\322\215\315\207(\331\n\016\223\360\360\304\337C\376\203wX\373\343\002@\rKam-\253Z\327\314\350\024\211\314\307\266\253\242\341\034c\335\2501\213,!\365aZ\353\203T\347\350S\362\332\203\355cL]~\221\320\023o\231u\255\212\244\234\023g>\267\345\344\334\200\346\306\202"
+}
+timestamp {
+  seconds: 39597
+  nanos: 69614191
+}
+
+Received message inside not request block: message_type: 13
+source: 3
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: "\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370"
+extra_data {
+  key: 1001
+  value: "\004\000@nh2\367VQ\311q\3768\2571\353k)}\321\273\245:c6\262g\305\317wL\240\244\317\214UKj\232\273uU\370\325\020\333K\364n1\230\306\037\352O\347\177)\225\243\364\255\307\020xC\334\001@R\354r\024\245\264\030\022\0234\3473&\203\016\334\254\246[\276\357Yx\251\353Cm\263\352\340\316\353\372\034W\347\343V\215\a`R\026D\322\215\315\207(\331\n\016\223\360\360\304\337C\376\203wX\373\343\002@\rKam-\253Z\327\314\350\024\211\314\307\266\253\242\341\034c\335\2501\213,!\365aZ\353\203T\347\350S\362\332\203\355cL]~\221\320\023o\231u\255\212\244\234\023g>\267\345\344\334\200\346\306\202"
+}
+timestamp {
+  seconds: 39597
+  nanos: 69614191
+}
+
+Valid message: message_type: 13
+source: 3
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: "\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370"
+extra_data {
+  key: 1001
+  value: "\004\000@nh2\367VQ\311q\3768\2571\353k)}\321\273\245:c6\262g\305\317wL\240\244\317\214UKj\232\273uU\370\325\020\333K\364n1\230\306\037\352O\347\177)\225\243\364\255\307\020xC\334\001@R\354r\024\245\264\030\022\0234\3473&\203\016\334\254\246[\276\357Yx\251\353Cm\263\352\340\316\353\372\034W\347\343V\215\a`R\026D\322\215\315\207(\331\n\016\223\360\360\304\337C\376\203wX\373\343\002@\rKam-\253Z\327\314\350\024\211\314\307\266\253\242\341\034c\335\2501\213,!\365aZ\353\203T\347\350S\362\332\203\355cL]~\221\320\023o\231u\255\212\244\234\023g>\267\345\344\334\200\346\306\202"
+}
+timestamp {
+  seconds: 39597
+  nanos: 69614191
+}
+
+Tallying message: message_type: 13
+source: 3
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: "\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370"
+extra_data {
+  key: 1001
+  value: "\004\000@nh2\367VQ\311q\3768\2571\353k)}\321\273\245:c6\262g\305\317wL\240\244\317\214UKj\232\273uU\370\325\020\333K\364n1\230\306\037\352O\347\177)\225\243\364\255\307\020xC\334\001@R\354r\024\245\264\030\022\0234\3473&\203\016\334\254\246[\276\357Yx\251\353Cm\263\352\340\316\353\372\034W\347\343V\215\a`R\026D\322\215\315\207(\331\n\016\223\360\360\304\337C\376\203wX\373\343\002@\rKam-\253Z\327\314\350\024\211\314\307\266\253\242\341\034c\335\2501\213,!\365aZ\353\203T\347\350S\362\332\203\355cL]~\221\320\023o\231u\255\212\244\234\023g>\267\345\344\334\200\346\306\202"
+}
+timestamp {
+  seconds: 39597
+  nanos: 69614191
+}
+
+Tallying message: message_type: 13
+source: 3
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+extra_data {
+  key: 1001
+  value: "\004\000@nh2\367VQ\311q\3768\2571\353k)}\321\273\245:c6\262g\305\317wL\240\244\317\214UKj\232\273uU\370\325\020\333K\364n1\230\306\037\352O\347\177)\225\243\364\255\307\020xC\334\001@R\354r\024\245\264\030\022\0234\3473&\203\016\334\254\246[\276\357Yx\251\353Cm\263\352\340\316\353\372\034W\347\343V\215\a`R\026D\322\215\315\207(\331\n\016\223\360\360\304\337C\376\203wX\373\343\002@\rKam-\253Z\327\314\350\024\211\314\307\266\253\242\341\034c\335\2501\213,!\365aZ\353\203T\347\350S\362\332\203\355cL]~\221\320\023o\231u\255\212\244\234\023g>\267\345\344\334\200\346\306\202"
+}
+timestamp {
+  seconds: 39597
+  nanos: 69614191
+}
+
+Running state update loop for seqnum: 0
+For some reason I'm here 3 and seqnum: 0
+Calling state update from staeUpdateLoop
+Inside state update for seqnum: 0
+Returning null as seqnum <= lastExecutedSequenceNum and isExecuted(seqnum) = true
+ and isPrimary(seqnum) = falselastExecutedSequenceNum = 0
+Message event received in 0
+Targets: [0, 1, 2, 3] for message: message_type: 14
+source: 3
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: "\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370"
+extra_data {
+  key: 1001
+  value: "\004\000@\317\372$@\226\220\v{\263\362\330?k<\370\306\242c\356\363.\024\337:\270\261[\251\020\317\206\275\3176\204\024\265ry!\301\023\363\335p\345\254\020\374:K\332\a\302\226\236\312;\353\237\233q\016\247\001@\021\267Hdx\327\245\"4\272\306\a\213\204^\357\354\355p\277\254\vJ\307\260\344\377\317=\346\231D\365\245 \251\035\370\215\031\302\277fI\237\222Y\030\267\367\002\303\021{k\034\240\357\360D\032q6\316\002@\354[>\303\335\363\2154Z\304\330\226\212@\003\357\344\201ud\"\304.gq\236\016{\327\3561\'=\346\351#_\266\024j\207\246\\\021\202\332L\037\032\245*[\257\270C\361\211\235X\346\b\330?\344"
+}
+timestamp {
+  seconds: 39597
+  nanos: 171584387
+}
+
+Received request: message_type: 14
+source: 3
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: "\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370"
+extra_data {
+  key: 1001
+  value: "\004\000@\317\372$@\226\220\v{\263\362\330?k<\370\306\242c\356\363.\024\337:\270\261[\251\020\317\206\275\3176\204\024\265ry!\301\023\363\335p\345\254\020\374:K\332\a\302\226\236\312;\353\237\233q\016\247\001@\021\267Hdx\327\245\"4\272\306\a\213\204^\357\354\355p\277\254\vJ\307\260\344\377\317=\346\231D\365\245 \251\035\370\215\031\302\277fI\237\222Y\030\267\367\002\303\021{k\034\240\357\360D\032q6\316\002@\354[>\303\335\363\2154Z\304\330\226\212@\003\357\344\201ud\"\304.gq\236\016{\327\3561\'=\346\351#_\266\024j\207\246\\\021\202\332L\037\032\245*[\257\270C\361\211\235X\346\b\330?\344"
+}
+timestamp {
+  seconds: 39597
+  nanos: 171584387
+}
+
+Going to process: message_type: 14
+source: 3
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: "\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370"
+extra_data {
+  key: 1001
+  value: "\004\000@\317\372$@\226\220\v{\263\362\330?k<\370\306\242c\356\363.\024\337:\270\261[\251\020\317\206\275\3176\204\024\265ry!\301\023\363\335p\345\254\020\374:K\332\a\302\226\236\312;\353\237\233q\016\247\001@\021\267Hdx\327\245\"4\272\306\a\213\204^\357\354\355p\277\254\vJ\307\260\344\377\317=\346\231D\365\245 \251\035\370\215\031\302\277fI\237\222Y\030\267\367\002\303\021{k\034\240\357\360D\032q6\316\002@\354[>\303\335\363\2154Z\304\330\226\212@\003\357\344\201ud\"\304.gq\236\016{\327\3561\'=\346\351#_\266\024j\207\246\\\021\202\332L\037\032\245*[\257\270C\361\211\235X\346\b\330?\344"
+}
+timestamp {
+  seconds: 39597
+  nanos: 171584387
+}
+
+Verifying MAC for source: 3
+Secret Key: [B@7b6729fc
+MAC validation successful
+Processed: message_type: 14
+source: 3
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: "\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370"
+extra_data {
+  key: 1001
+  value: "\004\000@\317\372$@\226\220\v{\263\362\330?k<\370\306\242c\356\363.\024\337:\270\261[\251\020\317\206\275\3176\204\024\265ry!\301\023\363\335p\345\254\020\374:K\332\a\302\226\236\312;\353\237\233q\016\247\001@\021\267Hdx\327\245\"4\272\306\a\213\204^\357\354\355p\277\254\vJ\307\260\344\377\317=\346\231D\365\245 \251\035\370\215\031\302\277fI\237\222Y\030\267\367\002\303\021{k\034\240\357\360D\032q6\316\002@\354[>\303\335\363\2154Z\304\330\226\212@\003\357\344\201ud\"\304.gq\236\016{\327\3561\'=\346\351#_\266\024j\207\246\\\021\202\332L\037\032\245*[\257\270C\361\211\235X\346\b\330?\344"
+}
+timestamp {
+  seconds: 39597
+  nanos: 171584387
+}
+
+Received message inside not request block: message_type: 14
+source: 3
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: "\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370"
+extra_data {
+  key: 1001
+  value: "\004\000@\317\372$@\226\220\v{\263\362\330?k<\370\306\242c\356\363.\024\337:\270\261[\251\020\317\206\275\3176\204\024\265ry!\301\023\363\335p\345\254\020\374:K\332\a\302\226\236\312;\353\237\233q\016\247\001@\021\267Hdx\327\245\"4\272\306\a\213\204^\357\354\355p\277\254\vJ\307\260\344\377\317=\346\231D\365\245 \251\035\370\215\031\302\277fI\237\222Y\030\267\367\002\303\021{k\034\240\357\360D\032q6\316\002@\354[>\303\335\363\2154Z\304\330\226\212@\003\357\344\201ud\"\304.gq\236\016{\327\3561\'=\346\351#_\266\024j\207\246\\\021\202\332L\037\032\245*[\257\270C\361\211\235X\346\b\330?\344"
+}
+timestamp {
+  seconds: 39597
+  nanos: 171584387
+}
+
+Valid message: message_type: 14
+source: 3
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: "\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370"
+extra_data {
+  key: 1001
+  value: "\004\000@\317\372$@\226\220\v{\263\362\330?k<\370\306\242c\356\363.\024\337:\270\261[\251\020\317\206\275\3176\204\024\265ry!\301\023\363\335p\345\254\020\374:K\332\a\302\226\236\312;\353\237\233q\016\247\001@\021\267Hdx\327\245\"4\272\306\a\213\204^\357\354\355p\277\254\vJ\307\260\344\377\317=\346\231D\365\245 \251\035\370\215\031\302\277fI\237\222Y\030\267\367\002\303\021{k\034\240\357\360D\032q6\316\002@\354[>\303\335\363\2154Z\304\330\226\212@\003\357\344\201ud\"\304.gq\236\016{\327\3561\'=\346\351#_\266\024j\207\246\\\021\202\332L\037\032\245*[\257\270C\361\211\235X\346\b\330?\344"
+}
+timestamp {
+  seconds: 39597
+  nanos: 171584387
+}
+
+Tallying message: message_type: 14
+source: 3
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+digest: "\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370"
+extra_data {
+  key: 1001
+  value: "\004\000@\317\372$@\226\220\v{\263\362\330?k<\370\306\242c\356\363.\024\337:\270\261[\251\020\317\206\275\3176\204\024\265ry!\301\023\363\335p\345\254\020\374:K\332\a\302\226\236\312;\353\237\233q\016\247\001@\021\267Hdx\327\245\"4\272\306\a\213\204^\357\354\355p\277\254\vJ\307\260\344\377\317=\346\231D\365\245 \251\035\370\215\031\302\277fI\237\222Y\030\267\367\002\303\021{k\034\240\357\360D\032q6\316\002@\354[>\303\335\363\2154Z\304\330\226\212@\003\357\344\201ud\"\304.gq\236\016{\327\3561\'=\346\351#_\266\024j\207\246\\\021\202\332L\037\032\245*[\257\270C\361\211\235X\346\b\330?\344"
+}
+timestamp {
+  seconds: 39597
+  nanos: 171584387
+}
+
+Tallying message: message_type: 14
+source: 3
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 11
+extra_data {
+  key: 1001
+  value: "\004\000@\317\372$@\226\220\v{\263\362\330?k<\370\306\242c\356\363.\024\337:\270\261[\251\020\317\206\275\3176\204\024\265ry!\301\023\363\335p\345\254\020\374:K\332\a\302\226\236\312;\353\237\233q\016\247\001@\021\267Hdx\327\245\"4\272\306\a\213\204^\357\354\355p\277\254\vJ\307\260\344\377\317=\346\231D\365\245 \251\035\370\215\031\302\277fI\237\222Y\030\267\367\002\303\021{k\034\240\357\360D\032q6\316\002@\354[>\303\335\363\2154Z\304\330\226\212@\003\357\344\201ud\"\304.gq\236\016{\327\3561\'=\346\351#_\266\024j\207\246\\\021\202\332L\037\032\245*[\257\270C\361\211\235X\346\b\330?\344"
+}
+timestamp {
+  seconds: 39597
+  nanos: 171584387
+}
+
+Running state update loop for seqnum: 0
+For some reason I'm here 3 and seqnum: 0
+Calling state update from staeUpdateLoop
+Inside state update for seqnum: 0
+Returning null as seqnum <= lastExecutedSequenceNum and isExecuted(seqnum) = true
+ and isPrimary(seqnum) = falselastExecutedSequenceNum = 0
+Message event received in 0
+Targets: [0] for message: source: 16
+targets: 0
+requests {
+  client: 16
+  request_num: 12
+  record: 2
+  operation: ADD
+  value: 57
+  timestamp {
+    seconds: 39597
+    nanos: 821226670
+  }
+}
+digest: "|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+"
+extra_data {
+  key: 1001
+  value: "\001\000@\273\217\000\177\024!eJ\301\204\324]}\321R`\321-\216\273\325\216.z\027\'|\237\347\037F\240\246\304\264\206\230S,~\316\301b\253\356\343X\361\a\2232\030\372\3666\336\311n\224\357\376xX\201"
+}
+timestamp {
+  seconds: 39597
+  nanos: 821524488
+}
+
+Received request: source: 16
+targets: 0
+requests {
+  client: 16
+  request_num: 12
+  record: 2
+  operation: ADD
+  value: 57
+  timestamp {
+    seconds: 39597
+    nanos: 821226670
+  }
+}
+digest: "|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+"
+extra_data {
+  key: 1001
+  value: "\001\000@\273\217\000\177\024!eJ\301\204\324]}\321R`\321-\216\273\325\216.z\027\'|\237\347\037F\240\246\304\264\206\230S,~\316\301b\253\356\343X\361\a\2232\030\372\3666\336\311n\224\357\376xX\201"
+}
+timestamp {
+  seconds: 39597
+  nanos: 821524488
+}
+
+Going to process: source: 16
+targets: 0
+requests {
+  client: 16
+  request_num: 12
+  record: 2
+  operation: ADD
+  value: 57
+  timestamp {
+    seconds: 39597
+    nanos: 821226670
+  }
+}
+digest: "|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+"
+extra_data {
+  key: 1001
+  value: "\001\000@\273\217\000\177\024!eJ\301\204\324]}\321R`\321-\216\273\325\216.z\027\'|\237\347\037F\240\246\304\264\206\230S,~\316\301b\253\356\343X\361\a\2232\030\372\3666\336\311n\224\357\376xX\201"
+}
+timestamp {
+  seconds: 39597
+  nanos: 821524488
+}
+
+Verifying MAC for source: 4
+Secret Key: [B@4c45257e
+MAC validation successful
+Processed: source: 16
+targets: 0
+requests {
+  client: 16
+  request_num: 12
+  record: 2
+  operation: ADD
+  value: 57
+  timestamp {
+    seconds: 39597
+    nanos: 821226670
+  }
+}
+digest: "|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+"
+extra_data {
+  key: 1001
+  value: "\001\000@\273\217\000\177\024!eJ\301\204\324]}\321R`\321-\216\273\325\216.z\027\'|\237\347\037F\240\246\304\264\206\230S,~\316\301b\253\356\343X\361\a\2232\030\372\3666\336\311n\224\357\376xX\201"
+}
+timestamp {
+  seconds: 39597
+  nanos: 821524488
+}
+
+Received request: source: 16
+targets: 0
+requests {
+  client: 16
+  request_num: 12
+  record: 2
+  operation: ADD
+  value: 57
+  timestamp {
+    seconds: 39597
+    nanos: 821226670
+  }
+}
+digest: "|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+"
+extra_data {
+  key: 1001
+  value: "\001\000@\273\217\000\177\024!eJ\301\204\324]}\321R`\321-\216\273\325\216.z\027\'|\237\347\037F\240\246\304\264\206\230S,~\316\301b\253\356\343X\361\a\2232\030\372\3666\336\311n\224\357\376xX\201"
+}
+timestamp {
+  seconds: 39597
+  nanos: 821524488
+}
+
+Inside seqnum == null
+Inserting into pending requests
+Pending requests size: 1
+callling state update for next sequence number: 1
+For some reason I'm here 4 and nextSequence: 1
+Calling state update from staeUpdateLoop
+Inside state update for seqnum: 1
+Adding seqnum to updating: 1
+Inside while loop
+ Printing roles: 
+Role: 0
+Role: 1
+Role: 3
+Inside pending requests1
+Inside pending requests3
+State: pbft_idle
+Transition: [from pbft_idle to pbft_wait_prepare, condition=com.gbft.framework.statemachine.Condition@7c2bf47e, updateMode=none, responses=[(3,12)], extraTally=[(0,13)]]
+Inside pending requests4
+Condition type: 1
+The message type is: 0
+Inside pending requests5
+Pending request size and block size: 1 10
+Inside pending requests6 and pending request size: 1
+My source is: 0
+My messsage type is: 0
+My targets are: [0]
+Inside pending requests8 and message: 
+Tallying message: sequence_num: 1
+targets: 0
+requests {
+  client: 16
+  request_num: 12
+  record: 2
+  operation: ADD
+  value: 57
+  timestamp {
+    seconds: 39597
+    nanos: 821226670
+  }
+}
+digest: "|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+"
+extra_data {
+  key: 1001
+  value: "\001"
+}
+timestamp {
+  seconds: 39597
+  nanos: 828868490
+}
+
+Tallying message: sequence_num: 1
+targets: 0
+requests {
+  client: 16
+  request_num: 12
+  record: 2
+  operation: ADD
+  value: 57
+  timestamp {
+    seconds: 39597
+    nanos: 821226670
+  }
+}
+extra_data {
+  key: 1001
+  value: "\001"
+}
+timestamp {
+  seconds: 39597
+  nanos: 828868490
+}
+
+Seqnum: 1 QuorumId: 0
+Printing all elements of counter
+Seqnum: 0
+MessageType: 0
+Viewnum: 0
+Digest: <ByteString@1ee25d86 size=32 contents="\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370">
+Node: 0
+MessageType: 12
+Viewnum: 0
+Digest: <ByteString@1ee25d86 size=32 contents="\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370">
+Node: 0
+MessageType: 13
+Viewnum: 0
+Digest: <ByteString@1ee25d86 size=32 contents="\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370">
+Node: 0
+Node: 1
+Node: 2
+Node: 3
+MessageType: 14
+Viewnum: 0
+Digest: <ByteString@1a024e30 size=32 contents="\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370">
+Node: 0
+Node: 1
+Node: 2
+Node: 3
+Seqnum: 1
+MessageType: 0
+Viewnum: 0
+Digest: <ByteString@1a5aec39 size=32 contents="|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+">
+Node: 0
+Returning from here2 is null
+Inside checkMessageTally: seqnum: 1, quorumId: com.gbft.framework.utils.MessageTally$QuorumId@3c2, viewnum: 0, checkview: 0
+Inside pending requests8 + conditionMet: true
+Currently at Role: 3 MessageType: 12
+My source is: 0
+My messsage type is: 12
+My targets are: [0, 1, 2, 3]
+Current targets: [0, 1, 2, 3]
+Inside sharded plugin: 0 4 0
+My source is: 0
+My messsage type is: 13
+My targets are: [0]
+Tallying message: sequence_num: 1
+message_type: 13
+targets: 0
+request_nums: 12
+digest: "|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+"
+extra_data {
+  key: 1001
+  value: "\001"
+}
+timestamp {
+  seconds: 39597
+  nanos: 832409119
+}
+
+Tallying message: sequence_num: 1
+message_type: 13
+targets: 0
+request_nums: 12
+extra_data {
+  key: 1001
+  value: "\001"
+}
+timestamp {
+  seconds: 39597
+  nanos: 832409119
+}
+
+Sending message: sequence_num: 1
+message_type: 12
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+requests {
+  client: 16
+  request_num: 12
+  record: 2
+  operation: ADD
+  value: 57
+  timestamp {
+    seconds: 39597
+    nanos: 821226670
+  }
+}
+digest: "|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+"
+extra_data {
+  key: 1001
+  value: "\004\001@s\027IP\226\350\332\376\274\202\322Z[(\207\330@\021\t\370\257\'\303\2205\034\307\331\364E\335\b\345\200\311\352\036\217\320)x\003\343\321\354\t^i\242Y\361\263\363\336\266\312\330P)?B\231:d\002@B9\202\312W;\206\307M \223^\271\316f\037\356\246\272A\2461\2241\344\240~u4\371}1\257_\242M\177\024N\"3\243\257Z\206z\373+\317\306\022\366\322\001\004\236\203\252\004\023h\230\240\031\003@\322\306\350!\\6\264\327\234\004T\024\374\2079\036\376f\020cP\374#\376\177\203t\022z%\215\314t\332\306\201\027\367\030\326\331\b\025\003\\\232\037\022VeY2L\0012\217_\20401\0222\bF"
+}
+timestamp {
+  seconds: 39597
+  nanos: 831270885
+}
+
+DirectPipelinePlugin.sendMessage
+16:42:48.551  Found target: [0, 1, 2, 3]
+16:42:48.551  Message event received in 0
+In the continue block
+In the continue block
+In the continue block
+In the continue block
+Sending event to 1 at 127.0.0.1:6022
+Using connection - Sending event to 1 at 127.0.0.1:6022
+Sending event to 2 at 127.0.0.1:6023
+Using connection - Sending event to 2 at 127.0.0.1:6023
+Sending event to 3 at 127.0.0.1:6024
+Using connection - Sending event to 3 at 127.0.0.1:6024
+Tallying message: sequence_num: 1
+message_type: 12
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+requests {
+  client: 16
+  request_num: 12
+  record: 2
+  operation: ADD
+  value: 57
+  timestamp {
+    seconds: 39597
+    nanos: 821226670
+  }
+}
+digest: "|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+"
+extra_data {
+  key: 1001
+  value: "\004\001@s\027IP\226\350\332\376\274\202\322Z[(\207\330@\021\t\370\257\'\303\2205\034\307\331\364E\335\b\345\200\311\352\036\217\320)x\003\343\321\354\t^i\242Y\361\263\363\336\266\312\330P)?B\231:d\002@B9\202\312W;\206\307M \223^\271\316f\037\356\246\272A\2461\2241\344\240~u4\371}1\257_\242M\177\024N\"3\243\257Z\206z\373+\317\306\022\366\322\001\004\236\203\252\004\023h\230\240\031\003@\322\306\350!\\6\264\327\234\004T\024\374\2079\036\376f\020cP\374#\376\177\203t\022z%\215\314t\332\306\201\027\367\030\326\331\b\025\003\\\232\037\022VeY2L\0012\217_\20401\0222\bF"
+}
+timestamp {
+  seconds: 39597
+  nanos: 831270885
+}
+
+Tallying message: sequence_num: 1
+message_type: 12
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+requests {
+  client: 16
+  request_num: 12
+  record: 2
+  operation: ADD
+  value: 57
+  timestamp {
+    seconds: 39597
+    nanos: 821226670
+  }
+}
+extra_data {
+  key: 1001
+  value: "\004\001@s\027IP\226\350\332\376\274\202\322Z[(\207\330@\021\t\370\257\'\303\2205\034\307\331\364E\335\b\345\200\311\352\036\217\320)x\003\343\321\354\t^i\242Y\361\263\363\336\266\312\330P)?B\231:d\002@B9\202\312W;\206\307M \223^\271\316f\037\356\246\272A\2461\2241\344\240~u4\371}1\257_\242M\177\024N\"3\243\257Z\206z\373+\317\306\022\366\322\001\004\236\203\252\004\023h\230\240\031\003@\322\306\350!\\6\264\327\234\004T\024\374\2079\036\376f\020cP\374#\376\177\203t\022z%\215\314t\332\306\201\027\367\030\326\331\b\025\003\\\232\037\022VeY2L\0012\217_\20401\0222\bF"
+}
+timestamp {
+  seconds: 39597
+  nanos: 831270885
+}
+
+Increasing next sequence by 1 1
+Inside while loop
+ Printing roles: 
+Role: 0
+Role: 1
+Role: 3
+Inside pending requests1
+Inside pending requests3
+State: pbft_wait_prepare
+Candidate is null
+Candidate is null
+Transition: [from pbft_wait_prepare to pbft_wait_commit, condition=com.gbft.framework.statemachine.Condition@6988fd24, updateMode=none, responses=[(3,14)], extraTally=[]]
+Inside pending requests4
+Condition type: 1
+The message type is: 13
+Seqnum: 1 QuorumId: 13
+Printing all elements of counter
+Seqnum: 0
+MessageType: 0
+Viewnum: 0
+Digest: <ByteString@1ee25d86 size=32 contents="\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370">
+Node: 0
+MessageType: 12
+Viewnum: 0
+Digest: <ByteString@1ee25d86 size=32 contents="\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370">
+Node: 0
+MessageType: 13
+Viewnum: 0
+Digest: <ByteString@1ee25d86 size=32 contents="\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370">
+Node: 0
+Node: 1
+Node: 2
+Node: 3
+MessageType: 14
+Viewnum: 0
+Digest: <ByteString@1a024e30 size=32 contents="\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370">
+Node: 0
+Node: 1
+Node: 2
+Node: 3
+Seqnum: 1
+MessageType: 0
+Viewnum: 0
+Digest: <ByteString@1a5aec39 size=32 contents="|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+">
+Node: 0
+MessageType: 12
+Viewnum: 0
+Digest: <ByteString@1a5aec39 size=32 contents="|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+">
+Node: 0
+MessageType: 13
+Viewnum: 0
+Digest: <ByteString@1a5aec39 size=32 contents="|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+">
+Node: 0
+Returning from here2 is null
+Inside checkMessageTally: seqnum: 1, quorumId: com.gbft.framework.utils.MessageTally$QuorumId@557, viewnum: null, checkview: 0
+Inside pending requests8 + conditionMet: false
+Message event received in 0
+Targets: [0, 1, 2, 3] for message: sequence_num: 1
+message_type: 13
+source: 3
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 12
+digest: "|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+"
+extra_data {
+  key: 1001
+  value: "\004\000@\312\241q<\372\3661&\313\r2j\3220\337\324\027\337\224\354\263\275\275\261\357\005E\274\03509\2306N\272\031\004yp\371\304\331yY\357\031\307\327z\234\326\350\242\211\260\235\313\245\255\314\036\017F\v\001@\"~\234sF\016x%Q\247\255\203>X6\312\311\270\211OLC9\364zn\177X\301\336\032\224\356\330\275M\365 \024\016\261hiJ\032\274\036%jx\343_\221\261\332\330<s\257\235\341E#\366\002@&\252\311\313m\315\231NO\256\377\364\331\257\233(\t\"4\3550\313 +\237v\327\264\004\026\226\201\271\024\016\323\233\202\316oCz\245\227\253\275s\025\027:\352d\363J\024\363\265\203\215]m\032\v\260"
+}
+timestamp {
+  seconds: 39597
+  nanos: 845206183
+}
+
+Received request: sequence_num: 1
+message_type: 13
+source: 3
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 12
+digest: "|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+"
+extra_data {
+  key: 1001
+  value: "\004\000@\312\241q<\372\3661&\313\r2j\3220\337\324\027\337\224\354\263\275\275\261\357\005E\274\03509\2306N\272\031\004yp\371\304\331yY\357\031\307\327z\234\326\350\242\211\260\235\313\245\255\314\036\017F\v\001@\"~\234sF\016x%Q\247\255\203>X6\312\311\270\211OLC9\364zn\177X\301\336\032\224\356\330\275M\365 \024\016\261hiJ\032\274\036%jx\343_\221\261\332\330<s\257\235\341E#\366\002@&\252\311\313m\315\231NO\256\377\364\331\257\233(\t\"4\3550\313 +\237v\327\264\004\026\226\201\271\024\016\323\233\202\316oCz\245\227\253\275s\025\027:\352d\363J\024\363\265\203\215]m\032\v\260"
+}
+timestamp {
+  seconds: 39597
+  nanos: 845206183
+}
+
+Going to process: sequence_num: 1
+message_type: 13
+source: 3
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 12
+digest: "|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+"
+extra_data {
+  key: 1001
+  value: "\004\000@\312\241q<\372\3661&\313\r2j\3220\337\324\027\337\224\354\263\275\275\261\357\005E\274\03509\2306N\272\031\004yp\371\304\331yY\357\031\307\327z\234\326\350\242\211\260\235\313\245\255\314\036\017F\v\001@\"~\234sF\016x%Q\247\255\203>X6\312\311\270\211OLC9\364zn\177X\301\336\032\224\356\330\275M\365 \024\016\261hiJ\032\274\036%jx\343_\221\261\332\330<s\257\235\341E#\366\002@&\252\311\313m\315\231NO\256\377\364\331\257\233(\t\"4\3550\313 +\237v\327\264\004\026\226\201\271\024\016\323\233\202\316oCz\245\227\253\275s\025\027:\352d\363J\024\363\265\203\215]m\032\v\260"
+}
+timestamp {
+  seconds: 39597
+  nanos: 845206183
+}
+
+Verifying MAC for source: 3
+Secret Key: [B@7b6729fc
+MAC validation successful
+Processed: sequence_num: 1
+message_type: 13
+source: 3
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 12
+digest: "|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+"
+extra_data {
+  key: 1001
+  value: "\004\000@\312\241q<\372\3661&\313\r2j\3220\337\324\027\337\224\354\263\275\275\261\357\005E\274\03509\2306N\272\031\004yp\371\304\331yY\357\031\307\327z\234\326\350\242\211\260\235\313\245\255\314\036\017F\v\001@\"~\234sF\016x%Q\247\255\203>X6\312\311\270\211OLC9\364zn\177X\301\336\032\224\356\330\275M\365 \024\016\261hiJ\032\274\036%jx\343_\221\261\332\330<s\257\235\341E#\366\002@&\252\311\313m\315\231NO\256\377\364\331\257\233(\t\"4\3550\313 +\237v\327\264\004\026\226\201\271\024\016\323\233\202\316oCz\245\227\253\275s\025\027:\352d\363J\024\363\265\203\215]m\032\v\260"
+}
+timestamp {
+  seconds: 39597
+  nanos: 845206183
+}
+
+Received message inside not request block: sequence_num: 1
+message_type: 13
+source: 3
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 12
+digest: "|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+"
+extra_data {
+  key: 1001
+  value: "\004\000@\312\241q<\372\3661&\313\r2j\3220\337\324\027\337\224\354\263\275\275\261\357\005E\274\03509\2306N\272\031\004yp\371\304\331yY\357\031\307\327z\234\326\350\242\211\260\235\313\245\255\314\036\017F\v\001@\"~\234sF\016x%Q\247\255\203>X6\312\311\270\211OLC9\364zn\177X\301\336\032\224\356\330\275M\365 \024\016\261hiJ\032\274\036%jx\343_\221\261\332\330<s\257\235\341E#\366\002@&\252\311\313m\315\231NO\256\377\364\331\257\233(\t\"4\3550\313 +\237v\327\264\004\026\226\201\271\024\016\323\233\202\316oCz\245\227\253\275s\025\027:\352d\363J\024\363\265\203\215]m\032\v\260"
+}
+timestamp {
+  seconds: 39597
+  nanos: 845206183
+}
+
+Valid message: sequence_num: 1
+message_type: 13
+source: 3
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 12
+digest: "|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+"
+extra_data {
+  key: 1001
+  value: "\004\000@\312\241q<\372\3661&\313\r2j\3220\337\324\027\337\224\354\263\275\275\261\357\005E\274\03509\2306N\272\031\004yp\371\304\331yY\357\031\307\327z\234\326\350\242\211\260\235\313\245\255\314\036\017F\v\001@\"~\234sF\016x%Q\247\255\203>X6\312\311\270\211OLC9\364zn\177X\301\336\032\224\356\330\275M\365 \024\016\261hiJ\032\274\036%jx\343_\221\261\332\330<s\257\235\341E#\366\002@&\252\311\313m\315\231NO\256\377\364\331\257\233(\t\"4\3550\313 +\237v\327\264\004\026\226\201\271\024\016\323\233\202\316oCz\245\227\253\275s\025\027:\352d\363J\024\363\265\203\215]m\032\v\260"
+}
+timestamp {
+  seconds: 39597
+  nanos: 845206183
+}
+
+Tallying message: sequence_num: 1
+message_type: 13
+source: 3
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 12
+digest: "|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+"
+extra_data {
+  key: 1001
+  value: "\004\000@\312\241q<\372\3661&\313\r2j\3220\337\324\027\337\224\354\263\275\275\261\357\005E\274\03509\2306N\272\031\004yp\371\304\331yY\357\031\307\327z\234\326\350\242\211\260\235\313\245\255\314\036\017F\v\001@\"~\234sF\016x%Q\247\255\203>X6\312\311\270\211OLC9\364zn\177X\301\336\032\224\356\330\275M\365 \024\016\261hiJ\032\274\036%jx\343_\221\261\332\330<s\257\235\341E#\366\002@&\252\311\313m\315\231NO\256\377\364\331\257\233(\t\"4\3550\313 +\237v\327\264\004\026\226\201\271\024\016\323\233\202\316oCz\245\227\253\275s\025\027:\352d\363J\024\363\265\203\215]m\032\v\260"
+}
+timestamp {
+  seconds: 39597
+  nanos: 845206183
+}
+
+Tallying message: sequence_num: 1
+message_type: 13
+source: 3
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 12
+extra_data {
+  key: 1001
+  value: "\004\000@\312\241q<\372\3661&\313\r2j\3220\337\324\027\337\224\354\263\275\275\261\357\005E\274\03509\2306N\272\031\004yp\371\304\331yY\357\031\307\327z\234\326\350\242\211\260\235\313\245\255\314\036\017F\v\001@\"~\234sF\016x%Q\247\255\203>X6\312\311\270\211OLC9\364zn\177X\301\336\032\224\356\330\275M\365 \024\016\261hiJ\032\274\036%jx\343_\221\261\332\330<s\257\235\341E#\366\002@&\252\311\313m\315\231NO\256\377\364\331\257\233(\t\"4\3550\313 +\237v\327\264\004\026\226\201\271\024\016\323\233\202\316oCz\245\227\253\275s\025\027:\352d\363J\024\363\265\203\215]m\032\v\260"
+}
+timestamp {
+  seconds: 39597
+  nanos: 845206183
+}
+
+Running state update loop for seqnum: 1
+For some reason I'm here 3 and seqnum: 1
+Calling state update from staeUpdateLoop
+Inside state update for seqnum: 1
+Adding seqnum to updating: 1
+Inside while loop
+ Printing roles: 
+Role: 0
+Role: 1
+Role: 3
+Inside pending requests1
+Inside pending requests3
+State: pbft_wait_prepare
+Candidate is null
+Candidate is null
+Transition: [from pbft_wait_prepare to pbft_wait_commit, condition=com.gbft.framework.statemachine.Condition@6988fd24, updateMode=none, responses=[(3,14)], extraTally=[]]
+Inside pending requests4
+Condition type: 1
+The message type is: 13
+Seqnum: 1 QuorumId: 13
+Printing all elements of counter
+Seqnum: 0
+MessageType: 0
+Viewnum: 0
+Digest: <ByteString@1ee25d86 size=32 contents="\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370">
+Node: 0
+MessageType: 12
+Viewnum: 0
+Digest: <ByteString@1ee25d86 size=32 contents="\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370">
+Node: 0
+MessageType: 13
+Viewnum: 0
+Digest: <ByteString@1ee25d86 size=32 contents="\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370">
+Node: 0
+Node: 1
+Node: 2
+Node: 3
+MessageType: 14
+Viewnum: 0
+Digest: <ByteString@1a024e30 size=32 contents="\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370">
+Node: 0
+Node: 1
+Node: 2
+Node: 3
+Seqnum: 1
+MessageType: 0
+Viewnum: 0
+Digest: <ByteString@1a5aec39 size=32 contents="|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+">
+Node: 0
+MessageType: 12
+Viewnum: 0
+Digest: <ByteString@1a5aec39 size=32 contents="|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+">
+Node: 0
+MessageType: 13
+Viewnum: 0
+Digest: <ByteString@1a5aec39 size=32 contents="|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+">
+Node: 0
+Node: 3
+Returning from here2 is null
+Inside checkMessageTally: seqnum: 1, quorumId: com.gbft.framework.utils.MessageTally$QuorumId@557, viewnum: null, checkview: 0
+Inside pending requests8 + conditionMet: false
+Message event received in 0
+Targets: [0, 1, 2, 3] for message: sequence_num: 1
+message_type: 13
+source: 2
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 12
+digest: "|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+"
+extra_data {
+  key: 1001
+  value: "\004\000@\215\352VLb@cV\256\b\230Xh\2344TI\243e\230\033\331\3309 \271\v\274?\255\034\344\362#\201\314S\343p4\243\243V\322\002\224\251\356b\3440\270\2644\320BF\b0\257\177\204\v\322\001@\232\354\357\215r\270\335\271RM\343\003K_\314\224@l\223\313\332={ze\356\214*\350T6\037xo7!P\237\217\227D\333e\265\254\001\t\006\372\236g\020\033\235\'H\215~=f\240nD\231\003@\211\250\223\307\264\344dk\206\033i\217\037\311\033_l\354{\342\027\360\234\255-o\0249\355\310\235w1ZHcY\255G4\304;\2367\273M\242\267\204\256\273\324\200\276\0368\236\256\312\361\377\240\an"
+}
+timestamp {
+  seconds: 39597
+  nanos: 846231670
+}
+
+Message event received in 0
+Received request: sequence_num: 1
+message_type: 13
+source: 2
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 12
+digest: "|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+"
+extra_data {
+  key: 1001
+  value: "\004\000@\215\352VLb@cV\256\b\230Xh\2344TI\243e\230\033\331\3309 \271\v\274?\255\034\344\362#\201\314S\343p4\243\243V\322\002\224\251\356b\3440\270\2644\320BF\b0\257\177\204\v\322\001@\232\354\357\215r\270\335\271RM\343\003K_\314\224@l\223\313\332={ze\356\214*\350T6\037xo7!P\237\217\227D\333e\265\254\001\t\006\372\236g\020\033\235\'H\215~=f\240nD\231\003@\211\250\223\307\264\344dk\206\033i\217\037\311\033_l\354{\342\027\360\234\255-o\0249\355\310\235w1ZHcY\255G4\304;\2367\273M\242\267\204\256\273\324\200\276\0368\236\256\312\361\377\240\an"
+}
+timestamp {
+  seconds: 39597
+  nanos: 846231670
+}
+
+Going to process: sequence_num: 1
+message_type: 13
+source: 2
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 12
+digest: "|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+"
+extra_data {
+  key: 1001
+  value: "\004\000@\215\352VLb@cV\256\b\230Xh\2344TI\243e\230\033\331\3309 \271\v\274?\255\034\344\362#\201\314S\343p4\243\243V\322\002\224\251\356b\3440\270\2644\320BF\b0\257\177\204\v\322\001@\232\354\357\215r\270\335\271RM\343\003K_\314\224@l\223\313\332={ze\356\214*\350T6\037xo7!P\237\217\227D\333e\265\254\001\t\006\372\236g\020\033\235\'H\215~=f\240nD\231\003@\211\250\223\307\264\344dk\206\033i\217\037\311\033_l\354{\342\027\360\234\255-o\0249\355\310\235w1ZHcY\255G4\304;\2367\273M\242\267\204\256\273\324\200\276\0368\236\256\312\361\377\240\an"
+}
+timestamp {
+  seconds: 39597
+  nanos: 846231670
+}
+
+Verifying MAC for source: 2
+Secret Key: [B@3016ef13
+MAC validation successful
+Targets: [0, 1, 2, 3] for message: sequence_num: 1
+message_type: 14
+source: 2
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 12
+digest: "|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+"
+extra_data {
+  key: 1001
+  value: "\004\000@\227\325p\216r\023CT\223R\b\350\302\251\271\267s\365\3659eU\351\33714\002\005\225\rg\223\367\230v\252=\314\316\270\233[\320zR1HeN\250\213v2b\021\200\r\374\363Q\035\2602\004\001@\r\033\360d1\255|v\"\"P\r\355\202\0269\233Y\240\347\002\301K\305\377\235Y\301-\372?;\337j-\330\362\374\340\353\016KS\312\240O\364\365=|B\364L\250\231\\=\254\366\346J|\230\336\003@{*\257O\\\301\247\200\3752\f\217& \353%c\256\2149\a\371B\253\304B\374\301\236\300\021\034p\317Z1pl/\264\207\375\343D\217\247`\004a[O\237\207\204H$\336YR\202p\320?;"
+}
+timestamp {
+  seconds: 39597
+  nanos: 871767127
+}
+
+Processed: sequence_num: 1
+message_type: 13
+source: 2
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 12
+digest: "|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+"
+extra_data {
+  key: 1001
+  value: "\004\000@\215\352VLb@cV\256\b\230Xh\2344TI\243e\230\033\331\3309 \271\v\274?\255\034\344\362#\201\314S\343p4\243\243V\322\002\224\251\356b\3440\270\2644\320BF\b0\257\177\204\v\322\001@\232\354\357\215r\270\335\271RM\343\003K_\314\224@l\223\313\332={ze\356\214*\350T6\037xo7!P\237\217\227D\333e\265\254\001\t\006\372\236g\020\033\235\'H\215~=f\240nD\231\003@\211\250\223\307\264\344dk\206\033i\217\037\311\033_l\354{\342\027\360\234\255-o\0249\355\310\235w1ZHcY\255G4\304;\2367\273M\242\267\204\256\273\324\200\276\0368\236\256\312\361\377\240\an"
+}
+timestamp {
+  seconds: 39597
+  nanos: 846231670
+}
+
+Message event received in 0
+Received request: sequence_num: 1
+message_type: 14
+source: 2
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 12
+digest: "|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+"
+extra_data {
+  key: 1001
+  value: "\004\000@\227\325p\216r\023CT\223R\b\350\302\251\271\267s\365\3659eU\351\33714\002\005\225\rg\223\367\230v\252=\314\316\270\233[\320zR1HeN\250\213v2b\021\200\r\374\363Q\035\2602\004\001@\r\033\360d1\255|v\"\"P\r\355\202\0269\233Y\240\347\002\301K\305\377\235Y\301-\372?;\337j-\330\362\374\340\353\016KS\312\240O\364\365=|B\364L\250\231\\=\254\366\346J|\230\336\003@{*\257O\\\301\247\200\3752\f\217& \353%c\256\2149\a\371B\253\304B\374\301\236\300\021\034p\317Z1pl/\264\207\375\343D\217\247`\004a[O\237\207\204H$\336YR\202p\320?;"
+}
+timestamp {
+  seconds: 39597
+  nanos: 871767127
+}
+
+Going to process: sequence_num: 1
+message_type: 14
+source: 2
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 12
+digest: "|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+"
+extra_data {
+  key: 1001
+  value: "\004\000@\227\325p\216r\023CT\223R\b\350\302\251\271\267s\365\3659eU\351\33714\002\005\225\rg\223\367\230v\252=\314\316\270\233[\320zR1HeN\250\213v2b\021\200\r\374\363Q\035\2602\004\001@\r\033\360d1\255|v\"\"P\r\355\202\0269\233Y\240\347\002\301K\305\377\235Y\301-\372?;\337j-\330\362\374\340\353\016KS\312\240O\364\365=|B\364L\250\231\\=\254\366\346J|\230\336\003@{*\257O\\\301\247\200\3752\f\217& \353%c\256\2149\a\371B\253\304B\374\301\236\300\021\034p\317Z1pl/\264\207\375\343D\217\247`\004a[O\237\207\204H$\336YR\202p\320?;"
+}
+timestamp {
+  seconds: 39597
+  nanos: 871767127
+}
+
+Verifying MAC for source: 2
+Secret Key: [B@3016ef13
+MAC validation successful
+Processed: sequence_num: 1
+message_type: 14
+source: 2
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 12
+digest: "|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+"
+extra_data {
+  key: 1001
+  value: "\004\000@\227\325p\216r\023CT\223R\b\350\302\251\271\267s\365\3659eU\351\33714\002\005\225\rg\223\367\230v\252=\314\316\270\233[\320zR1HeN\250\213v2b\021\200\r\374\363Q\035\2602\004\001@\r\033\360d1\255|v\"\"P\r\355\202\0269\233Y\240\347\002\301K\305\377\235Y\301-\372?;\337j-\330\362\374\340\353\016KS\312\240O\364\365=|B\364L\250\231\\=\254\366\346J|\230\336\003@{*\257O\\\301\247\200\3752\f\217& \353%c\256\2149\a\371B\253\304B\374\301\236\300\021\034p\317Z1pl/\264\207\375\343D\217\247`\004a[O\237\207\204H$\336YR\202p\320?;"
+}
+timestamp {
+  seconds: 39597
+  nanos: 871767127
+}
+
+Targets: [0, 1, 2, 3] for message: sequence_num: 1
+message_type: 13
+source: 1
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 12
+digest: "|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+"
+extra_data {
+  key: 1001
+  value: "\004\000@\240\236{l\263{\000c\240\262Cl\035\270v\251\363\002\t\257c\t\204\356\327e$\035+\336T\360\252\226=\275\260\334gz~\361\212\371\bM\226\002V\v\335\241\362\"\302\nqN\000S\343\2433\366\002@\373\343\n\344S\362\246 u\224\b\341\204\347\211#\022w\232\267\033p\233\346\235\354\377\335\"\342ec\000HY(DA.AV\021-\272\001\023\\\022\361\\\330~tz\3704\366W2@\2644V\203\003@\a\227\027\340H}\210\202\335wg\264[R\255\\!\306\334,A>\217\200R\273\2126y>\021\222eB\315U\276\020j)\321C\272\264\242)\223\373\210k\270T\214\347\027\365l\376\267\375\0058\363\242"
+}
+timestamp {
+  seconds: 39597
+  nanos: 848738271
+}
+
+Message event received in 0
+Targets: [0, 1, 2, 3] for message: sequence_num: 1
+message_type: 14
+source: 1
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 12
+digest: "|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+"
+extra_data {
+  key: 1001
+  value: "\004\000@&\253}\360\026w\366\336Ykb\t\005\361f0.\372\365\374\v\336r\315U\220E\366\2311\016\330U\242<\331\276\360\333\016\325\037\221\304(\325\026m\370\336<\265\006\240\270\310\304_\244\307\'\001\267&\002@\362\247\351W\346k\035`\364U\031\303\206m\341\322\333hk\257\211.;c|\330\261x\026.kC\372\245*\205\033e2\001\030\'\334\3017?g\370\312\336\361\266q\350\356BS\340G\340y\344\261\364\003@\236\n$\323AZ;\326\325\027w\305\377\322q1\362\261\316)g\364R\036VP&\351,\231\306\375\3035F\260\032=\306i?\'>@O\321\300\311\364\177\220w\331M\2247Q\b\311\217\320\2754\036"
+}
+timestamp {
+  seconds: 39597
+  nanos: 870867329
+}
+
+Received request: sequence_num: 1
+message_type: 14
+source: 1
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 12
+digest: "|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+"
+extra_data {
+  key: 1001
+  value: "\004\000@&\253}\360\026w\366\336Ykb\t\005\361f0.\372\365\374\v\336r\315U\220E\366\2311\016\330U\242<\331\276\360\333\016\325\037\221\304(\325\026m\370\336<\265\006\240\270\310\304_\244\307\'\001\267&\002@\362\247\351W\346k\035`\364U\031\303\206m\341\322\333hk\257\211.;c|\330\261x\026.kC\372\245*\205\033e2\001\030\'\334\3017?g\370\312\336\361\266q\350\356BS\340G\340y\344\261\364\003@\236\n$\323AZ;\326\325\027w\305\377\322q1\362\261\316)g\364R\036VP&\351,\231\306\375\3035F\260\032=\306i?\'>@O\321\300\311\364\177\220w\331M\2247Q\b\311\217\320\2754\036"
+}
+timestamp {
+  seconds: 39597
+  nanos: 870867329
+}
+
+Going to process: sequence_num: 1
+message_type: 14
+source: 1
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 12
+digest: "|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+"
+extra_data {
+  key: 1001
+  value: "\004\000@&\253}\360\026w\366\336Ykb\t\005\361f0.\372\365\374\v\336r\315U\220E\366\2311\016\330U\242<\331\276\360\333\016\325\037\221\304(\325\026m\370\336<\265\006\240\270\310\304_\244\307\'\001\267&\002@\362\247\351W\346k\035`\364U\031\303\206m\341\322\333hk\257\211.;c|\330\261x\026.kC\372\245*\205\033e2\001\030\'\334\3017?g\370\312\336\361\266q\350\356BS\340G\340y\344\261\364\003@\236\n$\323AZ;\326\325\027w\305\377\322q1\362\261\316)g\364R\036VP&\351,\231\306\375\3035F\260\032=\306i?\'>@O\321\300\311\364\177\220w\331M\2247Q\b\311\217\320\2754\036"
+}
+timestamp {
+  seconds: 39597
+  nanos: 870867329
+}
+
+Verifying MAC for source: 1
+Secret Key: [B@10fa2540
+MAC validation successful
+Received request: sequence_num: 1
+message_type: 13
+source: 1
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 12
+digest: "|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+"
+extra_data {
+  key: 1001
+  value: "\004\000@\240\236{l\263{\000c\240\262Cl\035\270v\251\363\002\t\257c\t\204\356\327e$\035+\336T\360\252\226=\275\260\334gz~\361\212\371\bM\226\002V\v\335\241\362\"\302\nqN\000S\343\2433\366\002@\373\343\n\344S\362\246 u\224\b\341\204\347\211#\022w\232\267\033p\233\346\235\354\377\335\"\342ec\000HY(DA.AV\021-\272\001\023\\\022\361\\\330~tz\3704\366W2@\2644V\203\003@\a\227\027\340H}\210\202\335wg\264[R\255\\!\306\334,A>\217\200R\273\2126y>\021\222eB\315U\276\020j)\321C\272\264\242)\223\373\210k\270T\214\347\027\365l\376\267\375\0058\363\242"
+}
+timestamp {
+  seconds: 39597
+  nanos: 848738271
+}
+
+Going to process: sequence_num: 1
+message_type: 13
+source: 1
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 12
+digest: "|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+"
+extra_data {
+  key: 1001
+  value: "\004\000@\240\236{l\263{\000c\240\262Cl\035\270v\251\363\002\t\257c\t\204\356\327e$\035+\336T\360\252\226=\275\260\334gz~\361\212\371\bM\226\002V\v\335\241\362\"\302\nqN\000S\343\2433\366\002@\373\343\n\344S\362\246 u\224\b\341\204\347\211#\022w\232\267\033p\233\346\235\354\377\335\"\342ec\000HY(DA.AV\021-\272\001\023\\\022\361\\\330~tz\3704\366W2@\2644V\203\003@\a\227\027\340H}\210\202\335wg\264[R\255\\!\306\334,A>\217\200R\273\2126y>\021\222eB\315U\276\020j)\321C\272\264\242)\223\373\210k\270T\214\347\027\365l\376\267\375\0058\363\242"
+}
+timestamp {
+  seconds: 39597
+  nanos: 848738271
+}
+
+Verifying MAC for source: 1
+Secret Key: [B@10fa2540
+Processed: sequence_num: 1
+message_type: 14
+source: 1
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 12
+digest: "|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+"
+extra_data {
+  key: 1001
+  value: "\004\000@&\253}\360\026w\366\336Ykb\t\005\361f0.\372\365\374\v\336r\315U\220E\366\2311\016\330U\242<\331\276\360\333\016\325\037\221\304(\325\026m\370\336<\265\006\240\270\310\304_\244\307\'\001\267&\002@\362\247\351W\346k\035`\364U\031\303\206m\341\322\333hk\257\211.;c|\330\261x\026.kC\372\245*\205\033e2\001\030\'\334\3017?g\370\312\336\361\266q\350\356BS\340G\340y\344\261\364\003@\236\n$\323AZ;\326\325\027w\305\377\322q1\362\261\316)g\364R\036VP&\351,\231\306\375\3035F\260\032=\306i?\'>@O\321\300\311\364\177\220w\331M\2247Q\b\311\217\320\2754\036"
+}
+timestamp {
+  seconds: 39597
+  nanos: 870867329
+}
+
+Received message inside not request block: sequence_num: 1
+message_type: 14
+source: 1
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 12
+digest: "|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+"
+extra_data {
+  key: 1001
+  value: "\004\000@&\253}\360\026w\366\336Ykb\t\005\361f0.\372\365\374\v\336r\315U\220E\366\2311\016\330U\242<\331\276\360\333\016\325\037\221\304(\325\026m\370\336<\265\006\240\270\310\304_\244\307\'\001\267&\002@\362\247\351W\346k\035`\364U\031\303\206m\341\322\333hk\257\211.;c|\330\261x\026.kC\372\245*\205\033e2\001\030\'\334\3017?g\370\312\336\361\266q\350\356BS\340G\340y\344\261\364\003@\236\n$\323AZ;\326\325\027w\305\377\322q1\362\261\316)g\364R\036VP&\351,\231\306\375\3035F\260\032=\306i?\'>@O\321\300\311\364\177\220w\331M\2247Q\b\311\217\320\2754\036"
+}
+timestamp {
+  seconds: 39597
+  nanos: 870867329
+}
+
+MAC validation successful
+Valid message: sequence_num: 1
+message_type: 14
+source: 1
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 12
+digest: "|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+"
+extra_data {
+  key: 1001
+  value: "\004\000@&\253}\360\026w\366\336Ykb\t\005\361f0.\372\365\374\v\336r\315U\220E\366\2311\016\330U\242<\331\276\360\333\016\325\037\221\304(\325\026m\370\336<\265\006\240\270\310\304_\244\307\'\001\267&\002@\362\247\351W\346k\035`\364U\031\303\206m\341\322\333hk\257\211.;c|\330\261x\026.kC\372\245*\205\033e2\001\030\'\334\3017?g\370\312\336\361\266q\350\356BS\340G\340y\344\261\364\003@\236\n$\323AZ;\326\325\027w\305\377\322q1\362\261\316)g\364R\036VP&\351,\231\306\375\3035F\260\032=\306i?\'>@O\321\300\311\364\177\220w\331M\2247Q\b\311\217\320\2754\036"
+}
+timestamp {
+  seconds: 39597
+  nanos: 870867329
+}
+
+Processed: sequence_num: 1
+message_type: 13
+source: 1
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 12
+digest: "|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+"
+extra_data {
+  key: 1001
+  value: "\004\000@\240\236{l\263{\000c\240\262Cl\035\270v\251\363\002\t\257c\t\204\356\327e$\035+\336T\360\252\226=\275\260\334gz~\361\212\371\bM\226\002V\v\335\241\362\"\302\nqN\000S\343\2433\366\002@\373\343\n\344S\362\246 u\224\b\341\204\347\211#\022w\232\267\033p\233\346\235\354\377\335\"\342ec\000HY(DA.AV\021-\272\001\023\\\022\361\\\330~tz\3704\366W2@\2644V\203\003@\a\227\027\340H}\210\202\335wg\264[R\255\\!\306\334,A>\217\200R\273\2126y>\021\222eB\315U\276\020j)\321C\272\264\242)\223\373\210k\270T\214\347\027\365l\376\267\375\0058\363\242"
+}
+timestamp {
+  seconds: 39597
+  nanos: 848738271
+}
+
+Tallying message: sequence_num: 1
+message_type: 14
+source: 1
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 12
+digest: "|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+"
+extra_data {
+  key: 1001
+  value: "\004\000@&\253}\360\026w\366\336Ykb\t\005\361f0.\372\365\374\v\336r\315U\220E\366\2311\016\330U\242<\331\276\360\333\016\325\037\221\304(\325\026m\370\336<\265\006\240\270\310\304_\244\307\'\001\267&\002@\362\247\351W\346k\035`\364U\031\303\206m\341\322\333hk\257\211.;c|\330\261x\026.kC\372\245*\205\033e2\001\030\'\334\3017?g\370\312\336\361\266q\350\356BS\340G\340y\344\261\364\003@\236\n$\323AZ;\326\325\027w\305\377\322q1\362\261\316)g\364R\036VP&\351,\231\306\375\3035F\260\032=\306i?\'>@O\321\300\311\364\177\220w\331M\2247Q\b\311\217\320\2754\036"
+}
+timestamp {
+  seconds: 39597
+  nanos: 870867329
+}
+
+Received message inside not request block: sequence_num: 1
+message_type: 13
+source: 1
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 12
+digest: "|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+"
+extra_data {
+  key: 1001
+  value: "\004\000@\240\236{l\263{\000c\240\262Cl\035\270v\251\363\002\t\257c\t\204\356\327e$\035+\336T\360\252\226=\275\260\334gz~\361\212\371\bM\226\002V\v\335\241\362\"\302\nqN\000S\343\2433\366\002@\373\343\n\344S\362\246 u\224\b\341\204\347\211#\022w\232\267\033p\233\346\235\354\377\335\"\342ec\000HY(DA.AV\021-\272\001\023\\\022\361\\\330~tz\3704\366W2@\2644V\203\003@\a\227\027\340H}\210\202\335wg\264[R\255\\!\306\334,A>\217\200R\273\2126y>\021\222eB\315U\276\020j)\321C\272\264\242)\223\373\210k\270T\214\347\027\365l\376\267\375\0058\363\242"
+}
+timestamp {
+  seconds: 39597
+  nanos: 848738271
+}
+
+Valid message: sequence_num: 1
+message_type: 13
+source: 1
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 12
+digest: "|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+"
+extra_data {
+  key: 1001
+  value: "\004\000@\240\236{l\263{\000c\240\262Cl\035\270v\251\363\002\t\257c\t\204\356\327e$\035+\336T\360\252\226=\275\260\334gz~\361\212\371\bM\226\002V\v\335\241\362\"\302\nqN\000S\343\2433\366\002@\373\343\n\344S\362\246 u\224\b\341\204\347\211#\022w\232\267\033p\233\346\235\354\377\335\"\342ec\000HY(DA.AV\021-\272\001\023\\\022\361\\\330~tz\3704\366W2@\2644V\203\003@\a\227\027\340H}\210\202\335wg\264[R\255\\!\306\334,A>\217\200R\273\2126y>\021\222eB\315U\276\020j)\321C\272\264\242)\223\373\210k\270T\214\347\027\365l\376\267\375\0058\363\242"
+}
+timestamp {
+  seconds: 39597
+  nanos: 848738271
+}
+
+Tallying message: sequence_num: 1
+message_type: 14
+source: 1
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 12
+extra_data {
+  key: 1001
+  value: "\004\000@&\253}\360\026w\366\336Ykb\t\005\361f0.\372\365\374\v\336r\315U\220E\366\2311\016\330U\242<\331\276\360\333\016\325\037\221\304(\325\026m\370\336<\265\006\240\270\310\304_\244\307\'\001\267&\002@\362\247\351W\346k\035`\364U\031\303\206m\341\322\333hk\257\211.;c|\330\261x\026.kC\372\245*\205\033e2\001\030\'\334\3017?g\370\312\336\361\266q\350\356BS\340G\340y\344\261\364\003@\236\n$\323AZ;\326\325\027w\305\377\322q1\362\261\316)g\364R\036VP&\351,\231\306\375\3035F\260\032=\306i?\'>@O\321\300\311\364\177\220w\331M\2247Q\b\311\217\320\2754\036"
+}
+timestamp {
+  seconds: 39597
+  nanos: 870867329
+}
+
+Tallying message: sequence_num: 1
+message_type: 13
+source: 1
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 12
+digest: "|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+"
+extra_data {
+  key: 1001
+  value: "\004\000@\240\236{l\263{\000c\240\262Cl\035\270v\251\363\002\t\257c\t\204\356\327e$\035+\336T\360\252\226=\275\260\334gz~\361\212\371\bM\226\002V\v\335\241\362\"\302\nqN\000S\343\2433\366\002@\373\343\n\344S\362\246 u\224\b\341\204\347\211#\022w\232\267\033p\233\346\235\354\377\335\"\342ec\000HY(DA.AV\021-\272\001\023\\\022\361\\\330~tz\3704\366W2@\2644V\203\003@\a\227\027\340H}\210\202\335wg\264[R\255\\!\306\334,A>\217\200R\273\2126y>\021\222eB\315U\276\020j)\321C\272\264\242)\223\373\210k\270T\214\347\027\365l\376\267\375\0058\363\242"
+}
+timestamp {
+  seconds: 39597
+  nanos: 848738271
+}
+
+Running state update loop for seqnum: 1
+For some reason I'm here 3 and seqnum: 1
+Calling state update from staeUpdateLoop
+Inside state update for seqnum: 1
+Adding seqnum to updating: 1
+Inside while loop
+Tallying message: sequence_num: 1
+message_type: 13
+source: 1
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 12
+extra_data {
+  key: 1001
+  value: "\004\000@\240\236{l\263{\000c\240\262Cl\035\270v\251\363\002\t\257c\t\204\356\327e$\035+\336T\360\252\226=\275\260\334gz~\361\212\371\bM\226\002V\v\335\241\362\"\302\nqN\000S\343\2433\366\002@\373\343\n\344S\362\246 u\224\b\341\204\347\211#\022w\232\267\033p\233\346\235\354\377\335\"\342ec\000HY(DA.AV\021-\272\001\023\\\022\361\\\330~tz\3704\366W2@\2644V\203\003@\a\227\027\340H}\210\202\335wg\264[R\255\\!\306\334,A>\217\200R\273\2126y>\021\222eB\315U\276\020j)\321C\272\264\242)\223\373\210k\270T\214\347\027\365l\376\267\375\0058\363\242"
+}
+timestamp {
+  seconds: 39597
+  nanos: 848738271
+}
+
+ Printing roles: 
+Message event received in 0
+Targets: [0, 1, 2, 3] for message: sequence_num: 1
+message_type: 14
+source: 3
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 12
+digest: "|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+"
+extra_data {
+  key: 1001
+  value: "\004\000@\341\214\2527BL\316{>\314lj\210\363\273H\311\202\035\337\362\244\246\025\251\270G\212\215\236C\370\277>\036\374\n,\215\276\307\305YS\214\201`\001\311\223\210)xM\f\254\364h\276\241\352\223Te\001@\374\220\202\251_\375\004\345\225\371\3414\302K\200H\275\271\377\346=\210\030\267C\343\331lW\004&\026\206\327\370\206\271|W3\364\036U\324\361\t\024\213\202\256\215w\337\226\341?\203Ix\001\r\\\367\230\002@\263\357\311\370\342\025\244\004\305\356=0\364kz\204\223\0019\202\245k\303\346jB\227\215\000\361\3744\3316\035\233;k\213\313!7\274\037R\035\374\231\177G/\276\276\352i\304\220#i\2370Q\264\032"
+}
+timestamp {
+  seconds: 39597
+  nanos: 890029323
+}
+
+Received message inside not request block: sequence_num: 1
+message_type: 13
+source: 2
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 12
+digest: "|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+"
+extra_data {
+  key: 1001
+  value: "\004\000@\215\352VLb@cV\256\b\230Xh\2344TI\243e\230\033\331\3309 \271\v\274?\255\034\344\362#\201\314S\343p4\243\243V\322\002\224\251\356b\3440\270\2644\320BF\b0\257\177\204\v\322\001@\232\354\357\215r\270\335\271RM\343\003K_\314\224@l\223\313\332={ze\356\214*\350T6\037xo7!P\237\217\227D\333e\265\254\001\t\006\372\236g\020\033\235\'H\215~=f\240nD\231\003@\211\250\223\307\264\344dk\206\033i\217\037\311\033_l\354{\342\027\360\234\255-o\0249\355\310\235w1ZHcY\255G4\304;\2367\273M\242\267\204\256\273\324\200\276\0368\236\256\312\361\377\240\an"
+}
+timestamp {
+  seconds: 39597
+  nanos: 846231670
+}
+
+Valid message: sequence_num: 1
+message_type: 13
+source: 2
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 12
+digest: "|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+"
+extra_data {
+  key: 1001
+  value: "\004\000@\215\352VLb@cV\256\b\230Xh\2344TI\243e\230\033\331\3309 \271\v\274?\255\034\344\362#\201\314S\343p4\243\243V\322\002\224\251\356b\3440\270\2644\320BF\b0\257\177\204\v\322\001@\232\354\357\215r\270\335\271RM\343\003K_\314\224@l\223\313\332={ze\356\214*\350T6\037xo7!P\237\217\227D\333e\265\254\001\t\006\372\236g\020\033\235\'H\215~=f\240nD\231\003@\211\250\223\307\264\344dk\206\033i\217\037\311\033_l\354{\342\027\360\234\255-o\0249\355\310\235w1ZHcY\255G4\304;\2367\273M\242\267\204\256\273\324\200\276\0368\236\256\312\361\377\240\an"
+}
+timestamp {
+  seconds: 39597
+  nanos: 846231670
+}
+
+Role: 0
+Role: 1
+Role: 3
+Inside pending requests1
+Inside pending requests3
+State: pbft_wait_prepare
+Candidate is null
+Candidate is null
+Transition: [from pbft_wait_prepare to pbft_wait_commit, condition=com.gbft.framework.statemachine.Condition@6988fd24, updateMode=none, responses=[(3,14)], extraTally=[]]
+Inside pending requests4
+Condition type: 1
+The message type is: 13
+Seqnum: 1 QuorumId: 13
+Printing all elements of counter
+Seqnum: 0
+MessageType: 0
+Viewnum: 0
+Digest: <ByteString@1ee25d86 size=32 contents="\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370">
+Node: 0
+MessageType: 12
+Viewnum: 0
+Digest: <ByteString@1ee25d86 size=32 contents="\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370">
+Node: 0
+MessageType: 13
+Viewnum: 0
+Digest: <ByteString@1ee25d86 size=32 contents="\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370">
+Tallying message: sequence_num: 1
+message_type: 13
+source: 2
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 12
+digest: "|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+"
+extra_data {
+  key: 1001
+  value: "\004\000@\215\352VLb@cV\256\b\230Xh\2344TI\243e\230\033\331\3309 \271\v\274?\255\034\344\362#\201\314S\343p4\243\243V\322\002\224\251\356b\3440\270\2644\320BF\b0\257\177\204\v\322\001@\232\354\357\215r\270\335\271RM\343\003K_\314\224@l\223\313\332={ze\356\214*\350T6\037xo7!P\237\217\227D\333e\265\254\001\t\006\372\236g\020\033\235\'H\215~=f\240nD\231\003@\211\250\223\307\264\344dk\206\033i\217\037\311\033_l\354{\342\027\360\234\255-o\0249\355\310\235w1ZHcY\255G4\304;\2367\273M\242\267\204\256\273\324\200\276\0368\236\256\312\361\377\240\an"
+}
+timestamp {
+  seconds: 39597
+  nanos: 846231670
+}
+
+Node: 0
+Node: 1
+Node: 2
+Node: 3
+MessageType: 14
+Viewnum: 0
+Running state update loop for seqnum: 1
+For some reason I'm here 3 and seqnum: 1
+Calling state update from staeUpdateLoop
+Received message inside not request block: sequence_num: 1
+message_type: 14
+source: 2
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 12
+digest: "|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+"
+extra_data {
+  key: 1001
+  value: "\004\000@\227\325p\216r\023CT\223R\b\350\302\251\271\267s\365\3659eU\351\33714\002\005\225\rg\223\367\230v\252=\314\316\270\233[\320zR1HeN\250\213v2b\021\200\r\374\363Q\035\2602\004\001@\r\033\360d1\255|v\"\"P\r\355\202\0269\233Y\240\347\002\301K\305\377\235Y\301-\372?;\337j-\330\362\374\340\353\016KS\312\240O\364\365=|B\364L\250\231\\=\254\366\346J|\230\336\003@{*\257O\\\301\247\200\3752\f\217& \353%c\256\2149\a\371B\253\304B\374\301\236\300\021\034p\317Z1pl/\264\207\375\343D\217\247`\004a[O\237\207\204H$\336YR\202p\320?;"
+}
+timestamp {
+  seconds: 39597
+  nanos: 871767127
+}
+
+Received request: sequence_num: 1
+message_type: 14
+source: 3
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 12
+digest: "|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+"
+extra_data {
+  key: 1001
+  value: "\004\000@\341\214\2527BL\316{>\314lj\210\363\273H\311\202\035\337\362\244\246\025\251\270G\212\215\236C\370\277>\036\374\n,\215\276\307\305YS\214\201`\001\311\223\210)xM\f\254\364h\276\241\352\223Te\001@\374\220\202\251_\375\004\345\225\371\3414\302K\200H\275\271\377\346=\210\030\267C\343\331lW\004&\026\206\327\370\206\271|W3\364\036U\324\361\t\024\213\202\256\215w\337\226\341?\203Ix\001\r\\\367\230\002@\263\357\311\370\342\025\244\004\305\356=0\364kz\204\223\0019\202\245k\303\346jB\227\215\000\361\3744\3316\035\233;k\213\313!7\274\037R\035\374\231\177G/\276\276\352i\304\220#i\2370Q\264\032"
+}
+timestamp {
+  seconds: 39597
+  nanos: 890029323
+}
+
+Valid message: sequence_num: 1
+message_type: 14
+source: 2
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 12
+digest: "|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+"
+extra_data {
+  key: 1001
+  value: "\004\000@\227\325p\216r\023CT\223R\b\350\302\251\271\267s\365\3659eU\351\33714\002\005\225\rg\223\367\230v\252=\314\316\270\233[\320zR1HeN\250\213v2b\021\200\r\374\363Q\035\2602\004\001@\r\033\360d1\255|v\"\"P\r\355\202\0269\233Y\240\347\002\301K\305\377\235Y\301-\372?;\337j-\330\362\374\340\353\016KS\312\240O\364\365=|B\364L\250\231\\=\254\366\346J|\230\336\003@{*\257O\\\301\247\200\3752\f\217& \353%c\256\2149\a\371B\253\304B\374\301\236\300\021\034p\317Z1pl/\264\207\375\343D\217\247`\004a[O\237\207\204H$\336YR\202p\320?;"
+}
+timestamp {
+  seconds: 39597
+  nanos: 871767127
+}
+
+Going to process: sequence_num: 1
+message_type: 14
+source: 3
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 12
+digest: "|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+"
+extra_data {
+  key: 1001
+  value: "\004\000@\341\214\2527BL\316{>\314lj\210\363\273H\311\202\035\337\362\244\246\025\251\270G\212\215\236C\370\277>\036\374\n,\215\276\307\305YS\214\201`\001\311\223\210)xM\f\254\364h\276\241\352\223Te\001@\374\220\202\251_\375\004\345\225\371\3414\302K\200H\275\271\377\346=\210\030\267C\343\331lW\004&\026\206\327\370\206\271|W3\364\036U\324\361\t\024\213\202\256\215w\337\226\341?\203Ix\001\r\\\367\230\002@\263\357\311\370\342\025\244\004\305\356=0\364kz\204\223\0019\202\245k\303\346jB\227\215\000\361\3744\3316\035\233;k\213\313!7\274\037R\035\374\231\177G/\276\276\352i\304\220#i\2370Q\264\032"
+}
+timestamp {
+  seconds: 39597
+  nanos: 890029323
+}
+
+Tallying message: sequence_num: 1
+message_type: 14
+source: 2
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 12
+digest: "|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+"
+extra_data {
+  key: 1001
+  value: "\004\000@\227\325p\216r\023CT\223R\b\350\302\251\271\267s\365\3659eU\351\33714\002\005\225\rg\223\367\230v\252=\314\316\270\233[\320zR1HeN\250\213v2b\021\200\r\374\363Q\035\2602\004\001@\r\033\360d1\255|v\"\"P\r\355\202\0269\233Y\240\347\002\301K\305\377\235Y\301-\372?;\337j-\330\362\374\340\353\016KS\312\240O\364\365=|B\364L\250\231\\=\254\366\346J|\230\336\003@{*\257O\\\301\247\200\3752\f\217& \353%c\256\2149\a\371B\253\304B\374\301\236\300\021\034p\317Z1pl/\264\207\375\343D\217\247`\004a[O\237\207\204H$\336YR\202p\320?;"
+}
+timestamp {
+  seconds: 39597
+  nanos: 871767127
+}
+
+Verifying MAC for source: 3
+Secret Key: [B@7b6729fc
+Digest: <ByteString@1a024e30 size=32 contents="\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370">
+Node: 0
+Node: 1
+Node: 2
+Node: 3
+Seqnum: 1
+MessageType: 0
+Viewnum: 0
+Inside state update for seqnum: 1
+Returning null as updating.contains(seqnum)
+Digest: <ByteString@1a5aec39 size=32 contents="|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+">
+Node: 0
+MessageType: 12
+Viewnum: 0
+Digest: <ByteString@1a5aec39 size=32 contents="|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+">
+Node: 0
+MessageType: 13
+Viewnum: 0
+Digest: <ByteString@1a5aec39 size=32 contents="|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+">
+Node: 0
+Node: 1
+Node: 3
+MessageType: 14
+Viewnum: 0
+Digest: <ByteString@1ac6f14b size=32 contents="|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+">
+Node: 1
+Tallying message: sequence_num: 1
+message_type: 13
+source: 2
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 12
+extra_data {
+  key: 1001
+  value: "\004\000@\215\352VLb@cV\256\b\230Xh\2344TI\243e\230\033\331\3309 \271\v\274?\255\034\344\362#\201\314S\343p4\243\243V\322\002\224\251\356b\3440\270\2644\320BF\b0\257\177\204\v\322\001@\232\354\357\215r\270\335\271RM\343\003K_\314\224@l\223\313\332={ze\356\214*\350T6\037xo7!P\237\217\227D\333e\265\254\001\t\006\372\236g\020\033\235\'H\215~=f\240nD\231\003@\211\250\223\307\264\344dk\206\033i\217\037\311\033_l\354{\342\027\360\234\255-o\0249\355\310\235w1ZHcY\255G4\304;\2367\273M\242\267\204\256\273\324\200\276\0368\236\256\312\361\377\240\an"
+}
+timestamp {
+  seconds: 39597
+  nanos: 846231670
+}
+
+Running state update loop for seqnum: 1
+For some reason I'm here 3 and seqnum: 1
+Calling state update from staeUpdateLoop
+Inside state update for seqnum: 1
+Returning null as updating.contains(seqnum)
+MAC validation successful
+Processed: sequence_num: 1
+message_type: 14
+source: 3
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 12
+digest: "|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+"
+extra_data {
+  key: 1001
+  value: "\004\000@\341\214\2527BL\316{>\314lj\210\363\273H\311\202\035\337\362\244\246\025\251\270G\212\215\236C\370\277>\036\374\n,\215\276\307\305YS\214\201`\001\311\223\210)xM\f\254\364h\276\241\352\223Te\001@\374\220\202\251_\375\004\345\225\371\3414\302K\200H\275\271\377\346=\210\030\267C\343\331lW\004&\026\206\327\370\206\271|W3\364\036U\324\361\t\024\213\202\256\215w\337\226\341?\203Ix\001\r\\\367\230\002@\263\357\311\370\342\025\244\004\305\356=0\364kz\204\223\0019\202\245k\303\346jB\227\215\000\361\3744\3316\035\233;k\213\313!7\274\037R\035\374\231\177G/\276\276\352i\304\220#i\2370Q\264\032"
+}
+timestamp {
+  seconds: 39597
+  nanos: 890029323
+}
+
+Received message inside not request block: sequence_num: 1
+message_type: 14
+source: 3
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 12
+digest: "|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+"
+extra_data {
+  key: 1001
+  value: "\004\000@\341\214\2527BL\316{>\314lj\210\363\273H\311\202\035\337\362\244\246\025\251\270G\212\215\236C\370\277>\036\374\n,\215\276\307\305YS\214\201`\001\311\223\210)xM\f\254\364h\276\241\352\223Te\001@\374\220\202\251_\375\004\345\225\371\3414\302K\200H\275\271\377\346=\210\030\267C\343\331lW\004&\026\206\327\370\206\271|W3\364\036U\324\361\t\024\213\202\256\215w\337\226\341?\203Ix\001\r\\\367\230\002@\263\357\311\370\342\025\244\004\305\356=0\364kz\204\223\0019\202\245k\303\346jB\227\215\000\361\3744\3316\035\233;k\213\313!7\274\037R\035\374\231\177G/\276\276\352i\304\220#i\2370Q\264\032"
+}
+timestamp {
+  seconds: 39597
+  nanos: 890029323
+}
+
+Valid message: sequence_num: 1
+message_type: 14
+source: 3
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 12
+digest: "|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+"
+extra_data {
+  key: 1001
+  value: "\004\000@\341\214\2527BL\316{>\314lj\210\363\273H\311\202\035\337\362\244\246\025\251\270G\212\215\236C\370\277>\036\374\n,\215\276\307\305YS\214\201`\001\311\223\210)xM\f\254\364h\276\241\352\223Te\001@\374\220\202\251_\375\004\345\225\371\3414\302K\200H\275\271\377\346=\210\030\267C\343\331lW\004&\026\206\327\370\206\271|W3\364\036U\324\361\t\024\213\202\256\215w\337\226\341?\203Ix\001\r\\\367\230\002@\263\357\311\370\342\025\244\004\305\356=0\364kz\204\223\0019\202\245k\303\346jB\227\215\000\361\3744\3316\035\233;k\213\313!7\274\037R\035\374\231\177G/\276\276\352i\304\220#i\2370Q\264\032"
+}
+timestamp {
+  seconds: 39597
+  nanos: 890029323
+}
+
+Tallying message: sequence_num: 1
+message_type: 14
+source: 3
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 12
+digest: "|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+"
+extra_data {
+  key: 1001
+  value: "\004\000@\341\214\2527BL\316{>\314lj\210\363\273H\311\202\035\337\362\244\246\025\251\270G\212\215\236C\370\277>\036\374\n,\215\276\307\305YS\214\201`\001\311\223\210)xM\f\254\364h\276\241\352\223Te\001@\374\220\202\251_\375\004\345\225\371\3414\302K\200H\275\271\377\346=\210\030\267C\343\331lW\004&\026\206\327\370\206\271|W3\364\036U\324\361\t\024\213\202\256\215w\337\226\341?\203Ix\001\r\\\367\230\002@\263\357\311\370\342\025\244\004\305\356=0\364kz\204\223\0019\202\245k\303\346jB\227\215\000\361\3744\3316\035\233;k\213\313!7\274\037R\035\374\231\177G/\276\276\352i\304\220#i\2370Q\264\032"
+}
+timestamp {
+  seconds: 39597
+  nanos: 890029323
+}
+
+Tallying message: sequence_num: 1
+message_type: 14
+source: 3
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 12
+extra_data {
+  key: 1001
+  value: "\004\000@\341\214\2527BL\316{>\314lj\210\363\273H\311\202\035\337\362\244\246\025\251\270G\212\215\236C\370\277>\036\374\n,\215\276\307\305YS\214\201`\001\311\223\210)xM\f\254\364h\276\241\352\223Te\001@\374\220\202\251_\375\004\345\225\371\3414\302K\200H\275\271\377\346=\210\030\267C\343\331lW\004&\026\206\327\370\206\271|W3\364\036U\324\361\t\024\213\202\256\215w\337\226\341?\203Ix\001\r\\\367\230\002@\263\357\311\370\342\025\244\004\305\356=0\364kz\204\223\0019\202\245k\303\346jB\227\215\000\361\3744\3316\035\233;k\213\313!7\274\037R\035\374\231\177G/\276\276\352i\304\220#i\2370Q\264\032"
+}
+timestamp {
+  seconds: 39597
+  nanos: 890029323
+}
+
+Running state update loop for seqnum: 1
+For some reason I'm here 3 and seqnum: 1
+Calling state update from staeUpdateLoop
+Inside state update for seqnum: 1
+Returning null as updating.contains(seqnum)
+Returning from here2 is null
+Inside checkMessageTally: seqnum: 1, quorumId: com.gbft.framework.utils.MessageTally$QuorumId@557, viewnum: 0, checkview: 0
+Inside pending requests8 + conditionMet: true
+Currently at Role: 3 MessageType: 14
+My source is: 0
+My messsage type is: 14
+My targets are: [0, 1, 2, 3]
+Current targets: [0, 1, 2, 3]
+Sending message: sequence_num: 1
+message_type: 14
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 12
+digest: "|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+"
+extra_data {
+  key: 1001
+  value: "\004\001@\240]\035\344\315\271\204\316\261\247\254\342&mgx\275\226C\241\335\tL\326\320\020\216\333\340\344\306I\274\342\365g\310E0\211\254\327\177\347\307|6\354\316\317\035\373\261\224O\275\r\243L\236\322QKf\002@\253@\365\265\016\201\212p\004-e\tA\000\330\203\303\024\300@\tY\311\370{\177\200\267\271\263\320\373os\211\311\307\255y\003L\244\250\\_\026\317|\244\346\331q(\004\371\3025\307\0041wW3\316\003@g\375\345_z\236\232\217\362v-\207s\352\342\355\030U\025\350\262\034\254t\316\317\022\230\214\031\216\3248N\231\346\237\021\axa\361@Q\022\205pe\n\231w\273\232n\304w\337\207g\212\315 \003&"
+}
+timestamp {
+  seconds: 39597
+  nanos: 920514832
+}
+
+DirectPipelinePlugin.sendMessage
+16:42:48.639  Found target: [0, 1, 2, 3]
+16:42:48.640  Message event received in 0
+In the continue block
+In the continue block
+In the continue block
+In the continue block
+Sending event to 1 at 127.0.0.1:6022
+Using connection - Sending event to 1 at 127.0.0.1:6022
+Sending event to 2 at 127.0.0.1:6023
+Using connection - Sending event to 2 at 127.0.0.1:6023
+Tallying message: sequence_num: 1
+message_type: 14
+source: 2
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 12
+extra_data {
+  key: 1001
+  value: "\004\000@\227\325p\216r\023CT\223R\b\350\302\251\271\267s\365\3659eU\351\33714\002\005\225\rg\223\367\230v\252=\314\316\270\233[\320zR1HeN\250\213v2b\021\200\r\374\363Q\035\2602\004\001@\r\033\360d1\255|v\"\"P\r\355\202\0269\233Y\240\347\002\301K\305\377\235Y\301-\372?;\337j-\330\362\374\340\353\016KS\312\240O\364\365=|B\364L\250\231\\=\254\366\346J|\230\336\003@{*\257O\\\301\247\200\3752\f\217& \353%c\256\2149\a\371B\253\304B\374\301\236\300\021\034p\317Z1pl/\264\207\375\343D\217\247`\004a[O\237\207\204H$\336YR\202p\320?;"
+}
+timestamp {
+  seconds: 39597
+  nanos: 871767127
+}
+
+Running state update loop for seqnum: 1
+For some reason I'm here 3 and seqnum: 1
+Calling state update from staeUpdateLoop
+Inside state update for seqnum: 1
+Returning null as updating.contains(seqnum)
+Sending event to 3 at 127.0.0.1:6024
+Using connection - Sending event to 3 at 127.0.0.1:6024
+Tallying message: sequence_num: 1
+message_type: 14
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 12
+digest: "|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+"
+extra_data {
+  key: 1001
+  value: "\004\001@\240]\035\344\315\271\204\316\261\247\254\342&mgx\275\226C\241\335\tL\326\320\020\216\333\340\344\306I\274\342\365g\310E0\211\254\327\177\347\307|6\354\316\317\035\373\261\224O\275\r\243L\236\322QKf\002@\253@\365\265\016\201\212p\004-e\tA\000\330\203\303\024\300@\tY\311\370{\177\200\267\271\263\320\373os\211\311\307\255y\003L\244\250\\_\026\317|\244\346\331q(\004\371\3025\307\0041wW3\316\003@g\375\345_z\236\232\217\362v-\207s\352\342\355\030U\025\350\262\034\254t\316\317\022\230\214\031\216\3248N\231\346\237\021\axa\361@Q\022\205pe\n\231w\273\232n\304w\337\207g\212\315 \003&"
+}
+timestamp {
+  seconds: 39597
+  nanos: 920514832
+}
+
+Tallying message: sequence_num: 1
+message_type: 14
+targets: 0
+targets: 1
+targets: 2
+targets: 3
+request_nums: 12
+extra_data {
+  key: 1001
+  value: "\004\001@\240]\035\344\315\271\204\316\261\247\254\342&mgx\275\226C\241\335\tL\326\320\020\216\333\340\344\306I\274\342\365g\310E0\211\254\327\177\347\307|6\354\316\317\035\373\261\224O\275\r\243L\236\322QKf\002@\253@\365\265\016\201\212p\004-e\tA\000\330\203\303\024\300@\tY\311\370{\177\200\267\271\263\320\373os\211\311\307\255y\003L\244\250\\_\026\317|\244\346\331q(\004\371\3025\307\0041wW3\316\003@g\375\345_z\236\232\217\362v-\207s\352\342\355\030U\025\350\262\034\254t\316\317\022\230\214\031\216\3248N\231\346\237\021\axa\361@Q\022\205pe\n\231w\273\232n\304w\337\207g\212\315 \003&"
+}
+timestamp {
+  seconds: 39597
+  nanos: 920514832
+}
+
+Inside while loop
+ Printing roles: 
+Role: 0
+Role: 1
+Role: 3
+Inside pending requests1
+Inside pending requests3
+State: pbft_wait_commit
+Candidate is null
+Candidate is null
+Transition: [from pbft_wait_commit to executed, condition=com.gbft.framework.statemachine.Condition@1e3dd92f, updateMode=sequence, responses=[(4,1)], extraTally=[]]
+Inside pending requests4
+Condition type: 1
+The message type is: 14
+Seqnum: 1 QuorumId: 14
+Printing all elements of counter
+Seqnum: 0
+MessageType: 0
+Viewnum: 0
+Digest: <ByteString@1ee25d86 size=32 contents="\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370">
+Node: 0
+MessageType: 12
+Viewnum: 0
+Digest: <ByteString@1ee25d86 size=32 contents="\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370">
+Node: 0
+MessageType: 13
+Viewnum: 0
+Digest: <ByteString@1ee25d86 size=32 contents="\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370">
+Node: 0
+Node: 1
+Node: 2
+Node: 3
+MessageType: 14
+Viewnum: 0
+Digest: <ByteString@1a024e30 size=32 contents="\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370">
+Node: 0
+Node: 1
+Node: 2
+Node: 3
+Seqnum: 1
+MessageType: 0
+Viewnum: 0
+Digest: <ByteString@1a5aec39 size=32 contents="|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+">
+Node: 0
+MessageType: 12
+Viewnum: 0
+Digest: <ByteString@1a5aec39 size=32 contents="|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+">
+Node: 0
+MessageType: 13
+Viewnum: 0
+Digest: <ByteString@1a5aec39 size=32 contents="|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+">
+Node: 0
+Node: 1
+Node: 2
+Node: 3
+MessageType: 14
+Viewnum: 0
+Digest: <ByteString@1ac6f14b size=32 contents="|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+">
+Node: 0
+Node: 1
+Node: 2
+Node: 3
+Returning from here2 is null
+Inside checkMessageTally: seqnum: 1, quorumId: com.gbft.framework.utils.MessageTally$QuorumId@576, viewnum: 0, checkview: 0
+Inside pending requests8 + conditionMet: true
+Adding seqnum to toUpdate2: 1
+This is causing issue for seqnum: 1
+Inside state update for seqnum: 1
+Adding seqnum to updating: 1
+Inside while loop
+ Printing roles: 
+Role: 0
+Role: 1
+Role: 3
+Inside pending requests1
+Inside pending requests3
+State: pbft_wait_commit
+Candidate is null
+Candidate is null
+Transition: [from pbft_wait_commit to executed, condition=com.gbft.framework.statemachine.Condition@1e3dd92f, updateMode=sequence, responses=[(4,1)], extraTally=[]]
+Inside pending requests4
+Condition type: 1
+The message type is: 14
+Seqnum: 1 QuorumId: 14
+Printing all elements of counter
+Seqnum: 0
+MessageType: 0
+Viewnum: 0
+Digest: <ByteString@1ee25d86 size=32 contents="\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370">
+Node: 0
+MessageType: 12
+Viewnum: 0
+Digest: <ByteString@1ee25d86 size=32 contents="\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370">
+Node: 0
+MessageType: 13
+Viewnum: 0
+Digest: <ByteString@1ee25d86 size=32 contents="\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370">
+Node: 0
+Node: 1
+Node: 2
+Node: 3
+MessageType: 14
+Viewnum: 0
+Digest: <ByteString@1a024e30 size=32 contents="\036MoPDE\233\257\2139\3314w\275\017#P.\273\300\313R\005\027\334\277\006\351rh\t\370">
+Node: 0
+Node: 1
+Node: 2
+Node: 3
+Seqnum: 1
+MessageType: 0
+Viewnum: 0
+Digest: <ByteString@1a5aec39 size=32 contents="|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+">
+Node: 0
+MessageType: 12
+Viewnum: 0
+Digest: <ByteString@1a5aec39 size=32 contents="|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+">
+Node: 0
+MessageType: 13
+Viewnum: 0
+Digest: <ByteString@1a5aec39 size=32 contents="|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+">
+Node: 0
+Node: 1
+Node: 2
+Node: 3
+MessageType: 14
+Viewnum: 0
+Digest: <ByteString@1ac6f14b size=32 contents="|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+">
+Node: 0
+Node: 1
+Node: 2
+Node: 3
+Inside checkMessageTally: seqnum: 1, quorumId: com.gbft.framework.utils.MessageTally$QuorumId@576, viewnum: 0, checkview: 0
+Inside pending requests8 + conditionMet: true
+Currently at Role: 4 MessageType: 1
+My source is: 0
+My messsage type is: 1
+My targets are: [4]
+Inside client response and targets: [16]
+Sending message: sequence_num: 1
+message_type: 1
+targets: 4
+requests {
+  client: 16
+  request_num: 12
+  record: 2
+  operation: ADD
+  value: 57
+  timestamp {
+    seconds: 39597
+    nanos: 821226670
+  }
+}
+digest: "|\'eWKeA\211\177a\030S U\342\340>TM$\361\\\225\024\204\246\216\272\200\035z+"
+reply_data {
+  key: 12
+  value: 1057
+}
+extra_data {
+  key: 1001
+  value: "\001\004@\352\204\3007\3310\225g\260\226[\336\313\221\376\365\234\"\340\356\226\262z\330\241\313\333\201)\000\263\345\216{\364\344HqQ\005x\332\377Z\351^\235*F\237\316\307{6\245\360:\363Q\3073\361\370\212"
+}
+timestamp {
+  seconds: 39597
+  nanos: 928411901
+}
+
+DirectPipelinePlugin.sendMessage
+16:42:48.650  Found target: [16]
+Sending event to 16 at 127.0.0.1:5051
+Using connection - Sending event to 16 at 127.0.0.1:5051
+Sending event to -1 at 127.0.0.1:5050
+16:42:50.498  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+16:42:53.464  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+16:42:56.465  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+16:42:59.465  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+16:43:02.467  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+16:43:05.475  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+16:43:08.470  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+16:43:11.474  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+16:43:14.483  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+16:43:17.477  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+16:43:20.477  Sending event to -1 at 127.0.0.1:5050

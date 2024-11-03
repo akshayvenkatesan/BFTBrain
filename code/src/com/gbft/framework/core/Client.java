@@ -85,6 +85,8 @@ public class Client extends Entity {
             for (var entry : replies.entrySet()) {
                 var reqnum = entry.getKey();
                 var request = checkpoint.getRequest(reqnum);
+                //Check if both the replies are as expected, if not create and execute rollback transaction
+                //After previous logic, decrease inorder of associated transactions. If inorder==0, add them to queue
                 dataset.update(request, entry.getValue());
 
                 // benchmarkManager.requestExecuted(reqnum, now);
@@ -147,7 +149,9 @@ public class Client extends Entity {
                 while (running) {
                     semaphore.acquire();
                     var next = System.nanoTime() + intervalns;
-
+                    //Write logic to create graph
+                    //Execute all independent transactions and to queue
+                    //Keep counter of currently executing transactiions. Run loop till either counter is 0 and queue is empty
                     var request = dataset.createRequest(nextRequestNum);
                     nextRequestNum += 1;
 
