@@ -362,7 +362,9 @@ public abstract class Entity {
             }
         } else {
             Long seqnum = message.getSequenceNum();
+            List<Integer> targets = message.getTargetsList();
             System.out.println("Received message inside not request block: " + message);
+            System.out.println("My id is and Message Target is : " + id + " " + targets);
             if (checkpointManager.getCheckpointNum(seqnum) < checkpointManager.getMinCheckpoint()) {
                 return;
             }
@@ -394,7 +396,7 @@ public abstract class Entity {
         var result = stateUpdate(seqnum);
         while (running && result != null && !result.isEmpty()) {
             var next = result.pollFirst();
-            System.out.println("This is causing issue for seqnum: " + next);
+            // System.out.println("This is causing issue for seqnum: " + next);
             var more = stateUpdate(next);
             if (more != null) {
                 result.addAll(more);

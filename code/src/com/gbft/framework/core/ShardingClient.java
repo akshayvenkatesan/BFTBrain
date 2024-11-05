@@ -94,6 +94,8 @@ public class ShardingClient extends Entity {
 
     //     }
     // }
+
+
     @Override
     protected void execute(long seqnum) {
         System.out.println("Inside execute for sharding client " + id + " with seqnum " + seqnum + ".");
@@ -115,15 +117,9 @@ public class ShardingClient extends Entity {
                 var request = checkpoint.getRequest(reqnum);
                 int record = request.getRecord();
                 var clusterNum = record / 25 + 1;
-                System.out.println("*"); 
-                System.out.println("*"); 
-                System.out.println("*"); 
-                System.out.println("*"); 
+                System.out.println("******************"); 
                 System.out.println("Key: "+record+" Value: "+entry.getValue()); 
-                System.out.println("*"); 
-                System.out.println("*"); 
-                System.out.println("*"); 
-                System.out.println("*");
+                System.out.println("******************"); 
 
                 if (rollbackResponses.containsKey(reqnum)) {
                     // This is a response for a rollback request
@@ -132,9 +128,12 @@ public class ShardingClient extends Entity {
                     responseMap.put(clusterNum, responseMap.getOrDefault(clusterNum, 0) + 1);
                 } else if (entry.getValue() < 0) {
                     // We need to send a rollback as the balance has become negative
-                    rollbackResponses.put(reqnum, new HashMap<>());
+                    System.out.println("Running rollback scenario");
+                    rollbackResponses.put(reqnum, new HashMap<>()); 
                     var rollbackTx = rollbackTransactions.get(reqnum);
                     var firstRollbackRequest = dataset.createRequestWithKeyAndVal(nextRequestNum++, rollbackTx[0], rollbackTx[1]);
+                    System.out.println("Sending first rollback request");
+                    //System.out.println("Next Request Num and rollbackTx[0] and rollbackTx[1] are : " + nextRequestNum + " " + rollbackTx[0] + " " + rollbackTx[1]);
                     sendRequest(firstRollbackRequest, clusterNum);
                     var nextRollback = reqnum % 10 == 1 ? 2 : 1;
                     var newRequestNum = Long.valueOf(reqnum / 10 + String.valueOf(nextRollback));
@@ -142,6 +141,8 @@ public class ShardingClient extends Entity {
                     var nextRollbackTx = rollbackTransactions.get(newRequestNum);
                     var secondRollbackRequest = dataset.createRequestWithKeyAndVal(nextRequestNum++, nextRollbackTx[0], nextRollbackTx[1]);
                     var nextClusterNum = (int) (newRequestNum / 25 + 1);
+                    System.out.println("Sending second rollback request");
+                    //System.out.println("Next Request Num and nextRollbackTx[0] and nextRollbackTx[1] are : " + nextRequestNum + " " + nextRollbackTx[0] + " " + nextRollbackTx[1]);
                     sendRequest(secondRollbackRequest, nextClusterNum);
                 } else {
                     //Check if both the replies are as expected, if not create and execute rollback transaction
@@ -257,14 +258,14 @@ public class ShardingClient extends Entity {
                                 // Sending first request with a-val
                                 System.out.println(" First request number is : " + firstRequestNumber);
                                 System.out.println(" Second request number is : " + secondRequestNumber);
-                                var request1 = dataset.createRequestWithKeyAndVal(firstRequestNumber, currentTransaction[0], -currentTransaction[2]);
+                                var request1 = dataset.createRequestWithKeyAndVal(firstRequestNumber, currentTransaction[1], +currentTransaction[2]);
                                 var clusternum1 = request1.getRecord() / 25 + 1;
                                 sendRequest(request1, clusternum1);
                                 while (System.nanoTime() < next) {
                                     LockSupport.parkNanos(intervalns / 3);
                                 }
                                 // Sending second request with b+val
-                                var request2 = dataset.createRequestWithKeyAndVal(secondRequestNumber, currentTransaction[1], +currentTransaction[2]);
+                                var request2 = dataset.createRequestWithKeyAndVal(secondRequestNumber, currentTransaction[0], -currentTransaction[2]);
                                 nextRequestNum += 1;
                                 var clusternum2 = request2.getRecord() / 25 + 1;
                                 sendRequest(request2, clusternum2);
