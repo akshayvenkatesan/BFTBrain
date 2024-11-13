@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentSkipListMap;
+import org.apache.commons.lang3.tuple.Pair;
 
 import com.gbft.framework.core.Entity;
 import com.gbft.framework.statemachine.StateMachine;
@@ -16,7 +17,7 @@ public class CheckpointManager {
     private Entity entity;
     private int CHECKPOINT;
     private int checkpointSize;
-    private ConcurrentSkipListMap<Long, CheckpointData> checkpoints;
+    private ConcurrentSkipListMap<Pair<Long,Long>, CheckpointData> checkpoints;
     private long lastStableCheckpoint; // s
     private long lowWaterMark; // h
     public final int lowHighGap; // k
@@ -31,14 +32,16 @@ public class CheckpointManager {
         lowWaterMark = 0;
 
         checkpoints = new ConcurrentSkipListMap<>();
-        checkpoints.put(0L, new CheckpointData(0, this.entity));
+        for(int i =0;i<5;i++) {
+            checkpoints.put(Pair.of(i, OL), new CheckpointData(0, this.entity));
+        }
     }
 
     /**
      * Send Checkpoint Message
      * @param checkpointNum Sequence Number / Checkpoint Size
      */
-    public void sendCheckpoint(long checkpointNum) {
+    public void sendCheckpoint(Pair<Long,Long> checkpointNum) {
         // System.out.println(entity.prefix + "sendCheckpoint, checkpointNum:  " + checkpointNum);
 
         var digest = getCheckpointDigest(checkpointNum);
@@ -48,7 +51,7 @@ public class CheckpointManager {
         entity.sendMessage(message);       
     } 
 
-    public ByteString getCheckpointDigest(long checkpointNum) {
+    public ByteString getCheckpointDigest(Pair<Long,Long> checkpointNum) {
         var stream = new ByteArrayOutputStream();
         try {
             var checkpoint = getCheckpoint(checkpointNum);
@@ -103,23 +106,23 @@ public class CheckpointManager {
     }
 
     public Long getMinCheckpoint() {
-        return checkpoints.firstKey();
+        return checkpoints.firstKey().getValue();
     }
 
     public Long getMaxCheckpoint() {
-        return checkpoints.lastKey();
+        return checkpoints.lastKey().getValue();
     }
 
-    public CheckpointData getCheckpoint(long checkpointNum) {
+    public CheckpointData getCheckpoint(Pair<Long,Long> checkpointNum) {
         return checkpoints.computeIfAbsent(checkpointNum, num -> new CheckpointData(num, this.entity));
     }
 
-    public void removeCheckpoint(long checkpointNum) {
+    public void removeCheckpoint(Pair<Long,Long> checkpointNum) {
         checkpoints.remove(checkpointNum);
     }
 
-    public long getCheckpointNum(long seqnum) {
-        return seqnum / checkpointSize;
+    public Pair<Long,Long> getCheckpointNum(long clusternum, long seqnum) {
+        return Pair.of(clusternum, seqnum / checkpointSize);
     }
 
     /**
@@ -127,11 +130,11 @@ public class CheckpointManager {
      * @param seqnum sequence number
      * @return checkpoint that is responsible for seqnum
      */
-    public CheckpointData getCheckpointForSeq(long seqnum) {
-        return getCheckpoint(seqnum / checkpointSize);
+    public CheckpointData getCheckpointForSeq(long clusternum, long seqnum) {
+        return getCheckpoint(Pair.of(clusternum, seqnum / checkpointSize));
     }
 
-    public CheckpointData getPrevCheckpointForSeq(long seqnum) {
-        return getCheckpoint(seqnum / checkpointSize - 1);
+    public CheckpointData getPrevCheckpointForSeq(long clusternum, long seqnum) {
+        return getCheckpoint(Pair.of(clusternum, seqnum/checkpointSize - 1));
     }
 }

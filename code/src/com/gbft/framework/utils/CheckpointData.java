@@ -18,15 +18,16 @@ import com.gbft.framework.data.RequestData;
 import com.gbft.framework.statemachine.StateMachine;
 import com.gbft.framework.utils.Printer;
 import com.gbft.framework.utils.Printer.Verbosity;
+import org.apache.commons.lang3.tuple.Pair;
 
 public class CheckpointData {
     private long num;
     private Entity entity;
 
     // seqnum -> state (state machine)
-    private Map<Long, Integer> stateMap;
+    private Map<Pair<Long,Long>, Integer> stateMap;
     private Map<Long, RequestData> requests;
-    private Map<Long, List<RequestData>> requestBlocks;
+    private Map<Pair<Long,Long>, List<RequestData>> requestBlocks;
     private Map<Long, NavigableSet<Long>> aggregationValues;
     private MessageTally messageTally;
     private MessageTally viewTally;
@@ -45,7 +46,7 @@ public class CheckpointData {
     public long beginTimestamp;
     public float throughput;
 
-    protected Map<Long, Map<Long, Integer>> replies;
+    protected Map<Pair<Long,Long>, Map<Long, Integer>> replies;
 
     public CheckpointData(long num, Entity entity) {
         this.num = num;
@@ -139,9 +140,9 @@ public class CheckpointData {
         return nextProtocol.get();
     }
 
-    public void addRequestBlock(long seqnum, List<RequestData> requestBlock) {
+    public void addRequestBlock(Pair<Long,Long> pair_clusternum_seqnum, List<RequestData> requestBlock) {
         requestBlock.forEach(request -> requests.put(request.getRequestNum(), request));
-        requestBlocks.put(seqnum, requestBlock);
+        requestBlocks.put(pair_clusternum_seqnum, requestBlock);
         // stateMap.put(seqnum, StateMachine.IDLE);
     }
 
@@ -149,16 +150,16 @@ public class CheckpointData {
         return requests.get(reqnum);
     }
 
-    public List<RequestData> getRequestBlock(long seqnum) {
-        return requestBlocks.get(seqnum);
+    public List<RequestData> getRequestBlock(Pair<Long,Long> pair_clusternum_seqnum) {
+        return requestBlocks.get(pair_clusternum_seqnum);
     }
 
-    public void addReplies(long seqnum, Map<Long, Integer> blockReplies) {
-        replies.put(seqnum, blockReplies);
+    public void addReplies(Pair<Long,Long> pair_clusternum_seqnum, Map<Long, Integer> blockReplies) {
+        replies.put(pair_clusternum_seqnum, blockReplies);
     }
 
-    public Map<Long, Integer> getReplies(long seqnum) {
-        return replies.get(seqnum);
+    public Map<Long, Integer> getReplies(Pair<Long,Long> pair_clusternum_seqnum) {
+        return replies.get(pair_clusternum_seqnum);
     }
 
     public MessageTally getMessageTally() {
@@ -177,8 +178,8 @@ public class CheckpointData {
      * @param seqnum sequence number
      * @param state state
      */
-    public void setState(long seqnum, int state) {
-        stateMap.put(seqnum, state);
+    public void setState(Pair<Long,Long> pair_clusternum_seqnum, int state) {
+        stateMap.put(pair_clusternum_seqnum, state);
     }
 
     /**
@@ -186,11 +187,11 @@ public class CheckpointData {
      * @param seqnum sequence number
      * @return state
      */
-    public int getState(long seqnum) {
+    public int getState(Pair<Long, Long> pair_clusternum_seqnum) {
         if (protocol.get() == null) {
             return StateMachine.ANY_STATE;
         } else {
-            return stateMap.getOrDefault(seqnum, StateMachine.states.indexOf(StateMachine.findState("idle", protocol.get() + "_")));
+            return stateMap.getOrDefault(pair_clusternum_seqnum, StateMachine.states.indexOf(StateMachine.findState("idle", protocol.get() + "_")));
         }
     }
 

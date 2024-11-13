@@ -12,22 +12,26 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock.ReadLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock.WriteLock;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.gbft.framework.data.MessageData;
 import com.gbft.framework.data.RequestData;
 import com.gbft.framework.statemachine.StateMachine;
+import com.gbft.framework.utils.MessageTally.QuorumId;
 import com.gbft.framework.utils.Printer.Verbosity;
 import com.google.protobuf.ByteString;
+import org.apache.commons.lang3.tuple.Pair;
 
 public class MessageTally {
 
     // seqnum -> message-type -> view-num -> digest -> set(node)
-    protected Map<Long, Map<Integer, ConcurrentSkipListMap<Long, Map<ByteString, Set<Integer>>>>> counter;
+    protected Map<Pair<Long,Long>, Map<Integer, ConcurrentSkipListMap<Long, Map<ByteString, Set<Integer>>>>> counter;
 
     // sequence-num -> message-type -> view-num
-    protected Map<Long, Map<QuorumId, ConcurrentSkipListSet<Long>>> quorumMessages;
+    protected Map<Pair<Long,Long>, Map<QuorumId, ConcurrentSkipListSet<Long>>> quorumMessages;
 
     // sequence-num -> view-num -> digest
-    protected Map<Long, ConcurrentSkipListMap<Long, ByteString>> quorumDigests;
+    protected Map<Pair<Long,Long>, ConcurrentSkipListMap<Long, ByteString>> quorumDigests;
 
     protected Map<ByteString, List<RequestData>> candidateBlocks;
     protected Map<ByteString, Map<Long, Integer>> candidateReplies;
@@ -58,6 +62,8 @@ public class MessageTally {
         var viewnum = message.getViewNum();
         var digest = message.getDigest();
         var source = message.getSource();
+        var clusternum = source / 4;
+        var pair_clusternum_seqnum = Pair.of(clusternum, seqnum);
         var type = message.getMessageType();
         System.out.println("Tallying message: " + message.toString());
         counterWriteLock.lock();
@@ -70,7 +76,7 @@ public class MessageTally {
             candidateReplies.put(digest, message.getReplyDataMap());
         }
 
-        counter.computeIfAbsent(seqnum, s -> new ConcurrentHashMap<>())
+        counter.computeIfAbsent(pair_clusternum_seqnum, s -> new ConcurrentHashMap<>())
                .computeIfAbsent(type, t -> new ConcurrentSkipListMap<>())
                .computeIfAbsent(viewnum, v -> new ConcurrentHashMap<>())
                .computeIfAbsent(digest, d -> ConcurrentHashMap.newKeySet())
@@ -79,29 +85,29 @@ public class MessageTally {
         counterWriteLock.unlock();
     }
 
-    public Long getMaxQuorum(long seqnum, QuorumId quorumId) {
+    public Long getMaxQuorum(Pair<Long,Long> pair_clusternum_seqnum, QuorumId quorumId) {
         Long max = null;
         counterReadLock.lock();
-        var subcounter = DataUtils.nestedGet(counter, seqnum, quorumId.message); // subcounter.key = view
+        var subcounter = DataUtils.nestedGetPair(counter, pair_clusternum_seqnum, quorumId.message); // subcounter.key = view
         // print all elements of coounter
-        System.out.println("Seqnum: " + seqnum + " QuorumId: " + quorumId.message);
-        System.out.println("Printing all elements of counter");
+        // System.out.println("Seqnum: " + seqnum + " QuorumId: " + quorumId.message);
+        // System.out.println("Printing all elements of counter");
         //Print all elements of counter
-        for (Map.Entry<Long, Map<Integer, ConcurrentSkipListMap<Long, Map<ByteString, Set<Integer>>>>> seqEntry : counter.entrySet()) {
-            System.out.println("Seqnum: " + seqEntry.getKey());
-            for (Map.Entry<Integer, ConcurrentSkipListMap<Long, Map<ByteString, Set<Integer>>>> typeEntry : seqEntry.getValue().entrySet()) {
-            System.out.println("MessageType: " + typeEntry.getKey());
-            for (Map.Entry<Long, Map<ByteString, Set<Integer>>> viewEntry : typeEntry.getValue().entrySet()) {
-                System.out.println("Viewnum: " + viewEntry.getKey());
-                for (Map.Entry<ByteString, Set<Integer>> digestEntry : viewEntry.getValue().entrySet()) {
-                System.out.println("Digest: " + digestEntry.getKey());
-                for (Integer node : digestEntry.getValue()) {
-                    System.out.println("Node: " + node);
-                }
-                }
-            }
-            }
-        }
+        // for (Map.Entry<Long, Map<Integer, ConcurrentSkipListMap<Long, Map<ByteString, Set<Integer>>>>> seqEntry : counter.entrySet()) {
+        //     // System.out.println("Seqnum: " + seqEntry.getKey());
+        //     for (Map.Entry<Integer, ConcurrentSkipListMap<Long, Map<ByteString, Set<Integer>>>> typeEntry : seqEntry.getValue().entrySet()) {
+        //     System.out.println("MessageType: " + typeEntry.getKey());
+        //     for (Map.Entry<Long, Map<ByteString, Set<Integer>>> viewEntry : typeEntry.getValue().entrySet()) {
+        //         System.out.println("Viewnum: " + viewEntry.getKey());
+        //         for (Map.Entry<ByteString, Set<Integer>> digestEntry : viewEntry.getValue().entrySet()) {
+        //         System.out.println("Digest: " + digestEntry.getKey());
+        //         for (Integer node : digestEntry.getValue()) {
+        //             System.out.println("Node: " + node);
+        //         }
+        //         }
+        //     }
+        //     }
+        // }
         if (subcounter == null) {
             System.out.println("subcounter is null");
             counterReadLock.unlock();
@@ -109,7 +115,7 @@ public class MessageTally {
         }
 
         quorumReadLock.lock();
-        var subquorum = DataUtils.nestedGet(quorumMessages, seqnum, quorumId);
+        var subquorum = DataUtils.nestedGetPair(quorumMessages, pair_clusternum_seqnum, quorumId);
         var currentmax = subquorum == null ? -1L : subquorum.last();
         if (subcounter.lastKey() <= currentmax) {
             max = subquorum.last();
@@ -117,7 +123,7 @@ public class MessageTally {
             counterReadLock.unlock();
 
             if (Printer.verbosity >= Verbosity.VVVVV) {
-                Printer.print(Verbosity.VVVVV, "GetMaxQuorum Success [currentmax]: ", StateMachine.messages.get(quorumId.message).name.toUpperCase() + " seqnum: " + seqnum + " size: " + quorumId.quorum);
+                // Printer.print(Verbosity.VVVVV, "GetMaxQuorum Success [currentmax]: ", StateMachine.messages.get(quorumId.message).name.toUpperCase() + " seqnum: " + seqnum + " size: " + quorumId.quorum);
             }
 
             return max;
@@ -130,7 +136,7 @@ public class MessageTally {
                                    .filter(entry -> entry.getValue().size() >= quorumId.quorum)
                                    .map(entry -> entry.getKey()).findAny();
             if (digest.isPresent()) {
-                updateQuorumDigest(seqnum, viewnum, digest.get(), quorumId);
+                updateQuorumDigest(pair_clusternum_seqnum, viewnum, digest.get(), quorumId);
                 max = viewnum;
 
                 if (Printer.verbosity >= Verbosity.VVVVV) {
@@ -145,7 +151,7 @@ public class MessageTally {
                     st = st.trim();
                     st = st + "]";
 
-                    Printer.print(Verbosity.VVVVV, "GetMaxQuorum Success [filter]: ", StateMachine.messages.get(quorumId.message).name.toUpperCase() + " seqnum: " + seqnum + " size: " + quorumId.quorum + " quorum: " + st);
+                    // Printer.print(Verbosity.VVVVV, "GetMaxQuorum Success [filter]: ", StateMachine.messages.get(quorumId.message).name.toUpperCase() + " seqnum: " + seqnum + " size: " + quorumId.quorum + " quorum: " + st);
                 }
                 break;
             }
@@ -156,16 +162,16 @@ public class MessageTally {
         return max;
     }
 
-    public boolean hasQuorum(long seqnum, long viewnum, QuorumId quorumId) {
+    public boolean hasQuorum(Pair<Long,Long> pair_clusternum_seqnum, long viewnum, QuorumId quorumId) {
         counterReadLock.lock();
-        var subcounter = DataUtils.nestedGet(counter, seqnum, quorumId.message); // subcounter.key = view
+        var subcounter = DataUtils.nestedGetPair(counter, pair_clusternum_seqnum, quorumId.message); // subcounter.key = view
         if (subcounter == null || !subcounter.containsKey(viewnum)) {
             counterReadLock.unlock();
             return false;
         }
 
         quorumReadLock.lock();
-        var subquorum = DataUtils.nestedGet(quorumMessages, seqnum, quorumId);
+        var subquorum = DataUtils.nestedGetPair(quorumMessages, pair_clusternum_seqnum, quorumId);
         if (subquorum != null && subquorum.contains(viewnum)) {
             quorumReadLock.unlock();
             counterReadLock.unlock();
@@ -181,7 +187,7 @@ public class MessageTally {
 
         var match = digest.isPresent();
         if (match) {
-            updateQuorumDigest(seqnum, viewnum, digest.get(), quorumId);
+            updateQuorumDigest(pair_clusternum_seqnum, viewnum, digest.get(), quorumId);
         }
         quorumWriteLock.unlock();
         counterReadLock.unlock();
@@ -189,50 +195,50 @@ public class MessageTally {
         return match;
     }
 
-    public void updateQuorumBlock(long seqnum, long viewnum, ByteString digest, List<RequestData> block, QuorumId quorumId) {
+    public void updateQuorumBlock(Pair<Long,Long> pair_clusternum_seqnum, long viewnum, ByteString digest, List<RequestData> block, QuorumId quorumId) {
         quorumWriteLock.lock();
         candidateBlocks.put(digest, block);
-        updateQuorumDigest(seqnum, viewnum, digest, quorumId);
+        updateQuorumDigest(pair_clusternum_seqnum, viewnum, digest, quorumId);
         quorumWriteLock.unlock();
     }
 
-    private void updateQuorumDigest(long seqnum, long viewnum, ByteString digest, QuorumId quorumId) {
-        quorumDigests.computeIfAbsent(seqnum, s -> new ConcurrentSkipListMap<>()).put(viewnum, digest);
-        quorumMessages.computeIfAbsent(seqnum, s -> new ConcurrentHashMap<>())
+    private void updateQuorumDigest(Pair<Long,Long> pair_clusternum_seqnum, long viewnum, ByteString digest, QuorumId quorumId) {
+        quorumDigests.computeIfAbsent(pair_clusternum_seqnum, s -> new ConcurrentSkipListMap<>()).put(viewnum, digest);
+        quorumMessages.computeIfAbsent(pair_clusternum_seqnum, s -> new ConcurrentHashMap<>())
                       .computeIfAbsent(quorumId, c -> new ConcurrentSkipListSet<>()).add(viewnum);
     }
 
-    public Set<Integer> getQuorumNodes(long seqnum, long viewnum, QuorumId quorumId) {
+    public Set<Integer> getQuorumNodes(Pair<Long,Long> pair_clusternum_seqnum, long viewnum, QuorumId quorumId) {
         quorumReadLock.lock();
-        var digest = getQuorumDigest(seqnum, viewnum);
+        var digest = getQuorumDigest(pair_clusternum_seqnum, viewnum);
         quorumReadLock.unlock();
 
         counterReadLock.lock();
-        var nodes = counter.get(seqnum).get(quorumId.message).get(viewnum).get(digest);
+        var nodes = counter.get(pair_clusternum_seqnum).get(quorumId.message).get(viewnum).get(digest);
         counterReadLock.unlock();
 
         return nodes;
     }
 
-    public ByteString getQuorumDigest(long seqnum, long viewnum) {
-        var submap = quorumDigests.get(seqnum);
+    public ByteString getQuorumDigest(Pair<Long,Long> pair_clusternum_seqnum, long viewnum) {
+        var submap = quorumDigests.get(pair_clusternum_seqnum);
         return submap == null ? null : submap.get(viewnum);
     }
 
-    public List<RequestData> getQuorumBlock(long seqnum, long viewnum) {
+    public List<RequestData> getQuorumBlock(Pair<Long,Long> pair_clusternum_seqnum, long viewnum) {
         quorumReadLock.lock();
-        var submap = quorumDigests.get(seqnum);
+        var submap = quorumDigests.get(pair_clusternum_seqnum);
         quorumReadLock.unlock();
         return submap == null ? null : candidateBlocks.get(submap.get(viewnum));
     }
 
-    public Map<Long, Integer> getQuorumReplies(long seqnum, long viewnum) {
-        var submap = quorumDigests.get(seqnum);
+    public Map<Long, Integer> getQuorumReplies(Pair<Long,Long> pair_clusternum_seqnum, long viewnum) {
+        var submap = quorumDigests.get(pair_clusternum_seqnum);
         return submap == null ? null : candidateReplies.get(submap.get(viewnum));
     }
 
-    public Long getMaxQuorum(long seqnum) {
-        var submap = quorumDigests.get(seqnum);
+    public Long getMaxQuorum(Pair<Long,Long> pair_clusternum_seqnum) {
+        var submap = quorumDigests.get(pair_clusternum_seqnum);
         return submap == null ? null : submap.lastKey();
     }
 

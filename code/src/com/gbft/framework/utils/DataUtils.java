@@ -23,6 +23,7 @@ import com.gbft.framework.data.RequestData;
 import com.gbft.framework.data.RequestData.Operation;
 import com.gbft.framework.data.UnitData;
 import com.google.protobuf.ByteString;
+import org.apache.commons.lang3.tuple.Pair;
 import com.google.protobuf.Timestamp;
 import com.google.protobuf.util.Timestamps;
 
@@ -216,6 +217,11 @@ public class DataUtils {
     }
 
     public static <R, A, B> R nestedGet(Map<A, Map<B, R>> map, A index1, B index2) {
+        var submap = map.get(index1);
+        return submap == null ? null : submap.get(index2);
+    }
+
+    public static <R, A, B> R nestedGetPair(Map<Pair<A,A>, Map<B, R>> map, Pair<A,A> index1, B index2) {
         var submap = map.get(index1);
         return submap == null ? null : submap.get(index2);
     }
