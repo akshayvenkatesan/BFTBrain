@@ -520,6 +520,7 @@ public abstract class Entity {
                                         if (learning && seqnum == exchangeSequence && isPrimary(seqnum)) {
                                             if (!reportTally.hasQuorum(currentEpisodeNum.get(), 0, new QuorumId(REPORT, REPORT_QUORUM))) {
                                                 System.out.println("Inside pending requests7 and report tally has no quorum");
+                                                System.out.println("Breaking searchloop2");
                                                 break searchloop;
                                             }
                                         }
@@ -527,8 +528,10 @@ public abstract class Entity {
                                         block = new ArrayList<RequestData>(blockSize);
                                         
                                         // for (var i = 0; i < blockSize; i++) {
-                                            
-                                            var request = pendingRequests.remove();
+                                            var request = pendingRequests.size() == 0 ? null : pendingRequests.remove();
+                                            if (request == null) {
+                                                continue;
+                                            } 
                                             // carry the report quorum in the first request of this reserved block
                                             // if (learning && seqnum == exchangeSequence && isPrimary(seqnum) && i == 0) 
                                             if (learning && seqnum == exchangeSequence && isPrimary(seqnum)) {
@@ -573,6 +576,7 @@ public abstract class Entity {
                                 synchronized (aggregationBuffer) {
                                     aggregationBuffer.add(seqnum);
                                 }
+                                System.out.println("Breaking searchloop1");
                                 break searchloop;
                             }
 
@@ -600,6 +604,7 @@ public abstract class Entity {
                                 // Printer.print(Verbosity.V, prefix, "[time-since-start=" + Printer.timeFormat(System.nanoTime() - systemStartTime, true) + "] ready for execution: seqnum=" + seqnum);
                             }
                             stateLock.unlock();
+                            System.out.println("Breaking searchloop3");
                             break searchloop;
                         }
                     }
@@ -623,6 +628,7 @@ public abstract class Entity {
             }
 
             if (seqExecuted || !stateUpdated) {
+                System.out.println("Breaking while loop with seqExecuted: " + seqExecuted + " stateUpdated: " + stateUpdated);
                 break;
             }
         }
@@ -630,10 +636,11 @@ public abstract class Entity {
         stateLock.lock();
         updating.remove(seqnum);
         var toUpdate = new TreeSet<Long>();
-        // if (nextseqUpdated || needsUpdate.contains(nextSequence)) {
-        //     System.out.println("Adding nextSequence to toUpdate1: " + nextSequence);
-        //     toUpdate.add(nextSequence);
-        // }
+        if (nextseqUpdated || needsUpdate.contains(nextSequence)) {
+            System.out.println("Adding nextSequence to toUpdate1: " + nextSequence);
+            System.out.println("nextseqUpdated: " + nextseqUpdated + " need.update.contains(nextSequence): " + needsUpdate.contains(nextSequence));
+            toUpdate.add(nextSequence);
+        }
 
         if (needsUpdate.contains(seqnum)) {
             needsUpdate.remove(seqnum);
@@ -713,8 +720,8 @@ public abstract class Entity {
             // checkSwitching(lastExecutedSequenceNum);
 
             //Commeting this part out because causing issue with seqnum
-            // System.out.println("For some reason I'm here 2 and running for lastExecutedSequenceNum+1: " + lastExecutedSequenceNum);
-            // stateUpdateLoop(lastExecutedSequenceNum + 1);
+            System.out.println("For some reason I'm here 2 and running for lastExecutedSequenceNum+1: " + lastExecutedSequenceNum);
+            stateUpdateLoop(lastExecutedSequenceNum + 1);
         }
     }
 
