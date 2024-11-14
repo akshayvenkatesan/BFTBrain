@@ -154,42 +154,45 @@ public class ShardingClient extends Entity {
                         var next = System.nanoTime() + intervalns;
 
                         // generating 1000 random transactions.
-                        List<int[]> transactions = dataset.generateRandomTransactions(1);
-                        for (int i =0;i<transactions.size();i++) {
-                            int[] currentTransaction = transactions.get(i);
-                            // If we are depositing in the same account then simply add the val to that key
-                            System.out.println("Sender is : " + currentTransaction[0]);
-                            System.out.println("Receiver is : " + currentTransaction[1]);
-                            System.out.println("Amount is : " + currentTransaction[2]);
-                            System.out.println(" Txn number is : " + nextRequestNum);
-                            if (currentTransaction[0] == currentTransaction[1]) {
-                                var request = dataset.createRequestWithKeyAndVal(nextRequestNum, currentTransaction[0], currentTransaction[2]);
-                                nextRequestNum += 1;
-                                var clusternum0 = request.getRecord() / 25 + 1;
-                                sendRequest(request, clusternum0);
-                            } else {
-                                Long firstRequestNumber = Long.valueOf(String.valueOf(nextRequestNum) + '1');
-                                Long secondRequestNumber = Long.valueOf(String.valueOf(nextRequestNum) + '2');
-                                // Sending first request with a-val
-                                System.out.println(" First request number is : " + firstRequestNumber);
-                                System.out.println(" Second request number is : " + secondRequestNumber);
-                                var request1 = dataset.createRequestWithKeyAndVal(firstRequestNumber, currentTransaction[0], -currentTransaction[2]);
-                                var clusternum1 = request1.getRecord() / 25 + 1;
-                                sendRequest(request1, clusternum1);
-                                while (System.nanoTime() < next) {
-                                    LockSupport.parkNanos(intervalns / 3);
-                                }
-                                // Sending second request with b+val
-                                var request2 = dataset.createRequestWithKeyAndVal(secondRequestNumber, currentTransaction[1], +currentTransaction[2]);
-                                nextRequestNum += 1;
-                                var clusternum2 = request2.getRecord() / 25 + 1;
-                                sendRequest(request2, clusternum2);
-                            }
-                        }
-//                    var request = dataset.createRequest(nextRequestNum);
-//                    nextRequestNum += 1;
-//
-//                    sendRequest(request);
+//                        List<int[]> transactions = dataset.generateRandomTransactions(1);
+//                        for (int i =0;i<transactions.size();i++) {
+//                            int[] currentTransaction = transactions.get(i);
+//                            // If we are depositing in the same account then simply add the val to that key
+//                            System.out.println("Sender is : " + currentTransaction[0]);
+//                            System.out.println("Receiver is : " + currentTransaction[1]);
+//                            System.out.println("Amount is : " + currentTransaction[2]);
+//                            System.out.println(" Txn number is : " + nextRequestNum);
+//                            if (currentTransaction[0] == currentTransaction[1]) {
+//                                var request = dataset.createRequestWithKeyAndVal(nextRequestNum, currentTransaction[0], currentTransaction[2]);
+//                                nextRequestNum += 1;
+//                                var clusternum0 = request.getRecord() / 25 + 1;
+//                                sendRequest(request, clusternum0);
+//                            } else {
+//                                Long firstRequestNumber = Long.valueOf(String.valueOf(nextRequestNum) + '1');
+//                                Long secondRequestNumber = Long.valueOf(String.valueOf(nextRequestNum) + '2');
+//                                // Sending first request with a-val
+//                                System.out.println(" First request number is : " + firstRequestNumber);
+//                                System.out.println(" Second request number is : " + secondRequestNumber);
+//                                var request1 = dataset.createRequestWithKeyAndVal(firstRequestNumber, currentTransaction[0], -currentTransaction[2]);
+//                                var clusternum1 = request1.getRecord() / 25 + 1;
+//                                sendRequest(request1, clusternum1);
+//                                while (System.nanoTime() < next) {
+//                                    LockSupport.parkNanos(intervalns / 3);
+//                                }
+//                                // Sending second request with b+val
+//                                var request2 = dataset.createRequestWithKeyAndVal(secondRequestNumber, currentTransaction[1], +currentTransaction[2]);
+//                                nextRequestNum += 1;
+//                                var clusternum2 = request2.getRecord() / 25 + 1;
+//                                sendRequest(request2, clusternum2);
+//                            }
+//                        }
+                        var request = dataset.createRequest(nextRequestNum);
+                        var clusternum = request.getRecord() / 25 + 1;
+                        nextRequestNum += 1;
+                        //Write logic to create graph
+                        //Execute all independent transactions and to queue
+                        //Keep counter of currently executing transactiions. Run loop till either counter is 0 and queue is empty
+                        sendRequest(request, clusternum);
 
 
                         while (System.nanoTime() < next) {
@@ -250,7 +253,7 @@ public class ShardingClient extends Entity {
 
         protected void execute() {
             System.out.println("Release semaphore for sharding client " + id + ".");
-            //semaphore.release();
+            semaphore.release();
         }
     }
 }

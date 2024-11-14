@@ -95,7 +95,7 @@ public class ClientDataset extends Dataset {
 
     public RequestData createRequest(long reqnum) {
 
-        var record = random.nextInt(AdvanceConfig.integer("workload.contention-level"));
+        var record = 15;//random.nextInt(AdvanceConfig.integer("workload.contention-level"));
         var operation = Operation.values()[random.nextInt(5)];
         int value = 0;
 

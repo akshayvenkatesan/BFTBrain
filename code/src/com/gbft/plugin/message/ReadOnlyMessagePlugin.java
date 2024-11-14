@@ -91,7 +91,7 @@ public class ReadOnlyMessagePlugin implements MessagePlugin {
                 this.executionResults.put(request.getRequestNum(), this.entity.dataset.execute(request));
             }
             // batching
-            var blockSize = Config.integer("benchmark.block-size");
+            var blockSize = 1;//Config.integer("benchmark.block-size");
 
             for (var request : message.getRequestsList()) {
                 this.pendingReadOnlyRequests.offer(request);

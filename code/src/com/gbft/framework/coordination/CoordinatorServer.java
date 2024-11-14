@@ -312,7 +312,7 @@ public class CoordinatorServer extends CoordinatorBase {
 
         private void printTitle() {
             var reqinterval = Config.integer("benchmark.request-interval-micros") * 1000L;
-            var blockSize = Config.integer("benchmark.block-size");
+            var blockSize = 1;//Config.integer("benchmark.block-size");
             var f = Config.integer("general.f");
 
             var title = new StringBuilder();

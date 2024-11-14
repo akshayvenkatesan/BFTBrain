@@ -146,7 +146,7 @@ public abstract class Entity {
 
         prefix = "{" + id + "} ";
 
-        blockSize = Config.integer("benchmark.block-size");
+        blockSize = 1;//Config.integer("benchmark.block-size");
         checkpointSize = Config.integer("benchmark.checkpoint-size");
 
         learning = Config.bool("general.learning");
@@ -530,7 +530,7 @@ public abstract class Entity {
 
                                 var message = createMessage(seqnum, currentViewNum, block, StateMachine.REQUEST, id,
                                         List.of(id));
-                                System.out.println("Inside pending requests8 and messaeg: " + message);
+                                System.out.println("Inside pending ghghghghgrequests8 and messaeg: " + message);
                                 checkpoint.tally(message);
                                 benchmarkManager.add(BenchmarkManager.CREATE_REQUEST_BLOCK, 0, System.nanoTime());
                                 
@@ -564,9 +564,11 @@ public abstract class Entity {
                             if (transition.updateMode == UpdateMode.SLOW) {
                                 featureManager.countPath(currentEpisodeNum.get(), FeatureManager.FAST_PATH_FREQUENCY, FeatureManager.SLOW);    
                             }
-
+                            System.out.println("XYZ");
+                            System.out.println(" Transition before : From : " + transition.fromState + " Transition to : " + transition.toState);
                             transition(seqnum, transition);
                             stateUpdated = true;
+                            System.out.println(" Transition After : From : " + transition.fromState + " Transition to : " + transition.toState);
                             // Printer.print(Verbosity.V, prefix, "[time-since-start=" + Printer.timeFormat(System.nanoTime() - systemStartTime, true) + "] transition state to: seqnum=" + seqnum + 
                             //                 ", toState=" + StateMachine.states.get(transition.toState).name);
 
@@ -793,7 +795,7 @@ public abstract class Entity {
         var checkpoint = checkpointManager.getCheckpointForSeq(seqnum);
         var currentState = checkpoint.getState(seqnum);
         var phase = StateMachine.states.get(currentState).phase;
-
+        System.out.println(" Kanav's phase is " + phase + " ID is " + this.getId());
         var requestBlock = checkpoint.getRequestBlock(seqnum);
 
         // if update mode is sequence mode
