@@ -14,6 +14,7 @@ import com.gbft.framework.data.MessageData;
 import com.gbft.framework.statemachine.StateMachine;
 import com.gbft.framework.statemachine.Transition;
 import com.gbft.framework.utils.Printer.Verbosity;
+import org.apache.commons.lang3.tuple.Pair;
 
 public class Timekeeper implements Runnable {
 
@@ -77,7 +78,7 @@ public class Timekeeper implements Runnable {
                 overdues.computeIfAbsent(seqnum, s -> new ArrayList<>()).add(pair);
                 multipliers.put(seqnum, multipliers.get(seqnum) + 1);
 
-                entity.stateUpdateLoop(seqnum);
+                entity.stateUpdateLoop(Pair.of(entity.getId()/4L, seqnum));
             } catch (InterruptedException e) {
 
             }
@@ -179,8 +180,8 @@ public class Timekeeper implements Runnable {
             return true;
         }
 
-        var checkpoint = entity.getCheckpointManager().getCheckpointForSeq(seqnum);
-        var currentState = checkpoint.getState(seqnum);
+        var checkpoint = entity.getCheckpointManager().getCheckpointForSeq(entity.getId()/4L, seqnum);
+        var currentState = checkpoint.getState(Pair.of(entity.getId()/4L, seqnum));
 
         return (mode == SEQUENCE_MODE && currentState == StateMachine.EXECUTED) ||
                 (mode == STATE_MODE && currentState != key.state);

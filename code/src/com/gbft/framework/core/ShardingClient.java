@@ -18,6 +18,7 @@ import com.gbft.framework.utils.Config;
 import com.gbft.framework.utils.MessageTally.QuorumId;
 import com.gbft.framework.utils.Printer;
 import com.gbft.framework.utils.Printer.Verbosity;
+import org.apache.commons.lang3.tuple.Pair;
 
 public class ShardingClient extends Entity {
 
@@ -99,11 +100,11 @@ public class ShardingClient extends Entity {
     @Override
     protected void execute(long seqnum) {
         System.out.println("Inside execute for sharding client " + id + " with seqnum " + seqnum + ".");
-        var checkpoint = checkpointManager.getCheckpointForSeq(seqnum);
+        var checkpoint = checkpointManager.getCheckpointForSeq(this.id/4L, seqnum);
 
         var tally = checkpoint.getMessageTally();
-        var viewnum = tally.getMaxQuorum(seqnum);
-        var replies = tally.getQuorumReplies(seqnum, viewnum);
+        var viewnum = tally.getMaxQuorum(Pair.of(this.id/4L, seqnum));
+        var replies = tally.getQuorumReplies(Pair.of(this.id/4L, seqnum), viewnum);
         currentViewNum = viewnum;
         /*
          * Checks for replies for the requests in the block and updates the dataset.
@@ -215,7 +216,7 @@ public class ShardingClient extends Entity {
     }
 
     public class RequestGenerator {
-        protected final Semaphore semaphore = new Semaphore(2);
+        protected final Semaphore semaphore = new Semaphore(1);
 
         public void init() {
             threads.add(new Thread(new RequestGenerator.RequestGeneratorRunner()));

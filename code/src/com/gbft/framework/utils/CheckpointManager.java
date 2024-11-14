@@ -33,7 +33,7 @@ public class CheckpointManager {
 
         checkpoints = new ConcurrentSkipListMap<>();
         for(int i =0;i<5;i++) {
-            checkpoints.put(Pair.of(i, OL), new CheckpointData(0, this.entity));
+            checkpoints.put(Pair.of((long) i, 0L), new CheckpointData(0, this.entity));
         }
     }
 
@@ -46,7 +46,7 @@ public class CheckpointManager {
 
         var digest = getCheckpointDigest(checkpointNum);
         var targets = entity.getRolePlugin().getRoleEntities(0, 0, StateMachine.NORMAL_PHASE, StateMachine.NODE, 1);
-        var message = DataUtils.createMessage(checkpointNum, 0L, CHECKPOINT, entity.getId(), targets, List.of(),
+        var message = DataUtils.createMessage(checkpointNum.getValue(), 0L, CHECKPOINT, entity.getId(), targets, List.of(),
                 entity.EMPTY_BLOCK, null, digest);
         entity.sendMessage(message);       
     } 
@@ -114,7 +114,7 @@ public class CheckpointManager {
     }
 
     public CheckpointData getCheckpoint(Pair<Long,Long> checkpointNum) {
-        return checkpoints.computeIfAbsent(checkpointNum, num -> new CheckpointData(num, this.entity));
+        return checkpoints.computeIfAbsent(checkpointNum, num -> new CheckpointData(num.getValue(), this.entity));
     }
 
     public void removeCheckpoint(Pair<Long,Long> checkpointNum) {

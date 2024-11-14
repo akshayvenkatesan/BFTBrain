@@ -13,6 +13,8 @@ import com.gbft.framework.utils.CheckpointManager;
 import com.gbft.framework.utils.Config;
 import com.gbft.framework.utils.DataUtils;
 import com.google.protobuf.ByteString;
+import com.google.protobuf.Parser;
+import org.apache.commons.lang3.tuple.Pair;
 
 public class CheckpointTransitionPlugin implements TransitionPlugin {
 
@@ -68,10 +70,11 @@ public class CheckpointTransitionPlugin implements TransitionPlugin {
         try {
             var min = checkpointNum * checkpointSize;
             var max = min + checkpointSize - 1;
-            var checkpoint = checkpointManager.getCheckpoint(checkpointNum);
+            var checkpoint = checkpointManager.getCheckpoint(Pair.of(entity.getId()/4L, checkpointNum));
             var tally = checkpoint.getMessageTally();
             for (var seqnum = min; seqnum < max; seqnum++) {
-                var digest = tally.getQuorumDigest(seqnum, tally.getMaxQuorum(seqnum));
+                var digest = tally.getQuorumDigest(Pair.of(entity.getId()/4L,seqnum),
+                        tally.getMaxQuorum(Pair.of(entity.getId()/4L,seqnum)));
                 stream.write(digest.toByteArray());
             }
 

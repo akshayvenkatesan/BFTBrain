@@ -81,10 +81,10 @@ public abstract class Entity {
     // Protocol State
 
     protected long nextSequence;
-    protected long lastExecutedSequenceNum;
+    protected Map<Long, Long> lastExecutedSequenceNum;
     protected long currentViewNum;
     protected Timekeeper timekeeper;
-    protected Map<Long, Transition> executionQueue;
+    protected Map<Long, Map<Long, Transition>> executionQueue;
 
     // Concurrency
 
@@ -164,7 +164,7 @@ public abstract class Entity {
 
         currentViewNum = 0L;
         nextSequence = 0L;
-        lastExecutedSequenceNum = -1L;
+        lastExecutedSequenceNum = Map.of(0L,-1L, 1L, -1L,2L,-1L, 3L, -1L);
         executionQueue = new HashMap<>();
 
         pendingRequests = new ConcurrentLinkedQueue<>();
@@ -317,12 +317,12 @@ public abstract class Entity {
         if (Printer.verbosity >= Verbosity.VVV) {
             Printer.print(Verbosity.VVV, prefix, "Processing ", message);
         }
-        System.out.println("Going to process: " + message);
+//        System.out.println("Going to process: " + message);
         for (var i = messagePlugins.size() - 1; i >= 0; i--) {
             var plugin = messagePlugins.get(i);
             message = plugin.processIncomingMessage(message);
         }
-        System.out.println("Processed: " + message);
+        //System.out.println("Processed: " + message);
         if (message.getFlagsList().contains(DataUtils.INVALID)) {
             System.out.println("Returning as message is invalid");
             return;
@@ -362,28 +362,29 @@ public abstract class Entity {
             }
         } else {
             Long seqnum = message.getSequenceNum();
-            List<Integer> targets = message.getTargetsList();
-            System.out.println("Received message inside not request block: " + message);
-            System.out.println("My id is and Message Target is : " + id + " " + targets);
-            if (checkpointManager.getCheckpointNum(this.id/4L, seqnum).getValue() < checkpointManager.getMinCheckpoint()) {
+            Long clusternum = message.getSource()/4L;
+//            List<Integer> targets = message.getTargetsList();
+            System.out.println("Received message inside not request block: ");
+//            System.out.println("My id is and Message Target is : " + id + " " + targets);
+            if (checkpointManager.getCheckpointNum(clusternum, seqnum).getValue() < checkpointManager.getMinCheckpoint()) {
                 return;
             }
 
             if (!isValidMessage(message)) {
                 return;
             }
-            System.out.println("Valid message: " + message);
-            var checkpoint = checkpointManager.getCheckpointForSeq(this.id/4L, seqnum);
+            var checkpoint = checkpointManager.getCheckpointForSeq(clusternum, seqnum);
+            System.out.println("Tallying message");
             checkpoint.tally(message);
             checkpoint.addAggregationValue(message);
-            timekeeper.messageReceived(seqnum, currentViewNum, checkpoint.getState(Pair.of(this.id/4L, seqnum)), message);
+            timekeeper.messageReceived(seqnum, currentViewNum, checkpoint.getState(Pair.of(clusternum, seqnum)), message);
 
             if (Printer.verbosity >= Verbosity.VVV) {
                 Printer.print(Verbosity.VVV, prefix, "Tally message ", message);
             }
-            System.out.println("Running state update loop for seqnum: " + seqnum); 
-            System.out.println("For some reason I'm here 3 and seqnum: " + seqnum);
-            stateUpdateLoop(Pair.of(this.id/4L, seqnum));
+            System.out.println("Running state update loop for clusternum: " + message.getSource()/4 +
+                    " seqnum: " + seqnum);
+            stateUpdateLoop(Pair.of(message.getSource()/4L, seqnum));
         }
 
         var start = DataUtils.toLong(message.getTimestamp());
@@ -392,7 +393,7 @@ public abstract class Entity {
 
     public void stateUpdateLoop(Pair<Long, Long> pair_clusternum_seqnum) {
         //Printer.print(Verbosity.VVVV, prefix, "StateUpdateLoop seqnum: " + seqnum);
-        //System.out.println("Calling state update from staeUpdateLoop");
+        System.out.println("Calling state update from staeUpdateLoop");
         var result = stateUpdate(pair_clusternum_seqnum);
         while (running && result != null && !result.isEmpty()) {
             var next = result.pollFirst();
@@ -458,8 +459,8 @@ public abstract class Entity {
             System.out.println("Inside while loop");
             stateUpdated = false;
 
-            var checkpoint = checkpointManager.getCheckpointForSeq(this.id/4L, pair_clusternum_seqnum.getValue());
-            var currentState = checkpoint.getState(Pair.of(this.id/4L, pair_clusternum_seqnum.getValue()));
+            var checkpoint = checkpointManager.getCheckpointForSeq(pair_clusternum_seqnum.getKey(), pair_clusternum_seqnum.getValue());
+            var currentState = checkpoint.getState(Pair.of(pair_clusternum_seqnum.getKey(), pair_clusternum_seqnum.getValue()));
             var phase = StateMachine.states.get(currentState).phase;
             var roles = rolePlugin.getEntityRoles(pair_clusternum_seqnum.getValue(), currentViewNum, phase, id);
             var roles2 = rolePlugin.getRoleEntities(pair_clusternum_seqnum.getValue(), pair_clusternum_seqnum.getValue(), local_cnt, local_cnt, local_cnt);
@@ -585,7 +586,7 @@ public abstract class Entity {
                                 featureManager.countPath(currentEpisodeNum.get(), FeatureManager.FAST_PATH_FREQUENCY, FeatureManager.SLOW);    
                             }
 
-                            transition(pair_clusternum_seqnum.getValue(), transition);
+                            transition(pair_clusternum_seqnum.getKey(), pair_clusternum_seqnum.getValue(), transition);
                             stateUpdated = true;
                             // Printer.print(Verbosity.V, prefix, "[time-since-start=" + Printer.timeFormat(System.nanoTime() - systemStartTime, true) + "] transition state to: seqnum=" + seqnum + 
                             //                 ", toState=" + StateMachine.states.get(transition.toState).name);
@@ -619,7 +620,7 @@ public abstract class Entity {
                     if (transition != null) {
                         benchmarkManager.start(BenchmarkManager.TIMEOUT, pair_clusternum_seqnum.getValue(), 1);
 
-                        transition(pair_clusternum_seqnum.getValue(), transition);
+                        transition(pair_clusternum_seqnum.getKey(), pair_clusternum_seqnum.getValue(), transition);
                         timekeeper.stateUpdated(pair_clusternum_seqnum.getValue(), transition.toState);
 
                         stateUpdated = true;
@@ -636,10 +637,10 @@ public abstract class Entity {
         stateLock.lock();
         updating.remove(pair_clusternum_seqnum);
         var toUpdate = new TreeSet<Pair<Long,Long>>();
-        if (nextseqUpdated || needsUpdate.contains(Pair.of(this.id/4, nextSequence))) {
+        if (nextseqUpdated || needsUpdate.contains(Pair.of(pair_clusternum_seqnum.getKey(), nextSequence))) {
             //System.out.println("Adding nextSequence to toUpdate1: " + nextSequence);
             //System.out.println("nextseqUpdated: " + nextseqUpdated + " need.update.contains(nextSequence): " + needsUpdate.contains(nextSequence));
-            toUpdate.add(Pair.of(this.id/4L, nextSequence));
+            toUpdate.add(Pair.of(pair_clusternum_seqnum.getKey(), nextSequence));
         }
 
         if (needsUpdate.contains(pair_clusternum_seqnum)) {
@@ -664,22 +665,30 @@ public abstract class Entity {
         return transition;
     }
 
-    public void executor() {
+    public void executor(Long clusternum) {
         while (running) {
             Transition transition;
+            var clusterLastExecutedSequence = lastExecutedSequenceNum.get(clusternum);
             synchronized (executionQueue) {
-                while (executionQueue.get(lastExecutedSequenceNum + 1) == null && running) {
-                    try {
-                        executionQueue.wait();
-                    } catch (InterruptedException e) {
+                    while (executionQueue.get(clusternum).get(clusterLastExecutedSequence+1) == null && running) {
+                        try {
+                            executionQueue.wait();
+                        } catch (InterruptedException e) {
+                        }
                     }
-                }
+            }
+//                while (executionQueue.get(lastExecutedSequenceNum + 1) == null && running) {
+//                    try {
+//                        executionQueue.wait();
+//                    } catch (InterruptedException e) {
+//                    }
+//                }
 
-                transition = executionQueue.get(lastExecutedSequenceNum + 1);
-                executionQueue.entrySet().removeIf(entry -> entry.getKey() <= lastExecutedSequenceNum + 1); 
-                lastExecutedSequenceNum += 1;
+                transition = executionQueue.get(clusternum).get(clusterLastExecutedSequence);
+                executionQueue.get(clusternum).entrySet().removeIf(entry -> entry.getKey() <= clusterLastExecutedSequence);
+                lastExecutedSequenceNum.put(clusternum, clusterLastExecutedSequence+1);
 
-                execute(lastExecutedSequenceNum);
+                execute(clusternum, clusterLastExecutedSequence+1);
                 // Printer.print(Verbosity.V, prefix, "[time-since-start=" + Printer.timeFormat(System.nanoTime() - systemStartTime, true) + "] executed by executor thread: seqnum=" + lastExecutedSequenceNum);
             }
 
@@ -817,7 +826,7 @@ public abstract class Entity {
         }
     }
 
-    public boolean transition(long seqnum, Transition transition) {
+    public boolean transition(long clusternum, long seqnum, Transition transition) {
         benchmarkManager.add(BenchmarkManager.TRANSITION, 0, System.nanoTime());
         var checkpoint = checkpointManager.getCheckpointForSeq(this.id/4L,seqnum);
         var currentState = checkpoint.getState(Pair.of(this.id/4L,seqnum));
@@ -1278,4 +1287,7 @@ public abstract class Entity {
     public int getEpisodeNum(long seqnum) {
         return (int) (seqnum / EPISODE_SIZE);
     }
+}
+
+public void main() {
 }

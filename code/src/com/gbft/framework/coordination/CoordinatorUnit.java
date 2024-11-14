@@ -20,8 +20,8 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.lang3.tuple.Pair;
 
-import com.gbft.framework.core.Client;
-import com.gbft.framework.core.DynamicClient;
+//import com.gbft.framework.core.Client;
+//import com.gbft.framework.core.DynamicClient;
 import com.gbft.framework.core.Entity;
 import com.gbft.framework.core.Node;
 import com.gbft.framework.core.ShardingClient;
@@ -267,7 +267,6 @@ public class CoordinatorUnit extends CoordinatorBase {
             receiveFromInQueueClient.interrupt();
             receiveFromInQueueReplica.interrupt();
         } else if (event.getEventType() == EventType.MESSAGE) {
-            println("Message event received in "+myUnit);
             var messages = event.getMessageBlock().getMessageDataList();
 
             // TODO: More parallel.

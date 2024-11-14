@@ -62,10 +62,10 @@ public class MessageTally {
         var viewnum = message.getViewNum();
         var digest = message.getDigest();
         var source = message.getSource();
-        var clusternum = source / 4;
+        var clusternum = source / 4L;
         var pair_clusternum_seqnum = Pair.of(clusternum, seqnum);
         var type = message.getMessageType();
-        System.out.println("Tallying message: " + message.toString());
+//        System.out.println("Tallying message: " + message.toString());
         counterWriteLock.lock();
 
         if (StateMachine.messages.get(type).hasRequestBlock) {
@@ -81,6 +81,8 @@ public class MessageTally {
                .computeIfAbsent(viewnum, v -> new ConcurrentHashMap<>())
                .computeIfAbsent(digest, d -> ConcurrentHashMap.newKeySet())
                .add(source);
+        System.out.println(STR."Tally Done for message with source \{source} clusternum is \{clusternum} is \{counter.get(pair_clusternum_seqnum).get(type)
+                .get(viewnum).get(digest)}");
 
         counterWriteLock.unlock();
     }

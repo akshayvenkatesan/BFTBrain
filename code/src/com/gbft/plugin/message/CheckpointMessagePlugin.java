@@ -16,6 +16,7 @@ import com.gbft.framework.utils.DataUtils;
 import com.gbft.framework.utils.MessageTally;
 import com.gbft.framework.utils.MessageTally.QuorumId;
 import com.google.protobuf.ByteString;
+import org.apache.commons.lang3.tuple.Pair;
 
 public class CheckpointMessagePlugin implements MessagePlugin {
 
@@ -49,10 +50,10 @@ public class CheckpointMessagePlugin implements MessagePlugin {
     public MessageData processIncomingMessage(MessageData message) {
         if (entity.isClient()) {
             var min_checkpoint = checkpointManager.getMinCheckpoint();
-            var current_checkpoint = checkpointManager.getCheckpointNum(entity.getLastExecutedSequenceNum());
+            var current_checkpoint = checkpointManager.getCheckpointNum(entity.getId()/4L, entity.getLastExecutedSequenceNum());
 
-            if (min_checkpoint < current_checkpoint) {
-                checkpointManager.removeCheckpoint(min_checkpoint);
+            if (min_checkpoint < current_checkpoint.getValue()) {
+                checkpointManager.removeCheckpoint(Pair.of(entity.getId()/4L, min_checkpoint));
             }
             return message;
         }
@@ -78,12 +79,12 @@ public class CheckpointMessagePlugin implements MessagePlugin {
 
                 var fetchDataBuilder = FetchData.newBuilder().setIsRequest(false);
                 if (checkpointNum < checkpointManager.getMinCheckpoint()
-                        || checkpointManager.getCheckpoint(checkpointNum).getServiceState() == null) {
+                        || checkpointManager.getCheckpoint(Pair.of(entity.getId()/4L,checkpointNum)).getServiceState() == null) {
                     System.out.println(entity.prefix + "No valid local checkpoint for checkpointNum " + checkpointNum);
                 } else {
                     // deep copy the service state stored in the checkpoint
                     Map<Integer, Integer> serviceState = new HashMap<>();
-                    checkpointManager.getCheckpoint(checkpointNum).getServiceState().getRecords()
+                    checkpointManager.getCheckpoint(Pair.of(entity.getId()/4L, checkpointNum)).getServiceState().getRecords()
                             .forEach((key, value) -> serviceState.put(key, value.get()));
                     fetchDataBuilder = fetchDataBuilder.putAllServiceState(serviceState);
                 }
@@ -135,16 +136,16 @@ public class CheckpointMessagePlugin implements MessagePlugin {
     }
 
     public boolean hasQuorum(long checkpointNum) {
-        return tally.hasQuorum(checkpointNum, 0, new QuorumId(CHECKPOINT, quorum));
+        return tally.hasQuorum(Pair.of(entity.getId()/4L, checkpointNum), 0, new QuorumId(CHECKPOINT, quorum));
     }
 
     private synchronized void processCheckpoints(long checkpointNum) {
         System.out.println(entity.prefix + "processCheckpoints, checkpointNum:  " + checkpointNum);
 
         // update last stable checkpoint s
-        if (tally.hasQuorum(checkpointNum, 0, new QuorumId(CHECKPOINT, quorum))) {
+        if (tally.hasQuorum(Pair.of(entity.getId()/4L, checkpointNum), 0, new QuorumId(CHECKPOINT, quorum))) {
             // update h
-            if (checkpointManager.getCheckpoint(checkpointNum).getServiceState() != null) {
+            if (checkpointManager.getCheckpoint(Pair.of(entity.getId()/4L, checkpointNum)).getServiceState() != null) {
                 checkpointManager.setLowWaterMark(checkpointNum);
             }
 
@@ -155,7 +156,7 @@ public class CheckpointMessagePlugin implements MessagePlugin {
                 // fetch service state from other nodes if s > h + k
                 if (checkpointNum > checkpointManager.getLowWaterMark() + checkpointManager.lowHighGap
                         && !isFetching.get()) {
-                    var targets = tally.getQuorumNodes(checkpointNum, 0, new QuorumId(CHECKPOINT, quorum));
+                    var targets = tally.getQuorumNodes(Pair.of(entity.getId()/4L, checkpointNum), 0, new QuorumId(CHECKPOINT, quorum));
                     var target = targets.iterator().next();
                     var message = DataUtils.createMessage(checkpointNum, 0L, FETCH, entity.getId(), List.of(target),
                             List.of(), entity.EMPTY_BLOCK, null, null);
@@ -165,7 +166,7 @@ public class CheckpointMessagePlugin implements MessagePlugin {
 
                     entity.sendMessage(message);
 
-                    checkpointDigest = tally.getQuorumDigest(checkpointNum, 0);
+                    checkpointDigest = tally.getQuorumDigest(Pair.of(entity.getId()/4L, checkpointNum), 0);
                     isFetching.set(true);
 
                     System.out.println(entity.prefix + "Sending FETCH request, checkpointNum: " + checkpointNum);
@@ -179,8 +180,8 @@ public class CheckpointMessagePlugin implements MessagePlugin {
         if (max > min + 3) {
             for (var num = min; max > num + 3; num++) {
                 // TODO: when to remove a checkpoint?
-                if (tally.hasQuorum(num, 0, new QuorumId(CHECKPOINT, quorum))) {
-                    checkpointManager.removeCheckpoint(num);
+                if (tally.hasQuorum(Pair.of(entity.getId()/4L, num), 0, new QuorumId(CHECKPOINT, quorum))) {
+                    checkpointManager.removeCheckpoint(Pair.of(entity.getId()/4L, num));
                 } else {
                     return;
                 }

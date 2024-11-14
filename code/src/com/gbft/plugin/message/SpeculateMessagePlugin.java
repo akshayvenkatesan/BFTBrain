@@ -11,6 +11,7 @@ import com.gbft.framework.utils.CheckpointManager;
 import com.gbft.framework.utils.FeatureManager;
 import com.gbft.framework.utils.Printer;
 import com.gbft.framework.utils.Printer.Verbosity;
+import org.apache.commons.lang3.tuple.Pair;
 
 public class SpeculateMessagePlugin implements MessagePlugin {
 
@@ -37,10 +38,11 @@ public class SpeculateMessagePlugin implements MessagePlugin {
         var currentView = entity.getCurrentViewNum();
         if (type == COMMIT) {
             var seqnum = message.getSequenceNum();
-            if (checkpointManager.getCheckpointForSeq(seqnum).getState(seqnum) == StateMachine.EXECUTED) {
-                var checkpoint = checkpointManager.getCheckpointForSeq(seqnum);
-                var block = checkpoint.getRequestBlock(seqnum);
-                var viewnum = checkpoint.getMessageTally().getMaxQuorum(seqnum);
+            if (checkpointManager.getCheckpointForSeq(entity.getId()/4L, seqnum).
+                    getState(Pair.of(entity.getId()/4L, seqnum)) == StateMachine.EXECUTED) {
+                var checkpoint = checkpointManager.getCheckpointForSeq(entity.getId()/4L, seqnum);
+                var block = checkpoint.getRequestBlock(Pair.of(entity.getId()/4L, seqnum));
+                var viewnum = checkpoint.getMessageTally().getMaxQuorum(Pair.of(entity.getId()/4L, seqnum));
                 var target = List.of(message.getSource());
                 var response = entity.createMessage(seqnum, viewnum, block, COMMIT, entity.getId(), target);
                 entity.sendMessage(response);

@@ -16,6 +16,8 @@ import com.gbft.framework.utils.DataUtils;
 import com.gbft.framework.utils.FeatureManager;
 import com.gbft.plugin.message.CheckpointMessagePlugin;
 import com.gbft.plugin.message.LearningMessagePlugin;
+import org.apache.commons.lang3.tuple.Pair;
+
 
 public class Node extends Entity {
 
@@ -25,15 +27,15 @@ public class Node extends Entity {
 
     @Override
     protected void execute(long seqnum) {
-        var checkpoint = checkpointManager.getCheckpointForSeq(seqnum);
-        var requestBlock = checkpoint.getRequestBlock(seqnum);
+        var checkpoint = checkpointManager.getCheckpointForSeq(this.id/4L, seqnum);
+        var requestBlock = checkpoint.getRequestBlock(Pair.of(this.id/4L, seqnum));
 
-        if (checkpoint.getReplies(seqnum) == null) {
+        if (checkpoint.getReplies(Pair.of(this.id/4L, seqnum)) == null) {
             var replies = new HashMap<Long, Integer>();
             for (var request : requestBlock) {
                 replies.put(request.getRequestNum(), dataset.execute(request));
             }
-            checkpoint.addReplies(seqnum, replies);
+            checkpoint.addReplies(Pair.of(this.id/4L, seqnum), replies);
         }
 
         // checkpoint
@@ -53,7 +55,7 @@ public class Node extends Entity {
             }
 
             // multicast CHECKPOINT message to all other nodes
-            new Thread(() -> checkpointManager.sendCheckpoint(seqnum / checkpointSize)).start();
+            new Thread(() -> checkpointManager.sendCheckpoint(Pair.of(this.id/4L, seqnum / checkpointSize))).start();
         }
 
         // report local features and reward
@@ -80,7 +82,7 @@ public class Node extends Entity {
 
                 Map<Integer, Float> report = new HashMap<>();
                 if (currentEpisodeNum.get() != 0) {
-                    var prev_checkpoint = checkpointManager.getPrevCheckpointForSeq(seqnum);
+                    var prev_checkpoint = checkpointManager.getPrevCheckpointForSeq(this.id/4L, seqnum);
                     if (pollutionFault.getType(this.id) == PollutionFault.POLLUTION_SBFT && prev_checkpoint.getProtocol().equals("sbft")) {
                         report.put(FeatureManager.REWARD, prev_checkpoint.throughput * 2.5f);
                     } else if (pollutionFault.getType(this.id) == PollutionFault.POLLUTION_ALL) {
