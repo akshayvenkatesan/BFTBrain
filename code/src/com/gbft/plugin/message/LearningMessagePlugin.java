@@ -9,6 +9,7 @@ import com.gbft.framework.plugins.MessagePlugin;
 import com.gbft.framework.utils.DataUtils;
 import com.gbft.framework.utils.MessageTally;
 import com.gbft.framework.utils.MessageTally.QuorumId;
+import org.apache.commons.lang3.tuple.Pair;
 
 public class LearningMessagePlugin implements MessagePlugin {
 
@@ -36,8 +37,8 @@ public class LearningMessagePlugin implements MessagePlugin {
         // collects report messages into a report quorum
         tally.tally(message);
 
-        if (entity.getReportTally().hasQuorum(seqnum, 0, new QuorumId(entity.REPORT, entity.REPORT_QUORUM))) {
-            entity.stateUpdateLoop(entity.exchangeSequence);
+        if (entity.getReportTally().hasQuorum(Pair.of(entity.getId()/4L, seqnum), 0, new QuorumId(entity.REPORT, entity.REPORT_QUORUM))) {
+            entity.stateUpdateLoop(Pair.of(entity.getId()/4L, entity.exchangeSequence));
         }
 
         return DataUtils.invalidate(message);

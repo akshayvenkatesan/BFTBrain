@@ -13,6 +13,7 @@ import io.grpc.Grpc;
 import io.grpc.InsecureServerCredentials;
 import io.grpc.Server;
 import io.grpc.stub.StreamObserver;
+import org.apache.commons.lang3.tuple.Pair;
 
 public class EntityCommServer {
     protected Entity entity;
@@ -70,7 +71,7 @@ public class EntityCommServer {
             var epoch = entity.currentEpisodeNum.get();
             System.out.println("epoch: " + epoch + ", received next protocol: " + request.getNextProtocol());
 
-            var checkpoint = entity.getCheckpointManager().getCheckpoint(epoch);
+            var checkpoint = entity.getCheckpointManager().getCheckpoint(Pair.of(entity.getId()/4L, (long) epoch));
             checkpoint.tallyDecision(request.getNextProtocol());
 
             responseObserver.onNext(Empty.newBuilder().build());

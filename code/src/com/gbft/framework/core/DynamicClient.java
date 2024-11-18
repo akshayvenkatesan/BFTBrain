@@ -10,6 +10,7 @@ import java.util.stream.IntStream;
 
 import com.gbft.framework.coordination.CoordinatorUnit;
 import com.gbft.framework.data.RequestData;
+import org.apache.commons.lang3.tuple.Pair;
 
 public class DynamicClient extends Client {
 
@@ -38,11 +39,11 @@ public class DynamicClient extends Client {
     public void execute(long seqnum) {
         super.execute(seqnum);
 
-        var checkpoint = checkpointManager.getCheckpointForSeq(seqnum);
+        var checkpoint = checkpointManager.getCheckpointForSeq(getId()/4L, seqnum);
 
         var tally = checkpoint.getMessageTally();
-        var viewnum = tally.getMaxQuorum(seqnum);
-        var replies = tally.getQuorumReplies(seqnum, viewnum);
+        var viewnum = tally.getMaxQuorum(Pair.of(getId()/4L, seqnum));
+        var replies = tally.getQuorumReplies(Pair.of(getId()/4L, seqnum), viewnum);
 
         if (viewnum > currentViewNum) {
             currentViewNum = viewnum;

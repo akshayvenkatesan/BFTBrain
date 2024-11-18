@@ -8,6 +8,7 @@ import java.util.concurrent.atomic.LongAdder;
 
 import com.gbft.framework.core.Entity;
 import com.gbft.framework.data.RequestData;
+import org.apache.commons.lang3.tuple.Pair;
 
 public class BenchmarkManager {
 
@@ -71,8 +72,8 @@ public class BenchmarkManager {
     public void sequenceStarted(long seqnum, long timestamp) {
         start(BLOCK_EXECUTE, seqnum, timestamp);
         start(TIMEOUT, seqnum, 0);
-
-        var requests = checkpointManager.getCheckpointForSeq(seqnum).getRequestBlock(seqnum);
+        var requests = checkpointManager.getCheckpointForSeq(entity.getId()/4L, seqnum)
+                .getRequestBlock(Pair.of(entity.getId()/4L, seqnum));
         // ERROR: requests can be null, NPE
         for (var request : requests) {
             var duration = timestamp - DataUtils.toLong(request.getTimestamp());
@@ -81,8 +82,8 @@ public class BenchmarkManager {
     }
 
     public void sequenceExecuted(long seqnum, long timestamp) {
-        var checkpoint = checkpointManager.getCheckpointForSeq(seqnum);
-        var requests = checkpoint.getRequestBlock(seqnum);
+        var checkpoint = checkpointManager.getCheckpointForSeq(entity.getId()/4L, seqnum);
+        var requests = checkpoint.getRequestBlock(Pair.of(entity.getId()/4L, seqnum));
 
         var start = starts.get(BLOCK_EXECUTE).remove(seqnum);
         var duration = timestamp - start;
@@ -107,7 +108,7 @@ public class BenchmarkManager {
 
     public void requestExecuted(long reqnum, long timestamp) {
         var seqnum = entity.getRequestSequence(reqnum);
-        var request = checkpointManager.getCheckpointForSeq(seqnum).getRequest(reqnum);
+        var request = checkpointManager.getCheckpointForSeq(entity.getId()/4L, seqnum).getRequest(reqnum);
         var duration = timestamp - DataUtils.toLong(request.getTimestamp());
         add(REQUEST_EXECUTE, duration, timestamp);
     }

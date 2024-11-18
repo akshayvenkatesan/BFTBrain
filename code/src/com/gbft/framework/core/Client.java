@@ -18,6 +18,7 @@ import com.gbft.framework.utils.Config;
 import com.gbft.framework.utils.MessageTally.QuorumId;
 import com.gbft.framework.utils.Printer;
 import com.gbft.framework.utils.Printer.Verbosity;
+import org.apache.commons.lang3.tuple.Pair;
 
 public class Client extends Entity {
 
@@ -53,12 +54,12 @@ public class Client extends Entity {
 
     @Override
     protected boolean checkMessageTally(long seqnum, QuorumId quorumId, UpdateMode updateMode) {
-        var checkpoint = checkpointManager.getCheckpointForSeq(seqnum);
+        var checkpoint = checkpointManager.getCheckpointForSeq(getId()/4L, seqnum);
 
         var tally = checkpoint.getMessageTally();
-        var viewnum = tally.getMaxQuorum(seqnum, quorumId);
+        var viewnum = tally.getMaxQuorum(Pair.of(getId()/4L, seqnum), quorumId);
         if (viewnum != null && viewnum >= currentViewNum) {
-            var block = tally.getQuorumBlock(seqnum, viewnum);
+            var block = tally.getQuorumBlock(Pair.of(getId()/4L, seqnum), viewnum);
             if (block != null) {
                 registerBlock(seqnum, block);
             }
@@ -70,11 +71,11 @@ public class Client extends Entity {
 
     @Override
     protected void execute(long seqnum) {
-        var checkpoint = checkpointManager.getCheckpointForSeq(seqnum);
+        var checkpoint = checkpointManager.getCheckpointForSeq(getId(), seqnum);
 
         var tally = checkpoint.getMessageTally();
-        var viewnum = tally.getMaxQuorum(seqnum);
-        var replies = tally.getQuorumReplies(seqnum, viewnum);
+        var viewnum = tally.getMaxQuorum(Pair.of((long) getId(), seqnum));
+        var replies = tally.getQuorumReplies(Pair.of((long) getId(), seqnum), viewnum);
         currentViewNum = viewnum;
         /*
          * Checks for replies for the requests in the block and updates the dataset.
@@ -120,7 +121,7 @@ public class Client extends Entity {
         report.put("throughput", String.format("%.2freq/s", throughput));
         report.put("last-executed-sequence", "num: " + lastExecutedSequenceNum);
         report.put("current-episode", "value: " + currentEpisodeNum.get());
-        report.put("current-protocol", "value: " + checkpointManager.getCheckpoint(currentEpisodeNum.get()).getProtocol());
+        report.put("current-protocol", "value: " + checkpointManager.getCheckpoint(Pair.of(getId()/4L, (long) currentEpisodeNum.get())).getProtocol());
 
         var blockCount = benchmark.count(BenchmarkManager.BLOCK_EXECUTE);
         var timeoutCount = benchmark.count(BenchmarkManager.TIMEOUT);

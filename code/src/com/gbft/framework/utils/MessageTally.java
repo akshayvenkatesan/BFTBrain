@@ -63,7 +63,7 @@ public class MessageTally {
         var digest = message.getDigest();
         var source = message.getSource();
         var clusternum = source / 4;
-        var pair_clusternum_seqnum = Pair.of(clusternum, seqnum);
+        var pair_clusternum_seqnum = Pair.of((long) clusternum, seqnum);
         var type = message.getMessageType();
         System.out.println("Tallying message: " + message.toString());
         counterWriteLock.lock();
