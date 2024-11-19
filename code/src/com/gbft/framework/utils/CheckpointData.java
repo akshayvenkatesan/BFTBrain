@@ -128,14 +128,17 @@ public class CheckpointData {
             {
                 clusternum = this.entity.getId()/4L;
             }
-            aggregationValues.computeIfAbsent(clusternum, v-> v.computeIfAbsent(seqnum, k -> new ConcurrentSkipListSet<>())).addAll(message.getAggregationValuesList());
+            aggregationValues.computeIfAbsent(clusternum, v -> new ConcurrentHashMap<>())
+                             .computeIfAbsent(seqnum, k -> new ConcurrentSkipListSet<>())
+                             .addAll(message.getAggregationValuesList());
         }
     }
 
     public void addAggregationValue(long clusternum, long seqnum, Set<Long> values) {
-        var clusternum = -1L;
         if (!values.isEmpty()) {
-            aggregationValues.computeIfAbsent(clusternum, v-> v.computeIfAbsent(seqnum, k -> new ConcurrentSkipListSet<>())).addAll(values);
+            aggregationValues.computeIfAbsent(clusternum, v -> new ConcurrentHashMap<>())
+                             .computeIfAbsent(seqnum, k -> new ConcurrentSkipListSet<>())
+                             .addAll(values);
         }
     }
 

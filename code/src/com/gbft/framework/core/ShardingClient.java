@@ -216,7 +216,7 @@ public class ShardingClient extends Entity {
     }
 
     public class RequestGenerator {
-        protected final Semaphore semaphore = new Semaphore(2);
+        protected final Semaphore semaphore = new Semaphore(1);
 
         public void init() {
             threads.add(new Thread(new RequestGenerator.RequestGeneratorRunner()));

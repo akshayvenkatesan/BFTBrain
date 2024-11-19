@@ -186,7 +186,8 @@ public abstract class Entity {
         timekeeper = new Timekeeper(this);
         for(long i = 0L; i <= 4L; i++)
         {
-        threads.add(new Thread(() -> executor(i)));
+            final long iCopy = i;
+        threads.add(new Thread(() -> executor(iCopy)));
         }
         threads.add(new Thread(() -> triggerSlowProposal()));
         threads.add(new Thread(() -> aggStateUpdate()));
@@ -722,7 +723,7 @@ public abstract class Entity {
                     checkSwitching(localSeq);
                     transition(cluster_num, localSeq, transition);
                 }
-                lastExecutedSequenceNum = localSeqs.pollLast();
+                lastExecutedSequenceNum.put(cluster_num,localSeqs.pollLast());
                 // System.out.println("lastExecutedSequenceNum update to: " + lastExecutedSequenceNum);
             } else {
                 benchmarkManager.sequenceExecuted(lastExecutedSequenceNum.get(cluster_num), System.nanoTime());
@@ -1035,15 +1036,15 @@ public abstract class Entity {
             if (type == StateMachine.REPLY) {
                 replies = checkpoint.getReplies(Pair.of(this.id/4L,seqnum));
             }
-
-            if (!checkpoint.getAggregationValues(seqnum).isEmpty()) {
-                var cluster_num = -1L;
+            var cluster_num = -1L;
                 if(this.isClient()){
                     cluster_num = source/4L;
                 }
                 else{
                     cluster_num = this.id/4L;
                 }
+            if (!checkpoint.getAggregationValues(cluster_num,seqnum).isEmpty()) {
+                
                 aggregationValues = checkpoint.getAggregationValues(cluster_num, seqnum);
             }
         }

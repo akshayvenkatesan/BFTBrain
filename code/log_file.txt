@@ -89,174 +89,174 @@ Getting cluster number for unit 16.
 Adding unit 16 to cluster 0.
 Cluster server mapping: {0=[], 1=[0, 1, 2, 3], 2=[4, 5, 6, 7], 3=[8, 9, 10, 11], 4=[12, 13, 14, 15]}.
 Cluster server mapping: {0=[16], 1=[0, 1, 2, 3], 2=[4, 5, 6, 7], 3=[8, 9, 10, 11], 4=[12, 13, 14, 15]}.
-23:04:43.560  Creating sharding client instance16.
+12:27:20.161  Creating sharding client instance16.
 Creating client dataset for sharding client 16.
 Sending event to -1 at 127.0.0.1:5050
-23:04:46.506  Sending event to -1 at 127.0.0.1:5050
-23:04:46.592  Unit configured.
-23:04:46.640  Received plugin event for targets: [16].
-23:04:46.644  Entities map for: {16=com.gbft.framework.core.ShardingClient@597edb6f}
-23:04:46.645  Target list is: [16]
+12:27:21.847  Sending event to -1 at 127.0.0.1:5050
+12:27:21.877  Unit configured.
+12:27:21.883  Received plugin event for targets: [16].
+12:27:21.893  Entities map for: {16=com.gbft.framework.core.ShardingClient@6541be00}
+12:27:21.898  Target list is: [16]
 Secret Key size: 0
-23:04:47.471  Ent is: 16
-23:04:47.471  Init plugin is: com.gbft.plugin.message.MacMessagePlugin@63b0e271
-23:04:47.471  Plug initialised status: false
-23:04:52.173  Received plugin event for targets: [16].
-23:04:52.173  Entities map for: {16=com.gbft.framework.core.ShardingClient@597edb6f}
-23:04:52.173  Target list is: [16]
-23:04:52.182  Received plugin event for targets: [16].
-23:04:52.182  Entities map for: {16=com.gbft.framework.core.ShardingClient@597edb6f}
-23:04:52.182  Target list is: [16]
-Updating secret keys with value for source: with bytes :0 [B@6ff20abe
+12:27:23.906  Ent is: 16
+12:27:23.906  Init plugin is: com.gbft.plugin.message.MacMessagePlugin@225c63d6
+12:27:23.906  Plug initialised status: false
+12:27:26.298  Received plugin event for targets: [16].
+12:27:26.298  Entities map for: {16=com.gbft.framework.core.ShardingClient@6541be00}
+12:27:26.298  Target list is: [16]
+Updating secret keys with value for source: with bytes :15 [B@54437fbd
+Secret Key size: 1
+12:27:26.300  Ent is: 16
+12:27:26.300  Init plugin is: com.gbft.plugin.message.MacMessagePlugin@225c63d6
+12:27:26.300  Plug initialised status: false
+12:27:26.320  Received plugin event for targets: [16].
+12:27:26.320  Entities map for: {16=com.gbft.framework.core.ShardingClient@6541be00}
+12:27:26.320  Target list is: [16]
+Updating secret keys with value for source: with bytes :14 [B@3d797c69
 Secret Key size: 2
-23:04:52.206  Ent is: 16
-23:04:52.206  Init plugin is: com.gbft.plugin.message.MacMessagePlugin@63b0e271
-23:04:52.206  Plug initialised status: false
-Updating secret keys with value for source: with bytes :2 [B@206683de
-Secret Key size: 2
-23:04:52.207  Ent is: 16
-23:04:52.207  Init plugin is: com.gbft.plugin.message.MacMessagePlugin@63b0e271
-23:04:52.207  Plug initialised status: false
-23:04:52.260  Received plugin event for targets: [16].
-23:04:52.261  Entities map for: {16=com.gbft.framework.core.ShardingClient@597edb6f}
-23:04:52.261  Target list is: [16]
-Updating secret keys with value for source: with bytes :3 [B@54437fbd
+12:27:26.320  Ent is: 16
+12:27:26.320  Init plugin is: com.gbft.plugin.message.MacMessagePlugin@225c63d6
+12:27:26.320  Plug initialised status: false
+12:27:26.378  Received plugin event for targets: [16].
+12:27:26.379  Entities map for: {16=com.gbft.framework.core.ShardingClient@6541be00}
+12:27:26.379  Target list is: [16]
+Updating secret keys with value for source: with bytes :13 [B@4920b564
 Secret Key size: 3
-23:04:52.261  Ent is: 16
-23:04:52.261  Init plugin is: com.gbft.plugin.message.MacMessagePlugin@63b0e271
-23:04:52.261  Plug initialised status: false
-23:04:52.510  Received plugin event for targets: [16].
-23:04:52.522  Entities map for: {16=com.gbft.framework.core.ShardingClient@597edb6f}
-23:04:52.522  Target list is: [16]
-Updating secret keys with value for source: with bytes :8 [B@48ab8b1a
-Secret Key size: 4
-23:04:52.522  Ent is: 16
-23:04:52.522  Init plugin is: com.gbft.plugin.message.MacMessagePlugin@63b0e271
-23:04:52.522  Plug initialised status: false
-23:04:52.522  Received plugin event for targets: [16].
-23:04:52.522  Entities map for: {16=com.gbft.framework.core.ShardingClient@597edb6f}
-23:04:52.583  Target list is: [16]
-Updating secret keys with value for source: with bytes :1 [B@7079d68d
-Secret Key size: 5
-23:04:52.583  Ent is: 16
-23:04:52.583  Init plugin is: com.gbft.plugin.message.MacMessagePlugin@63b0e271
-23:04:52.583  Plug initialised status: false
-23:04:52.587  Received plugin event for targets: [16].
-23:04:52.587  Entities map for: {16=com.gbft.framework.core.ShardingClient@597edb6f}
-23:04:52.587  Target list is: [16]
-Updating secret keys with value for source: with bytes :10 [B@3354d998
-Secret Key size: 6
-23:04:52.588  Ent is: 16
-23:04:52.588  Init plugin is: com.gbft.plugin.message.MacMessagePlugin@63b0e271
-23:04:52.588  Plug initialised status: false
-23:04:52.802  Received plugin event for targets: [16].
-23:04:52.802  Entities map for: {16=com.gbft.framework.core.ShardingClient@597edb6f}
-23:04:52.802  Target list is: [16]
-Updating secret keys with value for source: with bytes :9 [B@632a10ea
-Secret Key size: 7
-23:04:52.802  Ent is: 16
-23:04:52.802  Init plugin is: com.gbft.plugin.message.MacMessagePlugin@63b0e271
-23:04:52.802  Plug initialised status: false
-23:04:52.835  Received connection event from unit 0.
-23:04:52.850  Received plugin event for targets: [16].
-23:04:52.850  Entities map for: {16=com.gbft.framework.core.ShardingClient@597edb6f}
-23:04:52.850  Target list is: [16]
-Updating secret keys with value for source: with bytes :11 [B@6218fb2e
-Secret Key size: 8
-23:04:52.851  Ent is: 16
-23:04:52.851  Init plugin is: com.gbft.plugin.message.MacMessagePlugin@63b0e271
-23:04:52.860  Plug initialised status: false
-23:04:52.899  Received connection event from unit 1.
-23:04:52.927  Received connection event from unit 2.
-23:04:52.951  Received plugin event for targets: [16].
-23:04:52.951  Entities map for: {16=com.gbft.framework.core.ShardingClient@597edb6f}
-23:04:52.951  Target list is: [16]
-Updating secret keys with value for source: with bytes :14 [B@6dd2a02f
-Secret Key size: 9
-23:04:52.951  Ent is: 16
-23:04:52.952  Init plugin is: com.gbft.plugin.message.MacMessagePlugin@63b0e271
-23:04:52.952  Plug initialised status: false
-23:04:52.998  Received connection event from unit 3.
-23:04:53.101  Received connection event from unit 8.
-23:04:53.111  Received plugin event for targets: [16].
-23:04:53.112  Entities map for: {16=com.gbft.framework.core.ShardingClient@597edb6f}
-23:04:53.113  Target list is: [16]
-23:04:53.147  Received connection event from unit 9.
+12:27:26.379  Ent is: 16
+12:27:26.379  Init plugin is: com.gbft.plugin.message.MacMessagePlugin@225c63d6
+12:27:26.379  Plug initialised status: false
+12:27:26.468  Received plugin event for targets: [16].
+12:27:26.468  Entities map for: {16=com.gbft.framework.core.ShardingClient@6541be00}
+12:27:26.468  Target list is: [16]
 Updating secret keys with value for source: with bytes :12 [B@33ca79ec
+Secret Key size: 4
+12:27:26.468  Ent is: 16
+12:27:26.468  Init plugin is: com.gbft.plugin.message.MacMessagePlugin@225c63d6
+12:27:26.468  Plug initialised status: false
+12:27:26.547  Received connection event from unit 13.
+12:27:26.767  Received connection event from unit 14.
+12:27:26.767  Received connection event from unit 12.
+12:27:26.935  Received connection event from unit 15.
+12:27:26.993  Received plugin event for targets: [16].
+12:27:26.993  Entities map for: {16=com.gbft.framework.core.ShardingClient@6541be00}
+12:27:27.0  Target list is: [16]
+Updating secret keys with value for source: with bytes :6 [B@674827d5
+Secret Key size: 5
+12:27:27.7  Ent is: 16
+12:27:27.7  Init plugin is: com.gbft.plugin.message.MacMessagePlugin@225c63d6
+12:27:27.7  Plug initialised status: false
+12:27:27.41  Received plugin event for targets: [16].
+12:27:27.41  Entities map for: {16=com.gbft.framework.core.ShardingClient@6541be00}
+12:27:27.41  Target list is: [16]
+Updating secret keys with value for source: with bytes :7 [B@51a22f1d
+Secret Key size: 6
+12:27:27.41  Ent is: 16
+12:27:27.41  Init plugin is: com.gbft.plugin.message.MacMessagePlugin@225c63d6
+12:27:27.41  Plug initialised status: false
+12:27:27.45  Received plugin event for targets: [16].
+12:27:27.45  Entities map for: {16=com.gbft.framework.core.ShardingClient@6541be00}
+12:27:27.45  Target list is: [16]
+Updating secret keys with value for source: with bytes :4 [B@22673956
+Secret Key size: 7
+12:27:27.45  Ent is: 16
+12:27:27.45  Init plugin is: com.gbft.plugin.message.MacMessagePlugin@225c63d6
+12:27:27.45  Plug initialised status: false
+12:27:27.69  Received plugin event for targets: [16].
+12:27:27.69  Entities map for: {16=com.gbft.framework.core.ShardingClient@6541be00}
+12:27:27.69  Target list is: [16]
+Updating secret keys with value for source: with bytes :10 [B@6706a70b
+Secret Key size: 8
+12:27:27.69  Ent is: 16
+12:27:27.69  Init plugin is: com.gbft.plugin.message.MacMessagePlugin@225c63d6
+12:27:27.69  Plug initialised status: false
+12:27:27.118  Received plugin event for targets: [16].
+12:27:27.118  Entities map for: {16=com.gbft.framework.core.ShardingClient@6541be00}
+12:27:27.118  Target list is: [16]
+Updating secret keys with value for source: with bytes :8 [B@6223c513
+Secret Key size: 9
+12:27:27.121  Ent is: 16
+12:27:27.121  Init plugin is: com.gbft.plugin.message.MacMessagePlugin@225c63d6
+12:27:27.121  Plug initialised status: false
+12:27:27.129  Received plugin event for targets: [16].
+12:27:27.130  Entities map for: {16=com.gbft.framework.core.ShardingClient@6541be00}
+12:27:27.130  Target list is: [16]
+Updating secret keys with value for source: with bytes :5 [B@693e4988
 Secret Key size: 10
-23:04:53.152  Ent is: 16
-23:04:53.152  Init plugin is: com.gbft.plugin.message.MacMessagePlugin@63b0e271
-23:04:53.123  Received connection event from unit 10.
-23:04:53.124  Received connection event from unit 11.
-23:04:53.182  Plug initialised status: false
-23:04:53.192  Received plugin event for targets: [16].
-23:04:53.192  Entities map for: {16=com.gbft.framework.core.ShardingClient@597edb6f}
-23:04:53.192  Target list is: [16]
-Updating secret keys with value for source: with bytes :13 [B@4c48e6a8
+12:27:27.130  Ent is: 16
+12:27:27.130  Init plugin is: com.gbft.plugin.message.MacMessagePlugin@225c63d6
+12:27:27.134  Plug initialised status: false
+12:27:27.141  Received plugin event for targets: [16].
+12:27:27.141  Entities map for: {16=com.gbft.framework.core.ShardingClient@6541be00}
+12:27:27.141  Target list is: [16]
+Updating secret keys with value for source: with bytes :9 [B@346827f
 Secret Key size: 11
-23:04:53.192  Ent is: 16
-23:04:53.192  Init plugin is: com.gbft.plugin.message.MacMessagePlugin@63b0e271
-23:04:53.192  Plug initialised status: false
-23:04:53.225  Received plugin event for targets: [16].
-23:04:53.225  Entities map for: {16=com.gbft.framework.core.ShardingClient@597edb6f}
-23:04:53.226  Target list is: [16]
-Updating secret keys with value for source: with bytes :15 [B@674827d5
+12:27:27.141  Ent is: 16
+12:27:27.141  Init plugin is: com.gbft.plugin.message.MacMessagePlugin@225c63d6
+12:27:27.141  Plug initialised status: false
+12:27:27.169  Received connection event from unit 8.
+12:27:27.175  Received connection event from unit 10.
+12:27:27.182  Received connection event from unit 4.
+12:27:27.183  Received connection event from unit 9.
+12:27:27.189  Received plugin event for targets: [16].
+12:27:27.193  Entities map for: {16=com.gbft.framework.core.ShardingClient@6541be00}
+12:27:27.202  Received connection event from unit 5.
+12:27:27.202  Target list is: [16]
+Updating secret keys with value for source: with bytes :11 [B@37cb6108
 Secret Key size: 12
-23:04:53.226  Ent is: 16
-23:04:53.232  Init plugin is: com.gbft.plugin.message.MacMessagePlugin@63b0e271
-23:04:53.232  Plug initialised status: false
-23:04:53.255  Received connection event from unit 12.
-23:04:53.256  Received connection event from unit 13.
-23:04:53.275  Received connection event from unit 14.
-23:04:53.277  Received connection event from unit 15.
-23:04:53.734  Received plugin event for targets: [16].
-23:04:53.734  Entities map for: {16=com.gbft.framework.core.ShardingClient@597edb6f}
-23:04:53.734  Target list is: [16]
-Updating secret keys with value for source: with bytes :5 [B@346827f
+12:27:27.210  Ent is: 16
+12:27:27.211  Init plugin is: com.gbft.plugin.message.MacMessagePlugin@225c63d6
+12:27:27.211  Plug initialised status: false
+12:27:27.213  Received connection event from unit 7.
+12:27:27.206  Received connection event from unit 6.
+12:27:27.219  Received connection event from unit 11.
+12:27:27.432  Received plugin event for targets: [16].
+12:27:27.432  Entities map for: {16=com.gbft.framework.core.ShardingClient@6541be00}
+12:27:27.432  Target list is: [16]
+Updating secret keys with value for source: with bytes :0 [B@332b9c83
 Secret Key size: 13
-23:04:53.734  Ent is: 16
-23:04:53.734  Init plugin is: com.gbft.plugin.message.MacMessagePlugin@63b0e271
-23:04:53.734  Plug initialised status: false
-23:04:53.740  Received plugin event for targets: [16].
-23:04:53.751  Entities map for: {16=com.gbft.framework.core.ShardingClient@597edb6f}
-23:04:53.751  Target list is: [16]
-Updating secret keys with value for source: with bytes :4 [B@693e4988
+12:27:27.433  Ent is: 16
+12:27:27.433  Init plugin is: com.gbft.plugin.message.MacMessagePlugin@225c63d6
+12:27:27.433  Plug initialised status: false
+12:27:27.482  Received plugin event for targets: [16].
+12:27:27.482  Entities map for: {16=com.gbft.framework.core.ShardingClient@6541be00}
+12:27:27.482  Target list is: [16]
+Updating secret keys with value for source: with bytes :1 [B@1f6f243
 Secret Key size: 14
-23:04:53.751  Ent is: 16
-23:04:53.751  Init plugin is: com.gbft.plugin.message.MacMessagePlugin@63b0e271
-23:04:53.751  Plug initialised status: false
-23:04:53.762  Received plugin event for targets: [16].
-23:04:53.763  Entities map for: {16=com.gbft.framework.core.ShardingClient@597edb6f}
-23:04:53.763  Target list is: [16]
-Updating secret keys with value for source: with bytes :7 [B@278e4dc4
+12:27:27.482  Ent is: 16
+12:27:27.482  Init plugin is: com.gbft.plugin.message.MacMessagePlugin@225c63d6
+12:27:27.482  Plug initialised status: false
+12:27:27.516  Received plugin event for targets: [16].
+12:27:27.518  Entities map for: {16=com.gbft.framework.core.ShardingClient@6541be00}
+12:27:27.518  Target list is: [16]
+Updating secret keys with value for source: with bytes :2 [B@7d383fb
 Secret Key size: 15
-23:04:53.763  Ent is: 16
-23:04:53.763  Init plugin is: com.gbft.plugin.message.MacMessagePlugin@63b0e271
-23:04:53.763  Plug initialised status: false
-23:04:53.795  Received plugin event for targets: [16].
-23:04:53.796  Entities map for: {16=com.gbft.framework.core.ShardingClient@597edb6f}
-23:04:53.796  Target list is: [16]
-Updating secret keys with value for source: with bytes :6 [B@76ee89dd
+12:27:27.518  Ent is: 16
+12:27:27.518  Init plugin is: com.gbft.plugin.message.MacMessagePlugin@225c63d6
+12:27:27.518  Plug initialised status: false
+12:27:27.549  Received plugin event for targets: [16].
+12:27:27.549  Entities map for: {16=com.gbft.framework.core.ShardingClient@6541be00}
+12:27:27.549  Target list is: [16]
+Updating secret keys with value for source: with bytes :3 [B@219a0906
 Secret Key size: 16
-23:04:53.796  Ent is: 16
-23:04:53.796  Init plugin is: com.gbft.plugin.message.MacMessagePlugin@63b0e271
-23:04:53.796  Plug initialised status: true
-23:04:53.796  Inside finished block.
-23:04:53.796  Id is 16 and clusterNum is 0
+12:27:27.549  Ent is: 16
+12:27:27.549  Init plugin is: com.gbft.plugin.message.MacMessagePlugin@225c63d6
+12:27:27.549  Plug initialised status: true
+12:27:27.549  Inside finished block.
+12:27:27.550  Id is 16 and clusterNum is 0
 Sending event to -1 at 127.0.0.1:5050
-23:04:53.796  Sending event to -1 at 127.0.0.1:5050
-23:04:53.807  Received connection event from unit 4.
-23:04:53.819  Received connection event from unit 5.
-23:04:53.827  Received connection event from unit 6.
-23:04:53.851  Received connection event from server.
-23:04:53.859  Received connection event from unit 7.
+12:27:27.550  Sending event to -1 at 127.0.0.1:5050
+12:27:27.571  Received connection event from server.
+12:27:27.591  Received connection event from unit 0.
+12:27:27.610  Received connection event from unit 2.
+12:27:27.610  Received connection event from unit 1.
+12:27:27.625  Received connection event from unit 3.
 Sending event to -1 at 127.0.0.1:5050
-23:04:54.113  Sending event to -1 at 127.0.0.1:5050
-23:04:54.119  Connection initialized.
-23:04:54.144  Benchmark started.
-Sender is : 20
-Receiver is : 18
-Amount is : 1029
+12:27:27.648  Sending event to -1 at 127.0.0.1:5050
+12:27:27.669  Connection initialized.
+12:27:27.703  Benchmark started.
+Sender is : 12
+Receiver is : 1
+Amount is : 1079
  Txn number is : 1
  First request number is : 11
  Second request number is : 12
@@ -270,265 +270,28 @@ targets: 0
 requests {
   client: 16
   request_num: 11
-  record: 18
+  record: 1
   operation: ADD
-  value: 1029
+  value: 1079
   timestamp {
-    seconds: 148149
-    nanos: 655674419
+    seconds: 153263
+    nanos: 483783115
   }
 }
-digest: "\024vIK\260#(\212h%*\240=-3I\241\n\253\024\272\034\221\235\333\374\330Sz?H\030"
+digest: "\337\207Jr\356\035\n\035\232\313\235)\217\376\2646\313FZ+5*\020kODz\365\354S|Q"
 extra_data {
   key: 1001
-  value: "\001\000@\222N\363d\321\031M\316/A\a\304|f4\241\302t\037\236\347\255\205\021\371\327\343\215\362P\315$\373Q}\324\326>\313$\\$\262\203\b\2278\354 \244x\024\254(!\321\320D\246\300\221\021/\030"
+  value: "\001\000@J\221\016\261s2\366\345\021%z\350\246Hw\235L\371\311W3\255[\023\220=\244\336\a\315\246E\372\255i\n^\231\024\362\272\022\232\245\177a[-\031\252d\005\322N\210\017\372\324\210\f=\217M\025"
 }
 timestamp {
-  seconds: 148149
-  nanos: 727672467
+  seconds: 153263
+  nanos: 516790019
 }
 
 DirectPipelinePlugin.sendMessage
-23:04:54.413  Found target: [0]
+12:27:27.858  Found target: [0]
 Sending event to 0 at 127.0.0.1:6021
 Using connection - Sending event to 0 at 127.0.0.1:6021
-Message event received in 16
-Targets: [4] for message: message_type: 1
-targets: 4
-requests {
-  client: 16
-  request_num: 11
-  record: 18
-  operation: ADD
-  value: 1029
-  timestamp {
-    seconds: 148149
-    nanos: 655674419
-  }
-}
-digest: "\024vIK\260#(\212h%*\240=-3I\241\n\253\024\272\034\221\235\333\374\330Sz?H\030"
-reply_data {
-  key: 11
-  value: 2029
-}
-extra_data {
-  key: 1001
-  value: "\001\004@\342\263\366\326\310\324\232>=\341O\r\274\230d\305\2707\334?\320\207\032\272\242\237\354\252\324\320\352\245\016\vv\203\372\362\312\257\006v]\214\234\202\231\000j/\346\022\232:\223#\237\031\364uR\310\\\325"
-}
-timestamp {
-  seconds: 148150
-  nanos: 651339770
-}
-
-Received request: message_type: 1
-targets: 4
-requests {
-  client: 16
-  request_num: 11
-  record: 18
-  operation: ADD
-  value: 1029
-  timestamp {
-    seconds: 148149
-    nanos: 655674419
-  }
-}
-digest: "\024vIK\260#(\212h%*\240=-3I\241\n\253\024\272\034\221\235\333\374\330Sz?H\030"
-reply_data {
-  key: 11
-  value: 2029
-}
-extra_data {
-  key: 1001
-  value: "\001\004@\342\263\366\326\310\324\232>=\341O\r\274\230d\305\2707\334?\320\207\032\272\242\237\354\252\324\320\352\245\016\vv\203\372\362\312\257\006v]\214\234\202\231\000j/\346\022\232:\223#\237\031\364uR\310\\\325"
-}
-timestamp {
-  seconds: 148150
-  nanos: 651339770
-}
-
-Going to process: message_type: 1
-targets: 4
-requests {
-  client: 16
-  request_num: 11
-  record: 18
-  operation: ADD
-  value: 1029
-  timestamp {
-    seconds: 148149
-    nanos: 655674419
-  }
-}
-digest: "\024vIK\260#(\212h%*\240=-3I\241\n\253\024\272\034\221\235\333\374\330Sz?H\030"
-reply_data {
-  key: 11
-  value: 2029
-}
-extra_data {
-  key: 1001
-  value: "\001\004@\342\263\366\326\310\324\232>=\341O\r\274\230d\305\2707\334?\320\207\032\272\242\237\354\252\324\320\352\245\016\vv\203\372\362\312\257\006v]\214\234\202\231\000j/\346\022\232:\223#\237\031\364uR\310\\\325"
-}
-timestamp {
-  seconds: 148150
-  nanos: 651339770
-}
-
-Verifying MAC for source: 0
-Secret Key: [B@6ff20abe
-MAC validation successful
-Processed: message_type: 1
-targets: 4
-requests {
-  client: 16
-  request_num: 11
-  record: 18
-  operation: ADD
-  value: 1029
-  timestamp {
-    seconds: 148149
-    nanos: 655674419
-  }
-}
-digest: "\024vIK\260#(\212h%*\240=-3I\241\n\253\024\272\034\221\235\333\374\330Sz?H\030"
-reply_data {
-  key: 11
-  value: 2029
-}
-extra_data {
-  key: 1001
-  value: "\001\004@\342\263\366\326\310\324\232>=\341O\r\274\230d\305\2707\334?\320\207\032\272\242\237\354\252\324\320\352\245\016\vv\203\372\362\312\257\006v]\214\234\202\231\000j/\346\022\232:\223#\237\031\364uR\310\\\325"
-}
-timestamp {
-  seconds: 148150
-  nanos: 651339770
-}
-
-Received message inside not request block: message_type: 1
-targets: 4
-requests {
-  client: 16
-  request_num: 11
-  record: 18
-  operation: ADD
-  value: 1029
-  timestamp {
-    seconds: 148149
-    nanos: 655674419
-  }
-}
-digest: "\024vIK\260#(\212h%*\240=-3I\241\n\253\024\272\034\221\235\333\374\330Sz?H\030"
-reply_data {
-  key: 11
-  value: 2029
-}
-extra_data {
-  key: 1001
-  value: "\001\004@\342\263\366\326\310\324\232>=\341O\r\274\230d\305\2707\334?\320\207\032\272\242\237\354\252\324\320\352\245\016\vv\203\372\362\312\257\006v]\214\234\202\231\000j/\346\022\232:\223#\237\031\364uR\310\\\325"
-}
-timestamp {
-  seconds: 148150
-  nanos: 651339770
-}
-
-My id is and Message Target is : 16 [4]
-Valid message: message_type: 1
-targets: 4
-requests {
-  client: 16
-  request_num: 11
-  record: 18
-  operation: ADD
-  value: 1029
-  timestamp {
-    seconds: 148149
-    nanos: 655674419
-  }
-}
-digest: "\024vIK\260#(\212h%*\240=-3I\241\n\253\024\272\034\221\235\333\374\330Sz?H\030"
-reply_data {
-  key: 11
-  value: 2029
-}
-extra_data {
-  key: 1001
-  value: "\001\004@\342\263\366\326\310\324\232>=\341O\r\274\230d\305\2707\334?\320\207\032\272\242\237\354\252\324\320\352\245\016\vv\203\372\362\312\257\006v]\214\234\202\231\000j/\346\022\232:\223#\237\031\364uR\310\\\325"
-}
-timestamp {
-  seconds: 148150
-  nanos: 651339770
-}
-
-Tallying message: message_type: 1
-targets: 4
-requests {
-  client: 16
-  request_num: 11
-  record: 18
-  operation: ADD
-  value: 1029
-  timestamp {
-    seconds: 148149
-    nanos: 655674419
-  }
-}
-digest: "\024vIK\260#(\212h%*\240=-3I\241\n\253\024\272\034\221\235\333\374\330Sz?H\030"
-reply_data {
-  key: 11
-  value: 2029
-}
-extra_data {
-  key: 1001
-  value: "\001\004@\342\263\366\326\310\324\232>=\341O\r\274\230d\305\2707\334?\320\207\032\272\242\237\354\252\324\320\352\245\016\vv\203\372\362\312\257\006v]\214\234\202\231\000j/\346\022\232:\223#\237\031\364uR\310\\\325"
-}
-timestamp {
-  seconds: 148150
-  nanos: 651339770
-}
-
-Tallying message: message_type: 1
-targets: 4
-requests {
-  client: 16
-  request_num: 11
-  record: 18
-  operation: ADD
-  value: 1029
-  timestamp {
-    seconds: 148149
-    nanos: 655674419
-  }
-}
-reply_data {
-  key: 11
-  value: 2029
-}
-extra_data {
-  key: 1001
-  value: "\001\004@\342\263\366\326\310\324\232>=\341O\r\274\230d\305\2707\334?\320\207\032\272\242\237\354\252\324\320\352\245\016\vv\203\372\362\312\257\006v]\214\234\202\231\000j/\346\022\232:\223#\237\031\364uR\310\\\325"
-}
-timestamp {
-  seconds: 148150
-  nanos: 651339770
-}
-
-Running state update loop for seqnum: 0
-For some reason I'm here 3 and seqnum: 0
-stateMap: {}
-Inside while loop
-Pair_clusternum_seqnum: (0,0)
-Current state: -1
-Exception in thread "Thread-82" java.lang.IndexOutOfBoundsException: Index -1 out of bounds for length 33
-	at java.base/jdk.internal.util.Preconditions.outOfBounds(Preconditions.java:100)
-	at java.base/jdk.internal.util.Preconditions.outOfBoundsCheckIndex(Preconditions.java:106)
-	at java.base/jdk.internal.util.Preconditions.checkIndex(Preconditions.java:302)
-	at java.base/java.util.Objects.checkIndex(Objects.java:385)
-	at java.base/java.util.ArrayList.get(ArrayList.java:427)
-	at com.gbft.framework.core.Entity.stateUpdate(Entity.java:472)
-	at com.gbft.framework.core.Entity.stateUpdateLoop(Entity.java:404)
-	at com.gbft.framework.core.Entity.handleMessage(Entity.java:394)
-	at com.gbft.framework.coordination.CoordinatorUnit$ReceiverPoller.lambda$run$0(CoordinatorUnit.java:360)
-	at java.base/java.lang.Thread.run(Thread.java:1623)
 Inside sharded plugin: 0 16 0
 My source is: 16
 My messsage type is: 0
@@ -539,31 +302,31 @@ targets: 0
 requests {
   client: 16
   request_num: 12
-  record: 20
+  record: 12
   operation: SUB
-  value: 1029
+  value: 1079
   timestamp {
-    seconds: 148150
-    nanos: 928826498
+    seconds: 153264
+    nanos: 596495677
   }
 }
-digest: "Q\266\213S\313E\204\a\251h\030\240\273\324\324z]F\002K2x\376J\300\356U[NL\244\364"
+digest: "\213=\217\000\364\003\252\254\254\323;\235\317>V\211D\275T;\223\254X*\245\241\376Rw@3="
 extra_data {
   key: 1001
-  value: "\001\000@:\275\307\346\tL\253\334t\274\212\\x^\200\021\245%lk;\207\303\330\305\000\254\275S\201\v\254\214B\335\253\373\341\316\t\221\344,\277O\360I\305\271X\027]\265=\300\241\n_6\322\022U\231\002"
+  value: "\001\000@m$\234\\M;U1\a\241!\316h\216\356N[&\2743\276\271\274\223\215vTD$\234\346\216P\224\375\340\356\367o\2563Mv\030\272v\n\355\221\2417\375\373\303\251\253Q\376\275\254!\b#\356"
 }
 timestamp {
-  seconds: 148150
-  nanos: 930736360
+  seconds: 153264
+  nanos: 596933418
 }
 
 DirectPipelinePlugin.sendMessage
-23:04:55.457  Found target: [0]
+12:27:28.878  Found target: [0]
 Sending event to 0 at 127.0.0.1:6021
 Using connection - Sending event to 0 at 127.0.0.1:6021
-Sender is : 17
-Receiver is : 8
-Amount is : 1016
+Sender is : 16
+Receiver is : 20
+Amount is : 1083
  Txn number is : 2
  First request number is : 21
  Second request number is : 22
@@ -577,492 +340,28 @@ targets: 0
 requests {
   client: 16
   request_num: 21
-  record: 8
+  record: 20
   operation: ADD
-  value: 1016
+  value: 1083
   timestamp {
-    seconds: 148150
-    nanos: 936637146
+    seconds: 153264
+    nanos: 609367871
   }
 }
-digest: "\272\235\2743\b\035\256\006\216^k\001\3420\317\027]\037\viJz\247tp\210\003\027\222\362\373\027"
+digest: "\255@^\bq?\034\221\225n\177\330\274\006`\372Z#b`\000\206\307\020\231h\263mB\276mw"
 extra_data {
   key: 1001
-  value: "\001\000@\236\354rQP\264\344\016\335\344\243\336\024\333n\337\366\376\301p\240\177\372\3773\275\224\200c\337\025sZ\272:\005\275\255\354\244+\257>\037^\326\341\361\300R\353\220\032x\263\254\224o\216Vy\361\344\307"
+  value: "\001\000@\314g\267\314g\2116\313@\222k\021&a.\037\3165\321\n1\322\317a\a_t{\251\342\264]\035Q\227\036d\221\372\337\334)\221\000\252\213\204\177\327\vi\020&\215\231e\366\356\372\006\310_\367\030"
 }
 timestamp {
-  seconds: 148150
-  nanos: 936768132
+  seconds: 153264
+  nanos: 610349311
 }
 
 DirectPipelinePlugin.sendMessage
-23:04:55.467  Found target: [0]
+12:27:28.891  Found target: [0]
 Sending event to 0 at 127.0.0.1:6021
 Using connection - Sending event to 0 at 127.0.0.1:6021
-Message event received in 16
-Targets: [4] for message: sequence_num: 1
-message_type: 1
-targets: 4
-requests {
-  client: 16
-  request_num: 12
-  record: 20
-  operation: SUB
-  value: 1029
-  timestamp {
-    seconds: 148150
-    nanos: 928826498
-  }
-}
-digest: "Q\266\213S\313E\204\a\251h\030\240\273\324\324z]F\002K2x\376J\300\356U[NL\244\364"
-reply_data {
-  key: 12
-  value: -29
-}
-extra_data {
-  key: 1001
-  value: "\001\004@\254\005.\022\247p\372r3E\322A\3342)\234H\35732\033\325<\217_\237\312SC\006h\331Vp\305\036\f\250\376@o\260\215Kt\265\347\374\271\236[s\223\363\n\027\215{\300\030\377\241\027D"
-}
-timestamp {
-  seconds: 148151
-  nanos: 881070888
-}
-
-Received request: sequence_num: 1
-message_type: 1
-targets: 4
-requests {
-  client: 16
-  request_num: 12
-  record: 20
-  operation: SUB
-  value: 1029
-  timestamp {
-    seconds: 148150
-    nanos: 928826498
-  }
-}
-digest: "Q\266\213S\313E\204\a\251h\030\240\273\324\324z]F\002K2x\376J\300\356U[NL\244\364"
-reply_data {
-  key: 12
-  value: -29
-}
-extra_data {
-  key: 1001
-  value: "\001\004@\254\005.\022\247p\372r3E\322A\3342)\234H\35732\033\325<\217_\237\312SC\006h\331Vp\305\036\f\250\376@o\260\215Kt\265\347\374\271\236[s\223\363\n\027\215{\300\030\377\241\027D"
-}
-timestamp {
-  seconds: 148151
-  nanos: 881070888
-}
-
-Going to process: sequence_num: 1
-message_type: 1
-targets: 4
-requests {
-  client: 16
-  request_num: 12
-  record: 20
-  operation: SUB
-  value: 1029
-  timestamp {
-    seconds: 148150
-    nanos: 928826498
-  }
-}
-digest: "Q\266\213S\313E\204\a\251h\030\240\273\324\324z]F\002K2x\376J\300\356U[NL\244\364"
-reply_data {
-  key: 12
-  value: -29
-}
-extra_data {
-  key: 1001
-  value: "\001\004@\254\005.\022\247p\372r3E\322A\3342)\234H\35732\033\325<\217_\237\312SC\006h\331Vp\305\036\f\250\376@o\260\215Kt\265\347\374\271\236[s\223\363\n\027\215{\300\030\377\241\027D"
-}
-timestamp {
-  seconds: 148151
-  nanos: 881070888
-}
-
-Verifying MAC for source: 0
-Secret Key: [B@6ff20abe
-MAC validation successful
-Processed: sequence_num: 1
-message_type: 1
-targets: 4
-requests {
-  client: 16
-  request_num: 12
-  record: 20
-  operation: SUB
-  value: 1029
-  timestamp {
-    seconds: 148150
-    nanos: 928826498
-  }
-}
-digest: "Q\266\213S\313E\204\a\251h\030\240\273\324\324z]F\002K2x\376J\300\356U[NL\244\364"
-reply_data {
-  key: 12
-  value: -29
-}
-extra_data {
-  key: 1001
-  value: "\001\004@\254\005.\022\247p\372r3E\322A\3342)\234H\35732\033\325<\217_\237\312SC\006h\331Vp\305\036\f\250\376@o\260\215Kt\265\347\374\271\236[s\223\363\n\027\215{\300\030\377\241\027D"
-}
-timestamp {
-  seconds: 148151
-  nanos: 881070888
-}
-
-Received message inside not request block: sequence_num: 1
-message_type: 1
-targets: 4
-requests {
-  client: 16
-  request_num: 12
-  record: 20
-  operation: SUB
-  value: 1029
-  timestamp {
-    seconds: 148150
-    nanos: 928826498
-  }
-}
-digest: "Q\266\213S\313E\204\a\251h\030\240\273\324\324z]F\002K2x\376J\300\356U[NL\244\364"
-reply_data {
-  key: 12
-  value: -29
-}
-extra_data {
-  key: 1001
-  value: "\001\004@\254\005.\022\247p\372r3E\322A\3342)\234H\35732\033\325<\217_\237\312SC\006h\331Vp\305\036\f\250\376@o\260\215Kt\265\347\374\271\236[s\223\363\n\027\215{\300\030\377\241\027D"
-}
-timestamp {
-  seconds: 148151
-  nanos: 881070888
-}
-
-My id is and Message Target is : 16 [4]
-Valid message: sequence_num: 1
-message_type: 1
-targets: 4
-requests {
-  client: 16
-  request_num: 12
-  record: 20
-  operation: SUB
-  value: 1029
-  timestamp {
-    seconds: 148150
-    nanos: 928826498
-  }
-}
-digest: "Q\266\213S\313E\204\a\251h\030\240\273\324\324z]F\002K2x\376J\300\356U[NL\244\364"
-reply_data {
-  key: 12
-  value: -29
-}
-extra_data {
-  key: 1001
-  value: "\001\004@\254\005.\022\247p\372r3E\322A\3342)\234H\35732\033\325<\217_\237\312SC\006h\331Vp\305\036\f\250\376@o\260\215Kt\265\347\374\271\236[s\223\363\n\027\215{\300\030\377\241\027D"
-}
-timestamp {
-  seconds: 148151
-  nanos: 881070888
-}
-
-Tallying message: sequence_num: 1
-message_type: 1
-targets: 4
-requests {
-  client: 16
-  request_num: 12
-  record: 20
-  operation: SUB
-  value: 1029
-  timestamp {
-    seconds: 148150
-    nanos: 928826498
-  }
-}
-digest: "Q\266\213S\313E\204\a\251h\030\240\273\324\324z]F\002K2x\376J\300\356U[NL\244\364"
-reply_data {
-  key: 12
-  value: -29
-}
-extra_data {
-  key: 1001
-  value: "\001\004@\254\005.\022\247p\372r3E\322A\3342)\234H\35732\033\325<\217_\237\312SC\006h\331Vp\305\036\f\250\376@o\260\215Kt\265\347\374\271\236[s\223\363\n\027\215{\300\030\377\241\027D"
-}
-timestamp {
-  seconds: 148151
-  nanos: 881070888
-}
-
-Tallying message: sequence_num: 1
-message_type: 1
-targets: 4
-requests {
-  client: 16
-  request_num: 12
-  record: 20
-  operation: SUB
-  value: 1029
-  timestamp {
-    seconds: 148150
-    nanos: 928826498
-  }
-}
-reply_data {
-  key: 12
-  value: -29
-}
-extra_data {
-  key: 1001
-  value: "\001\004@\254\005.\022\247p\372r3E\322A\3342)\234H\35732\033\325<\217_\237\312SC\006h\331Vp\305\036\f\250\376@o\260\215Kt\265\347\374\271\236[s\223\363\n\027\215{\300\030\377\241\027D"
-}
-timestamp {
-  seconds: 148151
-  nanos: 881070888
-}
-
-Running state update loop for seqnum: 1
-For some reason I'm here 3 and seqnum: 1
-stateMap: {}
-Returning null as seqnum > nextSequence
-Message event received in 16
-Targets: [4] for message: sequence_num: 2
-message_type: 1
-targets: 4
-requests {
-  client: 16
-  request_num: 21
-  record: 8
-  operation: ADD
-  value: 1016
-  timestamp {
-    seconds: 148150
-    nanos: 936637146
-  }
-}
-digest: "\272\235\2743\b\035\256\006\216^k\001\3420\317\027]\037\viJz\247tp\210\003\027\222\362\373\027"
-reply_data {
-  key: 21
-  value: 2016
-}
-extra_data {
-  key: 1001
-  value: "\001\004@8\365Z\001\003\026\263U%h\341\356wEo#\367u`\246g`\204\001\253\350\255-\255%\024\017\220\211\220@\220\351/\336\234\005\336-V\361j\263\254\2422\221\251\256\033\263\216\r\273\203\020`#\240"
-}
-timestamp {
-  seconds: 148151
-  nanos: 911309237
-}
-
-Received request: sequence_num: 2
-message_type: 1
-targets: 4
-requests {
-  client: 16
-  request_num: 21
-  record: 8
-  operation: ADD
-  value: 1016
-  timestamp {
-    seconds: 148150
-    nanos: 936637146
-  }
-}
-digest: "\272\235\2743\b\035\256\006\216^k\001\3420\317\027]\037\viJz\247tp\210\003\027\222\362\373\027"
-reply_data {
-  key: 21
-  value: 2016
-}
-extra_data {
-  key: 1001
-  value: "\001\004@8\365Z\001\003\026\263U%h\341\356wEo#\367u`\246g`\204\001\253\350\255-\255%\024\017\220\211\220@\220\351/\336\234\005\336-V\361j\263\254\2422\221\251\256\033\263\216\r\273\203\020`#\240"
-}
-timestamp {
-  seconds: 148151
-  nanos: 911309237
-}
-
-Going to process: sequence_num: 2
-message_type: 1
-targets: 4
-requests {
-  client: 16
-  request_num: 21
-  record: 8
-  operation: ADD
-  value: 1016
-  timestamp {
-    seconds: 148150
-    nanos: 936637146
-  }
-}
-digest: "\272\235\2743\b\035\256\006\216^k\001\3420\317\027]\037\viJz\247tp\210\003\027\222\362\373\027"
-reply_data {
-  key: 21
-  value: 2016
-}
-extra_data {
-  key: 1001
-  value: "\001\004@8\365Z\001\003\026\263U%h\341\356wEo#\367u`\246g`\204\001\253\350\255-\255%\024\017\220\211\220@\220\351/\336\234\005\336-V\361j\263\254\2422\221\251\256\033\263\216\r\273\203\020`#\240"
-}
-timestamp {
-  seconds: 148151
-  nanos: 911309237
-}
-
-Verifying MAC for source: 0
-Secret Key: [B@6ff20abe
-MAC validation successful
-Processed: sequence_num: 2
-message_type: 1
-targets: 4
-requests {
-  client: 16
-  request_num: 21
-  record: 8
-  operation: ADD
-  value: 1016
-  timestamp {
-    seconds: 148150
-    nanos: 936637146
-  }
-}
-digest: "\272\235\2743\b\035\256\006\216^k\001\3420\317\027]\037\viJz\247tp\210\003\027\222\362\373\027"
-reply_data {
-  key: 21
-  value: 2016
-}
-extra_data {
-  key: 1001
-  value: "\001\004@8\365Z\001\003\026\263U%h\341\356wEo#\367u`\246g`\204\001\253\350\255-\255%\024\017\220\211\220@\220\351/\336\234\005\336-V\361j\263\254\2422\221\251\256\033\263\216\r\273\203\020`#\240"
-}
-timestamp {
-  seconds: 148151
-  nanos: 911309237
-}
-
-Received message inside not request block: sequence_num: 2
-message_type: 1
-targets: 4
-requests {
-  client: 16
-  request_num: 21
-  record: 8
-  operation: ADD
-  value: 1016
-  timestamp {
-    seconds: 148150
-    nanos: 936637146
-  }
-}
-digest: "\272\235\2743\b\035\256\006\216^k\001\3420\317\027]\037\viJz\247tp\210\003\027\222\362\373\027"
-reply_data {
-  key: 21
-  value: 2016
-}
-extra_data {
-  key: 1001
-  value: "\001\004@8\365Z\001\003\026\263U%h\341\356wEo#\367u`\246g`\204\001\253\350\255-\255%\024\017\220\211\220@\220\351/\336\234\005\336-V\361j\263\254\2422\221\251\256\033\263\216\r\273\203\020`#\240"
-}
-timestamp {
-  seconds: 148151
-  nanos: 911309237
-}
-
-My id is and Message Target is : 16 [4]
-Valid message: sequence_num: 2
-message_type: 1
-targets: 4
-requests {
-  client: 16
-  request_num: 21
-  record: 8
-  operation: ADD
-  value: 1016
-  timestamp {
-    seconds: 148150
-    nanos: 936637146
-  }
-}
-digest: "\272\235\2743\b\035\256\006\216^k\001\3420\317\027]\037\viJz\247tp\210\003\027\222\362\373\027"
-reply_data {
-  key: 21
-  value: 2016
-}
-extra_data {
-  key: 1001
-  value: "\001\004@8\365Z\001\003\026\263U%h\341\356wEo#\367u`\246g`\204\001\253\350\255-\255%\024\017\220\211\220@\220\351/\336\234\005\336-V\361j\263\254\2422\221\251\256\033\263\216\r\273\203\020`#\240"
-}
-timestamp {
-  seconds: 148151
-  nanos: 911309237
-}
-
-Tallying message: sequence_num: 2
-message_type: 1
-targets: 4
-requests {
-  client: 16
-  request_num: 21
-  record: 8
-  operation: ADD
-  value: 1016
-  timestamp {
-    seconds: 148150
-    nanos: 936637146
-  }
-}
-digest: "\272\235\2743\b\035\256\006\216^k\001\3420\317\027]\037\viJz\247tp\210\003\027\222\362\373\027"
-reply_data {
-  key: 21
-  value: 2016
-}
-extra_data {
-  key: 1001
-  value: "\001\004@8\365Z\001\003\026\263U%h\341\356wEo#\367u`\246g`\204\001\253\350\255-\255%\024\017\220\211\220@\220\351/\336\234\005\336-V\361j\263\254\2422\221\251\256\033\263\216\r\273\203\020`#\240"
-}
-timestamp {
-  seconds: 148151
-  nanos: 911309237
-}
-
-Tallying message: sequence_num: 2
-message_type: 1
-targets: 4
-requests {
-  client: 16
-  request_num: 21
-  record: 8
-  operation: ADD
-  value: 1016
-  timestamp {
-    seconds: 148150
-    nanos: 936637146
-  }
-}
-reply_data {
-  key: 21
-  value: 2016
-}
-extra_data {
-  key: 1001
-  value: "\001\004@8\365Z\001\003\026\263U%h\341\356wEo#\367u`\246g`\204\001\253\350\255-\255%\024\017\220\211\220@\220\351/\336\234\005\336-V\361j\263\254\2422\221\251\256\033\263\216\r\273\203\020`#\240"
-}
-timestamp {
-  seconds: 148151
-  nanos: 911309237
-}
-
-Running state update loop for seqnum: 2
-For some reason I'm here 3 and seqnum: 2
-stateMap: {}
-Returning null as seqnum > nextSequence
 Inside sharded plugin: 0 16 0
 My source is: 16
 My messsage type is: 0
@@ -1073,267 +372,87 @@ targets: 0
 requests {
   client: 16
   request_num: 22
-  record: 17
+  record: 16
   operation: SUB
-  value: 1016
+  value: 1083
   timestamp {
-    seconds: 148151
-    nanos: 978422744
+    seconds: 153265
+    nanos: 625687821
   }
 }
-digest: "E\220\247\316\321\024*\207u\352\003\352\331c\307\243>\253\t\300=L\361\306C\003]\315\236f\031\370"
+digest: "\002\3028\343h6]@!\244trg\301&\213}k\277\367\344\374cp\212R\210\337\357\253;/"
 extra_data {
   key: 1001
-  value: "\001\000@\202\223\2268\300O$\263N\237\306\233,\210\363\221\375\215\032O:_\327\377\227b\314\033k\030N\271\303\273\252\016E\353\356\001\237O\276\202;\363\322\037!$\351\216\220}\217\322\345\024\003d\306\v6t"
+  value: "\001\000@,r\253\246y\333\024\236L\2235\177\034e\2646\265:\241\250ah\246\246\210Y\036I\364\364\247\022S\313\030\321sK\303\323\352\v\203z\356\250\315\212o\302^\212Pd\\^D\235\312,\262\2459\034"
 }
 timestamp {
-  seconds: 148151
-  nanos: 978690245
+  seconds: 153265
+  nanos: 626331518
 }
 
 DirectPipelinePlugin.sendMessage
-23:04:56.509  Found target: [0]
+12:27:29.898  Found target: [0]
 Sending event to 0 at 127.0.0.1:6021
 Using connection - Sending event to 0 at 127.0.0.1:6021
-Message event received in 16
-Targets: [4] for message: sequence_num: 3
-message_type: 1
-targets: 4
-requests {
-  client: 16
-  request_num: 22
-  record: 17
-  operation: SUB
-  value: 1016
-  timestamp {
-    seconds: 148151
-    nanos: 978422744
-  }
-}
-digest: "E\220\247\316\321\024*\207u\352\003\352\331c\307\243>\253\t\300=L\361\306C\003]\315\236f\031\370"
-reply_data {
-  key: 22
-  value: -16
-}
-extra_data {
-  key: 1001
-  value: "\001\004@\366L:kr\262bH\321\321d^\030Q\236\253\203t!\312\236\252\273i\361\234\234O\005\031Y\326\276\234\336\220\326:\231k\207\322f\373\247\274e\276\a\312\205\206\331\201\347el\263Cx\305\031\\\207"
-}
-timestamp {
-  seconds: 148152
-  nanos: 72731053
-}
-
-Received request: sequence_num: 3
-message_type: 1
-targets: 4
-requests {
-  client: 16
-  request_num: 22
-  record: 17
-  operation: SUB
-  value: 1016
-  timestamp {
-    seconds: 148151
-    nanos: 978422744
-  }
-}
-digest: "E\220\247\316\321\024*\207u\352\003\352\331c\307\243>\253\t\300=L\361\306C\003]\315\236f\031\370"
-reply_data {
-  key: 22
-  value: -16
-}
-extra_data {
-  key: 1001
-  value: "\001\004@\366L:kr\262bH\321\321d^\030Q\236\253\203t!\312\236\252\273i\361\234\234O\005\031Y\326\276\234\336\220\326:\231k\207\322f\373\247\274e\276\a\312\205\206\331\201\347el\263Cx\305\031\\\207"
-}
-timestamp {
-  seconds: 148152
-  nanos: 72731053
-}
-
-Going to process: sequence_num: 3
-message_type: 1
-targets: 4
-requests {
-  client: 16
-  request_num: 22
-  record: 17
-  operation: SUB
-  value: 1016
-  timestamp {
-    seconds: 148151
-    nanos: 978422744
-  }
-}
-digest: "E\220\247\316\321\024*\207u\352\003\352\331c\307\243>\253\t\300=L\361\306C\003]\315\236f\031\370"
-reply_data {
-  key: 22
-  value: -16
-}
-extra_data {
-  key: 1001
-  value: "\001\004@\366L:kr\262bH\321\321d^\030Q\236\253\203t!\312\236\252\273i\361\234\234O\005\031Y\326\276\234\336\220\326:\231k\207\322f\373\247\274e\276\a\312\205\206\331\201\347el\263Cx\305\031\\\207"
-}
-timestamp {
-  seconds: 148152
-  nanos: 72731053
-}
-
-Verifying MAC for source: 0
-Secret Key: [B@6ff20abe
-MAC validation successful
-Processed: sequence_num: 3
-message_type: 1
-targets: 4
-requests {
-  client: 16
-  request_num: 22
-  record: 17
-  operation: SUB
-  value: 1016
-  timestamp {
-    seconds: 148151
-    nanos: 978422744
-  }
-}
-digest: "E\220\247\316\321\024*\207u\352\003\352\331c\307\243>\253\t\300=L\361\306C\003]\315\236f\031\370"
-reply_data {
-  key: 22
-  value: -16
-}
-extra_data {
-  key: 1001
-  value: "\001\004@\366L:kr\262bH\321\321d^\030Q\236\253\203t!\312\236\252\273i\361\234\234O\005\031Y\326\276\234\336\220\326:\231k\207\322f\373\247\274e\276\a\312\205\206\331\201\347el\263Cx\305\031\\\207"
-}
-timestamp {
-  seconds: 148152
-  nanos: 72731053
-}
-
-Received message inside not request block: sequence_num: 3
-message_type: 1
-targets: 4
-requests {
-  client: 16
-  request_num: 22
-  record: 17
-  operation: SUB
-  value: 1016
-  timestamp {
-    seconds: 148151
-    nanos: 978422744
-  }
-}
-digest: "E\220\247\316\321\024*\207u\352\003\352\331c\307\243>\253\t\300=L\361\306C\003]\315\236f\031\370"
-reply_data {
-  key: 22
-  value: -16
-}
-extra_data {
-  key: 1001
-  value: "\001\004@\366L:kr\262bH\321\321d^\030Q\236\253\203t!\312\236\252\273i\361\234\234O\005\031Y\326\276\234\336\220\326:\231k\207\322f\373\247\274e\276\a\312\205\206\331\201\347el\263Cx\305\031\\\207"
-}
-timestamp {
-  seconds: 148152
-  nanos: 72731053
-}
-
-My id is and Message Target is : 16 [4]
-Valid message: sequence_num: 3
-message_type: 1
-targets: 4
-requests {
-  client: 16
-  request_num: 22
-  record: 17
-  operation: SUB
-  value: 1016
-  timestamp {
-    seconds: 148151
-    nanos: 978422744
-  }
-}
-digest: "E\220\247\316\321\024*\207u\352\003\352\331c\307\243>\253\t\300=L\361\306C\003]\315\236f\031\370"
-reply_data {
-  key: 22
-  value: -16
-}
-extra_data {
-  key: 1001
-  value: "\001\004@\366L:kr\262bH\321\321d^\030Q\236\253\203t!\312\236\252\273i\361\234\234O\005\031Y\326\276\234\336\220\326:\231k\207\322f\373\247\274e\276\a\312\205\206\331\201\347el\263Cx\305\031\\\207"
-}
-timestamp {
-  seconds: 148152
-  nanos: 72731053
-}
-
-Tallying message: sequence_num: 3
-message_type: 1
-targets: 4
-requests {
-  client: 16
-  request_num: 22
-  record: 17
-  operation: SUB
-  value: 1016
-  timestamp {
-    seconds: 148151
-    nanos: 978422744
-  }
-}
-digest: "E\220\247\316\321\024*\207u\352\003\352\331c\307\243>\253\t\300=L\361\306C\003]\315\236f\031\370"
-reply_data {
-  key: 22
-  value: -16
-}
-extra_data {
-  key: 1001
-  value: "\001\004@\366L:kr\262bH\321\321d^\030Q\236\253\203t!\312\236\252\273i\361\234\234O\005\031Y\326\276\234\336\220\326:\231k\207\322f\373\247\274e\276\a\312\205\206\331\201\347el\263Cx\305\031\\\207"
-}
-timestamp {
-  seconds: 148152
-  nanos: 72731053
-}
-
-Tallying message: sequence_num: 3
-message_type: 1
-targets: 4
-requests {
-  client: 16
-  request_num: 22
-  record: 17
-  operation: SUB
-  value: 1016
-  timestamp {
-    seconds: 148151
-    nanos: 978422744
-  }
-}
-reply_data {
-  key: 22
-  value: -16
-}
-extra_data {
-  key: 1001
-  value: "\001\004@\366L:kr\262bH\321\321d^\030Q\236\253\203t!\312\236\252\273i\361\234\234O\005\031Y\326\276\234\336\220\326:\231k\207\322f\373\247\274e\276\a\312\205\206\331\201\347el\263Cx\305\031\\\207"
-}
-timestamp {
-  seconds: 148152
-  nanos: 72731053
-}
-
-Running state update loop for seqnum: 3
-For some reason I'm here 3 and seqnum: 3
-stateMap: {}
-Returning null as seqnum > nextSequence
 Sending event to -1 at 127.0.0.1:5050
-23:04:57.436  Sending event to -1 at 127.0.0.1:5050
+12:27:30.843  Sending event to -1 at 127.0.0.1:5050
 Sending event to -1 at 127.0.0.1:5050
-23:05:00.192  Sending event to -1 at 127.0.0.1:5050
+12:27:33.817  Sending event to -1 at 127.0.0.1:5050
 Sending event to -1 at 127.0.0.1:5050
-23:05:03.178  Sending event to -1 at 127.0.0.1:5050
+12:27:36.790  Sending event to -1 at 127.0.0.1:5050
 Sending event to -1 at 127.0.0.1:5050
-23:05:06.189  Sending event to -1 at 127.0.0.1:5050
+12:27:40.304  Sending event to -1 at 127.0.0.1:5050
 Sending event to -1 at 127.0.0.1:5050
-23:05:09.220  Sending event to -1 at 127.0.0.1:5050
+12:27:42.749  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+12:27:45.754  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+12:27:48.753  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+12:27:51.784  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+12:27:54.773  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+12:27:57.796  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+12:28:00.778  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+12:28:03.777  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+12:28:06.762  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+12:28:09.770  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+12:28:12.764  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+12:28:15.785  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+12:28:18.763  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+12:28:21.806  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+12:28:24.771  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+12:28:27.805  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+12:28:31.23  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+12:28:33.782  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+12:28:36.809  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+12:28:39.781  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+12:28:42.766  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+12:28:45.801  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+12:28:48.802  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+12:28:51.792  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+12:28:54.790  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+12:28:57.812  Sending event to -1 at 127.0.0.1:5050
+Sending event to -1 at 127.0.0.1:5050
+12:29:00.803  Sending event to -1 at 127.0.0.1:5050
