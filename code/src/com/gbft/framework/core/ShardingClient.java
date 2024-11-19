@@ -98,13 +98,13 @@ public class ShardingClient extends Entity {
 
 
     @Override
-    protected void execute(long seqnum) {
+    protected void execute(long cluster_num, long seqnum) {
         System.out.println("Inside execute for sharding client " + id + " with seqnum " + seqnum + ".");
         var checkpoint = checkpointManager.getCheckpointForSeq(getId()/4L, seqnum);
 
         var tally = checkpoint.getMessageTally();
-        var viewnum = tally.getMaxQuorum(Pair.of(getId()/4L, seqnum));
-        var replies = tally.getQuorumReplies(Pair.of(getId()/4L, seqnum), viewnum);
+        var viewnum = tally.getMaxQuorum(Pair.of(cluster_num, seqnum));
+        var replies = tally.getQuorumReplies(Pair.of(cluster_num, seqnum), viewnum);
         currentViewNum = viewnum;
         /*
          * Checks for replies for the requests in the block and updates the dataset.

@@ -176,7 +176,7 @@ public class Timekeeper implements Runnable {
         var key = pair.key;
         var mode = pair.mode;
 
-        if (seqnum <= entity.getLastExecutedSequenceNum() || key.view != entity.getCurrentViewNum()) {
+        if (seqnum <= entity.getLastExecutedSequenceNum(this.entity.getId()/4L) || key.view != entity.getCurrentViewNum()) {
             return true;
         }
 

@@ -50,10 +50,10 @@ public class CheckpointMessagePlugin implements MessagePlugin {
     public MessageData processIncomingMessage(MessageData message) {
         if (entity.isClient()) {
             var min_checkpoint = checkpointManager.getMinCheckpoint();
-            var current_checkpoint = checkpointManager.getCheckpointNum(entity.getId()/4L, entity.getLastExecutedSequenceNum());
+            var current_checkpoint = checkpointManager.getCheckpointNum(message.getSource()/4L, entity.getLastExecutedSequenceNum(message.getSource()/4L));
 
             if (min_checkpoint < current_checkpoint.getValue()) {
-                checkpointManager.removeCheckpoint(Pair.of(entity.getId()/4L, min_checkpoint));
+                checkpointManager.removeCheckpoint(Pair.of(message.getSource()/4L, min_checkpoint));
             }
             return message;
         }
@@ -104,7 +104,8 @@ public class CheckpointMessagePlugin implements MessagePlugin {
                     // check if digests match
                     if (checkpointManager.getCheckpointDigest(service_state).equals(checkpointDigest)) {
                         var lastExecutedSequenceNum = (checkpointNum + 1) * checkpointSize - 1;
-                        entity.setServiceState(service_state, lastExecutedSequenceNum);
+                        //Commenting to test out cluster_num changes
+                        //entity.setServiceState(service_state, lastExecutedSequenceNum);
 
                         checkpointManager.setLowWaterMark(checkpointNum);
 

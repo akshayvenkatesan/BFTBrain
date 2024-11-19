@@ -25,37 +25,40 @@ public class Node extends Entity {
     }
 
     @Override
-    protected void execute(long seqnum) {
-        var checkpoint = checkpointManager.getCheckpointForSeq(getId(), seqnum);
-        var requestBlock = checkpoint.getRequestBlock(Pair.of((long) getId(), seqnum));
+    protected void execute(long cluster_num, long seqnum) {
+        var checkpoint = checkpointManager.getCheckpointForSeq(cluster_num, seqnum);
+        var requestBlock = checkpoint.getRequestBlock(Pair.of(cluster_num, seqnum));
 
-        if (checkpoint.getReplies(Pair.of((long) getId(), seqnum)) == null) {
+        if (checkpoint.getReplies(Pair.of(cluster_num, seqnum)) == null) {
             var replies = new HashMap<Long, Integer>();
             for (var request : requestBlock) {
                 replies.put(request.getRequestNum(), dataset.execute(request));
             }
-            checkpoint.addReplies(Pair.of((long) getId(), seqnum), replies);
+            checkpoint.addReplies(Pair.of(cluster_num, seqnum), replies);
         }
 
         // checkpoint
-        if ((seqnum + 1) % checkpointSize == 0) {
-            // copy the current state to checkpoint, new requests can commit but not execute.
-            checkpoint.setServiceState(dataset);
+        
+        //Commenting out the following code block in order to test cluster_num logic
 
-            // update h
-            for (var i = messagePlugins.size() - 1; i >= 0; i--) {
-                var plugin = messagePlugins.get(i);
-                if (plugin instanceof CheckpointMessagePlugin) {
-                    CheckpointMessagePlugin checkpointPlugin = (CheckpointMessagePlugin) plugin;
-                    if (checkpointPlugin.hasQuorum(seqnum / checkpointSize)) {
-                        checkpointManager.setLowWaterMark(seqnum / checkpointSize);
-                    }
-                }
-            }
+        // if ((seqnum + 1) % checkpointSize == 0) {
+        //     // copy the current state to checkpoint, new requests can commit but not execute.
+        //     checkpoint.setServiceState(cluster_num, dataset);
 
-            // multicast CHECKPOINT message to all other nodes
-            new Thread(() -> checkpointManager.sendCheckpoint(Pair.of(getId()/4L, seqnum / checkpointSize))).start();
-        }
+        //     // update h
+        //     for (var i = messagePlugins.size() - 1; i >= 0; i--) {
+        //         var plugin = messagePlugins.get(i);
+        //         if (plugin instanceof CheckpointMessagePlugin) {
+        //             CheckpointMessagePlugin checkpointPlugin = (CheckpointMessagePlugin) plugin;
+        //             if (checkpointPlugin.hasQuorum(seqnum / checkpointSize)) {
+        //                 checkpointManager.setLowWaterMark(seqnum / checkpointSize);
+        //             }
+        //         }
+        //     }
+
+        //     // multicast CHECKPOINT message to all other nodes
+        //     new Thread(() -> checkpointManager.sendCheckpoint(Pair.of(cluster_num, seqnum / checkpointSize))).start();
+        // }
 
         // report local features and reward
         if (learning) {
@@ -81,7 +84,7 @@ public class Node extends Entity {
 
                 Map<Integer, Float> report = new HashMap<>();
                 if (currentEpisodeNum.get() != 0) {
-                    var prev_checkpoint = checkpointManager.getPrevCheckpointForSeq(getId()/4L, seqnum);
+                    var prev_checkpoint = checkpointManager.getPrevCheckpointForSeq(cluster_num, seqnum);
                     if (pollutionFault.getType(this.id) == PollutionFault.POLLUTION_SBFT && prev_checkpoint.getProtocol().equals("sbft")) {
                         report.put(FeatureManager.REWARD, prev_checkpoint.throughput * 2.5f);
                     } else if (pollutionFault.getType(this.id) == PollutionFault.POLLUTION_ALL) {

@@ -28,7 +28,8 @@ public class CheckpointData {
     private Map<Pair<Long,Long>, Integer> stateMap;
     private Map<Long, RequestData> requests;
     private Map<Pair<Long,Long>, List<RequestData>> requestBlocks;
-    private Map<Long, NavigableSet<Long>> aggregationValues;
+    // clusternum -> aggregation values
+    private Map<Long, Map<Long, NavigableSet<Long>>> aggregationValues;
     private MessageTally messageTally;
     private MessageTally viewTally;
     
@@ -55,6 +56,9 @@ public class CheckpointData {
         requests = new ConcurrentHashMap<>();
         requestBlocks = new ConcurrentHashMap<>();
         aggregationValues = new ConcurrentHashMap<>();
+        for (long clusterNum = 0; clusterNum < 5; clusterNum++) {
+            aggregationValues.put(clusterNum, new ConcurrentHashMap<>());
+        }
         messageTally = new MessageTally();
         viewTally = new MessageTally();
         serviceState = null;
@@ -114,19 +118,30 @@ public class CheckpointData {
 
     public void addAggregationValue(MessageData message) {
         var seqnum = message.getSequenceNum();
+        var clusternum = -1L;
         if (!message.getAggregationValuesList().isEmpty()) {
-            aggregationValues.computeIfAbsent(seqnum, k -> new ConcurrentSkipListSet<>()).addAll(message.getAggregationValuesList());
+            if(this.entity.isClient())
+            {
+                clusternum = message.getSource()/4L;
+            }
+            else
+            {
+                clusternum = this.entity.getId()/4L;
+            }
+            aggregationValues.computeIfAbsent(clusternum, v-> v.computeIfAbsent(seqnum, k -> new ConcurrentSkipListSet<>())).addAll(message.getAggregationValuesList());
         }
     }
 
-    public void addAggregationValue(long seqnum, Set<Long> values) {
+    public void addAggregationValue(long clusternum, long seqnum, Set<Long> values) {
+        var clusternum = -1L;
         if (!values.isEmpty()) {
-            aggregationValues.computeIfAbsent(seqnum, k -> new ConcurrentSkipListSet<>()).addAll(values);
+            aggregationValues.computeIfAbsent(clusternum, v-> v.computeIfAbsent(seqnum, k -> new ConcurrentSkipListSet<>())).addAll(values);
         }
     }
 
-    public NavigableSet<Long> getAggregationValues(long seqnum) {
-        return aggregationValues.getOrDefault(seqnum, new ConcurrentSkipListSet<>());
+    public NavigableSet<Long> getAggregationValues(long clusternum, long seqnum) {
+        aggregationValues.putIfAbsent(seqnum, new ConcurrentHashMap<>());
+        return aggregationValues.get(clusternum).getOrDefault(seqnum, new ConcurrentSkipListSet<>());
     }
 
     public String getDecision() {
@@ -191,6 +206,7 @@ public class CheckpointData {
         if (protocol.get() == null) {
             return StateMachine.ANY_STATE;
         } else {
+            System.out.println("stateMap: " + stateMap);
             return stateMap.getOrDefault(pair_clusternum_seqnum, StateMachine.states.indexOf(StateMachine.findState("idle", protocol.get() + "_")));
         }
     }

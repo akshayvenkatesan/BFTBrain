@@ -81,7 +81,7 @@ public abstract class Entity {
     // Protocol State
 
     protected long nextSequence;
-    protected long lastExecutedSequenceNum;
+    protected Map<Long,Long> lastExecutedSequenceNum;
     protected long currentViewNum;
     protected Timekeeper timekeeper;
     // Execution queue for each cluster
@@ -165,8 +165,12 @@ public abstract class Entity {
 
         currentViewNum = 0L;
         nextSequence = 0L;
-        lastExecutedSequenceNum = -1L;
-        executionQueue = new HashMap<>();
+        //lastExecutedSequenceNum = -1L;
+        lastExecutedSequenceNum = Map.of(0L, -1L, 1L, -1L, 2L, -1L, 3L, -1L, 4L, -1L);
+        executionQueue = new ConcurrentHashMap<>();
+        for (Long i=0L; i<=5L;i++) {
+            executionQueue.put(i, new ConcurrentHashMap<>());
+        }
 
         pendingRequests = new ConcurrentLinkedQueue<>();
         reqnumToSeqnumMap = new ConcurrentHashMap<>();
@@ -180,7 +184,10 @@ public abstract class Entity {
 
         threads = new ArrayList<>();
         timekeeper = new Timekeeper(this);
-        threads.add(new Thread(() -> executor()));
+        for(long i = 0L; i <= 4L; i++)
+        {
+        threads.add(new Thread(() -> executor(i)));
+        }
         threads.add(new Thread(() -> triggerSlowProposal()));
         threads.add(new Thread(() -> aggStateUpdate()));
 
@@ -303,7 +310,7 @@ public abstract class Entity {
                 // multiplexing global seqnum with local seqnum
                 seqnum = newLocalSeq.first();
                 var checkpoint = checkpointManager.getCheckpointForSeq(this.id/4L, seqnum);
-                checkpoint.addAggregationValue(seqnum, newLocalSeq);
+                checkpoint.addAggregationValue(this.id/4L, seqnum, newLocalSeq);
                 // System.out.println("trigger aggStateUpdate seqnum: " + seqnum + ", newLocalSeq: " + newLocalSeq.toString());
 
                 aggregationBuffer.clear();
@@ -314,6 +321,8 @@ public abstract class Entity {
     }
 
     public void handleMessage(MessageData message) {
+        //var cluster_num = message.getSource()/4L;
+
         System.out.println("Received request: " + message);
         if (Printer.verbosity >= Verbosity.VVV) {
             Printer.print(Verbosity.VVV, prefix, "Processing ", message);
@@ -331,6 +340,7 @@ public abstract class Entity {
 
         var type = message.getMessageType();
         if (type == StateMachine.REQUEST) {
+            var cluster_num = this.id/4L;
             System.out.println("Received request: " + message);
             var request = message.getRequestsList().get(0);
             var seqnum = getRequestSequence(request.getRequestNum());
@@ -358,15 +368,16 @@ public abstract class Entity {
                     System.out.println("Pending requests size: " + pendingRequests.size());
                     System.out.println("callling state update for next sequence number: " + nextSequence);
                     System.out.println("For some reason I'm here 4 and nextSequence: " + nextSequence);
-                    stateUpdateLoop(Pair.of(this.id/4L, nextSequence));
+                    stateUpdateLoop(Pair.of(cluster_num, nextSequence));
                 }
             }
         } else {
+            var cluster_num = message.getSource()/4L;
             Long seqnum = message.getSequenceNum();
             List<Integer> targets = message.getTargetsList();
             System.out.println("Received message inside not request block: " + message);
             System.out.println("My id is and Message Target is : " + id + " " + targets);
-            if (checkpointManager.getCheckpointNum(this.id/4L, seqnum).getValue() < checkpointManager.getMinCheckpoint()) {
+            if (checkpointManager.getCheckpointNum(cluster_num, seqnum).getValue() < checkpointManager.getMinCheckpoint()) {
                 return;
             }
 
@@ -374,17 +385,17 @@ public abstract class Entity {
                 return;
             }
             System.out.println("Valid message: " + message);
-            var checkpoint = checkpointManager.getCheckpointForSeq(this.id/4L, seqnum);
+            var checkpoint = checkpointManager.getCheckpointForSeq(cluster_num, seqnum);
             checkpoint.tally(message);
             checkpoint.addAggregationValue(message);
-            timekeeper.messageReceived(seqnum, currentViewNum, checkpoint.getState(Pair.of(this.id/4L, seqnum)), message);
+            timekeeper.messageReceived(seqnum, currentViewNum, checkpoint.getState(Pair.of(cluster_num, seqnum)), message);
 
             if (Printer.verbosity >= Verbosity.VVV) {
                 Printer.print(Verbosity.VVV, prefix, "Tally message ", message);
             }
             System.out.println("Running state update loop for seqnum: " + seqnum); 
             System.out.println("For some reason I'm here 3 and seqnum: " + seqnum);
-            stateUpdateLoop(Pair.of(this.id/4L, seqnum));
+            stateUpdateLoop(Pair.of(cluster_num, seqnum));
         }
 
         var start = DataUtils.toLong(message.getTimestamp());
@@ -421,8 +432,8 @@ public abstract class Entity {
         stateLock.lock();
 
         // TODO: concurrency control for leader rotation protocols
-        if (pair_clusternum_seqnum.getValue() <= lastExecutedSequenceNum || isExecuted(pair_clusternum_seqnum.getValue())
-                || (isPrimary(pair_clusternum_seqnum.getValue() ) && pair_clusternum_seqnum.getValue() - lastExecutedSequenceNum > pipelinePlugin.getMaxActiveSequences())) {
+        if (pair_clusternum_seqnum.getValue() <= lastExecutedSequenceNum.get(pair_clusternum_seqnum.getKey()) || isExecuted(pair_clusternum_seqnum.getValue())
+                || (isPrimary(pair_clusternum_seqnum.getValue() ) && pair_clusternum_seqnum.getValue() - lastExecutedSequenceNum.get(pair_clusternum_seqnum.getKey())  > pipelinePlugin.getMaxActiveSequences())) {
             stateLock.unlock();
             //System.out.println("Returning null as seqnum <= lastExecutedSequenceNum and isExecuted(seqnum) = " + isExecuted(seqnum) + "\n and isPrimary(seqnum) = " + isPrimary(seqnum) + "lastExecutedSequenceNum = " + lastExecutedSequenceNum);
             return null;
@@ -458,9 +469,10 @@ public abstract class Entity {
             local_cnt++;
             System.out.println("Inside while loop");
             stateUpdated = false;
-
-            var checkpoint = checkpointManager.getCheckpointForSeq(this.id/4L, pair_clusternum_seqnum.getValue());
-            var currentState = checkpoint.getState(Pair.of(this.id/4L, pair_clusternum_seqnum.getValue()));
+            System.out.println("Pair_clusternum_seqnum: " + pair_clusternum_seqnum);
+            var checkpoint = checkpointManager.getCheckpointForSeq(pair_clusternum_seqnum.getLeft(), pair_clusternum_seqnum.getValue());
+            var currentState = checkpoint.getState(Pair.of(pair_clusternum_seqnum.getLeft(), pair_clusternum_seqnum.getValue()));
+            System.out.println("Current state: " + currentState);
             var phase = StateMachine.states.get(currentState).phase;
             var roles = rolePlugin.getEntityRoles(pair_clusternum_seqnum.getValue(), currentViewNum, phase, id);
             var roles2 = rolePlugin.getRoleEntities(pair_clusternum_seqnum.getValue(), pair_clusternum_seqnum.getValue(), local_cnt, local_cnt, local_cnt);
@@ -519,7 +531,7 @@ public abstract class Entity {
 
                                         // seqnum reserved for feature exchange
                                         if (learning && pair_clusternum_seqnum.getValue() == exchangeSequence && isPrimary(pair_clusternum_seqnum.getValue())) {
-                                            if (!reportTally.hasQuorum(Pair.of(this.id/4L, Long.valueOf(currentEpisodeNum.get())), 0, new QuorumId(REPORT, REPORT_QUORUM))) {
+                                            if (!reportTally.hasQuorum(Pair.of(pair_clusternum_seqnum.getLeft(), Long.valueOf(currentEpisodeNum.get())), 0, new QuorumId(REPORT, REPORT_QUORUM))) {
                                                 System.out.println("Inside pending requests7 and report tally has no quorum");
                                                 System.out.println("Breaking searchloop2");
                                                 break searchloop;
@@ -572,7 +584,7 @@ public abstract class Entity {
                                 benchmarkManager.sequenceStarted(pair_clusternum_seqnum.getValue(), System.nanoTime());
                             }
 
-                            if (transition.updateMode == UpdateMode.AGGREGATION && checkpoint.getAggregationValues(pair_clusternum_seqnum.getValue()).isEmpty()) {
+                            if (transition.updateMode == UpdateMode.AGGREGATION && checkpoint.getAggregationValues(pair_clusternum_seqnum.getKey(),pair_clusternum_seqnum.getValue()).isEmpty()) {
                                 // store local seqnum (multiplexing with global seqnum) in the aggregation buffer
                                 synchronized (aggregationBuffer) {
                                     aggregationBuffer.add(pair_clusternum_seqnum.getValue());
@@ -586,7 +598,7 @@ public abstract class Entity {
                                 featureManager.countPath(currentEpisodeNum.get(), FeatureManager.FAST_PATH_FREQUENCY, FeatureManager.SLOW);    
                             }
 
-                            transition(pair_clusternum_seqnum.getValue(), transition);
+                            transition(pair_clusternum_seqnum.getKey(),pair_clusternum_seqnum.getValue(), transition);
                             stateUpdated = true;
                             // Printer.print(Verbosity.V, prefix, "[time-since-start=" + Printer.timeFormat(System.nanoTime() - systemStartTime, true) + "] transition state to: seqnum=" + seqnum + 
                             //                 ", toState=" + StateMachine.states.get(transition.toState).name);
@@ -620,7 +632,7 @@ public abstract class Entity {
                     if (transition != null) {
                         benchmarkManager.start(BenchmarkManager.TIMEOUT, pair_clusternum_seqnum.getValue(), 1);
 
-                        transition(pair_clusternum_seqnum.getValue(), transition);
+                        transition(pair_clusternum_seqnum.getKey(),pair_clusternum_seqnum.getValue(), transition);
                         timekeeper.stateUpdated(pair_clusternum_seqnum.getValue(), transition.toState);
 
                         stateUpdated = true;
@@ -637,10 +649,10 @@ public abstract class Entity {
         stateLock.lock();
         updating.remove(pair_clusternum_seqnum);
         var toUpdate = new TreeSet<Pair<Long,Long>>();
-        if (nextseqUpdated || needsUpdate.contains(Pair.of(this.id/4, nextSequence))) {
+        if (nextseqUpdated || needsUpdate.contains(Pair.of(pair_clusternum_seqnum.getLeft(), nextSequence))) {
             //System.out.println("Adding nextSequence to toUpdate1: " + nextSequence);
             //System.out.println("nextseqUpdated: " + nextseqUpdated + " need.update.contains(nextSequence): " + needsUpdate.contains(nextSequence));
-            toUpdate.add(Pair.of(this.id/4L, nextSequence));
+            toUpdate.add(Pair.of(pair_clusternum_seqnum.getLeft(), nextSequence));
         }
 
         if (needsUpdate.contains(pair_clusternum_seqnum)) {
@@ -665,65 +677,65 @@ public abstract class Entity {
         return transition;
     }
 
-    public void executor() {
+    public void executor(long cluster_num) {
         while (running) {
             Transition transition;
-            var clusterExecutionQueue = executionQueue.get(getId()/4L);
+            var clusterExecutionQueue = executionQueue.get(cluster_num);
             synchronized (clusterExecutionQueue) {
-                while (clusterExecutionQueue.get(lastExecutedSequenceNum + 1) == null && running) {
+                while (clusterExecutionQueue.get(lastExecutedSequenceNum.get(cluster_num) + 1) == null && running) {
                     try {
                         clusterExecutionQueue.wait();
                     } catch (InterruptedException e) {
                     }
                 }
 
-                transition = clusterExecutionQueue.get(lastExecutedSequenceNum + 1);
-                clusterExecutionQueue.entrySet().removeIf(entry -> entry.getKey() <= lastExecutedSequenceNum + 1);
-                lastExecutedSequenceNum += 1;
+                transition = clusterExecutionQueue.get(lastExecutedSequenceNum.get(cluster_num) + 1);
+                clusterExecutionQueue.entrySet().removeIf(entry -> entry.getKey() <= lastExecutedSequenceNum.get(cluster_num) + 1);
+                lastExecutedSequenceNum.put(cluster_num, lastExecutedSequenceNum.get(cluster_num) + 1);
 
-                execute(lastExecutedSequenceNum);
+                execute(cluster_num, lastExecutedSequenceNum.get(cluster_num));
                 // Printer.print(Verbosity.V, prefix, "[time-since-start=" + Printer.timeFormat(System.nanoTime() - systemStartTime, true) + "] executed by executor thread: seqnum=" + lastExecutedSequenceNum);
             }
 
-            var checkpoint = checkpointManager.getCheckpointForSeq(this.id/4L, lastExecutedSequenceNum);
-            var localSeqs = checkpoint.getAggregationValues(lastExecutedSequenceNum);
+            var checkpoint = checkpointManager.getCheckpointForSeq(cluster_num, lastExecutedSequenceNum.get(cluster_num));
+            var localSeqs = checkpoint.getAggregationValues(cluster_num, lastExecutedSequenceNum.get(cluster_num));
 
             // if aggregation then perform execution for all local seq
             if (!localSeqs.isEmpty() && !isClient()) {
                 // System.out.println("begin execution for global order: " + lastExecutedSequenceNum);
                 for (var localSeq : localSeqs) {
                     // System.out.println("executing localSeq: " + localSeq);
-                    if (localSeq != lastExecutedSequenceNum) {
+                    if (localSeq != lastExecutedSequenceNum.get(cluster_num)) {
                         // avoid getting null blocks
-                        while (checkpoint.getRequestBlock(Pair.of(this.id/4L,localSeq)) == null) {
+                        while (checkpoint.getRequestBlock(Pair.of(cluster_num,localSeq)) == null) {
                             try {
                                 Thread.sleep(1);
                             } catch (InterruptedException e) {
                             }
                         }
-                        execute(localSeq);
+                        execute(cluster_num, localSeq);
                     }
 
                     benchmarkManager.sequenceExecuted(localSeq, System.nanoTime());
-                    checkpoint.setState(Pair.of(this.id/4L,localSeq), transition.toState);
+                    checkpoint.setState(Pair.of(cluster_num,localSeq), transition.toState);
 
                     checkSwitching(localSeq);
-                    transition(localSeq, transition);
+                    transition(cluster_num, localSeq, transition);
                 }
                 lastExecutedSequenceNum = localSeqs.pollLast();
                 // System.out.println("lastExecutedSequenceNum update to: " + lastExecutedSequenceNum);
             } else {
-                benchmarkManager.sequenceExecuted(lastExecutedSequenceNum, System.nanoTime());
-                checkpoint.setState(Pair.of(this.id/4L, lastExecutedSequenceNum), transition.toState);
+                benchmarkManager.sequenceExecuted(lastExecutedSequenceNum.get(cluster_num), System.nanoTime());
+                checkpoint.setState(Pair.of(cluster_num, lastExecutedSequenceNum.get(cluster_num)), transition.toState);
 
-                checkSwitching(lastExecutedSequenceNum);
-                transition(lastExecutedSequenceNum, transition);
+                checkSwitching(lastExecutedSequenceNum.get(cluster_num));
+                transition(cluster_num, lastExecutedSequenceNum.get(cluster_num), transition);
             }
             // checkSwitching(lastExecutedSequenceNum);
 
             //Commeting this part out because causing issue with seqnum
             System.out.println("For some reason I'm here 2 and running for lastExecutedSequenceNum+1: " + lastExecutedSequenceNum);
-            stateUpdateLoop(Pair.of(this.id/4L, lastExecutedSequenceNum + 1));
+            stateUpdateLoop(Pair.of(this.id/4L, lastExecutedSequenceNum.get(cluster_num) + 1));
         }
     }
 
@@ -805,28 +817,28 @@ public abstract class Entity {
         }
     }
 
-    public void setServiceState(Map<Integer, Integer> service_state, long lastExecutedSequenceNum) {
+    public void setServiceState(Map<Integer, Integer> service_state, long cluster_num, ConcurrentHashMap<Long,Long> lastExecutedSequenceNum) {
         // lock on execution
         var clusterExecutionQueue = executionQueue.get(getId()/4L);
         synchronized (clusterExecutionQueue) {
             dataset.setRecords(service_state);
             
             stateLock.lock();
-            this.lastExecutedSequenceNum = lastExecutedSequenceNum;
-            this.nextSequence = lastExecutedSequenceNum + 1;
+            this.lastExecutedSequenceNum= lastExecutedSequenceNum;
+            this.nextSequence = lastExecutedSequenceNum.get(cluster_num) + 1;
             stateLock.unlock();
             System.out.println("For some reason I'm here 1 and running for lastExecutedSequenceNum+1: " + lastExecutedSequenceNum);
-            new Thread(() -> stateUpdateLoop(Pair.of(this.id/4L,lastExecutedSequenceNum + 1))).start();
+            new Thread(() -> stateUpdateLoop(Pair.of(cluster_num,lastExecutedSequenceNum.get(cluster_num) + 1))).start();
         }
     }
 
-    public boolean transition(long seqnum, Transition transition) {
+    public boolean transition(long cluster_num, long seqnum, Transition transition) {
         benchmarkManager.add(BenchmarkManager.TRANSITION, 0, System.nanoTime());
-        var checkpoint = checkpointManager.getCheckpointForSeq(this.id/4L,seqnum);
-        var currentState = checkpoint.getState(Pair.of(this.id/4L,seqnum));
+        var checkpoint = checkpointManager.getCheckpointForSeq(cluster_num,seqnum);
+        var currentState = checkpoint.getState(Pair.of(cluster_num,seqnum));
         var phase = StateMachine.states.get(currentState).phase;
 
-        var requestBlock = checkpoint.getRequestBlock(Pair.of(this.id/4L,seqnum));
+        var requestBlock = checkpoint.getRequestBlock(Pair.of(cluster_num,seqnum));
 
         // if update mode is sequence mode
         // **and** current state is not the same as the target state
@@ -839,8 +851,8 @@ public abstract class Entity {
 
             Printer.print(Verbosity.VVV, prefix, "Execution START: " + seqnum);
             // execute(seqnum);
-            executionQueue.putIfAbsent(getId()/4L, new HashMap<>());
-            var clusterExecutionQueue = executionQueue.get(getId()/4L);
+            //executionQueue.putIfAbsent(getId()/4L, new HashMap<>());
+            var clusterExecutionQueue = executionQueue.get(cluster_num);
             synchronized (clusterExecutionQueue) {
                 clusterExecutionQueue.put(seqnum, transition);
                 clusterExecutionQueue.notify();
@@ -1025,7 +1037,14 @@ public abstract class Entity {
             }
 
             if (!checkpoint.getAggregationValues(seqnum).isEmpty()) {
-                aggregationValues = checkpoint.getAggregationValues(seqnum);
+                var cluster_num = -1L;
+                if(this.isClient()){
+                    cluster_num = source/4L;
+                }
+                else{
+                    cluster_num = this.id/4L;
+                }
+                aggregationValues = checkpoint.getAggregationValues(cluster_num, seqnum);
             }
         }
 
@@ -1190,7 +1209,7 @@ public abstract class Entity {
 
     // Abstract Methods
 
-    protected abstract void execute(long seqnum);
+    protected abstract void execute(long cluster_num, long seqnum);
 
     public abstract boolean isClient();
 
@@ -1204,8 +1223,8 @@ public abstract class Entity {
         return running;
     }
 
-    public long getLastExecutedSequenceNum() {
-        return lastExecutedSequenceNum;
+    public long getLastExecutedSequenceNum(long cluster_num) {
+        return lastExecutedSequenceNum.get(cluster_num);
     }
 
     public long getNextSequence() {
