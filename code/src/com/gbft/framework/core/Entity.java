@@ -84,7 +84,8 @@ public abstract class Entity {
     protected long lastExecutedSequenceNum;
     protected long currentViewNum;
     protected Timekeeper timekeeper;
-    protected Map<Long, Transition> executionQueue;
+    // Execution queue for each cluster
+    protected Map<Long, Map<Long, Transition>> executionQueue;
 
     // Concurrency
 
@@ -667,16 +668,17 @@ public abstract class Entity {
     public void executor() {
         while (running) {
             Transition transition;
-            synchronized (executionQueue) {
-                while (executionQueue.get(lastExecutedSequenceNum + 1) == null && running) {
+            var clusterExecutionQueue = executionQueue.get(getId()/4L);
+            synchronized (clusterExecutionQueue) {
+                while (clusterExecutionQueue.get(lastExecutedSequenceNum + 1) == null && running) {
                     try {
-                        executionQueue.wait();
+                        clusterExecutionQueue.wait();
                     } catch (InterruptedException e) {
                     }
                 }
 
-                transition = executionQueue.get(lastExecutedSequenceNum + 1);
-                executionQueue.entrySet().removeIf(entry -> entry.getKey() <= lastExecutedSequenceNum + 1); 
+                transition = clusterExecutionQueue.get(lastExecutedSequenceNum + 1);
+                clusterExecutionQueue.entrySet().removeIf(entry -> entry.getKey() <= lastExecutedSequenceNum + 1);
                 lastExecutedSequenceNum += 1;
 
                 execute(lastExecutedSequenceNum);
@@ -805,7 +807,8 @@ public abstract class Entity {
 
     public void setServiceState(Map<Integer, Integer> service_state, long lastExecutedSequenceNum) {
         // lock on execution
-        synchronized (executionQueue) {
+        var clusterExecutionQueue = executionQueue.get(getId()/4L);
+        synchronized (clusterExecutionQueue) {
             dataset.setRecords(service_state);
             
             stateLock.lock();
@@ -836,9 +839,11 @@ public abstract class Entity {
 
             Printer.print(Verbosity.VVV, prefix, "Execution START: " + seqnum);
             // execute(seqnum);
-            synchronized (executionQueue) {
-                executionQueue.put(seqnum, transition);
-                executionQueue.notify();
+            executionQueue.putIfAbsent(getId()/4L, new HashMap<>());
+            var clusterExecutionQueue = executionQueue.get(getId()/4L);
+            synchronized (clusterExecutionQueue) {
+                clusterExecutionQueue.put(seqnum, transition);
+                clusterExecutionQueue.notify();
             }
             return false;
         }
