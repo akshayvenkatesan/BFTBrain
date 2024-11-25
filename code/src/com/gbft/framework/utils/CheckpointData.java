@@ -81,6 +81,7 @@ public class CheckpointData {
 
     public void tally(MessageData message) {
         messageTally.tally(message);
+        System.out.println("Message tally done, going to view tally");
         viewTally.tally(message.toBuilder().clearDigest().build());
 
         // track number of received messages per slot
@@ -206,11 +207,19 @@ public class CheckpointData {
      * @return state
      */
     public int getState(Pair<Long, Long> pair_clusternum_seqnum) {
+        System.out.println("Get State called");
         if (protocol.get() == null) {
+            System.out.println("Inside protocol null. Returning any state");
             return StateMachine.ANY_STATE;
         } else {
-            System.out.println("stateMap: " + stateMap);
-            return stateMap.getOrDefault(pair_clusternum_seqnum, StateMachine.states.indexOf(StateMachine.findState("idle", protocol.get() + "_")));
+//            System.out.println("stateMap: " + stateMap);
+//            for(StateMachine.StateInfo info : StateMachine.states) {
+//                System.out.print(info.name + " ");
+//            }
+//            System.out.println("XYZ " + StateMachine.findState("idle", protocol.get() + "_"));
+            var temp = stateMap.getOrDefault(pair_clusternum_seqnum, StateMachine.states.indexOf(StateMachine.findState("idle", protocol.get() + "_")));
+            System.out.println("Going to return temp as value" + temp);
+            return temp;
         }
     }
 

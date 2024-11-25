@@ -69,11 +69,12 @@ public class BenchmarkManager {
         }
     }
 
-    public void sequenceStarted(long seqnum, long timestamp) {
-        start(BLOCK_EXECUTE, seqnum, timestamp);
+    public void sequenceStarted(Pair<Long,Long> pair_clusternum, long timestamp) {
+        var seqnum = pair_clusternum.getRight();
+        start(BLOCK_EXECUTE, seqnum , timestamp);
         start(TIMEOUT, seqnum, 0);
-        var requests = checkpointManager.getCheckpointForSeq(entity.getId()/4L, seqnum)
-                .getRequestBlock(Pair.of(entity.getId()/4L, seqnum));
+        var requests = checkpointManager.getCheckpointForSeq(pair_clusternum.getKey(), seqnum)
+                .getRequestBlock(pair_clusternum);
         // ERROR: requests can be null, NPE
         for (var request : requests) {
             var duration = timestamp - DataUtils.toLong(request.getTimestamp());
@@ -81,9 +82,10 @@ public class BenchmarkManager {
         }
     }
 
-    public void sequenceExecuted(long seqnum, long timestamp) {
-        var checkpoint = checkpointManager.getCheckpointForSeq(entity.getId()/4L, seqnum);
-        var requests = checkpoint.getRequestBlock(Pair.of(entity.getId()/4L, seqnum));
+    public void sequenceExecuted(Pair<Long, Long> pair_clusternum, long timestamp) {
+        var seqnum = pair_clusternum.getValue();
+        var checkpoint = checkpointManager.getCheckpointForSeq(pair_clusternum.getKey(), seqnum);
+        var requests = checkpoint.getRequestBlock(pair_clusternum);
 
         var start = starts.get(BLOCK_EXECUTE).remove(seqnum);
         var duration = timestamp - start;
@@ -108,7 +110,7 @@ public class BenchmarkManager {
 
     public void requestExecuted(long reqnum, long timestamp) {
         var seqnum = entity.getRequestSequence(reqnum);
-        var request = checkpointManager.getCheckpointForSeq(entity.getId()/4L, seqnum).getRequest(reqnum);
+        var request = checkpointManager.getCheckpointForSeq(seqnum.getKey(), seqnum.getValue()).getRequest(reqnum);
         var duration = timestamp - DataUtils.toLong(request.getTimestamp());
         add(REQUEST_EXECUTE, duration, timestamp);
     }

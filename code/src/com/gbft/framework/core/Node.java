@@ -34,8 +34,10 @@ public class Node extends Entity {
             for (var request : requestBlock) {
                 replies.put(request.getRequestNum(), dataset.execute(request));
             }
+            dataset.printDataSet();
             checkpoint.addReplies(Pair.of(cluster_num, seqnum), replies);
         }
+
 
         // checkpoint
         

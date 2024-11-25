@@ -70,7 +70,7 @@ public abstract class Entity {
     // Protocol Data
 
     protected ConcurrentLinkedQueue<RequestData> pendingRequests;
-    protected Map<Long, Long> reqnumToSeqnumMap;
+    protected Map<Long, Pair<Long,Long>> reqnumToSeqnumMap;
     protected CheckpointManager checkpointManager;
 
     public final List<RequestData> EMPTY_BLOCK;
@@ -81,7 +81,7 @@ public abstract class Entity {
     // Protocol State
 
     protected long nextSequence;
-    protected Map<Long,Long> lastExecutedSequenceNum;
+    protected ConcurrentHashMap<Long,Long> lastExecutedSequenceNum;
     protected long currentViewNum;
     protected Timekeeper timekeeper;
     // Execution queue for each cluster
@@ -166,7 +166,13 @@ public abstract class Entity {
         currentViewNum = 0L;
         nextSequence = 0L;
         //lastExecutedSequenceNum = -1L;
-        lastExecutedSequenceNum = Map.of(0L, -1L, 1L, -1L, 2L, -1L, 3L, -1L, 4L, -1L);
+        lastExecutedSequenceNum = new ConcurrentHashMap<>();
+        lastExecutedSequenceNum.put(0L, -1L);
+        lastExecutedSequenceNum.put(1L, -1L);
+        lastExecutedSequenceNum.put(2L, -1L);
+        lastExecutedSequenceNum.put(3L, -1L);
+        lastExecutedSequenceNum.put(4L, -1L);
+
         executionQueue = new ConcurrentHashMap<>();
         for (Long i=0L; i<=5L;i++) {
             executionQueue.put(i, new ConcurrentHashMap<>());
@@ -209,8 +215,16 @@ public abstract class Entity {
         slowProposalFault = new SlowProposalFault();
         pollutionFault = new PollutionFault();
 
-        checkpointManager.getCheckpoint(Pair.of(this.id/4L,0L)).setProtocol(coordinator.defaultProtocol);
-        checkpointManager.getCheckpoint(Pair.of(this.id/4L,0L)).beginTimestamp = System.nanoTime();
+        checkpointManager.getCheckpoint(Pair.of(0L,0L)).setProtocol(coordinator.defaultProtocol);
+        checkpointManager.getCheckpoint(Pair.of(0L,0L)).beginTimestamp = System.nanoTime();
+        checkpointManager.getCheckpoint(Pair.of(1L,0L)).setProtocol(coordinator.defaultProtocol);
+        checkpointManager.getCheckpoint(Pair.of(1L,0L)).beginTimestamp = System.nanoTime();
+        checkpointManager.getCheckpoint(Pair.of(2L,0L)).setProtocol(coordinator.defaultProtocol);
+        checkpointManager.getCheckpoint(Pair.of(2L,0L)).beginTimestamp = System.nanoTime();
+        checkpointManager.getCheckpoint(Pair.of(3L,0L)).setProtocol(coordinator.defaultProtocol);
+        checkpointManager.getCheckpoint(Pair.of(3L,0L)).beginTimestamp = System.nanoTime();
+        checkpointManager.getCheckpoint(Pair.of(4L,0L)).setProtocol(coordinator.defaultProtocol);
+        checkpointManager.getCheckpoint(Pair.of(4L,0L)).beginTimestamp = System.nanoTime();
         rolePlugin.episodeLeaderMode.put(0, Config.string("protocol.general.leader").equals("stable") ? 0 : 1);
 
         if (!isClient()) {
@@ -324,16 +338,16 @@ public abstract class Entity {
     public void handleMessage(MessageData message) {
         //var cluster_num = message.getSource()/4L;
 
-        System.out.println("Received request: " + message);
+        System.out.println("Received request: " );
         if (Printer.verbosity >= Verbosity.VVV) {
-            Printer.print(Verbosity.VVV, prefix, "Processing ", message);
+            //Printer.print(Verbosity.VVV, prefix, "Processing ", message);
         }
-        System.out.println("Going to process: " + message);
+        System.out.println("Going to process: " );
         for (var i = messagePlugins.size() - 1; i >= 0; i--) {
             var plugin = messagePlugins.get(i);
             message = plugin.processIncomingMessage(message);
         }
-        System.out.println("Processed: " + message);
+        System.out.println("Processed: ");
         if (message.getFlagsList().contains(DataUtils.INVALID)) {
             System.out.println("Returning as message is invalid");
             return;
@@ -342,10 +356,11 @@ public abstract class Entity {
         var type = message.getMessageType();
         if (type == StateMachine.REQUEST) {
             var cluster_num = this.id/4L;
-            System.out.println("Received request: " + message);
+            System.out.println("Received request: from " + message.getSource());
             var request = message.getRequestsList().get(0);
-            var seqnum = getRequestSequence(request.getRequestNum());
-            if (seqnum == null) {
+            Pair<Long, Long> clusterSeq = getRequestSequence(request.getRequestNum());
+            //var seqnum = clusterSeq.getValue();
+            if (clusterSeq == null) {
                 // slow proposal
                 System.out.println("Inside seqnum == null");
                 if (slowProposalFault.getPerRequestDelay(this.id) > 0) {
@@ -368,7 +383,6 @@ public abstract class Entity {
                     pendingRequests.offer(request);
                     System.out.println("Pending requests size: " + pendingRequests.size());
                     System.out.println("callling state update for next sequence number: " + nextSequence);
-                    System.out.println("For some reason I'm here 4 and nextSequence: " + nextSequence);
                     stateUpdateLoop(Pair.of(cluster_num, nextSequence));
                 }
             }
@@ -376,7 +390,7 @@ public abstract class Entity {
             var cluster_num = message.getSource()/4L;
             Long seqnum = message.getSequenceNum();
             List<Integer> targets = message.getTargetsList();
-            System.out.println("Received message inside not request block: " + message);
+            System.out.println("Received message inside not request block: ");
             System.out.println("My id is and Message Target is : " + id + " " + targets);
             if (checkpointManager.getCheckpointNum(cluster_num, seqnum).getValue() < checkpointManager.getMinCheckpoint()) {
                 return;
@@ -385,17 +399,17 @@ public abstract class Entity {
             if (!isValidMessage(message)) {
                 return;
             }
-            System.out.println("Valid message: " + message);
+            System.out.println("Valid message: ");
             var checkpoint = checkpointManager.getCheckpointForSeq(cluster_num, seqnum);
             checkpoint.tally(message);
             checkpoint.addAggregationValue(message);
             timekeeper.messageReceived(seqnum, currentViewNum, checkpoint.getState(Pair.of(cluster_num, seqnum)), message);
 
             if (Printer.verbosity >= Verbosity.VVV) {
-                Printer.print(Verbosity.VVV, prefix, "Tally message ", message);
+                // Printer.print(Verbosity.VVV, prefix, "Tally message ");
             }
-            System.out.println("Running state update loop for seqnum: " + seqnum); 
-            System.out.println("For some reason I'm here 3 and seqnum: " + seqnum);
+            System.out.println("Running state update loop for cluster num: " + cluster_num + "  " + seqnum + " + seqnum");
+            // System.out.println("For some reason I'm here 3 and seqnum: " + seqnum);
             stateUpdateLoop(Pair.of(cluster_num, seqnum));
         }
 
@@ -405,7 +419,7 @@ public abstract class Entity {
 
     public void stateUpdateLoop(Pair<Long, Long> pair_clusternum_seqnum) {
         //Printer.print(Verbosity.VVVV, prefix, "StateUpdateLoop seqnum: " + seqnum);
-        //System.out.println("Calling state update from staeUpdateLoop");
+        System.out.println("Calling state update from staeUpdateLoop");
         var result = stateUpdate(pair_clusternum_seqnum);
         while (running && result != null && !result.isEmpty()) {
             var next = result.pollFirst();
@@ -436,7 +450,7 @@ public abstract class Entity {
         if (pair_clusternum_seqnum.getValue() <= lastExecutedSequenceNum.get(pair_clusternum_seqnum.getKey()) || isExecuted(pair_clusternum_seqnum.getValue())
                 || (isPrimary(pair_clusternum_seqnum.getValue() ) && pair_clusternum_seqnum.getValue() - lastExecutedSequenceNum.get(pair_clusternum_seqnum.getKey())  > pipelinePlugin.getMaxActiveSequences())) {
             stateLock.unlock();
-            //System.out.println("Returning null as seqnum <= lastExecutedSequenceNum and isExecuted(seqnum) = " + isExecuted(seqnum) + "\n and isPrimary(seqnum) = " + isPrimary(seqnum) + "lastExecutedSequenceNum = " + lastExecutedSequenceNum);
+            System.out.println("Returning null as seqnum <= lastExecutedSequenceNum and isExecuted(seqnum) = " + isExecuted(pair_clusternum_seqnum.getValue()) + "\n and isPrimary(seqnum) = " + isPrimary(pair_clusternum_seqnum.getValue()) + "lastExecutedSequenceNum = " + lastExecutedSequenceNum);
             return null;
         }
         benchmarkManager.add(BenchmarkManager.IF1, 0, System.nanoTime());
@@ -471,10 +485,22 @@ public abstract class Entity {
             System.out.println("Inside while loop");
             stateUpdated = false;
             System.out.println("Pair_clusternum_seqnum: " + pair_clusternum_seqnum);
-            var checkpoint = checkpointManager.getCheckpointForSeq(pair_clusternum_seqnum.getLeft(), pair_clusternum_seqnum.getValue());
-            var currentState = checkpoint.getState(Pair.of(pair_clusternum_seqnum.getLeft(), pair_clusternum_seqnum.getValue()));
+            var checkpoint = checkpointManager.getCheckpointForSeq(pair_clusternum_seqnum.getKey(), pair_clusternum_seqnum.getValue());
+            System.out.println(" checkpoint is " + checkpoint.toString());
+            var currentState = checkpoint.getState(Pair.of(pair_clusternum_seqnum.getKey(), pair_clusternum_seqnum.getValue()));
             System.out.println("Current state: " + currentState);
-            var phase = StateMachine.states.get(currentState).phase;
+//            for (var state: StateMachine.states) {
+//                System.out.println("State machine states is " + state.name);
+//            }
+            var phase = 0;
+//            try{
+            System.out.println("my state is: " + StateMachine.states.get(currentState).name + " Phase: " + StateMachine.states.get(currentState).phase);
+//            }
+//            catch(Exception e)
+//            {
+//                return null;
+//            }
+            phase = StateMachine.states.get(currentState).phase;
             var roles = rolePlugin.getEntityRoles(pair_clusternum_seqnum.getValue(), currentViewNum, phase, id);
             var roles2 = rolePlugin.getRoleEntities(pair_clusternum_seqnum.getValue(), pair_clusternum_seqnum.getValue(), local_cnt, local_cnt, local_cnt);
         // Print roles
@@ -572,7 +598,7 @@ public abstract class Entity {
                             }
 
                             var quorumId = new QuorumId(messageType, condition.getParam(Condition.QUORUM));
-                            conditionMet = checkMessageTally(pair_clusternum_seqnum.getValue(), quorumId, transition.updateMode);
+                            conditionMet = checkMessageTally(pair_clusternum_seqnum, quorumId, transition.updateMode);
                             System.out.println("Inside pending requests8 + conditionMet: " + conditionMet);
                         }
 
@@ -582,7 +608,7 @@ public abstract class Entity {
                             timekeeper.stateUpdated(pair_clusternum_seqnum.getValue(), transition.toState);
 
                             if (StateMachine.isIdle(currentState)) {
-                                benchmarkManager.sequenceStarted(pair_clusternum_seqnum.getValue(), System.nanoTime());
+                                benchmarkManager.sequenceStarted(pair_clusternum_seqnum, System.nanoTime());
                             }
 
                             if (transition.updateMode == UpdateMode.AGGREGATION && checkpoint.getAggregationValues(pair_clusternum_seqnum.getKey(),pair_clusternum_seqnum.getValue()).isEmpty()) {
@@ -717,7 +743,7 @@ public abstract class Entity {
                         execute(cluster_num, localSeq);
                     }
 
-                    benchmarkManager.sequenceExecuted(localSeq, System.nanoTime());
+                    benchmarkManager.sequenceExecuted(Pair.of(cluster_num,localSeq), System.nanoTime());
                     checkpoint.setState(Pair.of(cluster_num,localSeq), transition.toState);
 
                     checkSwitching(localSeq);
@@ -726,7 +752,7 @@ public abstract class Entity {
                 lastExecutedSequenceNum.put(cluster_num,localSeqs.pollLast());
                 // System.out.println("lastExecutedSequenceNum update to: " + lastExecutedSequenceNum);
             } else {
-                benchmarkManager.sequenceExecuted(lastExecutedSequenceNum.get(cluster_num), System.nanoTime());
+                benchmarkManager.sequenceExecuted(Pair.of(cluster_num, lastExecutedSequenceNum.get(cluster_num)), System.nanoTime());
                 checkpoint.setState(Pair.of(cluster_num, lastExecutedSequenceNum.get(cluster_num)), transition.toState);
 
                 checkSwitching(lastExecutedSequenceNum.get(cluster_num));
@@ -904,8 +930,8 @@ public abstract class Entity {
                 checkpoint.tally(message);
 
                 if (Printer.verbosity >= Verbosity.VVV) {
-                    Printer.print(Verbosity.VVV, prefix, "Processing extra ", message);
-                    Printer.print(Verbosity.VVV, prefix, "Tally message extra ", message);
+                    //Printer.print(Verbosity.VVV, prefix, "Processing extra ", message);
+                    //Printer.print(Verbosity.VVV, prefix, "Tally message extra ", message);
                 }
             }
         }
@@ -916,8 +942,8 @@ public abstract class Entity {
                 checkpoint.tally(message);
 
                 if (Printer.verbosity >= Verbosity.VVV) {
-                    Printer.print(Verbosity.VVV, prefix, "Processing self via transition ", message);
-                    Printer.print(Verbosity.VVV, prefix, "Tally message self via transition ", message);
+                   // Printer.print(Verbosity.VVV, prefix, "Processing self via transition ", message);
+                   // Printer.print(Verbosity.VVV, prefix, "Tally message self via transition ", message);
                 }
             }
         }
@@ -1000,13 +1026,13 @@ public abstract class Entity {
     }
 
     public void sendMessage(MessageData message) {
-        System.out.println("Sending message: " + message);
+        System.out.println("Sending message from id " + getId());
         if (message.getFlagsList().contains(DataUtils.INVALID)) {
             return;
         }
 
         if (Printer.verbosity >= Verbosity.VVV) {
-            Printer.print(Verbosity.VVV, prefix, "Sending message: ", message);
+            // Printer.print(Verbosity.VVV, prefix, "Sending message: ", message);
         }
         // Printer.print(Verbosity.V, prefix, "Sending message: ", message);
 
@@ -1087,17 +1113,19 @@ public abstract class Entity {
         return message;
     }
 
-    protected boolean checkMessageTally(long seqnum, QuorumId quorumId, UpdateMode updateMode) {
-        var checkpoint = checkpointManager.getCheckpointForSeq(this.id/4L,seqnum);
+    protected boolean checkMessageTally(Pair<Long,Long> pair_clusternum, QuorumId quorumId, UpdateMode updateMode) {
+        var seqnum = pair_clusternum.getValue();
+        var checkpoint = checkpointManager.getCheckpointForSeq(pair_clusternum.getKey(), seqnum);
         var tally = checkpoint.getMessageTally();
         var checkview = updateMode == UpdateMode.VIEW ? currentViewNum + 1 : currentViewNum;
         //var quorumId = new QuorumId(condition.getParam(Condition.MESSAGE_TYPE), condition.getParam(Condition.QUORUM));
-        var viewnum = tally.getMaxQuorum(Pair.of(this.id/4L,seqnum), quorumId);
+        var viewnum = tally.getMaxQuorum(pair_clusternum, quorumId);
         System.out.println("Inside checkMessageTally: seqnum: " + seqnum + ", quorumId: " + quorumId + ", viewnum: " + viewnum + ", checkview: " + checkview);
         if (viewnum != null && viewnum == checkview) {
-            var block = tally.getQuorumBlock(Pair.of(this.id/4L,seqnum), viewnum);
+            var block = tally.getQuorumBlock(pair_clusternum, viewnum);
             if (block != null) {
-                registerBlock(seqnum, block);
+                System.out.println("Registering block here for seqnum " + seqnum);
+                registerBlock(pair_clusternum, block);
             }
 
             if (Printer.verbosity >= Verbosity.VVVVV) {
@@ -1130,19 +1158,20 @@ public abstract class Entity {
         return checkpointManager.getCheckpointForSeq(this.id/4L,seqnum).getState(Pair.of(this.id/4L,seqnum)) == StateMachine.EXECUTED;
     }
 
-    protected void registerBlock(long seqnum, List<RequestData> block) {
-        var checkpoint = checkpointManager.getCheckpointForSeq(this.id/4L,seqnum);
-        if (checkpoint.getRequestBlock(Pair.of(this.id/4L,seqnum)) == null) {
+    protected void registerBlock(Pair<Long,Long> pair_cluster_num, List<RequestData> block) {
+        var checkpoint = checkpointManager.getCheckpointForSeq(pair_cluster_num.getKey(),pair_cluster_num.getValue());
+        if (checkpoint.getRequestBlock(pair_cluster_num) == null) {
             for (var request : block) {
-                reqnumToSeqnumMap.put(request.getRequestNum(), seqnum);
+                System.out.println(" Putting key as "  + request.getRequestNum() + " with value Pair of " + pair_cluster_num.getKey() + "  ->  " + pair_cluster_num.getValue());
+                reqnumToSeqnumMap.put(request.getRequestNum(), pair_cluster_num);
             }
 
-            checkpoint.addRequestBlock(Pair.of(this.id/4L,seqnum), block);
+            checkpoint.addRequestBlock(pair_cluster_num, block);
             //// benchmarkManager.sequenceStarted(seqnum, DataUtils.timeus());
         }
     }
 
-    public Long getRequestSequence(long reqnum) {
+    public Pair<Long, Long> getRequestSequence(long reqnum) {
         return reqnumToSeqnumMap.get(reqnum);
     }
 

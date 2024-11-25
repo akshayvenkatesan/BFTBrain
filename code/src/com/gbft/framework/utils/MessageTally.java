@@ -65,7 +65,7 @@ public class MessageTally {
         var clusternum = source / 4;
         var pair_clusternum_seqnum = Pair.of((long) clusternum, seqnum);
         var type = message.getMessageType();
-        System.out.println("Tallying message: " + message.toString());
+        System.out.println("Tallying message: " );
         counterWriteLock.lock();
 
         if (StateMachine.messages.get(type).hasRequestBlock) {
@@ -75,13 +75,24 @@ public class MessageTally {
         if (!message.getReplyDataMap().isEmpty()) {
             candidateReplies.put(digest, message.getReplyDataMap());
         }
+        //System.out.println("In tally counter map is: " + counter.toString());
+        try {
+            System.out.println("For message id " + message.getRequestNums(0) + " Before update: " + counter.toString());
+        } catch (Exception e) {
+            System.out.println( " in catch");
+        }
 
+        System.out.println(" before counter "  + counter.toString());
         counter.computeIfAbsent(pair_clusternum_seqnum, s -> new ConcurrentHashMap<>())
                .computeIfAbsent(type, t -> new ConcurrentSkipListMap<>())
                .computeIfAbsent(viewnum, v -> new ConcurrentHashMap<>())
                .computeIfAbsent(digest, d -> ConcurrentHashMap.newKeySet())
                .add(source);
-
+        try {
+            System.out.println("For message id " + message.getRequestNums(0) + " After update: " + counter.toString());
+        } catch (Exception e) {
+            System.out.println( " in catch");
+        }
         counterWriteLock.unlock();
     }
 

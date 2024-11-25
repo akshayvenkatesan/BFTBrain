@@ -1,8 +1,6 @@
 package com.gbft.framework.core;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.LockSupport;
 import java.util.concurrent.Semaphore;
@@ -25,7 +23,6 @@ public class ShardingClient extends Entity {
     protected long nextRequestNum;
     protected long intervalns;
     protected final int requestTargetRole;
-
     protected ClientDataset dataset;
 
     private RequestGenerator requestGenerator;
@@ -36,6 +33,8 @@ public class ShardingClient extends Entity {
     private Map<Long, Map<Integer, Integer>> rollbackResponses;
 
     private Map<Long, int[]> rollbackTransactions;
+
+    private Set<Long> executedRequests;
 
     public ShardingClient(int id, CoordinatorUnit coordinator) {
         super(id, coordinator);
@@ -50,6 +49,7 @@ public class ShardingClient extends Entity {
         responses = new HashMap<>();
         rollbackResponses = new HashMap<>();
         rollbackTransactions = new HashMap<>();
+        executedRequests = new HashSet<>();
         requestGenerator = createRequestGenerator();
         requestGenerator.init();
     }
@@ -99,8 +99,8 @@ public class ShardingClient extends Entity {
 
     @Override
     protected void execute(long cluster_num, long seqnum) {
-        System.out.println("Inside execute for sharding client " + id + " with seqnum " + seqnum + ".");
-        var checkpoint = checkpointManager.getCheckpointForSeq(getId()/4L, seqnum);
+        System.out.println("Inside execute for sharding client " + cluster_num + " with seqnum " + seqnum + ".");
+        var checkpoint = checkpointManager.getCheckpointForSeq(cluster_num, seqnum);
 
         var tally = checkpoint.getMessageTally();
         var viewnum = tally.getMaxQuorum(Pair.of(cluster_num, seqnum));
@@ -114,6 +114,7 @@ public class ShardingClient extends Entity {
             System.out.println("Updating dataset for sharding client " + id + ".");
             var now = System.nanoTime();
             for (var entry : replies.entrySet()) {
+                System.out.println("Reqnum: "+ entry.getKey());
                 var reqnum = entry.getKey();
                 var request = checkpoint.getRequest(reqnum);
                 int record = request.getRecord();
@@ -127,24 +128,27 @@ public class ShardingClient extends Entity {
 
                     var responseMap = rollbackResponses.get(reqnum);
                     responseMap.put(clusterNum, responseMap.getOrDefault(clusterNum, 0) + 1);
-                } else if (entry.getValue() < 0) {
-                    // We need to send a rollback as the balance has become negative
-                    System.out.println("Running rollback scenario");
-                    rollbackResponses.put(reqnum, new HashMap<>()); 
-                    var rollbackTx = rollbackTransactions.get(reqnum);
-                    var firstRollbackRequest = dataset.createRequestWithKeyAndVal(nextRequestNum++, rollbackTx[0], rollbackTx[1]);
-                    System.out.println("Sending first rollback request");
-                    //System.out.println("Next Request Num and rollbackTx[0] and rollbackTx[1] are : " + nextRequestNum + " " + rollbackTx[0] + " " + rollbackTx[1]);
-                    sendRequest(firstRollbackRequest, clusterNum);
-                    var nextRollback = reqnum % 10 == 1 ? 2 : 1;
-                    var newRequestNum = Long.valueOf(reqnum / 10 + String.valueOf(nextRollback));
-                    rollbackResponses.put(newRequestNum, new HashMap<>());
-                    var nextRollbackTx = rollbackTransactions.get(newRequestNum);
-                    var secondRollbackRequest = dataset.createRequestWithKeyAndVal(nextRequestNum++, nextRollbackTx[0], nextRollbackTx[1]);
-                    var nextClusterNum = (int) (newRequestNum / 25 + 1);
-                    System.out.println("Sending second rollback request");
-                    //System.out.println("Next Request Num and nextRollbackTx[0] and nextRollbackTx[1] are : " + nextRequestNum + " " + nextRollbackTx[0] + " " + nextRollbackTx[1]);
-                    sendRequest(secondRollbackRequest, nextClusterNum);
+//                } else if (entry.getValue() < 0) {
+//                    // We need to send a rollback as the balance has become negative
+//                    System.out.println("Running rollback scenario");
+//                    rollbackResponses.put(reqnum, new HashMap<>());
+//                    var rollbackTx = rollbackTransactions.get(reqnum);
+//                    Long firstRequestNumber = Long.valueOf(reqnum/10 + '3');
+//                    Long secondRequestNumber = Long.valueOf(reqnum/10 + '4');
+//                    var firstRollbackRequest = dataset.createRequestWithKeyAndVal(firstRequestNumber, rollbackTx[0], rollbackTx[1]);
+//                    System.out.println("Sending first rollback request");
+//                    //System.out.println("Next Request Num and rollbackTx[0] and rollbackTx[1] are : " + nextRequestNum + " " + rollbackTx[0] + " " + rollbackTx[1]);
+//                    sendRequest(firstRollbackRequest, clusterNum);
+//                    var nextRollback = reqnum % 10 == 1 ? 2 : 1;
+//                    var newRequestNum = Long.valueOf(reqnum / 10 + String.valueOf(nextRollback));
+//                    rollbackResponses.put(newRequestNum, new HashMap<>());
+//                    var nextRollbackTx = rollbackTransactions.get(newRequestNum);
+//                    var secondRollbackRequest = dataset.createRequestWithKeyAndVal(secondRequestNumber, nextRollbackTx[0], nextRollbackTx[1]);
+//                    var nextClusterNum = (int) (newRequestNum / 25 + 1);
+//                    System.out.println("Sending second rollback request");
+//                    //System.out.println("Next Request Num and nextRollbackTx[0] and nextRollbackTx[1] are : " + nextRequestNum + " " + nextRollbackTx[0] + " " + nextRollbackTx[1]);
+//                    sendRequest(secondRollbackRequest, nextClusterNum);
+//                }
                 } else {
                     //Check if both the replies are as expected, if not create and execute rollback transaction
                     //After previous logic, decrease inorder of associated transactions. If inorder==0, add them to queue
@@ -154,6 +158,11 @@ public class ShardingClient extends Entity {
                 // benchmarkManager.requestExecuted(reqnum, now);
 
             //Check each currently executing transaction in a map
+                if (executedRequests.contains(reqnum/10L)) {
+                    requestGenerator.execute();
+                } else {
+                    executedRequests.add(reqnum/10L);
+                }
             }
             /*
              * this mainly releases one semaphore to ensure only
@@ -161,8 +170,6 @@ public class ShardingClient extends Entity {
              * simulates a client, the client is blocked until the
              * next simulation is started
              */
-            requestGenerator.execute();
-
         }
     }
 
@@ -227,6 +234,7 @@ public class ShardingClient extends Entity {
             public void run() {
                 try{
                     while (running) {
+                        System.out.println(" Trying to acquire semaphore ");
                         semaphore.acquire();
                         var next = System.nanoTime() + intervalns;
 
@@ -336,7 +344,13 @@ public class ShardingClient extends Entity {
 
         protected void execute() {
             System.out.println("Release semaphore for sharding client " + id + ".");
-            //semaphore.release();
+            if (nextRequestNum < 5) {
+                System.out.println("releasing semaphore here");
+                semaphore.release();
+            } else {
+                System.out.println("Printing Final dataset after 10 txns: ");
+                dataset.printDataSet();
+            }
         }
     }
 }

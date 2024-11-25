@@ -150,6 +150,12 @@ public class StateMachine {
         PRIMARY = roles.indexOf("primary");
         REQUEST = messages.indexOf(findMessage("request"));
         REPLY = messages.indexOf(findMessage("reply"));
+        System.out.println("Insisde state machine initiazlized REquest " + REQUEST);
+        System.out.println("Insisde state machine initiazlized Reply " + REPLY);
+        System.out.println("Insisde state machine initiazlized printin list");
+        for(MessageInfo message : messages) {
+            System.out.print(message.name + " ");
+        }
     }
 
     private static Condition genCondition(YamlNode node, String prefix) {

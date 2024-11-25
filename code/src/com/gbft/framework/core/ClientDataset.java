@@ -66,9 +66,9 @@ public class ClientDataset extends Dataset {
             int[] array = new int[3];
 
             // Assign random values
-            array[0] = random.nextInt(20) + 1;    // sender's key - 0th element: 1-99
-            array[1] = random.nextInt(20) + 1;    // receiver's key - 1st element: 1-99
-            array[2] = random.nextInt(100) + 1000;  // Amount - 2nd element: 1-10000
+            array[0] = random.nextInt(99) + 1;    // sender's key - 0th element: 1-99
+            array[1] = random.nextInt(99) + 1;    // receiver's key - 1st element: 1-99
+            array[2] = random.nextInt(999);  // Amount - 2nd element: 1-10000
 
             // Add the array to the list
             arrayList.add(array);

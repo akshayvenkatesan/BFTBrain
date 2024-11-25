@@ -81,6 +81,22 @@ public class Dataset {
         return value;
     }
 
+    public void printDataSet() {
+        int sum = 0;
+
+        // Print each key-value pair
+        System.out.println("Map contents:");
+        for (Map.Entry<Integer, AtomicInteger> entry : records.entrySet()) {
+            int key = entry.getKey();
+            int value = entry.getValue().get(); // Access the value of AtomicInteger
+            System.out.println("Key: " + key + ", Value: " + value);
+            sum += value;
+        }
+
+        // Print the sum of all values
+        System.out.println("Sum of all AtomicInteger values: " + sum);
+    }
+
     public void update(RequestData request, int value) {
         var record = request.getRecord();
         records.get(record).set(value);

@@ -332,7 +332,7 @@ public class CoordinatorUnit extends CoordinatorBase {
 
                             for (var message : messages) {
                                 var targets = message.getTargetsList();
-                                System.out.println("Targets: "+targets.toString() + " for message: "+message.toString());
+                                System.out.println("Targets: "+targets.toString() + " for message: ");
                                 for (var target : targets) {
                                     var new_target = target%4;
                                     if ((target == message.getSource() || EntityMapUtils.getUnit(new_target) != myUnit) && myUnit!=16) {
